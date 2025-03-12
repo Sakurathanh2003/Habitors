@@ -10,18 +10,18 @@ import SwiftUI
 
 extension Text {
     func gilroyRegular(_ size: CGFloat) -> Text {
-        self.font(.custom("Gilroy Regular", size: size))
+        self.font(.custom("Gilroy-Regular", size: size))
     }
     
     func gilroyBold(_ size: CGFloat) -> Text {
-        self.font(.custom("Gilroy Bold", size: size))
+        self.font(.custom("Gilroy-Bold", size: size))
     }
     
     func gilroySemiBold(_ size: CGFloat) -> Text {
-        self.font(.custom("Gilroy SemiBold", size: size))
+        self.font(.custom("Gilroy-SemiBold", size: size))
     }
     
     func gilroyMedium(_ size: CGFloat) -> Text {
-        self.font(.custom("Gilroy Medium", size: size))
+        self.font(.custom("Gilroy-Medium", size: size))
     }
 }

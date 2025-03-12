@@ -21,11 +21,12 @@
 		FA03A0422D81F975004875F9 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0412D81F975004875F9 /* BaseViewModel.swift */; };
 		FA03A0442D81F979004875F9 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0432D81F979004875F9 /* Coordinator.swift */; };
 		FA03A0472D81F9BC004875F9 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0462D81F9BC004875F9 /* UIView+Extension.swift */; };
-		FA03A0632D81FC44004875F9 /* Gilroy Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FA03A04D2D81FC44004875F9 /* Gilroy Bold.otf */; };
-		FA03A06A2D81FC44004875F9 /* Gilroy Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = FA03A0542D81FC44004875F9 /* Gilroy Medium.otf */; };
-		FA03A06B2D81FC44004875F9 /* Gilroy Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = FA03A0552D81FC44004875F9 /* Gilroy Regular.otf */; };
-		FA03A06D2D81FC44004875F9 /* Gilroy SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FA03A0572D81FC44004875F9 /* Gilroy SemiBold.otf */; };
 		FA03A0762D81FCA9004875F9 /* Text+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0752D81FCA9004875F9 /* Text+Extension.swift */; };
+		FA03A0792D8205EB004875F9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0782D8205EB004875F9 /* HomeView.swift */; };
+		FA03A0AA2D82073D004875F9 /* Gilroy-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA03A0872D82073C004875F9 /* Gilroy-Bold.ttf */; };
+		FA03A0B22D82073D004875F9 /* Gilroy-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA03A08F2D82073C004875F9 /* Gilroy-Medium.ttf */; };
+		FA03A0B42D82073D004875F9 /* Gilroy-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA03A0912D82073C004875F9 /* Gilroy-Regular.ttf */; };
+		FA03A0B62D82073D004875F9 /* Gilroy-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA03A0932D82073C004875F9 /* Gilroy-SemiBold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,11 +48,12 @@
 		FA03A0412D81F975004875F9 /* BaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		FA03A0432D81F979004875F9 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		FA03A0462D81F9BC004875F9 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
-		FA03A04D2D81FC44004875F9 /* Gilroy Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy Bold.otf"; sourceTree = "<group>"; };
-		FA03A0542D81FC44004875F9 /* Gilroy Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy Medium.otf"; sourceTree = "<group>"; };
-		FA03A0552D81FC44004875F9 /* Gilroy Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy Regular.otf"; sourceTree = "<group>"; };
-		FA03A0572D81FC44004875F9 /* Gilroy SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy SemiBold.otf"; sourceTree = "<group>"; };
 		FA03A0752D81FCA9004875F9 /* Text+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Extension.swift"; sourceTree = "<group>"; };
+		FA03A0782D8205EB004875F9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		FA03A0872D82073C004875F9 /* Gilroy-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy-Bold.ttf"; sourceTree = "<group>"; };
+		FA03A08F2D82073C004875F9 /* Gilroy-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy-Medium.ttf"; sourceTree = "<group>"; };
+		FA03A0912D82073C004875F9 /* Gilroy-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy-Regular.ttf"; sourceTree = "<group>"; };
+		FA03A0932D82073C004875F9 /* Gilroy-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy-SemiBold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 		FA03A0322D81F905004875F9 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				FA03A0772D8205DF004875F9 /* Home */,
 				FA03A03E2D81F965004875F9 /* Core */,
 				FA03A0332D81F90C004875F9 /* Splash */,
 			);
@@ -167,20 +170,29 @@
 		FA03A0492D81FBCC004875F9 /* Font */ = {
 			isa = PBXGroup;
 			children = (
-				FA03A05F2D81FC44004875F9 /* Gilroy */,
+				FA03A09C2D82073C004875F9 /* gilroy */,
 			);
 			path = Font;
 			sourceTree = "<group>";
 		};
-		FA03A05F2D81FC44004875F9 /* Gilroy */ = {
+		FA03A0772D8205DF004875F9 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				FA03A04D2D81FC44004875F9 /* Gilroy Bold.otf */,
-				FA03A0542D81FC44004875F9 /* Gilroy Medium.otf */,
-				FA03A0552D81FC44004875F9 /* Gilroy Regular.otf */,
-				FA03A0572D81FC44004875F9 /* Gilroy SemiBold.otf */,
+				FA03A0782D8205EB004875F9 /* HomeView.swift */,
 			);
-			path = Gilroy;
+			path = Home;
+			sourceTree = "<group>";
+		};
+		FA03A09C2D82073C004875F9 /* gilroy */ = {
+			isa = PBXGroup;
+			children = (
+				FA03A0872D82073C004875F9 /* Gilroy-Bold.ttf */,
+				FA03A08F2D82073C004875F9 /* Gilroy-Medium.ttf */,
+				FA03A0912D82073C004875F9 /* Gilroy-Regular.ttf */,
+				FA03A0932D82073C004875F9 /* Gilroy-SemiBold.ttf */,
+			);
+			name = gilroy;
+			path = ../../../../../Downloads/gilroy;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -244,12 +256,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA03A0282D81F844004875F9 /* Assets.xcassets in Resources */,
+				FA03A0AA2D82073D004875F9 /* Gilroy-Bold.ttf in Resources */,
 				FA03A02B2D81F844004875F9 /* Base in Resources */,
-				FA03A06D2D81FC44004875F9 /* Gilroy SemiBold.otf in Resources */,
-				FA03A06A2D81FC44004875F9 /* Gilroy Medium.otf in Resources */,
-				FA03A06B2D81FC44004875F9 /* Gilroy Regular.otf in Resources */,
+				FA03A0B62D82073D004875F9 /* Gilroy-SemiBold.ttf in Resources */,
+				FA03A0B42D82073D004875F9 /* Gilroy-Regular.ttf in Resources */,
+				FA03A0B22D82073D004875F9 /* Gilroy-Medium.ttf in Resources */,
 				FA03A0262D81F83F004875F9 /* Base in Resources */,
-				FA03A0632D81FC44004875F9 /* Gilroy Bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +323,7 @@
 				FA03A0402D81F970004875F9 /* BaseViewController.swift in Sources */,
 				FA03A0762D81FCA9004875F9 /* Text+Extension.swift in Sources */,
 				FA03A03D2D81F925004875F9 /* SplashView.swift in Sources */,
+				FA03A0792D8205EB004875F9 /* HomeView.swift in Sources */,
 				FA03A0472D81F9BC004875F9 /* UIView+Extension.swift in Sources */,
 				FA03A0442D81F979004875F9 /* Coordinator.swift in Sources */,
 			);
@@ -474,6 +487,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -504,6 +518,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
