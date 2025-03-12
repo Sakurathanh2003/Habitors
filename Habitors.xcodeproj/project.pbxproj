@@ -9,11 +9,23 @@
 /* Begin PBXBuildFile section */
 		23312E1699B2096F7EA3DAD6 /* Pods_Habitors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC7B1BE09FE7CF60A0E460AF /* Pods_Habitors.framework */; };
 		FA03A01F2D81F83F004875F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A01E2D81F83F004875F9 /* AppDelegate.swift */; };
-		FA03A0212D81F83F004875F9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0202D81F83F004875F9 /* SceneDelegate.swift */; };
 		FA03A0232D81F83F004875F9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0222D81F83F004875F9 /* ViewController.swift */; };
 		FA03A0262D81F83F004875F9 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = FA03A0252D81F83F004875F9 /* Base */; };
 		FA03A0282D81F844004875F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA03A0272D81F844004875F9 /* Assets.xcassets */; };
 		FA03A02B2D81F844004875F9 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = FA03A02A2D81F844004875F9 /* Base */; };
+		FA03A0392D81F916004875F9 /* SplashCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0342D81F916004875F9 /* SplashCoordinator.swift */; };
+		FA03A03A2D81F916004875F9 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0352D81F916004875F9 /* SplashViewController.swift */; };
+		FA03A03B2D81F916004875F9 /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0362D81F916004875F9 /* SplashViewModel.swift */; };
+		FA03A03D2D81F925004875F9 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A03C2D81F925004875F9 /* SplashView.swift */; };
+		FA03A0402D81F970004875F9 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A03F2D81F970004875F9 /* BaseViewController.swift */; };
+		FA03A0422D81F975004875F9 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0412D81F975004875F9 /* BaseViewModel.swift */; };
+		FA03A0442D81F979004875F9 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0432D81F979004875F9 /* Coordinator.swift */; };
+		FA03A0472D81F9BC004875F9 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0462D81F9BC004875F9 /* UIView+Extension.swift */; };
+		FA03A0632D81FC44004875F9 /* Gilroy Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FA03A04D2D81FC44004875F9 /* Gilroy Bold.otf */; };
+		FA03A06A2D81FC44004875F9 /* Gilroy Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = FA03A0542D81FC44004875F9 /* Gilroy Medium.otf */; };
+		FA03A06B2D81FC44004875F9 /* Gilroy Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = FA03A0552D81FC44004875F9 /* Gilroy Regular.otf */; };
+		FA03A06D2D81FC44004875F9 /* Gilroy SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FA03A0572D81FC44004875F9 /* Gilroy SemiBold.otf */; };
+		FA03A0762D81FCA9004875F9 /* Text+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0752D81FCA9004875F9 /* Text+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,12 +34,24 @@
 		EC7B1BE09FE7CF60A0E460AF /* Pods_Habitors.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Habitors.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA03A01B2D81F83F004875F9 /* Habitors.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Habitors.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA03A01E2D81F83F004875F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FA03A0202D81F83F004875F9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		FA03A0222D81F83F004875F9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FA03A0252D81F83F004875F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FA03A0272D81F844004875F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA03A02A2D81F844004875F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA03A02C2D81F844004875F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA03A0342D81F916004875F9 /* SplashCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashCoordinator.swift; sourceTree = "<group>"; };
+		FA03A0352D81F916004875F9 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		FA03A0362D81F916004875F9 /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
+		FA03A03C2D81F925004875F9 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		FA03A03F2D81F970004875F9 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		FA03A0412D81F975004875F9 /* BaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		FA03A0432D81F979004875F9 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		FA03A0462D81F9BC004875F9 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		FA03A04D2D81FC44004875F9 /* Gilroy Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy Bold.otf"; sourceTree = "<group>"; };
+		FA03A0542D81FC44004875F9 /* Gilroy Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy Medium.otf"; sourceTree = "<group>"; };
+		FA03A0552D81FC44004875F9 /* Gilroy Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy Regular.otf"; sourceTree = "<group>"; };
+		FA03A0572D81FC44004875F9 /* Gilroy SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy SemiBold.otf"; sourceTree = "<group>"; };
+		FA03A0752D81FCA9004875F9 /* Text+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,7 +72,6 @@
 				06D8F555F47B0B82B4DDFF30 /* Pods-Habitors.debug.xcconfig */,
 				0CDF5891CE71BFD804C379EF /* Pods-Habitors.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -81,8 +104,10 @@
 		FA03A01D2D81F83F004875F9 /* Habitors */ = {
 			isa = PBXGroup;
 			children = (
+				FA03A0482D81FBC7004875F9 /* Resources */,
+				FA03A0452D81F99F004875F9 /* Extension */,
+				FA03A0322D81F905004875F9 /* Screen */,
 				FA03A01E2D81F83F004875F9 /* AppDelegate.swift */,
-				FA03A0202D81F83F004875F9 /* SceneDelegate.swift */,
 				FA03A0222D81F83F004875F9 /* ViewController.swift */,
 				FA03A0242D81F83F004875F9 /* Main.storyboard */,
 				FA03A0272D81F844004875F9 /* Assets.xcassets */,
@@ -90,6 +115,72 @@
 				FA03A02C2D81F844004875F9 /* Info.plist */,
 			);
 			path = Habitors;
+			sourceTree = "<group>";
+		};
+		FA03A0322D81F905004875F9 /* Screen */ = {
+			isa = PBXGroup;
+			children = (
+				FA03A03E2D81F965004875F9 /* Core */,
+				FA03A0332D81F90C004875F9 /* Splash */,
+			);
+			path = Screen;
+			sourceTree = "<group>";
+		};
+		FA03A0332D81F90C004875F9 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				FA03A0342D81F916004875F9 /* SplashCoordinator.swift */,
+				FA03A0352D81F916004875F9 /* SplashViewController.swift */,
+				FA03A0362D81F916004875F9 /* SplashViewModel.swift */,
+				FA03A03C2D81F925004875F9 /* SplashView.swift */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
+		FA03A03E2D81F965004875F9 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				FA03A0432D81F979004875F9 /* Coordinator.swift */,
+				FA03A0412D81F975004875F9 /* BaseViewModel.swift */,
+				FA03A03F2D81F970004875F9 /* BaseViewController.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		FA03A0452D81F99F004875F9 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				FA03A0462D81F9BC004875F9 /* UIView+Extension.swift */,
+				FA03A0752D81FCA9004875F9 /* Text+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		FA03A0482D81FBC7004875F9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				FA03A0492D81FBCC004875F9 /* Font */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		FA03A0492D81FBCC004875F9 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				FA03A05F2D81FC44004875F9 /* Gilroy */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+		FA03A05F2D81FC44004875F9 /* Gilroy */ = {
+			isa = PBXGroup;
+			children = (
+				FA03A04D2D81FC44004875F9 /* Gilroy Bold.otf */,
+				FA03A0542D81FC44004875F9 /* Gilroy Medium.otf */,
+				FA03A0552D81FC44004875F9 /* Gilroy Regular.otf */,
+				FA03A0572D81FC44004875F9 /* Gilroy SemiBold.otf */,
+			);
+			path = Gilroy;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -103,6 +194,7 @@
 				FA03A0172D81F83F004875F9 /* Sources */,
 				FA03A0182D81F83F004875F9 /* Frameworks */,
 				FA03A0192D81F83F004875F9 /* Resources */,
+				BAEBE67ACB25C89959A792EA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -153,7 +245,11 @@
 			files = (
 				FA03A0282D81F844004875F9 /* Assets.xcassets in Resources */,
 				FA03A02B2D81F844004875F9 /* Base in Resources */,
+				FA03A06D2D81FC44004875F9 /* Gilroy SemiBold.otf in Resources */,
+				FA03A06A2D81FC44004875F9 /* Gilroy Medium.otf in Resources */,
+				FA03A06B2D81FC44004875F9 /* Gilroy Regular.otf in Resources */,
 				FA03A0262D81F83F004875F9 /* Base in Resources */,
+				FA03A0632D81FC44004875F9 /* Gilroy Bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,6 +278,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		BAEBE67ACB25C89959A792EA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Habitors/Pods-Habitors-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Habitors/Pods-Habitors-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Habitors/Pods-Habitors-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -190,8 +303,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA03A0232D81F83F004875F9 /* ViewController.swift in Sources */,
+				FA03A0392D81F916004875F9 /* SplashCoordinator.swift in Sources */,
+				FA03A03A2D81F916004875F9 /* SplashViewController.swift in Sources */,
+				FA03A03B2D81F916004875F9 /* SplashViewModel.swift in Sources */,
 				FA03A01F2D81F83F004875F9 /* AppDelegate.swift in Sources */,
-				FA03A0212D81F83F004875F9 /* SceneDelegate.swift in Sources */,
+				FA03A0422D81F975004875F9 /* BaseViewModel.swift in Sources */,
+				FA03A0402D81F970004875F9 /* BaseViewController.swift in Sources */,
+				FA03A0762D81FCA9004875F9 /* Text+Extension.swift in Sources */,
+				FA03A03D2D81F925004875F9 /* SplashView.swift in Sources */,
+				FA03A0472D81F9BC004875F9 /* UIView+Extension.swift in Sources */,
+				FA03A0442D81F979004875F9 /* Coordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,6 +466,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NS9ZL6QW8L;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Habitors/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -374,6 +496,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NS9ZL6QW8L;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Habitors/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

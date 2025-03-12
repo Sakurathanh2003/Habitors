@@ -6,5 +6,6 @@ target 'Habitors' do
   use_frameworks!
 
   # Pods for Habitors
+  pod 'RxSwift'
 
 end
