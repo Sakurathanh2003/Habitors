@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		23312E1699B2096F7EA3DAD6 /* Pods_Habitors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC7B1BE09FE7CF60A0E460AF /* Pods_Habitors.framework */; };
+		241806742D82B19900E54E41 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241806702D82B19900E54E41 /* HomeCoordinator.swift */; };
+		241806752D82B19900E54E41 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241806712D82B19900E54E41 /* HomeViewController.swift */; };
+		241806762D82B19900E54E41 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241806722D82B19900E54E41 /* HomeViewModel.swift */; };
 		FA03A01F2D81F83F004875F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A01E2D81F83F004875F9 /* AppDelegate.swift */; };
 		FA03A0232D81F83F004875F9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0222D81F83F004875F9 /* ViewController.swift */; };
 		FA03A0262D81F83F004875F9 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = FA03A0252D81F83F004875F9 /* Base */; };
@@ -32,6 +35,9 @@
 /* Begin PBXFileReference section */
 		06D8F555F47B0B82B4DDFF30 /* Pods-Habitors.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Habitors.debug.xcconfig"; path = "Target Support Files/Pods-Habitors/Pods-Habitors.debug.xcconfig"; sourceTree = "<group>"; };
 		0CDF5891CE71BFD804C379EF /* Pods-Habitors.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Habitors.release.xcconfig"; path = "Target Support Files/Pods-Habitors/Pods-Habitors.release.xcconfig"; sourceTree = "<group>"; };
+		241806702D82B19900E54E41 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
+		241806712D82B19900E54E41 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		241806722D82B19900E54E41 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		EC7B1BE09FE7CF60A0E460AF /* Pods_Habitors.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Habitors.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA03A01B2D81F83F004875F9 /* Habitors.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Habitors.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA03A01E2D81F83F004875F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -164,8 +170,9 @@
 			children = (
 				FA03A0492D81FBCC004875F9 /* Font */,
 			);
-			path = Resources;
-			sourceTree = "<group>";
+			name = Resources;
+			path = Habitors/Resources;
+			sourceTree = SOURCE_ROOT;
 		};
 		FA03A0492D81FBCC004875F9 /* Font */ = {
 			isa = PBXGroup;
@@ -179,6 +186,9 @@
 			isa = PBXGroup;
 			children = (
 				FA03A0782D8205EB004875F9 /* HomeView.swift */,
+				241806702D82B19900E54E41 /* HomeCoordinator.swift */,
+				241806712D82B19900E54E41 /* HomeViewController.swift */,
+				241806722D82B19900E54E41 /* HomeViewModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -191,8 +201,7 @@
 				FA03A0912D82073C004875F9 /* Gilroy-Regular.ttf */,
 				FA03A0932D82073C004875F9 /* Gilroy-SemiBold.ttf */,
 			);
-			name = gilroy;
-			path = ../../../../../Downloads/gilroy;
+			path = gilroy;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -322,6 +331,9 @@
 				FA03A0422D81F975004875F9 /* BaseViewModel.swift in Sources */,
 				FA03A0402D81F970004875F9 /* BaseViewController.swift in Sources */,
 				FA03A0762D81FCA9004875F9 /* Text+Extension.swift in Sources */,
+				241806742D82B19900E54E41 /* HomeCoordinator.swift in Sources */,
+				241806752D82B19900E54E41 /* HomeViewController.swift in Sources */,
+				241806762D82B19900E54E41 /* HomeViewModel.swift in Sources */,
 				FA03A03D2D81F925004875F9 /* SplashView.swift in Sources */,
 				FA03A0792D8205EB004875F9 /* HomeView.swift in Sources */,
 				FA03A0472D81F9BC004875F9 /* UIView+Extension.swift in Sources */,
@@ -478,7 +490,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = NS9ZL6QW8L;
+				DEVELOPMENT_TEAM = F78JLS32Y8;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Habitors/Info.plist;
@@ -493,7 +505,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.thanh.Habitors;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thanh.Habitors.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -509,7 +521,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = NS9ZL6QW8L;
+				DEVELOPMENT_TEAM = F78JLS32Y8;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Habitors/Info.plist;
@@ -524,7 +536,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.thanh.Habitors;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thanh.Habitors.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

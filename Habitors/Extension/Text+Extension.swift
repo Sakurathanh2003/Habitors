@@ -24,4 +24,10 @@ extension Text {
     func gilroyMedium(_ size: CGFloat) -> Text {
         self.font(.custom("Gilroy-Medium", size: size))
     }
+    
+    func autoresize(_ numberOfLine: Int) -> some View {
+        self.lineLimit(numberOfLine)
+            .scaledToFit()
+            .minimumScaleFactor(0.1)
+    }
 }
