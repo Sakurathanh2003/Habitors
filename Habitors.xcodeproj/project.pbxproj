@@ -30,6 +30,12 @@
 		FA03A0B22D82073D004875F9 /* Gilroy-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA03A08F2D82073C004875F9 /* Gilroy-Medium.ttf */; };
 		FA03A0B42D82073D004875F9 /* Gilroy-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA03A0912D82073C004875F9 /* Gilroy-Regular.ttf */; };
 		FA03A0B62D82073D004875F9 /* Gilroy-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA03A0932D82073C004875F9 /* Gilroy-SemiBold.ttf */; };
+		FA03A0C12D830362004875F9 /* DateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0C02D830362004875F9 /* DateView.swift */; };
+		FA03A0C32D830435004875F9 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0C22D830435004875F9 /* Date+Extension.swift */; };
+		FA03A0C72D8304FE004875F9 /* SingleTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0C62D8304FE004875F9 /* SingleTaskView.swift */; };
+		FA03A0CA2D830674004875F9 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0C92D830674004875F9 /* Task.swift */; };
+		FA03A0CC2D831691004875F9 /* HomeActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0CB2D831691004875F9 /* HomeActivityView.swift */; };
+		FA03A0CE2D831C71004875F9 /* DashedLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0CD2D831C71004875F9 /* DashedLineView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +66,12 @@
 		FA03A08F2D82073C004875F9 /* Gilroy-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy-Medium.ttf"; sourceTree = "<group>"; };
 		FA03A0912D82073C004875F9 /* Gilroy-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy-Regular.ttf"; sourceTree = "<group>"; };
 		FA03A0932D82073C004875F9 /* Gilroy-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy-SemiBold.ttf"; sourceTree = "<group>"; };
+		FA03A0C02D830362004875F9 /* DateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateView.swift; sourceTree = "<group>"; };
+		FA03A0C22D830435004875F9 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		FA03A0C62D8304FE004875F9 /* SingleTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTaskView.swift; sourceTree = "<group>"; };
+		FA03A0C92D830674004875F9 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		FA03A0CB2D831691004875F9 /* HomeActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeActivityView.swift; sourceTree = "<group>"; };
+		FA03A0CD2D831C71004875F9 /* DashedLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashedLineView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +124,8 @@
 		FA03A01D2D81F83F004875F9 /* Habitors */ = {
 			isa = PBXGroup;
 			children = (
+				FA03A0C82D83066B004875F9 /* Model */,
+				FA03A0BF2D830358004875F9 /* Custom */,
 				FA03A0482D81FBC7004875F9 /* Resources */,
 				FA03A0452D81F99F004875F9 /* Extension */,
 				FA03A0322D81F905004875F9 /* Screen */,
@@ -161,6 +175,7 @@
 			children = (
 				FA03A0462D81F9BC004875F9 /* UIView+Extension.swift */,
 				FA03A0752D81FCA9004875F9 /* Text+Extension.swift */,
+				FA03A0C22D830435004875F9 /* Date+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -185,6 +200,7 @@
 		FA03A0772D8205DF004875F9 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				FA03A0CB2D831691004875F9 /* HomeActivityView.swift */,
 				FA03A0782D8205EB004875F9 /* HomeView.swift */,
 				241806702D82B19900E54E41 /* HomeCoordinator.swift */,
 				241806712D82B19900E54E41 /* HomeViewController.swift */,
@@ -202,6 +218,24 @@
 				FA03A0932D82073C004875F9 /* Gilroy-SemiBold.ttf */,
 			);
 			path = gilroy;
+			sourceTree = "<group>";
+		};
+		FA03A0BF2D830358004875F9 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				FA03A0C02D830362004875F9 /* DateView.swift */,
+				FA03A0C62D8304FE004875F9 /* SingleTaskView.swift */,
+				FA03A0CD2D831C71004875F9 /* DashedLineView.swift */,
+			);
+			path = Custom;
+			sourceTree = "<group>";
+		};
+		FA03A0C82D83066B004875F9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FA03A0C92D830674004875F9 /* Task.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -325,17 +359,23 @@
 			files = (
 				FA03A0232D81F83F004875F9 /* ViewController.swift in Sources */,
 				FA03A0392D81F916004875F9 /* SplashCoordinator.swift in Sources */,
+				FA03A0C12D830362004875F9 /* DateView.swift in Sources */,
 				FA03A03A2D81F916004875F9 /* SplashViewController.swift in Sources */,
 				FA03A03B2D81F916004875F9 /* SplashViewModel.swift in Sources */,
 				FA03A01F2D81F83F004875F9 /* AppDelegate.swift in Sources */,
+				FA03A0CC2D831691004875F9 /* HomeActivityView.swift in Sources */,
 				FA03A0422D81F975004875F9 /* BaseViewModel.swift in Sources */,
+				FA03A0CA2D830674004875F9 /* Task.swift in Sources */,
 				FA03A0402D81F970004875F9 /* BaseViewController.swift in Sources */,
 				FA03A0762D81FCA9004875F9 /* Text+Extension.swift in Sources */,
+				FA03A0C32D830435004875F9 /* Date+Extension.swift in Sources */,
 				241806742D82B19900E54E41 /* HomeCoordinator.swift in Sources */,
 				241806752D82B19900E54E41 /* HomeViewController.swift in Sources */,
 				241806762D82B19900E54E41 /* HomeViewModel.swift in Sources */,
 				FA03A03D2D81F925004875F9 /* SplashView.swift in Sources */,
 				FA03A0792D8205EB004875F9 /* HomeView.swift in Sources */,
+				FA03A0C72D8304FE004875F9 /* SingleTaskView.swift in Sources */,
+				FA03A0CE2D831C71004875F9 /* DashedLineView.swift in Sources */,
 				FA03A0472D81F9BC004875F9 /* UIView+Extension.swift in Sources */,
 				FA03A0442D81F979004875F9 /* Coordinator.swift in Sources */,
 			);
@@ -490,7 +530,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = F78JLS32Y8;
+				DEVELOPMENT_TEAM = NS9ZL6QW8L;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Habitors/Info.plist;
@@ -505,7 +545,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.thanh.Habitors.test;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thanh.Habitors;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -521,7 +561,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = F78JLS32Y8;
+				DEVELOPMENT_TEAM = NS9ZL6QW8L;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Habitors/Info.plist;
@@ -536,7 +576,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.thanh.Habitors.test;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thanh.Habitors;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

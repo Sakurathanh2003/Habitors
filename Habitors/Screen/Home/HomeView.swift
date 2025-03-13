@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import RxSwift
 
 enum HomeTab: String {
     case home
@@ -14,44 +15,101 @@ enum HomeTab: String {
     case discover
 }
 
+fileprivate struct Const {
+    static let horizontalPadding: CGFloat = 24.0
+}
+
 struct HomeView: View {
     @ObservedObject var viewModel: HomeViewModel
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             navigationBar
+                .padding(.horizontal, Const.horizontalPadding)
             
-            ScrollView {
-                VStack {
-                    summaryView
-                    calendarView
-                }
+            switch viewModel.currentTab {
+            case .home:
+                content
+            case .activity:
+                HomeActivityView(viewModel: viewModel)
+            case .profile:
+                Spacer()
+            case .discover:
+                Spacer()
             }
+            
             
             HomeTabbarView(viewModel: viewModel)
         }
-        .padding(.horizontal, 24)
+        .onAppear(perform: {
+            viewModel.selectedDate = Date()
+        })
     }
     
-    // MARK: - Calendar
-    var calendarView: some View {
-        ScrollView(.horizontal) {
-            HStack {
-                ZStack {
-                    Color.red
-                    
-                    VStack(spacing: 12) {
-                        Text("Fri")
-                            .gilroyRegular(12)
-                            .foregroundStyle(Color("Gray"))
+    // MARK: - Home Content
+    var content: some View {
+        VStack(spacing: 0) {
+            summaryView
+                .padding(.horizontal, Const.horizontalPadding)
+                .padding(.top, 22)
+            calendarView
+                .padding(.top, 24)
+            
+            ScrollView(.vertical) {
+                VStack(spacing: 16) {
+                    if viewModel.tasks.isEmpty {
+                        Image("ic_empty_task")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 50)
                         
-                        Text("13")
-                            .gilroySemiBold(16)
+                        Text("You have no habits scheduled for this day. Keep up the good work and enjoy your break! 😊")
+                            .gilroyRegular(16)
+                            .lineSpacing(5)
+                            .multilineTextAlignment(.center)
                             .foregroundStyle(Color("Gray"))
+                            
+                    } else {
+                        ForEach(0..<15) { index in
+                            SingleTaskView(task: Task(name: "Task \(index + 1)", isCompleted: index % 2 == 0, date: Date()))
+                        }
                     }
                 }
-                .frame(width: 52,height: 88)
-               
+                .padding(.horizontal, Const.horizontalPadding)
+                .padding(.vertical, 24)
+            }
+            .mask(
+                LinearGradient(stops: [
+                    .init(color: .clear, location: 0),
+                    .init(color: .black, location: 0.1)
+                ], startPoint: .top, endPoint: .bottom)
+            )
+        }
+    }
+        
+    // MARK: - Calendar
+    var calendarView: some View {
+        ScrollViewReader { proxy in
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack {
+                    ForEach(viewModel.dateInMonth, id: \.timeIntervalSince1970) { date in
+                        DateView(date: date,
+                                 isSelected: viewModel.isSelectedDate(date))
+                        .id(date.format("dd"))
+                        .onTapGesture {
+                            viewModel.input.selectDate.onNext(date)
+                        }
+                    }
+                }
+                .padding(.horizontal, Const.horizontalPadding)
+            }
+            .onChange(of: viewModel.selectedDate) { date in
+                if let date {
+                    withAnimation {
+                        proxy.scrollTo(date.format("dd"),
+                                       anchor: .center)
+                    }
+                }
             }
         }
     }
@@ -60,15 +118,25 @@ struct HomeView: View {
     var summaryView: some View {
         HStack(spacing: 0) {
             VStack(alignment: .leading, spacing: 20) {
-                Text("Friday\n21 January, 2022")
+                let dateDescription = Date().format("EEEE\ndd MMMM, yyyy")
+                Text(dateDescription)
                     .gilroyRegular(12)
                     .padding(.top, 16)
                 
-                Text("You have\n4 tasks to do")
-                    .gilroyBold(28)
-                    .autoresize(2)
-                    .lineSpacing(5)
-                    .padding(.bottom, 24)
+                if viewModel.todayTasks.isEmpty {
+                    Text("Your tasks are\ncompleted")
+                        .gilroyBold(28)
+                        .autoresize(2)
+                        .lineSpacing(5)
+                        .padding(.bottom, 24)
+                } else {
+                    Text("You have\n4 tasks to do")
+                        .gilroyBold(28)
+                        .autoresize(2)
+                        .lineSpacing(5)
+                        .padding(.bottom, 24)
+                }
+                
             }
            
             Spacer(minLength: 0)
@@ -97,13 +165,19 @@ struct HomeView: View {
     var navigationBar: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text("Good evening 🖐️")
-                    .gilroyMedium(14)
-                    .foregroundStyle(Color("Gray"))
-                
-                Text("SaberAli")
-                    .gilroyBold(28)
-                    .foregroundStyle(Color("Black"))
+                if viewModel.currentTab == .home {
+                    Text("Good evening 🖐️")
+                        .gilroyMedium(14)
+                        .foregroundStyle(Color("Gray"))
+                    
+                    Text("SaberAli")
+                        .gilroyBold(28)
+                        .foregroundStyle(Color("Black"))
+                } else {
+                    Text(viewModel.currentTab.rawValue.capitalized)
+                        .gilroyBold(28)
+                        .foregroundStyle(Color("Black"))
+                }
             }
             
             Spacer()
@@ -113,6 +187,7 @@ struct HomeView: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 24, height: 24)
         }
+        .frame(height: 56)
     }
 }
 
@@ -142,7 +217,13 @@ fileprivate struct HomeTabbarView: View {
             tabItemView(.profile)
         }
         .frame(height: 60)
-        .background(Color.white.ignoresSafeArea())
+        .padding(.top, 10)
+        .background(
+            VStack(spacing: 0) {
+                Color("Secondary").frame(height: 1)
+                Color.white.ignoresSafeArea()
+            }
+        )
     }
     
     @ViewBuilder

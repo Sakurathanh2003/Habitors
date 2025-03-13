@@ -1,0 +1,22 @@
+//
+//  Task.swift
+//  Habitors
+//
+//  Created by Vũ Thị Thanh on 13/3/25.
+//
+
+import Foundation
+
+class Task {
+    var id: String
+    var name: String
+    var isCompleted: Bool
+    var date: Date
+    
+    init(name: String, isCompleted: Bool, date: Date) {
+        self.id = UUID().uuidString
+        self.name = name
+        self.isCompleted = isCompleted
+        self.date = date
+    }
+}

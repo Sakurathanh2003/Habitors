@@ -11,6 +11,7 @@ import SwiftUI
 
 struct HomeViewModelInput: InputOutputViewModel {
     var selectTab = PublishSubject<HomeTab>()
+    var selectDate = PublishSubject<Date>()
 }
 
 struct HomeViewModelOutput: InputOutputViewModel {
@@ -22,11 +23,42 @@ struct HomeViewModelRouting: RoutingOutput {
 }
 
 final class HomeViewModel: BaseViewModel<HomeViewModelInput, HomeViewModelOutput, HomeViewModelRouting> {
-    @Published var currentTab: HomeTab = .home
+    @Published var currentTab: HomeTab = .activity
+    @Published var dateInMonth = [Date]()
+    @Published var selectedDate: Date?
+    
+    @Published var tasks = [Task]()
+    @Published var todayTasks = [Task]()
     
     override init() {
         super.init()
+        getDateInMonth()
         configInput()
+    }
+    
+    private func getDateInMonth() {
+        let calendar = Calendar.current
+        let currentDate = Date()
+        
+        // Lấy năm và tháng hiện tại
+        let components = calendar.dateComponents([.year, .month], from: currentDate)
+        
+        // Lấy ngày đầu tiên của tháng
+        guard let startDate = calendar.date(from: components) else {
+            return
+        }
+        
+        // Lấy số ngày trong tháng hiện tại
+        guard let range = calendar.range(of: .day, in: .month, for: startDate) else { 
+            return
+        }
+        
+        // Tạo danh sách các ngày trong tháng
+        self.dateInMonth = range.compactMap { day -> Date? in
+            var dayComponent = components
+            dayComponent.day = day
+            return calendar.date(from: dayComponent)
+        }
     }
     
     private func configInput() {
@@ -35,6 +67,15 @@ final class HomeViewModel: BaseViewModel<HomeViewModelInput, HomeViewModelOutput
                 self.currentTab = tab
             }
         }).disposed(by: self.disposeBag)
+        
+        input.selectDate.subscribe(onNext: { [unowned self] date in
+            self.selectedDate = date
+            self.getTasks()
+        }).disposed(by: self.disposeBag)
+    }
+    
+    private func getTasks() {
+        
     }
 }
 
@@ -42,5 +83,14 @@ final class HomeViewModel: BaseViewModel<HomeViewModelInput, HomeViewModelOutput
 extension HomeViewModel {
     func isSelected(_ tab: HomeTab) -> Bool {
         return currentTab == tab
+    }
+    
+    func isSelectedDate(_ date: Date) -> Bool {
+        guard let selectedDate else {
+            return false
+        }
+        
+        let calendar = Calendar.current
+        return calendar.isDate(date, inSameDayAs: selectedDate)
     }
 }
