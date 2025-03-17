@@ -7,5 +7,6 @@ target 'Habitors' do
 
   # Pods for Habitors
   pod 'RxSwift'
+  pod 'SwiftUIIntrospect'
 
 end

@@ -23,12 +23,29 @@ struct HomeViewModelRouting: RoutingOutput {
 }
 
 final class HomeViewModel: BaseViewModel<HomeViewModelInput, HomeViewModelOutput, HomeViewModelRouting> {
-    @Published var currentTab: HomeTab = .activity
+    @Published var currentTab: HomeTab = .tools
     @Published var dateInMonth = [Date]()
     @Published var selectedDate: Date?
     
     @Published var tasks = [Task]()
     @Published var todayTasks = [Task]()
+    
+    @Published var showingToolItem: Tool.Item?
+    
+    @Published var tools: [Tool] = [
+        .init(id: UUID().uuidString, name: "Meditations", type: .music, items: [
+            .init(name: "Energy Ball", description: "7 min"),
+            .init(name: "Breath Cycle", description: "5 min"),
+            .init(name: "Mindfulness", description: "5 min"),
+            .init(name: "IDK", description: "5 min")
+        ]),
+        .init(id: UUID().uuidString, name: "Soundscapes", type: .music, items: [
+            .init(name: "Energy Ball", description: "7 min"),
+            .init(name: "Breath Cycle", description: "5 min"),
+            .init(name: "Mindfulness", description: "5 min"),
+            .init(name: "IDK", description: "5 min")
+        ])
+    ]
     
     override init() {
         super.init()

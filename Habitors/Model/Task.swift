@@ -20,3 +20,13 @@ class Task {
         self.date = date
     }
 }
+
+class Time {
+    var hour: Int
+    var minutes: Int
+    
+    init(hour: Int, minutes: Int) {
+        self.hour = hour
+        self.minutes = minutes
+    }
+}

@@ -11,7 +11,7 @@ import RxSwift
 enum HomeTab: String {
     case home
     case activity
-    case profile
+    case tools
     case discover
 }
 
@@ -19,31 +19,41 @@ fileprivate struct Const {
     static let horizontalPadding: CGFloat = 24.0
 }
 
+
+
 struct HomeView: View {
     @ObservedObject var viewModel: HomeViewModel
+    @Namespace var animation
     
     var body: some View {
-        VStack(spacing: 0) {
-            navigationBar
-                .padding(.horizontal, Const.horizontalPadding)
-            
-            switch viewModel.currentTab {
-            case .home:
-                content
-            case .activity:
-                HomeActivityView(viewModel: viewModel)
-            case .profile:
-                Spacer()
-            case .discover:
-                Spacer()
+        ZStack {
+            VStack(spacing: 0) {
+                navigationBar
+                    .padding(.horizontal, Const.horizontalPadding)
+                
+                switch viewModel.currentTab {
+                case .home:
+                    content
+                case .activity:
+                    HomeActivityView(viewModel: viewModel)
+                case .tools:
+                    HomeToolView(viewModel: viewModel, namespace: animation)
+                case .discover:
+                    HomeDiscoverView(viewModel: viewModel)
+                }
+                
+                HomeTabbarView(viewModel: viewModel)
             }
+            .onAppear(perform: {
+                viewModel.selectedDate = Date()
+            })
             
-            
-            HomeTabbarView(viewModel: viewModel)
+            if let item = viewModel.showingToolItem {
+                MusicToolDetailView(dismiss: {
+                    self.viewModel.showingToolItem = nil
+                }, item: item, namespace: animation)
+            }
         }
-        .onAppear(perform: {
-            viewModel.selectedDate = Date()
-        })
     }
     
     // MARK: - Home Content
@@ -214,7 +224,7 @@ fileprivate struct HomeTabbarView: View {
                 )
             
             tabItemView(.discover)
-            tabItemView(.profile)
+            tabItemView(.tools)
         }
         .frame(height: 60)
         .padding(.top, 10)

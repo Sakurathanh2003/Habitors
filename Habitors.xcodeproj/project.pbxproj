@@ -36,6 +36,21 @@
 		FA03A0CA2D830674004875F9 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0C92D830674004875F9 /* Task.swift */; };
 		FA03A0CC2D831691004875F9 /* HomeActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0CB2D831691004875F9 /* HomeActivityView.swift */; };
 		FA03A0CE2D831C71004875F9 /* DashedLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0CD2D831C71004875F9 /* DashedLineView.swift */; };
+		FA03A0D02D8472EC004875F9 /* HomeDiscoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0CF2D8472EC004875F9 /* HomeDiscoverView.swift */; };
+		FA03A0D22D847566004875F9 /* HomeToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0D12D847566004875F9 /* HomeToolView.swift */; };
+		FA03A0D52D8486FC004875F9 /* Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0D42D8486FB004875F9 /* Tool.swift */; };
+		FA2A0AEB2D84A30400A597DB /* MusicToolDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2A0AEA2D84A30400A597DB /* MusicToolDetailView.swift */; };
+		FA2A0AF12D8516EB00A597DB /* CreateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2A0AED2D8516EB00A597DB /* CreateCoordinator.swift */; };
+		FA2A0AF22D8516EB00A597DB /* CreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2A0AEE2D8516EB00A597DB /* CreateViewController.swift */; };
+		FA2A0AF32D8516EB00A597DB /* CreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2A0AEF2D8516EB00A597DB /* CreateViewModel.swift */; };
+		FA2A0AF62D85170500A597DB /* CreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2A0AF52D85170500A597DB /* CreateView.swift */; };
+		FA2A0AF82D85254200A597DB /* HabitToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2A0AF72D85254200A597DB /* HabitToggle.swift */; };
+		FA2A0AFA2D85256E00A597DB /* CalendarDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2A0AF92D85256E00A597DB /* CalendarDialog.swift */; };
+		FA2A0AFC2D85284100A597DB /* Calendar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2A0AFB2D85284100A597DB /* Calendar+Extension.swift */; };
+		FA2A0AFF2D85740C00A597DB /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2A0AFE2D85740C00A597DB /* CalendarViewModel.swift */; };
+		FA2A0B012D859CD500A597DB /* SetPeriodDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2A0B002D859CD500A597DB /* SetPeriodDialog.swift */; };
+		FA2A0B042D859E2600A597DB /* TimeDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2A0B032D859E2600A597DB /* TimeDialog.swift */; };
+		FA2A0B062D85A01000A597DB /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2A0B052D85A01000A597DB /* Int+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +87,21 @@
 		FA03A0C92D830674004875F9 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		FA03A0CB2D831691004875F9 /* HomeActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeActivityView.swift; sourceTree = "<group>"; };
 		FA03A0CD2D831C71004875F9 /* DashedLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashedLineView.swift; sourceTree = "<group>"; };
+		FA03A0CF2D8472EC004875F9 /* HomeDiscoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDiscoverView.swift; sourceTree = "<group>"; };
+		FA03A0D12D847566004875F9 /* HomeToolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeToolView.swift; sourceTree = "<group>"; };
+		FA03A0D42D8486FB004875F9 /* Tool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tool.swift; sourceTree = "<group>"; };
+		FA2A0AEA2D84A30400A597DB /* MusicToolDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicToolDetailView.swift; sourceTree = "<group>"; };
+		FA2A0AED2D8516EB00A597DB /* CreateCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCoordinator.swift; sourceTree = "<group>"; };
+		FA2A0AEE2D8516EB00A597DB /* CreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewController.swift; sourceTree = "<group>"; };
+		FA2A0AEF2D8516EB00A597DB /* CreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewModel.swift; sourceTree = "<group>"; };
+		FA2A0AF52D85170500A597DB /* CreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateView.swift; sourceTree = "<group>"; };
+		FA2A0AF72D85254200A597DB /* HabitToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitToggle.swift; sourceTree = "<group>"; };
+		FA2A0AF92D85256E00A597DB /* CalendarDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDialog.swift; sourceTree = "<group>"; };
+		FA2A0AFB2D85284100A597DB /* Calendar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Calendar+Extension.swift"; sourceTree = "<group>"; };
+		FA2A0AFE2D85740C00A597DB /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
+		FA2A0B002D859CD500A597DB /* SetPeriodDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPeriodDialog.swift; sourceTree = "<group>"; };
+		FA2A0B032D859E2600A597DB /* TimeDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeDialog.swift; sourceTree = "<group>"; };
+		FA2A0B052D85A01000A597DB /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +172,8 @@
 		FA03A0322D81F905004875F9 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				FA2A0AEC2D8516D400A597DB /* Create */,
+				FA2A0AE92D84A2F200A597DB /* Tool */,
 				FA03A0772D8205DF004875F9 /* Home */,
 				FA03A03E2D81F965004875F9 /* Core */,
 				FA03A0332D81F90C004875F9 /* Splash */,
@@ -176,6 +208,8 @@
 				FA03A0462D81F9BC004875F9 /* UIView+Extension.swift */,
 				FA03A0752D81FCA9004875F9 /* Text+Extension.swift */,
 				FA03A0C22D830435004875F9 /* Date+Extension.swift */,
+				FA2A0AFB2D85284100A597DB /* Calendar+Extension.swift */,
+				FA2A0B052D85A01000A597DB /* Int+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -200,8 +234,7 @@
 		FA03A0772D8205DF004875F9 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				FA03A0CB2D831691004875F9 /* HomeActivityView.swift */,
-				FA03A0782D8205EB004875F9 /* HomeView.swift */,
+				FA03A0D32D8475BA004875F9 /* View */,
 				241806702D82B19900E54E41 /* HomeCoordinator.swift */,
 				241806712D82B19900E54E41 /* HomeViewController.swift */,
 				241806722D82B19900E54E41 /* HomeViewModel.swift */,
@@ -223,9 +256,13 @@
 		FA03A0BF2D830358004875F9 /* Custom */ = {
 			isa = PBXGroup;
 			children = (
+				FA2A0B022D859E1A00A597DB /* Time */,
+				FA2A0AFD2D8573AF00A597DB /* Calendar */,
 				FA03A0C02D830362004875F9 /* DateView.swift */,
 				FA03A0C62D8304FE004875F9 /* SingleTaskView.swift */,
 				FA03A0CD2D831C71004875F9 /* DashedLineView.swift */,
+				FA2A0AF72D85254200A597DB /* HabitToggle.swift */,
+				FA2A0B002D859CD500A597DB /* SetPeriodDialog.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -234,8 +271,56 @@
 			isa = PBXGroup;
 			children = (
 				FA03A0C92D830674004875F9 /* Task.swift */,
+				FA03A0D42D8486FB004875F9 /* Tool.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		FA03A0D32D8475BA004875F9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FA03A0CF2D8472EC004875F9 /* HomeDiscoverView.swift */,
+				FA03A0CB2D831691004875F9 /* HomeActivityView.swift */,
+				FA03A0782D8205EB004875F9 /* HomeView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FA2A0AE92D84A2F200A597DB /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				FA03A0D12D847566004875F9 /* HomeToolView.swift */,
+				FA2A0AEA2D84A30400A597DB /* MusicToolDetailView.swift */,
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
+		FA2A0AEC2D8516D400A597DB /* Create */ = {
+			isa = PBXGroup;
+			children = (
+				FA2A0AED2D8516EB00A597DB /* CreateCoordinator.swift */,
+				FA2A0AEE2D8516EB00A597DB /* CreateViewController.swift */,
+				FA2A0AEF2D8516EB00A597DB /* CreateViewModel.swift */,
+				FA2A0AF52D85170500A597DB /* CreateView.swift */,
+			);
+			path = Create;
+			sourceTree = "<group>";
+		};
+		FA2A0AFD2D8573AF00A597DB /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				FA2A0AF92D85256E00A597DB /* CalendarDialog.swift */,
+				FA2A0AFE2D85740C00A597DB /* CalendarViewModel.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		FA2A0B022D859E1A00A597DB /* Time */ = {
+			isa = PBXGroup;
+			children = (
+				FA2A0B032D859E2600A597DB /* TimeDialog.swift */,
+			);
+			path = Time;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -357,9 +442,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA2A0B042D859E2600A597DB /* TimeDialog.swift in Sources */,
+				FA2A0AF82D85254200A597DB /* HabitToggle.swift in Sources */,
 				FA03A0232D81F83F004875F9 /* ViewController.swift in Sources */,
+				FA2A0AEB2D84A30400A597DB /* MusicToolDetailView.swift in Sources */,
 				FA03A0392D81F916004875F9 /* SplashCoordinator.swift in Sources */,
+				FA2A0AFA2D85256E00A597DB /* CalendarDialog.swift in Sources */,
 				FA03A0C12D830362004875F9 /* DateView.swift in Sources */,
+				FA2A0AF12D8516EB00A597DB /* CreateCoordinator.swift in Sources */,
+				FA2A0AF22D8516EB00A597DB /* CreateViewController.swift in Sources */,
+				FA2A0AF32D8516EB00A597DB /* CreateViewModel.swift in Sources */,
+				FA2A0AFF2D85740C00A597DB /* CalendarViewModel.swift in Sources */,
+				FA03A0D52D8486FC004875F9 /* Tool.swift in Sources */,
 				FA03A03A2D81F916004875F9 /* SplashViewController.swift in Sources */,
 				FA03A03B2D81F916004875F9 /* SplashViewModel.swift in Sources */,
 				FA03A01F2D81F83F004875F9 /* AppDelegate.swift in Sources */,
@@ -367,13 +461,19 @@
 				FA03A0422D81F975004875F9 /* BaseViewModel.swift in Sources */,
 				FA03A0CA2D830674004875F9 /* Task.swift in Sources */,
 				FA03A0402D81F970004875F9 /* BaseViewController.swift in Sources */,
+				FA2A0AF62D85170500A597DB /* CreateView.swift in Sources */,
 				FA03A0762D81FCA9004875F9 /* Text+Extension.swift in Sources */,
+				FA2A0B062D85A01000A597DB /* Int+Extension.swift in Sources */,
 				FA03A0C32D830435004875F9 /* Date+Extension.swift in Sources */,
 				241806742D82B19900E54E41 /* HomeCoordinator.swift in Sources */,
+				FA2A0AFC2D85284100A597DB /* Calendar+Extension.swift in Sources */,
 				241806752D82B19900E54E41 /* HomeViewController.swift in Sources */,
 				241806762D82B19900E54E41 /* HomeViewModel.swift in Sources */,
 				FA03A03D2D81F925004875F9 /* SplashView.swift in Sources */,
+				FA03A0D02D8472EC004875F9 /* HomeDiscoverView.swift in Sources */,
+				FA2A0B012D859CD500A597DB /* SetPeriodDialog.swift in Sources */,
 				FA03A0792D8205EB004875F9 /* HomeView.swift in Sources */,
+				FA03A0D22D847566004875F9 /* HomeToolView.swift in Sources */,
 				FA03A0C72D8304FE004875F9 /* SingleTaskView.swift in Sources */,
 				FA03A0CE2D831C71004875F9 /* DashedLineView.swift in Sources */,
 				FA03A0472D81F9BC004875F9 /* UIView+Extension.swift in Sources */,

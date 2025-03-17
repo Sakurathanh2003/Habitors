@@ -8,6 +8,16 @@
 import Foundation
 import SwiftUI
 
+extension Font {
+    static func golroyMedium(_ size: CGFloat) -> Font {
+        return Font.custom("Gilroy-Medium", size: size)
+    }
+    
+    static func golroySemiBold(_ size: CGFloat) -> Font {
+        return Font.custom("Gilroy-SemiBold", size: size)
+    }
+}
+
 extension Text {
     func gilroyRegular(_ size: CGFloat) -> Text {
         self.font(.custom("Gilroy-Regular", size: size))
@@ -29,5 +39,23 @@ extension Text {
         self.lineLimit(numberOfLine)
             .scaledToFit()
             .minimumScaleFactor(0.1)
+    }
+}
+
+extension View {
+    func gilroyRegular(_ size: CGFloat) -> some View {
+        self.font(.custom("Gilroy-Regular", size: size))
+    }
+    
+    func gilroyBold(_ size: CGFloat) -> some View {
+        self.font(.custom("Gilroy-Bold", size: size))
+    }
+    
+    func gilroySemiBold(_ size: CGFloat) -> some View {
+        self.font(.custom("Gilroy-SemiBold", size: size))
+    }
+    
+    func gilroyMedium(_ size: CGFloat) -> some View {
+        self.font(.custom("Gilroy-Medium", size: size))
     }
 }
