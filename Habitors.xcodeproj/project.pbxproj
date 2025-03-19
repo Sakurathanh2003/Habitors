@@ -51,7 +51,44 @@
 		FA2A0B012D859CD500A597DB /* SetPeriodDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2A0B002D859CD500A597DB /* SetPeriodDialog.swift */; };
 		FA2A0B042D859E2600A597DB /* TimeDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2A0B032D859E2600A597DB /* TimeDialog.swift */; };
 		FA2A0B062D85A01000A597DB /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2A0B052D85A01000A597DB /* Int+Extension.swift */; };
+		FAABE50E2D8883CE00544254 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAABE50D2D8883CD00544254 /* AppCoordinator.swift */; };
+		FAABE5122D888C6400544254 /* SakuraExtension in Frameworks */ = {isa = PBXBuildFile; productRef = FAABE5112D888C6400544254 /* SakuraExtension */; };
+		FAABE5192D89B0E000544254 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAABE5182D89B0E000544254 /* WidgetKit.framework */; };
+		FAABE51B2D89B0E000544254 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAABE51A2D89B0E000544254 /* SwiftUI.framework */; };
+		FAABE51E2D89B0E000544254 /* HabitWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAABE51D2D89B0E000544254 /* HabitWidgetBundle.swift */; };
+		FAABE5202D89B0E000544254 /* HabitWidgetLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAABE51F2D89B0E000544254 /* HabitWidgetLiveActivity.swift */; };
+		FAABE5222D89B0E000544254 /* HabitWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAABE5212D89B0E000544254 /* HabitWidget.swift */; };
+		FAABE5242D89B0E000544254 /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAABE5232D89B0E000544254 /* AppIntent.swift */; };
+		FAABE5262D89B0E300544254 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAABE5252D89B0E300544254 /* Assets.xcassets */; };
+		FAABE52A2D89B0E300544254 /* HabitWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = FAABE5172D89B0E000544254 /* HabitWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		FAABE52F2D89B45F00544254 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0C92D830674004875F9 /* Task.swift */; };
+		FAABE5312D89D89100544254 /* Habit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAABE5302D89D89100544254 /* Habit.swift */; };
+		FAABE5332D89D9FB00544254 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAABE5322D89D9FB00544254 /* AppTheme.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FAABE5282D89B0E300544254 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FA03A0132D81F83F004875F9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FAABE5162D89B0E000544254;
+			remoteInfo = HabitWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FAABE52E2D89B0E300544254 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				FAABE52A2D89B0E300544254 /* HabitWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		06D8F555F47B0B82B4DDFF30 /* Pods-Habitors.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Habitors.debug.xcconfig"; path = "Target Support Files/Pods-Habitors/Pods-Habitors.debug.xcconfig"; sourceTree = "<group>"; };
@@ -102,6 +139,18 @@
 		FA2A0B002D859CD500A597DB /* SetPeriodDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPeriodDialog.swift; sourceTree = "<group>"; };
 		FA2A0B032D859E2600A597DB /* TimeDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeDialog.swift; sourceTree = "<group>"; };
 		FA2A0B052D85A01000A597DB /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
+		FAABE50D2D8883CD00544254 /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		FAABE5172D89B0E000544254 /* HabitWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = HabitWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAABE5182D89B0E000544254 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		FAABE51A2D89B0E000544254 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		FAABE51D2D89B0E000544254 /* HabitWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitWidgetBundle.swift; sourceTree = "<group>"; };
+		FAABE51F2D89B0E000544254 /* HabitWidgetLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitWidgetLiveActivity.swift; sourceTree = "<group>"; };
+		FAABE5212D89B0E000544254 /* HabitWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitWidget.swift; sourceTree = "<group>"; };
+		FAABE5232D89B0E000544254 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
+		FAABE5252D89B0E300544254 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FAABE5272D89B0E300544254 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FAABE5302D89D89100544254 /* Habit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habit.swift; sourceTree = "<group>"; };
+		FAABE5322D89D9FB00544254 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +159,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				23312E1699B2096F7EA3DAD6 /* Pods_Habitors.framework in Frameworks */,
+				FAABE5122D888C6400544254 /* SakuraExtension in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FAABE5142D89B0E000544254 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FAABE51B2D89B0E000544254 /* SwiftUI.framework in Frameworks */,
+				FAABE5192D89B0E000544254 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,6 +188,8 @@
 			isa = PBXGroup;
 			children = (
 				EC7B1BE09FE7CF60A0E460AF /* Pods_Habitors.framework */,
+				FAABE5182D89B0E000544254 /* WidgetKit.framework */,
+				FAABE51A2D89B0E000544254 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -137,6 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				FA03A01D2D81F83F004875F9 /* Habitors */,
+				FAABE51C2D89B0E000544254 /* HabitWidget */,
 				FA03A01C2D81F83F004875F9 /* Products */,
 				1D6C327FB0C0DD1A02024FED /* Pods */,
 				C769EF5CB3D0651AAB002413 /* Frameworks */,
@@ -147,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				FA03A01B2D81F83F004875F9 /* Habitors.app */,
+				FAABE5172D89B0E000544254 /* HabitWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -172,6 +235,7 @@
 		FA03A0322D81F905004875F9 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				FAABE50D2D8883CD00544254 /* AppCoordinator.swift */,
 				FA2A0AEC2D8516D400A597DB /* Create */,
 				FA2A0AE92D84A2F200A597DB /* Tool */,
 				FA03A0772D8205DF004875F9 /* Home */,
@@ -272,6 +336,8 @@
 			children = (
 				FA03A0C92D830674004875F9 /* Task.swift */,
 				FA03A0D42D8486FB004875F9 /* Tool.swift */,
+				FAABE5302D89D89100544254 /* Habit.swift */,
+				FAABE5322D89D9FB00544254 /* AppTheme.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -323,6 +389,19 @@
 			path = Time;
 			sourceTree = "<group>";
 		};
+		FAABE51C2D89B0E000544254 /* HabitWidget */ = {
+			isa = PBXGroup;
+			children = (
+				FAABE51D2D89B0E000544254 /* HabitWidgetBundle.swift */,
+				FAABE51F2D89B0E000544254 /* HabitWidgetLiveActivity.swift */,
+				FAABE5212D89B0E000544254 /* HabitWidget.swift */,
+				FAABE5232D89B0E000544254 /* AppIntent.swift */,
+				FAABE5252D89B0E300544254 /* Assets.xcassets */,
+				FAABE5272D89B0E300544254 /* Info.plist */,
+			);
+			path = HabitWidget;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -335,15 +414,37 @@
 				FA03A0182D81F83F004875F9 /* Frameworks */,
 				FA03A0192D81F83F004875F9 /* Resources */,
 				BAEBE67ACB25C89959A792EA /* [CP] Embed Pods Frameworks */,
+				FAABE52E2D89B0E300544254 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FAABE5292D89B0E300544254 /* PBXTargetDependency */,
+			);
+			name = Habitors;
+			packageProductDependencies = (
+				FAABE5112D888C6400544254 /* SakuraExtension */,
+			);
+			productName = Habitors;
+			productReference = FA03A01B2D81F83F004875F9 /* Habitors.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FAABE5162D89B0E000544254 /* HabitWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FAABE52B2D89B0E300544254 /* Build configuration list for PBXNativeTarget "HabitWidgetExtension" */;
+			buildPhases = (
+				FAABE5132D89B0E000544254 /* Sources */,
+				FAABE5142D89B0E000544254 /* Frameworks */,
+				FAABE5152D89B0E000544254 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = Habitors;
-			productName = Habitors;
-			productReference = FA03A01B2D81F83F004875F9 /* Habitors.app */;
-			productType = "com.apple.product-type.application";
+			name = HabitWidgetExtension;
+			productName = HabitWidgetExtension;
+			productReference = FAABE5172D89B0E000544254 /* HabitWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -358,6 +459,9 @@
 					FA03A01A2D81F83F004875F9 = {
 						CreatedOnToolsVersion = 15.4;
 					};
+					FAABE5162D89B0E000544254 = {
+						CreatedOnToolsVersion = 15.4;
+					};
 				};
 			};
 			buildConfigurationList = FA03A0162D81F83F004875F9 /* Build configuration list for PBXProject "Habitors" */;
@@ -369,11 +473,15 @@
 				Base,
 			);
 			mainGroup = FA03A0122D81F83F004875F9;
+			packageReferences = (
+				FAABE5102D888C6400544254 /* XCRemoteSwiftPackageReference "SakuraExtension" */,
+			);
 			productRefGroup = FA03A01C2D81F83F004875F9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				FA03A01A2D81F83F004875F9 /* Habitors */,
+				FAABE5162D89B0E000544254 /* HabitWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -390,6 +498,14 @@
 				FA03A0B42D82073D004875F9 /* Gilroy-Regular.ttf in Resources */,
 				FA03A0B22D82073D004875F9 /* Gilroy-Medium.ttf in Resources */,
 				FA03A0262D81F83F004875F9 /* Base in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FAABE5152D89B0E000544254 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FAABE5262D89B0E300544254 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,7 +559,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA2A0B042D859E2600A597DB /* TimeDialog.swift in Sources */,
+				FAABE50E2D8883CE00544254 /* AppCoordinator.swift in Sources */,
 				FA2A0AF82D85254200A597DB /* HabitToggle.swift in Sources */,
+				FAABE5332D89D9FB00544254 /* AppTheme.swift in Sources */,
 				FA03A0232D81F83F004875F9 /* ViewController.swift in Sources */,
 				FA2A0AEB2D84A30400A597DB /* MusicToolDetailView.swift in Sources */,
 				FA03A0392D81F916004875F9 /* SplashCoordinator.swift in Sources */,
@@ -467,6 +585,7 @@
 				FA03A0C32D830435004875F9 /* Date+Extension.swift in Sources */,
 				241806742D82B19900E54E41 /* HomeCoordinator.swift in Sources */,
 				FA2A0AFC2D85284100A597DB /* Calendar+Extension.swift in Sources */,
+				FAABE5312D89D89100544254 /* Habit.swift in Sources */,
 				241806752D82B19900E54E41 /* HomeViewController.swift in Sources */,
 				241806762D82B19900E54E41 /* HomeViewModel.swift in Sources */,
 				FA03A03D2D81F925004875F9 /* SplashView.swift in Sources */,
@@ -481,7 +600,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FAABE5132D89B0E000544254 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FAABE51E2D89B0E000544254 /* HabitWidgetBundle.swift in Sources */,
+				FAABE5242D89B0E000544254 /* AppIntent.swift in Sources */,
+				FAABE52F2D89B45F00544254 /* Task.swift in Sources */,
+				FAABE5202D89B0E000544254 /* HabitWidgetLiveActivity.swift in Sources */,
+				FAABE5222D89B0E000544254 /* HabitWidget.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FAABE5292D89B0E300544254 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FAABE5162D89B0E000544254 /* HabitWidgetExtension */;
+			targetProxy = FAABE5282D89B0E300544254 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		FA03A0242D81F83F004875F9 /* Main.storyboard */ = {
@@ -626,6 +765,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 06D8F555F47B0B82B4DDFF30 /* Pods-Habitors.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -635,10 +775,10 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Habitors/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = "";
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -647,9 +787,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thanh.Habitors;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -657,6 +801,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0CDF5891CE71BFD804C379EF /* Pods-Habitors.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -666,10 +811,10 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Habitors/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = "";
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -678,6 +823,64 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thanh.Habitors;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		FAABE52C2D89B0E300544254 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NS9ZL6QW8L;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HabitWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = HabitWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thanh.Habitors.HabitWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FAABE52D2D89B0E300544254 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NS9ZL6QW8L;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HabitWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = HabitWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thanh.Habitors.HabitWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -705,7 +908,35 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		FAABE52B2D89B0E300544254 /* Build configuration list for PBXNativeTarget "HabitWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FAABE52C2D89B0E300544254 /* Debug */,
+				FAABE52D2D89B0E300544254 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FAABE5102D888C6400544254 /* XCRemoteSwiftPackageReference "SakuraExtension" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Sakurathanh2003/SakuraExtension.git";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FAABE5112D888C6400544254 /* SakuraExtension */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FAABE5102D888C6400544254 /* XCRemoteSwiftPackageReference "SakuraExtension" */;
+			productName = SakuraExtension;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = FA03A0132D81F83F004875F9 /* Project object */;
 }

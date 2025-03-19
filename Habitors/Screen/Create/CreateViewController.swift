@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import RxSwift
 
-class CreateViewController: UIViewController {
+class CreateViewController: BaseViewController {
     var viewModel: CreateViewModel
     weak var coordinator: CreateCoordinator?
 
@@ -29,6 +30,7 @@ class CreateViewController: UIViewController {
 
     // MARK: - Config
     func config() {
+        insertFullScreen(CreateView(viewModel: viewModel))
         configViewModelInput()
         configViewModelOutput()
         configRoutingOutput()
@@ -43,6 +45,8 @@ class CreateViewController: UIViewController {
     }
 
     func configRoutingOutput() {
-
+        viewModel.routing.stop.subscribe(onNext: { [weak self] in
+            self?.coordinator?.stop()
+        }).disposed(by: self.disposeBag)
     }
 }

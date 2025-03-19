@@ -19,11 +19,22 @@ fileprivate struct Const {
     static let horizontalPadding: CGFloat = 24.0
 }
 
-
+extension AppTheme {
+    var backgroundColor: Color {
+        switch self {
+        case .theme1, .theme2: Color.white
+        case .theme3, .theme4: Color.black
+        }
+    }
+}
 
 struct HomeView: View {
     @ObservedObject var viewModel: HomeViewModel
     @Namespace var animation
+    
+    var theme: AppTheme {
+        return .theme1
+    }
     
     var body: some View {
         ZStack {
@@ -54,6 +65,7 @@ struct HomeView: View {
                 }, item: item, namespace: animation)
             }
         }
+        .background(theme.backgroundColor.ignoresSafeArea())
     }
     
     // MARK: - Home Content
@@ -222,6 +234,9 @@ fileprivate struct HomeTabbarView: View {
                         .foregroundColor(.white)
                         
                 )
+                .onTapGesture {
+                    viewModel.routing.routeToCreate.onNext(())
+                }
             
             tabItemView(.discover)
             tabItemView(.tools)

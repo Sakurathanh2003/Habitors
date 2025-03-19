@@ -19,7 +19,7 @@ struct HomeViewModelOutput: InputOutputViewModel {
 }
 
 struct HomeViewModelRouting: RoutingOutput {
-
+    var routeToCreate = PublishSubject<()>()
 }
 
 final class HomeViewModel: BaseViewModel<HomeViewModelInput, HomeViewModelOutput, HomeViewModelRouting> {

@@ -77,3 +77,22 @@ class WindowBaseCoordinator: Coordinator {
         self.window = window
     }
 }
+
+
+class NavigationBaseCoordinator: Coordinator {
+    var navigationController: UINavigationController
+    
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
+    }
+}
+
+class PresentedCoordinator: Coordinator {
+    weak var parentVC: UIViewController?
+    
+    init(controller: UIViewController) {
+        weak var vc = controller
+        self.parentVC = vc
+    }
+}
+

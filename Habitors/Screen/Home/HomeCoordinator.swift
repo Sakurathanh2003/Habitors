@@ -7,7 +7,10 @@
 
 import UIKit
 
-final class HomeCoordinator: Coordinator {
+final class HomeCoordinator: WindowBaseCoordinator {
+    
+    private var createCoordinator: CreateCoordinator?
+    
     lazy var controller: HomeViewController = {
         let viewModel = HomeViewModel()
         let controller = HomeViewController(viewModel: viewModel, coordinator: self)
@@ -16,9 +19,25 @@ final class HomeCoordinator: Coordinator {
 
     override func start() {
         super.start()
+        
+        let navigationController = UINavigationController(rootViewController: controller)
+        navigationController.isNavigationBarHidden = true
+        
+        window.rootViewController = navigationController
+        window.makeKeyAndVisible()
     }
 
-    override func stop(completion: (() -> Void)? = nil) {
-        super.stop(completion: completion)
+    override func childDidStop(_ child: Coordinator) {
+        super.childDidStop(child)
+        
+        if child is CreateCoordinator {
+            self.createCoordinator = nil
+        }
+    }
+    
+    func routeToCreate() {
+        self.createCoordinator = CreateCoordinator(controller: controller)
+        self.createCoordinator?.start()
+        self.addChild(createCoordinator)
     }
 }

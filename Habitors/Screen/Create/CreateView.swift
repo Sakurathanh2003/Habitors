@@ -67,6 +67,7 @@ struct CreateView: View {
                 }
             }
         )
+        .background(Color.white.ignoresSafeArea())
     }
     
     // MARK: - Reminder
@@ -319,11 +320,16 @@ struct CreateView: View {
     
     var navigationBar: some View {
         HStack {
-            Image("ic_back")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 24, height: 24)
-            
+            Button(action: {
+                viewModel.routing.stop.onNext(())
+            }, label: {
+                Image("ic_back")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 24, height: 24)
+                    .frame(width: 30, height: 30)
+            })
+        
             Spacer(minLength: 0)
             
             Button {

@@ -1,0 +1,15 @@
+{
+  "originHash" : "d2b03d571b31716b76ec4d98c427241a6befc4a1647f9b1870bb1a3fdbd84aaf",
+  "pins" : [
+    {
+      "identity" : "sakuraextension",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Sakurathanh2003/SakuraExtension.git",
+      "state" : {
+        "branch" : "develop",
+        "revision" : "21155db5b4fc84991fbb3376a2ff6331a80733fb"
+      }
+    }
+  ],
+  "version" : 3
+}

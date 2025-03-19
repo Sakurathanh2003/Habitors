@@ -7,7 +7,8 @@
 
 import UIKit
 
-final class CreateCoordinator: Coordinator {
+final class CreateCoordinator: PresentedCoordinator {
+    
     lazy var controller: CreateViewController = {
         let viewModel = CreateViewModel()
         let controller = CreateViewController(viewModel: viewModel, coordinator: self)
@@ -16,9 +17,12 @@ final class CreateCoordinator: Coordinator {
 
     override func start() {
         super.start()
+        controller.modalPresentationStyle = .overFullScreen
+        parentVC?.present(controller, animated: true)
     }
 
     override func stop(completion: (() -> Void)? = nil) {
+        controller.dismiss(animated: true)
         super.stop(completion: completion)
     }
 }

@@ -18,7 +18,7 @@ struct CreateViewModelOutput: InputOutputViewModel {
 }
 
 struct CreateViewModelRouting: RoutingOutput {
-
+    var stop = PublishSubject<()>()
 }
 
 final class CreateViewModel: BaseViewModel<CreateViewModelInput, CreateViewModelOutput, CreateViewModelRouting> {

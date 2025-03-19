@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class HomeViewController: BaseViewController {
     var viewModel: HomeViewModel
@@ -29,6 +30,7 @@ class HomeViewController: BaseViewController {
 
     // MARK: - Config
     func config() {
+        insertFullScreen(HomeView(viewModel: viewModel))
         configViewModelInput()
         configViewModelOutput()
         configRoutingOutput()
@@ -43,6 +45,8 @@ class HomeViewController: BaseViewController {
     }
 
     func configRoutingOutput() {
-
+        viewModel.routing.routeToCreate.subscribe(onNext: { [weak self] in
+            self?.coordinator?.routeToCreate()
+        }).disposed(by: self.disposeBag)
     }
 }
