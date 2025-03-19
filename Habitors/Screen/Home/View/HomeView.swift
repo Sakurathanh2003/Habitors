@@ -19,15 +19,6 @@ fileprivate struct Const {
     static let horizontalPadding: CGFloat = 24.0
 }
 
-extension AppTheme {
-    var backgroundColor: Color {
-        switch self {
-        case .theme1, .theme2: Color.white
-        case .theme3, .theme4: Color.black
-        }
-    }
-}
-
 struct HomeView: View {
     @ObservedObject var viewModel: HomeViewModel
     @Namespace var animation

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 enum AppTheme {
     case theme1
@@ -15,4 +16,11 @@ enum AppTheme {
 }
 
 // MARK: - Background
-
+extension AppTheme {
+    var backgroundColor: Color {
+        switch self {
+        case .theme1, .theme2: Color.white
+        case .theme3, .theme4: Color.black
+        }
+    }
+}

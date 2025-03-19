@@ -11,6 +11,14 @@
 		241806742D82B19900E54E41 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241806702D82B19900E54E41 /* HomeCoordinator.swift */; };
 		241806752D82B19900E54E41 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241806712D82B19900E54E41 /* HomeViewController.swift */; };
 		241806762D82B19900E54E41 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241806722D82B19900E54E41 /* HomeViewModel.swift */; };
+		24E9230B2D8A931B00E9B96C /* Habit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E9230A2D8A931B00E9B96C /* Habit.swift */; };
+		24E9230F2D8A94F200E9B96C /* HabitCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E9230E2D8A94F200E9B96C /* HabitCategory.swift */; };
+		24E923112D8A953E00E9B96C /* AppConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E923102D8A953E00E9B96C /* AppConst.swift */; };
+		24E923132D8A988E00E9B96C /* GoalUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E923122D8A988E00E9B96C /* GoalUnit.swift */; };
+		24E923192D8A9C0A00E9B96C /* ChooseTemplateHabitCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E923152D8A9C0A00E9B96C /* ChooseTemplateHabitCoordinator.swift */; };
+		24E9231A2D8A9C0A00E9B96C /* ChooseTemplateHabitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E923162D8A9C0A00E9B96C /* ChooseTemplateHabitViewController.swift */; };
+		24E9231B2D8A9C0A00E9B96C /* ChooseTemplateHabitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E923172D8A9C0A00E9B96C /* ChooseTemplateHabitViewModel.swift */; };
+		24E9231E2D8A9C2F00E9B96C /* ChooseTemplateHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E9231D2D8A9C2F00E9B96C /* ChooseTemplateHabitView.swift */; };
 		FA03A01F2D81F83F004875F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A01E2D81F83F004875F9 /* AppDelegate.swift */; };
 		FA03A0232D81F83F004875F9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0222D81F83F004875F9 /* ViewController.swift */; };
 		FA03A0262D81F83F004875F9 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = FA03A0252D81F83F004875F9 /* Base */; };
@@ -62,7 +70,6 @@
 		FAABE5262D89B0E300544254 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAABE5252D89B0E300544254 /* Assets.xcassets */; };
 		FAABE52A2D89B0E300544254 /* HabitWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = FAABE5172D89B0E000544254 /* HabitWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		FAABE52F2D89B45F00544254 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0C92D830674004875F9 /* Task.swift */; };
-		FAABE5312D89D89100544254 /* Habit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAABE5302D89D89100544254 /* Habit.swift */; };
 		FAABE5332D89D9FB00544254 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAABE5322D89D9FB00544254 /* AppTheme.swift */; };
 /* End PBXBuildFile section */
 
@@ -96,6 +103,14 @@
 		241806702D82B19900E54E41 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		241806712D82B19900E54E41 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		241806722D82B19900E54E41 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		24E9230A2D8A931B00E9B96C /* Habit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habit.swift; sourceTree = "<group>"; };
+		24E9230E2D8A94F200E9B96C /* HabitCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCategory.swift; sourceTree = "<group>"; };
+		24E923102D8A953E00E9B96C /* AppConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConst.swift; sourceTree = "<group>"; };
+		24E923122D8A988E00E9B96C /* GoalUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalUnit.swift; sourceTree = "<group>"; };
+		24E923152D8A9C0A00E9B96C /* ChooseTemplateHabitCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTemplateHabitCoordinator.swift; sourceTree = "<group>"; };
+		24E923162D8A9C0A00E9B96C /* ChooseTemplateHabitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTemplateHabitViewController.swift; sourceTree = "<group>"; };
+		24E923172D8A9C0A00E9B96C /* ChooseTemplateHabitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTemplateHabitViewModel.swift; sourceTree = "<group>"; };
+		24E9231D2D8A9C2F00E9B96C /* ChooseTemplateHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTemplateHabitView.swift; sourceTree = "<group>"; };
 		EC7B1BE09FE7CF60A0E460AF /* Pods_Habitors.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Habitors.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA03A01B2D81F83F004875F9 /* Habitors.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Habitors.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA03A01E2D81F83F004875F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -149,7 +164,6 @@
 		FAABE5232D89B0E000544254 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
 		FAABE5252D89B0E300544254 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FAABE5272D89B0E300544254 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FAABE5302D89D89100544254 /* Habit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habit.swift; sourceTree = "<group>"; };
 		FAABE5322D89D9FB00544254 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -182,6 +196,28 @@
 				0CDF5891CE71BFD804C379EF /* Pods-Habitors.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		24E923092D8A931400E9B96C /* Habit */ = {
+			isa = PBXGroup;
+			children = (
+				24E9230E2D8A94F200E9B96C /* HabitCategory.swift */,
+				24E923102D8A953E00E9B96C /* AppConst.swift */,
+				24E9230A2D8A931B00E9B96C /* Habit.swift */,
+				24E923122D8A988E00E9B96C /* GoalUnit.swift */,
+			);
+			path = Habit;
+			sourceTree = "<group>";
+		};
+		24E923142D8A9BF800E9B96C /* ChooseHabit */ = {
+			isa = PBXGroup;
+			children = (
+				24E923152D8A9C0A00E9B96C /* ChooseTemplateHabitCoordinator.swift */,
+				24E923162D8A9C0A00E9B96C /* ChooseTemplateHabitViewController.swift */,
+				24E923172D8A9C0A00E9B96C /* ChooseTemplateHabitViewModel.swift */,
+				24E9231D2D8A9C2F00E9B96C /* ChooseTemplateHabitView.swift */,
+			);
+			path = ChooseHabit;
 			sourceTree = "<group>";
 		};
 		C769EF5CB3D0651AAB002413 /* Frameworks */ = {
@@ -235,6 +271,7 @@
 		FA03A0322D81F905004875F9 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				24E923142D8A9BF800E9B96C /* ChooseHabit */,
 				FAABE50D2D8883CD00544254 /* AppCoordinator.swift */,
 				FA2A0AEC2D8516D400A597DB /* Create */,
 				FA2A0AE92D84A2F200A597DB /* Tool */,
@@ -334,9 +371,9 @@
 		FA03A0C82D83066B004875F9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				24E923092D8A931400E9B96C /* Habit */,
 				FA03A0C92D830674004875F9 /* Task.swift */,
 				FA03A0D42D8486FB004875F9 /* Tool.swift */,
-				FAABE5302D89D89100544254 /* Habit.swift */,
 				FAABE5322D89D9FB00544254 /* AppTheme.swift */,
 			);
 			path = Model;
@@ -560,13 +597,17 @@
 			files = (
 				FA2A0B042D859E2600A597DB /* TimeDialog.swift in Sources */,
 				FAABE50E2D8883CE00544254 /* AppCoordinator.swift in Sources */,
+				24E923132D8A988E00E9B96C /* GoalUnit.swift in Sources */,
 				FA2A0AF82D85254200A597DB /* HabitToggle.swift in Sources */,
+				24E923112D8A953E00E9B96C /* AppConst.swift in Sources */,
 				FAABE5332D89D9FB00544254 /* AppTheme.swift in Sources */,
 				FA03A0232D81F83F004875F9 /* ViewController.swift in Sources */,
 				FA2A0AEB2D84A30400A597DB /* MusicToolDetailView.swift in Sources */,
+				24E9230B2D8A931B00E9B96C /* Habit.swift in Sources */,
 				FA03A0392D81F916004875F9 /* SplashCoordinator.swift in Sources */,
 				FA2A0AFA2D85256E00A597DB /* CalendarDialog.swift in Sources */,
 				FA03A0C12D830362004875F9 /* DateView.swift in Sources */,
+				24E9231E2D8A9C2F00E9B96C /* ChooseTemplateHabitView.swift in Sources */,
 				FA2A0AF12D8516EB00A597DB /* CreateCoordinator.swift in Sources */,
 				FA2A0AF22D8516EB00A597DB /* CreateViewController.swift in Sources */,
 				FA2A0AF32D8516EB00A597DB /* CreateViewModel.swift in Sources */,
@@ -578,6 +619,7 @@
 				FA03A0CC2D831691004875F9 /* HomeActivityView.swift in Sources */,
 				FA03A0422D81F975004875F9 /* BaseViewModel.swift in Sources */,
 				FA03A0CA2D830674004875F9 /* Task.swift in Sources */,
+				24E9230F2D8A94F200E9B96C /* HabitCategory.swift in Sources */,
 				FA03A0402D81F970004875F9 /* BaseViewController.swift in Sources */,
 				FA2A0AF62D85170500A597DB /* CreateView.swift in Sources */,
 				FA03A0762D81FCA9004875F9 /* Text+Extension.swift in Sources */,
@@ -585,9 +627,11 @@
 				FA03A0C32D830435004875F9 /* Date+Extension.swift in Sources */,
 				241806742D82B19900E54E41 /* HomeCoordinator.swift in Sources */,
 				FA2A0AFC2D85284100A597DB /* Calendar+Extension.swift in Sources */,
-				FAABE5312D89D89100544254 /* Habit.swift in Sources */,
 				241806752D82B19900E54E41 /* HomeViewController.swift in Sources */,
 				241806762D82B19900E54E41 /* HomeViewModel.swift in Sources */,
+				24E923192D8A9C0A00E9B96C /* ChooseTemplateHabitCoordinator.swift in Sources */,
+				24E9231A2D8A9C0A00E9B96C /* ChooseTemplateHabitViewController.swift in Sources */,
+				24E9231B2D8A9C0A00E9B96C /* ChooseTemplateHabitViewModel.swift in Sources */,
 				FA03A03D2D81F925004875F9 /* SplashView.swift in Sources */,
 				FA03A0D02D8472EC004875F9 /* HomeDiscoverView.swift in Sources */,
 				FA2A0B012D859CD500A597DB /* SetPeriodDialog.swift in Sources */,

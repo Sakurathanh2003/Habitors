@@ -9,7 +9,7 @@ import UIKit
 
 final class HomeCoordinator: WindowBaseCoordinator {
     
-    private var createCoordinator: CreateCoordinator?
+    private var chooseTemplateCoordinator: ChooseTemplateHabitCoordinator?
     
     lazy var controller: HomeViewController = {
         let viewModel = HomeViewModel()
@@ -30,14 +30,14 @@ final class HomeCoordinator: WindowBaseCoordinator {
     override func childDidStop(_ child: Coordinator) {
         super.childDidStop(child)
         
-        if child is CreateCoordinator {
-            self.createCoordinator = nil
+        if child is ChooseTemplateHabitCoordinator {
+            self.chooseTemplateCoordinator = nil
         }
     }
     
     func routeToCreate() {
-        self.createCoordinator = CreateCoordinator(controller: controller)
-        self.createCoordinator?.start()
-        self.addChild(createCoordinator)
+        self.chooseTemplateCoordinator = ChooseTemplateHabitCoordinator(controller: controller)
+        self.chooseTemplateCoordinator?.start()
+        self.addChild(chooseTemplateCoordinator)
     }
 }

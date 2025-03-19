@@ -1,0 +1,27 @@
+//
+//  ChooseTemplateHabitCoordinator.swift
+//  Habitors
+//
+//  Created by CucPhung on 19/3/25.
+//
+
+import UIKit
+
+final class ChooseTemplateHabitCoordinator: PresentedCoordinator {
+    lazy var controller: ChooseTemplateHabitViewController = {
+        let viewModel = ChooseTemplateHabitViewModel()
+        let controller = ChooseTemplateHabitViewController(viewModel: viewModel, coordinator: self)
+        return controller
+    }()
+
+    override func start() {
+        super.start()
+        controller.modalPresentationStyle = .overFullScreen
+        parentVC?.present(controller, animated: true)
+    }
+
+    override func stop(completion: (() -> Void)? = nil) {
+        controller.dismiss(animated: true)
+        super.stop(completion: completion)
+    }
+}
