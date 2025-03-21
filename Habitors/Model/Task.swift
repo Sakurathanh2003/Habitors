@@ -29,4 +29,8 @@ class Time {
         self.hour = hour
         self.minutes = minutes
     }
+    
+    var description: String {
+        return String(format: "%02d:%02d", hour, minutes)
+    }
 }

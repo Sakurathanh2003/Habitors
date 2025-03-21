@@ -30,6 +30,10 @@ extension Date {
         return weekday == (calendar.firstWeekday + 5) % 7 + 1
     }
     
+    var isToday: Bool {
+        return calendar.isDateInToday(self)
+    }
+    
     // Lùi lại 1 ngày
     var previousDay: Date {
         return calendar.date(byAdding: .day, value: -1, to: self) ?? self

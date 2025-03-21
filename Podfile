@@ -8,8 +8,8 @@ target 'Habitors' do
   # Pods for Habitors
   pod 'RxSwift'
   pod 'SwiftUIIntrospect'
-pod 'ffmpeg-kit-ios-full'
-pod 'GCDWebServer'
+
+  pod 'RealmSwift'
 end
 
 post_install do |installer|

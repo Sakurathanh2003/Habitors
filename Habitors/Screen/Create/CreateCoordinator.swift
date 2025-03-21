@@ -9,8 +9,15 @@ import UIKit
 
 final class CreateCoordinator: PresentedCoordinator {
     
+    let habit: Habit?
+    
+    init(habit: Habit? = nil, controller: UIViewController) {
+        self.habit = habit
+        super.init(controller: controller)
+    }
+    
     lazy var controller: CreateViewController = {
-        let viewModel = CreateViewModel()
+        let viewModel = CreateViewModel(habit: habit)
         let controller = CreateViewController(viewModel: viewModel, coordinator: self)
         return controller
     }()

@@ -60,7 +60,6 @@
 		FA2A0B042D859E2600A597DB /* TimeDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2A0B032D859E2600A597DB /* TimeDialog.swift */; };
 		FA2A0B062D85A01000A597DB /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2A0B052D85A01000A597DB /* Int+Extension.swift */; };
 		FAABE50E2D8883CE00544254 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAABE50D2D8883CD00544254 /* AppCoordinator.swift */; };
-		FAABE5122D888C6400544254 /* SakuraExtension in Frameworks */ = {isa = PBXBuildFile; productRef = FAABE5112D888C6400544254 /* SakuraExtension */; };
 		FAABE5192D89B0E000544254 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAABE5182D89B0E000544254 /* WidgetKit.framework */; };
 		FAABE51B2D89B0E000544254 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAABE51A2D89B0E000544254 /* SwiftUI.framework */; };
 		FAABE51E2D89B0E000544254 /* HabitWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAABE51D2D89B0E000544254 /* HabitWidgetBundle.swift */; };
@@ -71,6 +70,11 @@
 		FAABE52A2D89B0E300544254 /* HabitWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = FAABE5172D89B0E000544254 /* HabitWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		FAABE52F2D89B45F00544254 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0C92D830674004875F9 /* Task.swift */; };
 		FAABE5332D89D9FB00544254 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAABE5322D89D9FB00544254 /* AppTheme.swift */; };
+		FAABE5362D8B04E100544254 /* SakuraExtension in Frameworks */ = {isa = PBXBuildFile; productRef = FAABE5352D8B04E100544254 /* SakuraExtension */; };
+		FAABE5382D8C677300544254 /* Frequency.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAABE5372D8C677300544254 /* Frequency.swift */; };
+		FAABE53B2D8C76AB00544254 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAABE53A2D8C76AA00544254 /* RealmManager.swift */; };
+		FAABE53D2D8C76AF00544254 /* RealmDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAABE53C2D8C76AE00544254 /* RealmDao.swift */; };
+		FAABE5412D8C773400544254 /* HabitDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAABE5402D8C773400544254 /* HabitDAO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -165,6 +169,12 @@
 		FAABE5252D89B0E300544254 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FAABE5272D89B0E300544254 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FAABE5322D89D9FB00544254 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
+		FAABE5372D8C677300544254 /* Frequency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Frequency.swift; sourceTree = "<group>"; };
+		FAABE53A2D8C76AA00544254 /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		FAABE53C2D8C76AE00544254 /* RealmDao.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmDao.swift; sourceTree = "<group>"; };
+		FAABE53E2D8C770600544254 /* Habitors.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Habitors.entitlements; sourceTree = "<group>"; };
+		FAABE53F2D8C771B00544254 /* HabitWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HabitWidgetExtension.entitlements; sourceTree = "<group>"; };
+		FAABE5402D8C773400544254 /* HabitDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDAO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,7 +183,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				23312E1699B2096F7EA3DAD6 /* Pods_Habitors.framework in Frameworks */,
-				FAABE5122D888C6400544254 /* SakuraExtension in Frameworks */,
+				FAABE5362D8B04E100544254 /* SakuraExtension in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,6 +215,7 @@
 				24E923102D8A953E00E9B96C /* AppConst.swift */,
 				24E9230A2D8A931B00E9B96C /* Habit.swift */,
 				24E923122D8A988E00E9B96C /* GoalUnit.swift */,
+				FAABE5372D8C677300544254 /* Frequency.swift */,
 			);
 			path = Habit;
 			sourceTree = "<group>";
@@ -233,6 +244,7 @@
 		FA03A0122D81F83F004875F9 = {
 			isa = PBXGroup;
 			children = (
+				FAABE53F2D8C771B00544254 /* HabitWidgetExtension.entitlements */,
 				FA03A01D2D81F83F004875F9 /* Habitors */,
 				FAABE51C2D89B0E000544254 /* HabitWidget */,
 				FA03A01C2D81F83F004875F9 /* Products */,
@@ -253,6 +265,8 @@
 		FA03A01D2D81F83F004875F9 /* Habitors */ = {
 			isa = PBXGroup;
 			children = (
+				FAABE53E2D8C770600544254 /* Habitors.entitlements */,
+				FAABE5392D8C75AE00544254 /* Realm */,
 				FA03A0C82D83066B004875F9 /* Model */,
 				FA03A0BF2D830358004875F9 /* Custom */,
 				FA03A0482D81FBC7004875F9 /* Resources */,
@@ -271,8 +285,8 @@
 		FA03A0322D81F905004875F9 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
-				24E923142D8A9BF800E9B96C /* ChooseHabit */,
 				FAABE50D2D8883CD00544254 /* AppCoordinator.swift */,
+				24E923142D8A9BF800E9B96C /* ChooseHabit */,
 				FA2A0AEC2D8516D400A597DB /* Create */,
 				FA2A0AE92D84A2F200A597DB /* Tool */,
 				FA03A0772D8205DF004875F9 /* Home */,
@@ -439,6 +453,16 @@
 			path = HabitWidget;
 			sourceTree = "<group>";
 		};
+		FAABE5392D8C75AE00544254 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				FAABE53C2D8C76AE00544254 /* RealmDao.swift */,
+				FAABE53A2D8C76AA00544254 /* RealmManager.swift */,
+				FAABE5402D8C773400544254 /* HabitDAO.swift */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -460,7 +484,7 @@
 			);
 			name = Habitors;
 			packageProductDependencies = (
-				FAABE5112D888C6400544254 /* SakuraExtension */,
+				FAABE5352D8B04E100544254 /* SakuraExtension */,
 			);
 			productName = Habitors;
 			productReference = FA03A01B2D81F83F004875F9 /* Habitors.app */;
@@ -511,7 +535,7 @@
 			);
 			mainGroup = FA03A0122D81F83F004875F9;
 			packageReferences = (
-				FAABE5102D888C6400544254 /* XCRemoteSwiftPackageReference "SakuraExtension" */,
+				FAABE5342D8B04E100544254 /* XCRemoteSwiftPackageReference "SakuraExtension" */,
 			);
 			productRefGroup = FA03A01C2D81F83F004875F9 /* Products */;
 			projectDirPath = "";
@@ -606,7 +630,9 @@
 				24E9230B2D8A931B00E9B96C /* Habit.swift in Sources */,
 				FA03A0392D81F916004875F9 /* SplashCoordinator.swift in Sources */,
 				FA2A0AFA2D85256E00A597DB /* CalendarDialog.swift in Sources */,
+				FAABE5412D8C773400544254 /* HabitDAO.swift in Sources */,
 				FA03A0C12D830362004875F9 /* DateView.swift in Sources */,
+				FAABE5382D8C677300544254 /* Frequency.swift in Sources */,
 				24E9231E2D8A9C2F00E9B96C /* ChooseTemplateHabitView.swift in Sources */,
 				FA2A0AF12D8516EB00A597DB /* CreateCoordinator.swift in Sources */,
 				FA2A0AF22D8516EB00A597DB /* CreateViewController.swift in Sources */,
@@ -623,6 +649,7 @@
 				FA03A0402D81F970004875F9 /* BaseViewController.swift in Sources */,
 				FA2A0AF62D85170500A597DB /* CreateView.swift in Sources */,
 				FA03A0762D81FCA9004875F9 /* Text+Extension.swift in Sources */,
+				FAABE53D2D8C76AF00544254 /* RealmDao.swift in Sources */,
 				FA2A0B062D85A01000A597DB /* Int+Extension.swift in Sources */,
 				FA03A0C32D830435004875F9 /* Date+Extension.swift in Sources */,
 				241806742D82B19900E54E41 /* HomeCoordinator.swift in Sources */,
@@ -635,6 +662,7 @@
 				FA03A03D2D81F925004875F9 /* SplashView.swift in Sources */,
 				FA03A0D02D8472EC004875F9 /* HomeDiscoverView.swift in Sources */,
 				FA2A0B012D859CD500A597DB /* SetPeriodDialog.swift in Sources */,
+				FAABE53B2D8C76AB00544254 /* RealmManager.swift in Sources */,
 				FA03A0792D8205EB004875F9 /* HomeView.swift in Sources */,
 				FA03A0D22D847566004875F9 /* HomeToolView.swift in Sources */,
 				FA03A0C72D8304FE004875F9 /* SingleTaskView.swift in Sources */,
@@ -812,6 +840,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Habitors/Habitors.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NS9ZL6QW8L;
@@ -848,6 +877,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Habitors/Habitors.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NS9ZL6QW8L;
@@ -882,6 +912,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = HabitWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NS9ZL6QW8L;
@@ -909,6 +940,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = HabitWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NS9ZL6QW8L;
@@ -964,7 +996,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		FAABE5102D888C6400544254 /* XCRemoteSwiftPackageReference "SakuraExtension" */ = {
+		FAABE5342D8B04E100544254 /* XCRemoteSwiftPackageReference "SakuraExtension" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Sakurathanh2003/SakuraExtension.git";
 			requirement = {
@@ -975,9 +1007,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		FAABE5112D888C6400544254 /* SakuraExtension */ = {
+		FAABE5352D8B04E100544254 /* SakuraExtension */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = FAABE5102D888C6400544254 /* XCRemoteSwiftPackageReference "SakuraExtension" */;
+			package = FAABE5342D8B04E100544254 /* XCRemoteSwiftPackageReference "SakuraExtension" */;
 			productName = SakuraExtension;
 		};
 /* End XCSwiftPackageProductDependency section */

@@ -14,24 +14,26 @@ struct TimeDialog: View {
     
     @State var hour: Int
     @State var minutes: Int
-    @State var isAM: Bool
     
-    init(time: Time) {
-        self.hour = time.hour % 13
+    var cancelAction: (() -> Void)
+    var doneAction: ((Time) -> Void)
+    
+    init(time: Time, cancelAction: @escaping () -> Void, doneAction: @escaping (Time) -> Void) {
+        self.hour = time.hour
         self.minutes = time.minutes
-        self.isAM = time.hour <= 12
+        self.cancelAction = cancelAction
+        self.doneAction = doneAction
     }
     
     var body: some View {
         ZStack {
             Color.black.opacity(0.5).ignoresSafeArea()
             
-            
             VStack {
                 HStack(alignment: .center, spacing: 39) {
                     Spacer(minLength: 0)
                     Picker(selection: $hour, label: /*@START_MENU_TOKEN@*/Text("Picker")/*@END_MENU_TOKEN@*/) {
-                        ForEach(1...12, id: \.self) { value in
+                        ForEach(0...23, id: \.self) { value in
                             Text(value.format("%02d"))
                                 .gilroySemiBold(18)
                                 .frame(height: 28)
@@ -51,23 +53,6 @@ struct TimeDialog: View {
                                 .frame(height: 28)
                                 .tag(value)
                         }
-                    }
-                    .pickerStyle(.wheel)
-                    .introspect(.picker(style: .wheel), on: .iOS(.v13, .v14, .v15, .v16, .v17, .v18)) {
-                        $0.subviews[1].backgroundColor = UIColor.red
-                                           .withAlphaComponent(0)
-                    }
-                    
-                    Picker(selection: $isAM, label: /*@START_MENU_TOKEN@*/Text("Picker")/*@END_MENU_TOKEN@*/) {
-                        Text("AM")
-                            .gilroySemiBold(18)
-                            .frame(height: 28)
-                            .tag(true)
-                        
-                        Text("PM")
-                            .gilroySemiBold(18)
-                            .frame(height: 28)
-                            .tag(false)
                     }
                     .pickerStyle(.wheel)
                     .introspect(.picker(style: .wheel), on: .iOS(.v13, .v14, .v15, .v16, .v17, .v18)) {
@@ -96,7 +81,7 @@ struct TimeDialog: View {
                     Spacer()
                     
                     Button(action: {
-                   //     cancelAction()
+                        cancelAction()
                     }, label: {
                         Text("Cancel")
                             .gilroyMedium(14)
@@ -104,7 +89,7 @@ struct TimeDialog: View {
                     })
                     
                     Button(action: {
-                        //  doneAction(viewModel.selectedDate)
+                        doneAction(.init(hour: hour, minutes: minutes))
                     }, label: {
                         Text("Done")
                             .gilroyMedium(14)
@@ -115,14 +100,14 @@ struct TimeDialog: View {
             .padding(24)
             .background(Color.white)
             .padding(24)
-            
-           
         }
-        
-        
     }
 }
 
 #Preview {
-    TimeDialog(time: .init(hour: 13, minutes: 12))
+    TimeDialog(time: .init(hour: 13, minutes: 12), cancelAction: {
+        
+    }, doneAction: { _ in
+        
+    })
 }

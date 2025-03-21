@@ -12,18 +12,16 @@ class CalendarViewModel: ObservableObject {
     @Published var currentMonth = Date()
     @Published var selectedDate = [Date]()
     @Published var daysInMonth = [Date]()
+    let isAllowSelectedMore: Bool
     
-    init(selectedDate: [Date]) {
+    init(isAllowSelectedMore: Bool, selectedDate: [Date]) {
         self.selectedDate = selectedDate
+        self.isAllowSelectedMore = isAllowSelectedMore
         
         if let firstDate = selectedDate.first {
             self.currentMonth = firstDate
         }
         
-        updateDaysInMonth()
-    }
-    
-    init() {
         updateDaysInMonth()
     }
     
@@ -40,6 +38,12 @@ class CalendarViewModel: ObservableObject {
     }
     
     func chooseDay(_ day: Date) {
+        if !isAllowSelectedMore {
+            selectedDate.removeAll()
+            selectedDate.append(day)
+            return
+        }
+        
         if selectedDate.contains(where: { $0.isSameDay(date: day)}) {
             selectedDate.removeAll(where: { $0.isSameDay(date: day)})
         } else {

@@ -10,27 +10,27 @@ import Foundation
 class AppConst {
     static let habitCategories: [HabitCategory] = [
         HabitCategory(id: "health", name: "Health", icon: "<3", description: "Health habits are linked witth Apple Health App", items: [
-            .init(id: "", name: "Walk", icon: "🚶🏻‍♀️‍➡️", goalUnit: .steps, goalValue: 10000),
-            .init(id: "", name: "Stand", icon: "🧍🏻‍♀️", goalUnit: .steps, goalValue: 10000),
-            .init(id: "", name: "Cycling", icon: "🚴🏻", goalUnit: .steps, goalValue: 10000),
-            .init(id: "", name: "Burn Calorie", icon: "🔥", goalUnit: .steps, goalValue: 10000),
-            .init(id: "", name: "Exercise", icon: "🏃🏻", goalUnit: .steps, goalValue: 10000),
-            .init(id: "", name: "Meditation", icon: "🧘🏻", goalUnit: .steps, goalValue: 10000),
-            .init(id: "", name: "Drink water", icon: "💧", goalUnit: .steps, goalValue: 10000),
-            .init(id: "", name: "Workout", icon: "💪🏻", goalUnit: .steps, goalValue: 10000)
+            .init(id: "", name: "Walk", icon: "🚶🏻‍♀️‍➡️", goalUnit: .steps, goalValue: 10000, isTemplate: true),
+            .init(id: "", name: "Stand", icon: "🧍🏻‍♀️", goalUnit: .steps, goalValue: 10000, isTemplate: true),
+            .init(id: "", name: "Cycling", icon: "🚴🏻", goalUnit: .steps, goalValue: 10000, isTemplate: true),
+            .init(id: "", name: "Burn Calorie", icon: "🔥", goalUnit: .steps, goalValue: 10000, isTemplate: true),
+            .init(id: "", name: "Exercise", icon: "🏃🏻", goalUnit: .steps, goalValue: 10000, isTemplate: true),
+            .init(id: "", name: "Meditation", icon: "🧘🏻", goalUnit: .steps, goalValue: 10000, isTemplate: true),
+            .init(id: "", name: "Drink water", icon: "💧", goalUnit: .steps, goalValue: 10000, isTemplate: true),
+            .init(id: "", name: "Workout", icon: "💪🏻", goalUnit: .steps, goalValue: 10000, isTemplate: true)
         ]),
         HabitCategory(id: "sport", name: "Sport", icon: "", description: "Exercise and fitness related habits", items: [
-            .init(id: "", name: "Walk", icon: "🚶🏻‍♀️‍➡️", goalUnit: .steps, goalValue: 10000),
-            .init(id: "", name: "Run", icon: "🚶🏻‍♀️‍➡️", goalUnit: .steps, goalValue: 10000),
-            .init(id: "", name: "Stretch", icon: "🚶🏻‍♀️‍➡️", goalUnit: .steps, goalValue: 10000),
-            .init(id: "", name: "Stand", icon: "🧍🏻‍♀️", goalUnit: .steps, goalValue: 10000),
-            .init(id: "", name: "Yoga", icon: "🧍🏻‍♀️", goalUnit: .steps, goalValue: 10000),
-            .init(id: "", name: "Cycling", icon: "🚴🏻", goalUnit: .steps, goalValue: 10000),
-            .init(id: "", name: "Swim", icon: "🚴🏻", goalUnit: .steps, goalValue: 10000),
-            .init(id: "", name: "Burn Calorie", icon: "🔥", goalUnit: .steps, goalValue: 10000),
-            .init(id: "", name: "Exercise", icon: "🏃🏻", goalUnit: .steps, goalValue: 10000),
-            .init(id: "", name: "Workout", icon: "💪🏻", goalUnit: .steps, goalValue: 10000),
-            .init(id: "", name: "Anaerobic", icon: "💪🏻", goalUnit: .steps, goalValue: 10000)
+            .init(id: "", name: "Walk", icon: "🚶🏻‍♀️‍➡️", goalUnit: .steps, goalValue: 10000, isTemplate: true),
+            .init(id: "", name: "Run", icon: "🚶🏻‍♀️‍➡️", goalUnit: .steps, goalValue: 10000, isTemplate: true),
+            .init(id: "", name: "Stretch", icon: "🚶🏻‍♀️‍➡️", goalUnit: .steps, goalValue: 10000, isTemplate: true),
+            .init(id: "", name: "Stand", icon: "🧍🏻‍♀️", goalUnit: .steps, goalValue: 10000, isTemplate: true),
+            .init(id: "", name: "Yoga", icon: "🧍🏻‍♀️", goalUnit: .steps, goalValue: 10000, isTemplate: true),
+            .init(id: "", name: "Cycling", icon: "🚴🏻", goalUnit: .steps, goalValue: 10000, isTemplate: true),
+            .init(id: "", name: "Swim", icon: "🚴🏻", goalUnit: .steps, goalValue: 10000, isTemplate: true),
+            .init(id: "", name: "Burn Calorie", icon: "🔥", goalUnit: .steps, goalValue: 10000, isTemplate: true),
+            .init(id: "", name: "Exercise", icon: "🏃🏻", goalUnit: .steps, goalValue: 10000, isTemplate: true),
+            .init(id: "", name: "Workout", icon: "💪🏻", goalUnit: .steps, goalValue: 10000, isTemplate: true),
+            .init(id: "", name: "Anaerobic", icon: "💪🏻", goalUnit: .steps, goalValue: 10000, isTemplate: true)
         ])
     ]
 }

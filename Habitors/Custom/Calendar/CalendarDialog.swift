@@ -23,8 +23,8 @@ struct CalendarDialog: View {
     var cancelAction: (() -> Void)
     var doneAction: (([Date]) -> Void)
     
-    init(selectedDate: [Date], cancelAction: @escaping () -> Void, doneAction: @escaping ([Date]) -> Void) {
-        self.viewModel = CalendarViewModel(selectedDate: selectedDate)
+    init(isAllowSelectedMore: Bool,selectedDate: [Date], cancelAction: @escaping () -> Void, doneAction: @escaping ([Date]) -> Void) {
+        self.viewModel = CalendarViewModel(isAllowSelectedMore: isAllowSelectedMore, selectedDate: selectedDate)
         self.cancelAction = cancelAction
         self.doneAction = doneAction
     }
@@ -128,7 +128,7 @@ struct CalendarDialog: View {
 }
 
 #Preview {
-    CalendarDialog(selectedDate: [], cancelAction: {
+    CalendarDialog(isAllowSelectedMore: false, selectedDate: [], cancelAction: {
         
     }, doneAction: { dates in
         

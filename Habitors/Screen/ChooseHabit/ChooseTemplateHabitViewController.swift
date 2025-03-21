@@ -30,7 +30,7 @@ class ChooseTemplateHabitViewController: BaseViewController {
 
     // MARK: - Config
     func config() {
-        insertFullScreen(ChooseTemplateHabitView())
+        insertFullScreen(ChooseTemplateHabitView(viewModel: viewModel))
         configViewModelInput()
         configViewModelOutput()
         configRoutingOutput()
@@ -47,6 +47,10 @@ class ChooseTemplateHabitViewController: BaseViewController {
     func configRoutingOutput() {
         viewModel.routing.stop.subscribe(onNext: { [weak self] in
             self?.coordinator?.stop()
+        }).disposed(by: self.disposeBag)
+        
+        viewModel.routing.routeToCreate.subscribe(onNext: { [weak self] habit in
+            self?.coordinator?.routeToCreate(habit: habit)
         }).disposed(by: self.disposeBag)
     }
 }
