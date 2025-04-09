@@ -8,51 +8,46 @@
 import SwiftUI
 
 struct SingleTaskView: View {
-    var task: Task
+    var date: Date
+    var habit: Habit
+    
+    @ViewBuilder
+    var iconThumbnail: some View {
+        if habit.icon.count == 1 {
+            Text(habit.icon)
+                .font(.system(size: 40))
+        } else {
+            Image(habit.icon)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .padding(2)
+        }
+    }
+    
     var body: some View {
         HStack(spacing: 16) {
             RoundedRectangle(cornerRadius: 4)
                 .fill(.white)
                 .frame(width: 59, height: 59)
-                .overlay(
-                    Text("👾")
-                )
+                .overlay(iconThumbnail)
             
             VStack(alignment: .leading, spacing: 10) {
-                Text(task.name)
+                Text(habit.name)
                     .gilroySemiBold(16)
                     .foregroundStyle(Color("Black"))
                 
-                if task.isCompleted {
+                if isCompleted {
                     Text("Completed")
                         .gilroyMedium(12)
                         .foregroundStyle(Color("Success"))
                 } else {
-                    Text(task.date.format("hh:mm a"))
+                    Text("\(goalDayValue) \(goalUnit) left to complete!")
                         .gilroyMedium(12)
                         .foregroundStyle(Color("Gray"))
                 }
             }
             
             Spacer(minLength: 0)
-            
-            if task.isCompleted {
-                Circle()
-                    .fill(Color("Success"))
-                    .frame(width: 24, height: 24)
-                    .overlay(
-                        Image(systemName: "checkmark")
-                            .renderingMode(.template)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 8)
-                            .foregroundStyle(.white)
-                    )
-            } else {
-                Circle()
-                    .stroke(Color("Gray03"), lineWidth: 1)
-                    .frame(width: 24, height: 24)
-            }
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 12)
@@ -60,9 +55,21 @@ struct SingleTaskView: View {
         .background(Color("Gray01"))
         .cornerRadius(12)
     }
-}
-
-#Preview {
-    SingleTaskView(task: .init(name: "Learn quran for 1 hour", isCompleted: true, date: Date()))
-        .previewLayout(.sizeThatFits)
+    
+    var repeatType: Frequency.RepeatType {
+        return habit.frequency.type
+    }
+    
+    var goalDayValue: Int {
+        let record = habit.records.first(where: { $0.date.isSameDay(date: date )})
+        return habit.goalValue - (record?.value ?? 0)
+    }
+    
+    var isCompleted: Bool {
+        goalDayValue <= 0
+    }
+    
+    var goalUnit: String {
+        return habit.goalUnit.rawValue
+    }
 }

@@ -10,6 +10,9 @@ import UIKit
 final class HomeCoordinator: WindowBaseCoordinator {
     
     private var chooseTemplateCoordinator: ChooseTemplateHabitCoordinator?
+    private var habitRecordCoordinator: HabitRecordCoordinator?
+    
+    private var todayOverviewCoordinator: TodayOverviewCoordinator?
     
     lazy var controller: HomeViewController = {
         let viewModel = HomeViewModel()
@@ -26,6 +29,15 @@ final class HomeCoordinator: WindowBaseCoordinator {
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
     }
+    
+    override func handle(event: any CoordinatorEvent) -> Bool {
+        if event is UserDidCreateHabit {
+            self.chooseTemplateCoordinator?.stop()
+            return true
+        }
+        
+        return false
+    }
 
     override func childDidStop(_ child: Coordinator) {
         super.childDidStop(child)
@@ -33,11 +45,27 @@ final class HomeCoordinator: WindowBaseCoordinator {
         if child is ChooseTemplateHabitCoordinator {
             self.chooseTemplateCoordinator = nil
         }
+        
+        if child is HabitRecordCoordinator {
+            self.habitRecordCoordinator = nil
+        }
     }
     
     func routeToCreate() {
         self.chooseTemplateCoordinator = ChooseTemplateHabitCoordinator(controller: controller)
         self.chooseTemplateCoordinator?.start()
         self.addChild(chooseTemplateCoordinator)
+    }
+    
+    func routeToHabitRecord(record: HabitRecord) {
+        self.habitRecordCoordinator = HabitRecordCoordinator(record: record, navigationController: controller.navigationController!)
+        self.habitRecordCoordinator?.start()
+        self.addChild(habitRecordCoordinator)
+    }
+    
+    func routeToOverview() {
+        self.todayOverviewCoordinator = TodayOverviewCoordinator(navigationController: controller.navigationController!)
+        self.todayOverviewCoordinator?.start()
+        self.addChild(todayOverviewCoordinator)
     }
 }

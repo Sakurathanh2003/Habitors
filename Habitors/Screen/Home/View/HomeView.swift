@@ -46,9 +46,6 @@ struct HomeView: View {
                 
                 HomeTabbarView(viewModel: viewModel)
             }
-            .onAppear(perform: {
-                viewModel.selectedDate = Date()
-            })
             
             if let item = viewModel.showingToolItem {
                 MusicToolDetailView(dismiss: {
@@ -68,35 +65,41 @@ struct HomeView: View {
             calendarView
                 .padding(.top, 24)
             
-            ScrollView(.vertical) {
+            if viewModel.tasks.isEmpty {
                 VStack(spacing: 16) {
-                    if viewModel.tasks.isEmpty {
-                        Image("ic_empty_task")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 50)
-                        
-                        Text("You have no habits scheduled for this day. Keep up the good work and enjoy your break! 😊")
-                            .gilroyRegular(16)
-                            .lineSpacing(5)
-                            .multilineTextAlignment(.center)
-                            .foregroundStyle(Color("Gray"))
-                            
-                    } else {
-                        ForEach(0..<15) { index in
-                            SingleTaskView(task: Task(name: "Task \(index + 1)", isCompleted: index % 2 == 0, date: Date()))
+                    Image("ic_empty_task")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 50)
+                        .padding(.top, 20)
+                    Text("You have no habits scheduled for this day. Keep up the good work and enjoy your break! 😊")
+                        .gilroyRegular(16)
+                        .lineSpacing(5)
+                        .multilineTextAlignment(.center)
+                        .foregroundStyle(Color("Gray"))
+                    Spacer(minLength: 0)
+                }
+            } else {
+                ScrollView(.vertical) {
+                    VStack(spacing: 16) {
+                        ForEach(viewModel.tasks, id: \.id) { habit in
+                            SingleTaskView(date: viewModel.selectedDate, habit: habit)
+                                .onTapGesture {
+                                    print("did tap")
+                                    viewModel.input.selectHabit.onNext(habit)
+                                }
                         }
                     }
+                    .padding(.horizontal, Const.horizontalPadding)
+                    .padding(.vertical, 24)
                 }
-                .padding(.horizontal, Const.horizontalPadding)
-                .padding(.vertical, 24)
+                .mask(
+                    LinearGradient(stops: [
+                        .init(color: .clear, location: 0),
+                        .init(color: .black, location: 0.1)
+                    ], startPoint: .top, endPoint: .bottom)
+                )
             }
-            .mask(
-                LinearGradient(stops: [
-                    .init(color: .clear, location: 0),
-                    .init(color: .black, location: 0.1)
-                ], startPoint: .top, endPoint: .bottom)
-            )
         }
     }
         
@@ -117,11 +120,9 @@ struct HomeView: View {
                 .padding(.horizontal, Const.horizontalPadding)
             }
             .onChange(of: viewModel.selectedDate) { date in
-                if let date {
-                    withAnimation {
-                        proxy.scrollTo(date.format("dd"),
-                                       anchor: .center)
-                    }
+                withAnimation {
+                    proxy.scrollTo(date.format("dd"),
+                                   anchor: .center)
                 }
             }
         }
@@ -136,20 +137,19 @@ struct HomeView: View {
                     .gilroyRegular(12)
                     .padding(.top, 16)
                 
-                if viewModel.todayTasks.isEmpty {
+                if viewModel.needToDoTodayHabit().isEmpty {
                     Text("Your tasks are\ncompleted")
                         .gilroyBold(28)
                         .autoresize(2)
                         .lineSpacing(5)
                         .padding(.bottom, 24)
                 } else {
-                    Text("You have\n4 tasks to do")
+                    Text("You have\n\(viewModel.needToDoTodayHabit().count) tasks to do")
                         .gilroyBold(28)
                         .autoresize(2)
                         .lineSpacing(5)
                         .padding(.bottom, 24)
                 }
-                
             }
            
             Spacer(minLength: 0)
@@ -171,6 +171,9 @@ struct HomeView: View {
                 )
         )
         .cornerRadius(9)
+        .onTapGesture {
+            viewModel.input.selectOverview.onNext(())
+        }
     }
     
     
@@ -194,7 +197,7 @@ struct HomeView: View {
             }
             
             Spacer()
-            
+                        
             Image("ic_setting")
                 .resizable()
                 .aspectRatio(contentMode: .fit)

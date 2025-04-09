@@ -52,5 +52,10 @@ class ChooseTemplateHabitViewController: BaseViewController {
         viewModel.routing.routeToCreate.subscribe(onNext: { [weak self] habit in
             self?.coordinator?.routeToCreate(habit: habit)
         }).disposed(by: self.disposeBag)
+        
+        viewModel.routing.showAlert.subscribe(onNext: { [weak self] msg in
+            self?.presentAlert(title: "", message: msg)
+        }).disposed(by: self.disposeBag)
     }
 }
+

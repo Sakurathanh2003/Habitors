@@ -27,6 +27,11 @@ class HomeViewController: BaseViewController {
         super.viewDidLoad()
         self.config()
     }
+    
+    override func viewDidFirstAppear() {
+        super.viewDidFirstAppear()
+        viewModel.input.selectDate.onNext(Date())
+    }
 
     // MARK: - Config
     func config() {
@@ -47,6 +52,18 @@ class HomeViewController: BaseViewController {
     func configRoutingOutput() {
         viewModel.routing.routeToCreate.subscribe(onNext: { [weak self] in
             self?.coordinator?.routeToCreate()
+        }).disposed(by: self.disposeBag)
+        
+        viewModel.routing.routeToHabitRecord.subscribe(onNext: { [weak self] record in
+            self?.coordinator?.routeToHabitRecord(record: record)
+        }).disposed(by: self.disposeBag)
+        
+        viewModel.routing.routeToOverview.subscribe(onNext: { [weak self] in
+            self?.coordinator?.routeToOverview()
+        }).disposed(by: self.disposeBag)
+        
+        viewModel.routing.showAlert.subscribe(onNext: { [weak self] msg in
+            self?.presentAlert(title: "Alert", message: msg)
         }).disposed(by: self.disposeBag)
     }
 }

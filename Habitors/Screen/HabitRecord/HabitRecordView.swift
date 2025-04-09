@@ -1,0 +1,389 @@
+//
+//  HabitRecordView.swift
+//  Habitors
+//
+//  Created by Vũ Thị Thanh on 26/3/25.
+//
+
+import SwiftUI
+import RxSwift
+
+fileprivate struct Const {
+    static let linewidth: CGFloat = 20
+}
+
+struct HabitRecordView: View {
+    @ObservedObject var viewModel: HabitRecordViewModel
+    @State var isShowing: Bool = false
+    
+    var body: some View {
+        VStack(spacing: 0) {
+            navigationBar.padding(.horizontal, 20)
+            
+            GeometryReader { proxy in
+                ScrollView {
+                    VStack(spacing: 0) {
+                        displayValueView
+                        changeValueView
+                    }
+                    .frame(height: proxy.size.height)
+                }
+            }
+        }
+        .background(Color.white.ignoresSafeArea())
+        .overlay(
+            ZStack {
+                if isShowing {
+                    menuDialog()
+                }
+                
+                if viewModel.isShowingAddValue {
+                    InputView(value: 0,
+                              titleString: "Enter value (count)",
+                              isShowing: $viewModel.isShowingAddValue,
+                              saveAction: {
+                        if let value = Int($0) {
+                            viewModel.input.addValue.onNext(value)
+                        }
+                    })
+                }
+            }
+        )
+    }
+    
+    // MARK: - Menu Dialog
+    @ViewBuilder
+    func menuDialog() -> some View {
+        ZStack {
+            Color.clear
+            VStack(alignment: .trailing, spacing: 0) {
+                Color.clear.frame(height: 56)
+                
+                Path { path in
+                    path.move(to: .zero)
+                    path.addLine(to: .init(x: 20, y: 20))
+                    path.addLine(to: .init(x: -20, y: 20))
+                    path.addLine(to: .zero)
+                }
+                .frame(width: 20, height: 20)
+                .foregroundColor(.white)
+                .padding(.trailing, 20)
+                
+                VStack(spacing: 0) {
+                    Button(action: {
+                        withAnimation {
+                            isShowing = false
+                        }
+                        
+                        viewModel.input.didTapEditHabit.onNext(())
+                    }, label: {
+                        Text("Edit Habit")
+                            .gilroyBold(18)
+                            .padding()
+                            .overlay(
+                                VStack {
+                                    Spacer()
+                                    Color.black.frame(height: 1)
+                                }
+                            )
+                            .foregroundColor(.black)
+                    })
+                    
+                    
+                    Button(action: {
+                        withAnimation {
+                            isShowing = false
+                            viewModel.input.didTapAddValue.onNext(())
+                        }
+                    }, label: {
+                        Text("Add value")
+                            .gilroyBold(18)
+                            .padding()
+                            .foregroundColor(.black)
+                    })
+                }
+                .background(Color.white)
+                .cornerRadius(5)
+                .padding(.trailing, 20)
+                
+                Spacer(minLength: 0)
+            }
+        }
+        .background(
+            Color.black.opacity(0.5).ignoresSafeArea()
+                .onTapGesture {
+                    withAnimation {
+                        isShowing = false
+                    }
+                }
+        )
+    }
+    
+    // MARK: - Display value
+    @ViewBuilder
+    var displayValueView: some View {
+        ZStack {
+            Circle()
+                .stroke(Color("Gray02"), lineWidth: Const.linewidth)
+                .padding(Const.linewidth)
+            
+            Circle()
+                .trim(from: 0, to: viewModel.progress)
+                .stroke(Color("Information"), lineWidth: Const.linewidth)
+                .padding(Const.linewidth)
+                .rotationEffect(.degrees(-90))
+        }
+        .overlay(
+            VStack {
+                if !viewModel.isTimeUnit {
+                    Text("/\(viewModel.goalValue)")
+                        .gilroyRegular(20)
+                        .autoresize(1)
+                        .foregroundStyle(Color("Gray03"))
+                        .opacity(0)
+                    
+                    Text("\(viewModel.currentValue)")
+                        .gilroyBold(UIScreen.main.bounds.width / 5)
+                        .autoresize(1)
+                    
+                    Text("/\(viewModel.goalValue)")
+                        .gilroyRegular(20)
+                        .autoresize(1)
+                        .foregroundStyle(Color("Gray03"))
+                } else {
+                    Text(viewModel.leftTimeString)
+                        .gilroyBold(UIScreen.main.bounds.width / 5)
+                        .autoresize(1)
+                }
+            }
+            .padding(.horizontal, 30)
+        )
+        .padding()
+        .frame(
+            width: UIScreen.main.bounds.width,
+            height: UIScreen.main.bounds.width
+        )
+    }
+    
+    // MARK: - Change Value
+    @ViewBuilder
+    var changeValueView: some View {
+        if !viewModel.isTimeUnit {
+            HStack(alignment: .center) {
+                LongPressButtonView {
+                    viewModel.input.addValue.onNext(-1)
+                } content: {
+                    Image(systemName: "minus")
+                        .renderingMode(.template)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 24, height: 24)
+                        .foregroundStyle(.white)
+                        .frame(width: 50, height: 50)
+                        .background(Color.black)
+                        .cornerRadius(25)
+                }
+                
+                Spacer().frame(width: UIScreen.main.bounds.width / 3)
+                
+                LongPressButtonView {
+                    viewModel.input.addValue.onNext(1)
+                } content: {
+                    Image(systemName: "plus")
+                        .renderingMode(.template)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 24, height: 24)
+                        .foregroundStyle(.white)
+                        .frame(width: 50, height: 50)
+                        .background(Color.black)
+                        .cornerRadius(25)
+                }
+            }
+            
+            Spacer(minLength: 0)
+            
+            quickAddView
+        } else {
+            Spacer()
+            
+            Text(viewModel.isCounting ? "Stop" : "Start")
+                .gilroyBold(20)
+                .frame(width: UIScreen.main.bounds.width / 2.5, height: 56)
+                .background(Color("Error"))
+                .cornerRadius(5)
+                .foregroundStyle(.white)
+                .onTapGesture {
+                    if viewModel.isCounting {
+                        viewModel.input.stopTimer.onNext(())
+                    } else {
+                        viewModel.input.startTimer.onNext(())
+                    }
+                }
+            
+            Text("Reset")
+                .gilroyBold(20)
+                .frame(width: UIScreen.main.bounds.width / 2.5, height: 56)
+                .background(Color("Gray03"))
+                .cornerRadius(5)
+                .foregroundStyle(.white)
+                .onTapGesture {
+                    viewModel.input.resetTimer.onNext(())
+                }
+                .padding(.top, 10)
+               
+            Spacer()
+        }
+    }
+    
+    // MARK: - Quick Add View
+    @ViewBuilder
+    var quickAddView: some View {
+        VStack {
+            HStack {
+                Text("Quick Add")
+                    .gilroyBold(20)
+                
+                Spacer()
+            }
+            
+            HStack(spacing: 10) {
+                Button {
+                    viewModel.input.addValue.onNext(5)
+                } label: {
+                    Color("Secondary")
+                        .frame(height: 56)
+                        .overlay(
+                            Text("5")
+                                .gilroyBold(20)
+                                .foregroundStyle(.white)
+                        )
+                        .cornerRadius(5)
+                }
+
+                Button {
+                    viewModel.input.addValue.onNext(10)
+                } label: {
+                    Color("Secondary")
+                        .frame(height: 56)
+                        .overlay(
+                            Text("10")
+                                .gilroyBold(20)
+                                .foregroundStyle(.white)
+                        )
+                        .cornerRadius(5)
+                }
+            }
+            
+            HStack(spacing: 10) {
+                Button {
+                    viewModel.input.addValue.onNext(15)
+                } label: {
+                    Color("Secondary")
+                        .frame(height: 56)
+                        .overlay(
+                            Text("15")
+                                .gilroyBold(20)
+                                .foregroundStyle(.white)
+                        )
+                        .cornerRadius(5)
+                }
+                
+                Button {
+                    withAnimation {
+                        isShowing = false
+                        viewModel.input.didTapAddValue.onNext(())
+                    }
+                } label: {
+                    Color("Secondary")
+                        .frame(height: 56)
+                        .overlay(
+                            Text("Other")
+                                .gilroyBold(20)
+                                .foregroundStyle(.white)
+                        )
+                        .cornerRadius(5)
+                }
+            }
+        }
+        .padding(.horizontal, 20)
+        .padding(.bottom, 10)
+    }
+    
+    // MARK: - Navigation Bar
+    var navigationBar: some View {
+        HStack {
+            Button(action: {
+                 viewModel.routing.stop.onNext(())
+            }, label: {
+                Image("ic_back")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 24, height: 24)
+                    .frame(width: 30, height: 30)
+            })
+        
+            Spacer(minLength: 0)
+            
+            Button(action: {
+                withAnimation {
+                    self.isShowing = true
+                }
+            }, label: {
+                Image(systemName: "ellipsis")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 24, height: 24)
+                    .frame(width: 30, height: 30)
+                    .foregroundStyle(.black)
+            })
+        }
+        .frame(height: 56)
+        .overlay(
+            Text(viewModel.title)
+                .gilroyBold(30)
+                .foregroundStyle(Color("Black"))
+        )
+    }
+}
+
+#Preview {
+    HabitRecordView(
+        viewModel:
+                .init(record: .init(id: "", habitID: "",date: Date(), status: "", value: 0,createdAt: Date())))
+}
+
+// MARK: - LongPressButtonView
+struct LongPressButtonView<Content: View>: View {
+    @State private var timer: Timer?
+    @State private var isPressing = false
+
+    var action: (() -> Void)
+    var content: (() -> Content)
+
+    var body: some View {
+        content()
+            .onLongPressGesture(minimumDuration: 0.2, pressing: { pressing in
+                if pressing {
+                    startTimer()
+                } else {
+                    stopTimer()
+                }
+            }, perform: {})
+            .onTapGesture {
+                action()
+            }
+    }
+
+    private func startTimer() {
+        stopTimer() // Đảm bảo không có timer trước đó
+        timer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { _ in
+            action()
+        }
+    }
+
+    private func stopTimer() {
+        timer?.invalidate()
+        timer = nil
+    }
+}

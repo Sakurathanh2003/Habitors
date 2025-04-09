@@ -48,5 +48,30 @@ class CreateViewController: BaseViewController {
         viewModel.routing.stop.subscribe(onNext: { [weak self] in
             self?.coordinator?.stop()
         }).disposed(by: self.disposeBag)
+        
+        viewModel.routing.didCreate.subscribe(onNext: { [weak self] in
+            self?.coordinator?.didCreateHabit()
+        }).disposed(by: self.disposeBag)
+        
+        viewModel.routing.showAlert.subscribe(onNext: { [weak self] message in
+            let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Ok", style: .cancel)
+            alert.addAction(cancelAction)
+            self?.present(alert, animated: true)
+        }).disposed(by: self.disposeBag)
+        
+        viewModel.routing.needPermisson.subscribe(onNext: { [weak self] message in
+            let alert = UIAlertController(title: "Oops", message: message, preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Ok", style: .cancel)
+            alert.addAction(cancelAction)
+            
+            let settingAction = UIAlertAction(title: "Go to Setting", style: .destructive) { _ in
+                UIApplication.shared.openAppleHealthSources()
+            }
+            
+            alert.addAction(settingAction)
+            self?.present(alert, animated: true)
+        }).disposed(by: self.disposeBag)
     }
 }
+

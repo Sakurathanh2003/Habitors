@@ -12,23 +12,30 @@ import SwiftUI
 struct HomeViewModelInput: InputOutputViewModel {
     var selectTab = PublishSubject<HomeTab>()
     var selectDate = PublishSubject<Date>()
+    var selectHabit = PublishSubject<Habit>()
+    
+    var selectOverview = PublishSubject<()>()
 }
 
 struct HomeViewModelOutput: InputOutputViewModel {
-
+    
 }
 
 struct HomeViewModelRouting: RoutingOutput {
     var routeToCreate = PublishSubject<()>()
+    var routeToHabitRecord = PublishSubject<HabitRecord>()
+    var routeToOverview = PublishSubject<()>()
+    
+    var showAlert = PublishSubject<String>()
 }
 
 final class HomeViewModel: BaseViewModel<HomeViewModelInput, HomeViewModelOutput, HomeViewModelRouting> {
-    @Published var currentTab: HomeTab = .tools
+    @Published var currentTab: HomeTab = .home
     @Published var dateInMonth = [Date]()
-    @Published var selectedDate: Date?
+    @Published var selectedDate: Date = Date().nextDay
     
-    @Published var tasks = [Task]()
-    @Published var todayTasks = [Task]()
+    @Published var tasks = [Habit]()
+    @Published var todayTasks = [Habit]()
     
     @Published var showingToolItem: Tool.Item?
     
@@ -51,6 +58,45 @@ final class HomeViewModel: BaseViewModel<HomeViewModelInput, HomeViewModelOutput
         super.init()
         getDateInMonth()
         configInput()
+        
+        getTasks()
+        configNotification()
+    }
+    
+    private func configNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(updateHabitItem(notification:)),
+                                               name: .updateHabitItem, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateHabitItem(notification:)),
+                                               name: .deleteHabitItem, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateHabitItem(notification:)),
+                                               name: .addHabitItem, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(changedHabitRecord(notification:)),
+                                               name: .didUpdateRecord, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(changedHabitRecord(notification:)),
+                                               name: .didAddRecord, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(changedHabitRecord(notification:)),
+                                               name: .didDeleteRecord, object: nil)
+    }
+    
+    @objc func changedHabitRecord(notification: Notification) {
+        getTasks()
+    }
+    
+    @objc func updateHabitRecord(notification: Notification) {
+        if let id = notification.object as? String, let habit = HabitDAO.shared.getHabit(id: id) {
+            if let index = self.tasks.firstIndex(where: { $0.id == id }) {
+                self.tasks[index] = habit
+            }
+            
+            if let index = self.todayTasks.firstIndex(where: { $0.id == id }) {
+                self.todayTasks[index] = habit
+            }
+        }
+    }
+    
+    @objc func updateHabitItem(notification: Notification) {
+        getTasks()
     }
     
     private func getDateInMonth() {
@@ -89,10 +135,26 @@ final class HomeViewModel: BaseViewModel<HomeViewModelInput, HomeViewModelOutput
             self.selectedDate = date
             self.getTasks()
         }).disposed(by: self.disposeBag)
+        
+        input.selectOverview.subscribe(onNext: { [unowned self] in
+            self.routing.routeToOverview.onNext(())
+        }).disposed(by: self.disposeBag)
+        
+        input.selectHabit.subscribe(onNext: { [unowned self] selectedHabit in
+            if let record = selectedHabit.records.first(where: { $0.date.isSameDay(date: selectedDate) }) {
+                self.routing.routeToHabitRecord.onNext(record)
+            } else {
+                if let record = HabitRecordDAO.shared.addObject(habitID: selectedHabit.id, value: 0, date: selectedDate, createdAt: Date()) {
+                    self.routing.routeToHabitRecord.onNext(record)
+                }
+            }
+        }).disposed(by: self.disposeBag)
     }
     
     private func getTasks() {
-        
+        let dao = HabitDAO()
+        self.tasks = dao.getHabitDay(selectedDate)
+        self.todayTasks = dao.getHabitDay(Date())
     }
 }
 
@@ -103,11 +165,17 @@ extension HomeViewModel {
     }
     
     func isSelectedDate(_ date: Date) -> Bool {
-        guard let selectedDate else {
-            return false
-        }
-        
         let calendar = Calendar.current
         return calendar.isDate(date, inSameDayAs: selectedDate)
+    }
+    
+    func needToDoTodayHabit() -> [Habit] {
+        let todayHabits = self.todayTasks.filter { habit in
+            let record = habit.records.first(where: { $0.date.isSameDay(date: Date() )})
+            let goal = habit.goalValue - (record?.value ?? 0) // Ý là cần thực hiện bao nhiêu lần nữa
+            return goal > 0
+        }
+        
+        return todayHabits
     }
 }

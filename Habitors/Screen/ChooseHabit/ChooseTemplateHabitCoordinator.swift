@@ -24,8 +24,8 @@ final class ChooseTemplateHabitCoordinator: PresentedCoordinator {
     }
 
     override func stop(completion: (() -> Void)? = nil) {
-        controller.dismiss(animated: true)
         super.stop(completion: completion)
+        controller.dismiss(animated: true)
     }
     
     override func childDidStop(_ child: Coordinator) {

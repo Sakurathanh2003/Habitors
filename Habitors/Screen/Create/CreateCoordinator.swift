@@ -7,6 +7,8 @@
 
 import UIKit
 
+struct UserDidCreateHabit: CoordinatorEvent { }
+
 final class CreateCoordinator: PresentedCoordinator {
     
     let habit: Habit?
@@ -31,5 +33,9 @@ final class CreateCoordinator: PresentedCoordinator {
     override func stop(completion: (() -> Void)? = nil) {
         controller.dismiss(animated: true)
         super.stop(completion: completion)
+    }
+    
+    func didCreateHabit() {
+        self.send(event: UserDidCreateHabit())
     }
 }

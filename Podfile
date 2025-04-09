@@ -10,6 +10,7 @@ target 'Habitors' do
   pod 'SwiftUIIntrospect'
 
   pod 'RealmSwift'
+  pod 'Swifter'
 end
 
 post_install do |installer|
