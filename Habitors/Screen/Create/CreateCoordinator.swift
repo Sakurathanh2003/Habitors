@@ -36,6 +36,10 @@ final class CreateCoordinator: PresentedCoordinator {
     }
     
     func didCreateHabit() {
-        self.send(event: UserDidCreateHabit())
+        self.parentVC?.view.transform = .init(translationX: 0, y: UIScreen.main.bounds.height)
+        controller.dismiss(animated: true) { [weak self] in
+            self?.parentVC?.dismiss(animated: false)
+            self?.send(event: UserDidCreateHabit())
+        }
     }
 }

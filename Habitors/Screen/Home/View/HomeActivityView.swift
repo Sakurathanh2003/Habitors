@@ -22,6 +22,12 @@ enum TimePeriod: String, CaseIterable {
     case year
 }
 
+struct ChartData {
+    var key: String
+    var value: Double
+    var target: Double
+}
+
 struct ProgressCircle: View {
     var progress: CGFloat // Giá trị tiến trình (0.0 -> 1.0)
     var lineWidth: CGFloat = 12
@@ -52,55 +58,143 @@ struct ProgressCircle: View {
     }
 }
 
-struct HomeActivityView: View {
-    @ObservedObject var viewModel: HomeViewModel
-    @State var currentTab = TimePeriod.week
+struct SummaryView: View {
+    var note: String
+    var unit: String
+    var value: Double
+    
+    var color: Color
+    var imageName: String
+    
     var body: some View {
-        ScrollView(.vertical) {
-            VStack(alignment: .leading) {
-                HStack(spacing: 0) {
-                    ForEach(TimePeriod.allCases, id: \.self) { type in
-                        TabItemView(type: type, isSelected: currentTab == type)
-                            .onTapGesture {
-                                currentTab = type
-                            }
-                    }
-                }
-                .padding(4)
-                .background(Color("Gray02"))
-                .cornerRadius(12)
-                .padding(.horizontal, Const.horizontalPadding)
-                
-                chartView
-                    .padding(.top, 25)
-                    .padding(.horizontal, Const.horizontalPadding)
-               
-                    
-                Color("Gray")
-                    .frame(height: 1)
-                    .padding(.top, 16)
-                    .padding(.horizontal, Const.horizontalPadding)
-                
-                summaryView
-                    .padding(.horizontal, Const.horizontalPadding)
-               
-                   
-                Color("Gray")
-                    .frame(height: 1)
-                    .padding(.top, 16)
-                    .padding(.horizontal, Const.horizontalPadding)
-                
-                VStack(spacing: 24) {
-                    todayGoalView
-                        .padding(.top, 13)
-                    
-                    weekGoalView
-                }
+        VStack(alignment: .leading, spacing: 0) {
+            HStack {
+                Circle()
+                    .fill(color.opacity(0.1))
+                    .frame(width: 40, height: 40)
+                    .overlay(
+                        Image(imageName)
+                            .renderingMode(.template)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .foregroundStyle(color)
+                    )
+                    .padding(.bottom, 20)
                 
                 Spacer()
             }
+            
+            Text(value.text)
+                .gilroyBold(16)
+            + Text(" \(unit)")
+                .gilroyRegular(10)
+               
+            
+            Text(note)
+                .gilroyRegular(10)
+                .padding(.top, 3)
+        }
+        .padding(10)
+        .background(.white)
+        .cornerRadius(5)
+    }
+}
+
+struct HomeActivityView: View {
+    @ObservedObject var viewModel: HomeViewModel
+    @State var currentTab = TimePeriod.week
+    
+    var body: some View {
+        ScrollView(.vertical) {
+            VStack(alignment: .leading, spacing: 20) {
+                Color.clear.frame(height: 1)
+                calendarView
+                statusView
+                summaryView
+                trendingView
+                comparationView
+            }
             .padding(.bottom, 100)
         }
+        .background(Color.black)
+    }
+    
+    // MARK: - Summary View
+    var summaryView: some View {
+        LazyVGrid(columns: [.init(), .init()]) {
+            SummaryView(note: "Done in May",
+                        unit: "Day",
+                        value: 100,
+                        color: .red,
+                        imageName: "")
+            SummaryView(note: "Total Done",
+                        unit: "Day",
+                        value: 100,
+                        color: .red,
+                        imageName: "")
+            SummaryView(note: "Current Streak",
+                        unit: "Day",
+                        value: 100,
+                        color: .red,
+                        imageName: "")
+            SummaryView(note: "Best Streak",
+                        unit: "Day",
+                        value: 100,
+                        color: .red,
+                        imageName: "")
+        }
+        .padding(.horizontal, 20)
+    }
+    
+    // MARK: - Status
+    @ViewBuilder
+    var statusView: some View {
+        let width = UIScreen.main.bounds.width - 80
+        let spacing = 1.0
+        let itemWidth = (width - spacing * 51) / 52
+        
+        VStack(spacing: 10) {
+            HStack {
+                Text("Yearly status").gilroySemiBold(14)
+                Spacer()
+                
+                HStack(spacing: 2) {
+                    Text("2025").gilroyRegular(10)
+                    Image(systemName: "chevron.down")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 5, height: 5)
+                }
+                .padding(5)
+                .background(Color("Gray02"))
+                .cornerRadius(5)
+            }
+            
+            VStack(spacing: spacing) {
+                ForEach(1...7, id: \.self) { _ in
+                    HStack(spacing: spacing) {
+                        ForEach(1...52, id: \.self) { _ in
+                            RoundedRectangle(cornerSize: .zero)
+                        }
+                    }
+                }
+            }
+            .frame(width: width,
+                   height: itemWidth * 7 + spacing * 6)
+        }
+        .padding(20)
+        .background(.white)
+        .cornerRadius(5)
+        .padding(.horizontal, 20)
+    }
+    
+    // MARK: - Calendar View
+    var calendarView: some View {
+        CalendarView(viewModel: CalendarViewModel(mode: .analytic))
+            .padding(20)
+            .background(.white)
+            .cornerRadius(5)
+            .padding(.horizontal, 20)
     }
     
     @ViewBuilder
@@ -191,168 +285,86 @@ struct HomeActivityView: View {
         }
     }
     
-    var summaryView: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            Text("Your weekly records of doing the task")
-                .gilroySemiBold(18)
-                .foregroundStyle(Color("Black"))
-            
+   
+    
+    @ViewBuilder
+    var trendingView: some View {
+        let data: [ChartData] = [
+            .init(key: "1", value: 25, target: 1000),
+            .init(key: "2", value: 50, target: 2240),
+            .init(key: "3", value: 2000, target: 2200),
+            .init(key: "4", value: 100, target: 1000),
+            .init(key: "5", value: 125, target: 1000),
+            .init(key: "6", value: 90, target: 1000),
+            .init(key: "7", value: 10, target: 1000),
+            .init(key: "8", value: 1000, target: 1000),
+        ]
+        
+        VStack(spacing: 30) {
             HStack {
-                VStack(alignment: .leading, spacing: 9) {
-                    HStack(spacing: 9) {
-                        Circle()
-                            .fill(Color("Gray02"))
-                            .frame(width: 16, height: 16)
-                        
-                        Text("Average weekly record")
-                            .gilroyMedium(12)
-                            .foregroundStyle(Color("Gray"))
-                    }
-                   
-                    HStack(spacing: 8) {
-                        Circle()
-                            .fill(Color("Primary"))
-                            .frame(width: 16, height: 16)
-                        
-                        Text("Today records")
-                            .gilroyMedium(12)
-                            .foregroundStyle(Color("Gray"))
-                    }
-                    
-                    
-                }
+                Text("Trending").gilroyBold(16)
                 
                 Spacer(minLength: 0)
-                
-                ProgressCircle(progress: 0.5)
-                    .frame(width: 80, height: 80)
-                    .overlay(
-                        Text("50%")
-                            .gilroyBold(20)
-                            .foregroundStyle(Color("Black"))
-                    )
-            }
-        }.padding(.top, 24)
-    }
-    
-    @State var dayInWeek = [
-        "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"
-    ]
-    
-    @State var percents = [
-        "100%", "80%", "60%", "40%", "20%"
-    ]
-    
-    @State var data: [CGFloat] = [
-        0, 50, 0, 50, 0, 20, 0
-    ]
-    
-    func line(bounds: CGSize) -> Path {
-        let width = bounds.width
-        let height = bounds.height
-        
-        let itemWidth = Const.dayTextWidth
-        let itemSpacing = (width - itemWidth * 7) / 6
-        
-        return Path { path in
-            func coordYFor(index: Int) -> CGFloat {
-                return height - height * data[index] / 100 + Const.percentTextHeight / 2
-            }
-            
-            func coordXFor(index: Int) -> CGFloat {
-                return itemWidth / 2 + (itemSpacing + itemWidth) * CGFloat(index)
-            }
-            
-            var p1 = CGPoint(x: itemWidth / 2,
-                             y: coordYFor(index: 0))
-            path.move(to: p1)
-            
-            var oldControlP: CGPoint?
-            
-            for index in 1..<7 {
-                
-                let p2 = CGPoint(x: coordXFor(index: index),
-                                 y: coordYFor(index: index))
-                
-                var p3: CGPoint?
-                
-                if index < data.count - 1 {
-                    p3 = CGPoint(x: itemWidth / 2 + (itemSpacing + itemWidth) * CGFloat(index + 1),
-                                 y: height - height * data[index + 1] / 100 + Const.percentTextHeight / 2)
+                HStack(spacing: 0) {
+                    ForEach(TimePeriod.allCases, id: \.self) { type in
+                        TabItemView(type: type, isSelected: currentTab == type)
+                            .onTapGesture {
+                                currentTab = type
+                            }
+                    }
                 }
-                
-                let newControlP = controlPointForPoints(p1: p1, p2: p2, next: p3)
-                
-                path.addCurve(to: p2, control1: oldControlP ?? p1, control2: newControlP ?? p2)
-                
-                p1 = p2
-                oldControlP = antipodalFor(point: newControlP, center: p2)
+                .padding(4)
+                .background(Color("Gray02"))
+                .cornerRadius(2)
             }
+        
+            ChartView(data: data)
+            .frame(height: 200)
         }
+        .padding(20)
+        .background(.white)
+        .cornerRadius(5)
+        .padding(.horizontal, 20)
     }
     
     @ViewBuilder
-    var chartView: some View {
-        VStack(spacing: 10) {
-            HStack(spacing: 0) {
-                VStack {
-                    ForEach(percents, id: \.self) { percent in
-                        DashedLineView(color: Color("Gray02"), lineHeight: 0.5)
-                            .frame(height: 14)
-                        Spacer()
-                    }
-                }
-                .clipped()
-                .overlay(
-                    GeometryReader(content: { proxy in
-                        ZStack {
-                            line(bounds: proxy.size)
-                                .stroke(style: StrokeStyle(lineWidth: 4, lineCap: .round)) // Độ dài nét & khoảng cách
-                                .foregroundColor(Color("Primary")) // Màu của đường line
-                            
-                            line(bounds: proxy.size)
-                                .fill(
-                                    LinearGradient(colors: [
-                                        Color("Primary").opacity(0.7),
-                                        Color("Primary").opacity(0.7),
-                                        Color("Primary").opacity(0.7),
-                                        Color("Primary").opacity(0)
-                                    ], startPoint: .top, endPoint: .bottom)
-                                )
-                        }
-                    })
-                )
+    var comparationView: some View {
+        let data: [ChartData] = [
+            .init(key: "1", value: 25, target: 1000),
+            .init(key: "2", value: 50, target: 2240),
+            .init(key: "3", value: 2000, target: 2200),
+            .init(key: "4", value: 100, target: 1000),
+            .init(key: "5", value: 125, target: 1000),
+            .init(key: "6", value: 90, target: 1000),
+            .init(key: "7", value: 10, target: 1000),
+            .init(key: "8", value: 1000, target: 1000),
+        ]
+        
+        VStack(spacing: 30) {
+            HStack {
+                Text("Comparision").gilroyBold(16)
                 
-                VStack {
-                    ForEach(percents, id: \.self) { percent in
-                        Text(percent)
-                            .gilroyMedium(12)
-                            .foregroundStyle(Color("Gray"))
-                            .frame(height: 14)
-                        
-                        Spacer()
+                Spacer(minLength: 0)
+                HStack(spacing: 0) {
+                    ForEach(TimePeriod.allCases, id: \.self) { type in
+                        TabItemView(type: type, isSelected: currentTab == type)
+                            .onTapGesture {
+                                currentTab = type
+                            }
                     }
                 }
-                .frame(width: 30)
+                .padding(4)
+                .background(Color("Gray02"))
+                .cornerRadius(2)
             }
-            
-            DashedLineView(color: Color("Gray02"), lineHeight: 0.5)
-            
-            HStack(spacing: 0) {
-                ForEach(dayInWeek.indices, id: \.self) { index in
-                    Text(dayInWeek[index])
-                        .gilroyMedium(12)
-                        .foregroundStyle(Color("Gray"))
-                        .frame(width: Const.dayTextWidth)
-                    
-                    if index != dayInWeek.count - 1 {
-                        Spacer(minLength: 0)
-                    }
-                }
-            }
-            .padding(.trailing, 30)
+        
+            ChartView(data: data)
+            .frame(height: 200)
         }
-        .frame(height: (UIScreen.main.bounds.width - Const.horizontalPadding * 2) / 329 * 229)
+        .padding(20)
+        .background(.white)
+        .cornerRadius(5)
+        .padding(.horizontal, 20)
     }
     
     func midPointForPoints(p1: CGPoint, p2: CGPoint) -> CGPoint {
@@ -384,6 +396,102 @@ struct HomeActivityView: View {
         
         return CGPoint(x: newX, y: newY)
     }
+    
+    
+}
+
+// MARK: - ChartView
+struct ChartView: View {
+    let data: [ChartData]
+    
+    var body: some View {
+        HStack(spacing: 0) {
+            
+            VStack(spacing: 0) {
+                ForEach(moc, id: \.self) { index in
+                    Text(index.text)
+                        .gilroyRegular(10)
+                        .frame(height: 16)
+                    
+                    if index != moc.last {
+                        Spacer(minLength: 0)
+                    }
+                }
+            }
+            .offset(y: -8)
+            .frame(width: 50)
+            
+            ForEach(data, id: \.key) { index in
+                Spacer(minLength: 0)
+                
+                VStack(alignment: .center, spacing: 0) {
+                    GeometryReader { proxy in
+                        let width = proxy.size.width / 4
+                        ZStack(alignment: .bottom) {
+                            Color.clear
+                            
+                            RoundedRectangle(cornerRadius: width / 2)
+                                .fill(.gray.opacity(0.3))
+                                .frame(width: width,
+                                       height: proxy.size.height / maxStep * index.target)
+                            
+                            RoundedRectangle(cornerRadius: width / 2)
+                                .fill(.red)
+                                .frame(width: width,
+                                       height: proxy.size.height / maxStep * index.value)
+                        }
+                    }
+                    
+                    Text(index.key)
+                        .gilroyRegular(10)
+                        .autoresize(1)
+                        .frame(height: 16)
+                    
+                }
+            }
+        }
+        .background(
+            VStack(spacing: 0) {
+                ForEach(moc, id: \.self) { index in
+                    Color.gray.opacity(0.1).frame(height: 1)
+                    
+                    if index != moc.last {
+                        Spacer(minLength: 0)
+                    }
+                }
+                
+                
+                Text("")
+                    .gilroyRegular(10)
+                    .frame(height: 16)
+            }
+        )
+    }
+    
+    var moc: [Double] {
+        return calculateYAxisSteps(from: data)
+    }
+    
+    var maxStep: Double {
+        moc.first ?? 1
+    }
+    
+    func calculateYAxisSteps( from data: [ChartData], numberOfSteps: Int = 5) -> [Double] {
+        let maxValue = data.flatMap { [$0.value, $0.target] }.max() ?? 0
+        
+        // Trường hợp không có dữ liệu > 0
+        if maxValue == 0 {
+            return (0...numberOfSteps).map { Double($0 * 5) }
+        }
+        
+        // Tìm step sao cho step * numberOfSteps >= maxValue
+        var step = ceil(maxValue / Double(numberOfSteps))
+        
+        // Làm tròn step về bội của 5
+        step = ceil(step / 5) * 5
+        
+        return (0...numberOfSteps).map { Double($0) * step }.reversed()
+    }
 }
 
 fileprivate struct TabItemView: View {
@@ -394,14 +502,15 @@ fileprivate struct TabItemView: View {
         ZStack {
             isSelected ? Color("Black") : Color.clear
             
-            Text(type.rawValue.capitalized)
-                .gilroyMedium(14)
+            Text("1 " + type.rawValue.capitalized)
+                .gilroyMedium(9)
                 .foregroundStyle(!isSelected ? Color("Gray") : Color("White"))
         }
-        .frame(height: 40)
-        .cornerRadius(8)
+        .frame(width: 50, height: 20)
+        .cornerRadius(2)
     }
 }
+
 
 #Preview {
     HomeView(viewModel: .init())

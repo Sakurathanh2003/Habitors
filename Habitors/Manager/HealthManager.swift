@@ -31,14 +31,16 @@ class HealthManager: NSObject {
     }
     
     // MARK: - Request
-    func requestAuthorization(for type: HKQuantityType, completion: @escaping @Sendable (Bool, String?) -> Void) {
-        let share: Set<HKSampleType> = type.canWrite ? [type] : []
-        healthStore.requestAuthorization(toShare: share, read: [type]) { success, error in
+    func requestAuthorization(for unit: GoalUnit, completion: @escaping @Sendable (Bool, String?) -> Void) {
+        healthStore.requestAuthorization(toShare: Set(unit.writeTypes), read: Set(unit.readTypes)) { success, error in
             Task {
-                let isGrant = await self.canAccess(of: type)
-                completion(isGrant, type.requestMessage)
+                let isGrant = await self.canAccess(of: unit)
                 
-                if type.identifier == HKQuantityTypeIdentifier.stepCount.rawValue && !self.needToObserverStepCount {
+                DispatchQueue.main.async {
+                    completion(isGrant, unit.requestMessage)
+                }
+               
+                if unit == .steps && !self.needToObserverStepCount {
                     self.needToObserverStepCount = true
                     self.startObservingStepCount()
                 }
@@ -46,16 +48,16 @@ class HealthManager: NSObject {
         }
     }
     
-    func canAccess(of type: HKQuantityType) async -> Bool {
-        let share: Set<HKSampleType> = type.canWrite ? [type] : []
-        let status = try? await healthStore.statusForAuthorizationRequest(toShare: share, read: [type])
+    func canAccess(of unit: GoalUnit) async -> Bool {
+        let status = try? await healthStore.statusForAuthorizationRequest(toShare: Set(unit.writeTypes),
+                                                                          read: Set(unit.readTypes))
         return status == .unnecessary
     }
     
     // MARK: - Step count
     func startObservingStepCount() {
         Task {
-            guard let stepType = HKObjectType.quantityType(forIdentifier: .stepCount), await canAccess(of: stepType) else {
+            guard let stepType = HKObjectType.quantityType(forIdentifier: .stepCount), await canAccess(of: .steps) else {
                 return
             }
             
@@ -159,45 +161,75 @@ class HealthManager: NSObject {
     }
     
     // MARK: - Exercise Time
-    func fetchExerciseTime(startDate: Date, endDate: Date, completion: @escaping (Double) -> Void) {
-        let type = HKQuantityType.quantityType(forIdentifier: .appleExerciseTime)!
-        let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: .strictStartDate)
+    func fetchExerciseTime(endDate: Date) async -> Double {
+        let startDate = endDate.startOfDay
+        
+        return await withUnsafeContinuation { continuation in
+            let type = HKQuantityType.quantityType(forIdentifier: .appleExerciseTime)!
+            let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: .strictStartDate)
 
-        let query = HKStatisticsQuery(quantityType: type, quantitySamplePredicate: predicate, options: .cumulativeSum) { _, result, error in
-            guard let result = result, let sum = result.sumQuantity() else {
-                completion(0)
-                return
+            let query = HKStatisticsQuery(quantityType: type, quantitySamplePredicate: predicate, options: .cumulativeSum) { _, result, error in
+                guard let result = result, let sum = result.sumQuantity() else {
+                    continuation.resume(returning: 0)
+                    return
+                }
+
+                let totalSecond = sum.doubleValue(for: .second())
+                continuation.resume(returning: totalSecond)
             }
 
-            let totalMinutes = sum.doubleValue(for: .second())
-            completion(totalMinutes)
-        }
-
-        healthStore.execute(query)
-    }
-}
-
-// MARK: - Extension
-extension HKQuantityType {
-    var canWrite: Bool {
-        switch self.identifier {
-        case HKQuantityTypeIdentifier.appleExerciseTime.rawValue:
-            false
-        case HKQuantityTypeIdentifier.appleStandTime.rawValue:
-            false
-        default:
-            true
+            healthStore.execute(query)
         }
     }
     
+    func saveWorkout(byAdding component: Calendar.Component, time: Double, date: Date, completion: @escaping (Bool, Error?) -> Void) {
+        // Lấy ngày, giờ, phút, giây từ thời điểm hiện tại
+        let calendar = Calendar.current
+        let currentYear = calendar.component(.year, from: date)
+        let currentMonth = calendar.component(.month, from: date)
+        let currentDay = calendar.component(.day, from: date)
+
+        // Lấy giờ, phút, giây từ date bạn có
+        let hour = calendar.component(.hour, from: Date())
+        let minute = calendar.component(.minute, from: Date())
+        let second = calendar.component(.second, from: Date())
+
+        // Tạo Date mới với ngày hiện tại và giữ nguyên giờ, phút, giây của date bạn có
+        let endDate = calendar.date(bySettingHour: hour, minute: minute, second: second, of: calendar.date(from: DateComponents(year: currentYear, month: currentMonth, day: currentDay))!)!
+        
+        let start = calendar.date(byAdding: component, value: Int(-abs(time)), to: endDate)!
+
+        let workout = HKWorkout(activityType: .other,
+                                start: start,
+                                end: endDate)
+
+        healthStore.save(workout) { success, error in
+            completion(success, error)
+            
+            if success {
+                print("Workout đã được lưu vào HealthKit")
+            } else {
+                print("Lỗi khi lưu workout: \(error?.localizedDescription ?? "Unknown error")")
+            }
+        }
+    }
+    
+    func saveData(for unit: GoalUnit, value: Double, date: Date, completion: @escaping (Bool, Error?) -> Void) {
+        switch unit {
+        case .steps:
+            addSteps(steps: value, date: date, completion: completion)
+        case .exerciseTime:
+            saveWorkout(byAdding: .minute, time: value, date: date, completion: completion)
+        default: break
+        }
+    }
+}
+
+extension GoalUnit {
     var requestMessage: String {
-        switch self.identifier {
-        case HKQuantityTypeIdentifier.appleExerciseTime.rawValue:
-            "Bạn cần cấp quyền đọc thời gian tập"
-        case HKQuantityTypeIdentifier.appleStandTime.rawValue:
-            "Bạn cần cấp quyền đọc thời gian đứng"
-        case HKQuantityTypeIdentifier.stepCount.rawValue:
-            "Bạn cần cấp quyền đọc và ghi số bước"
+        switch self {
+        case .steps: "Bạn cần cấp quyền đọc thời gian đứng"
+        case .exerciseTime: "Bạn cần cấp quyền đọc thời gian tập"
         default:
             "Bạn cần cấp quyền vừa yêu cầu"
         }

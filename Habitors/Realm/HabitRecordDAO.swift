@@ -19,7 +19,7 @@ final class HabitRecordDAO: RealmDao {
     static let shared = HabitRecordDAO()
     
     @discardableResult
-    func addObject(habitID: String, value: Int, date: Date, createdAt: Date) -> HabitRecord? {
+    func addObject(habitID: String, value: Double, date: Date, createdAt: Date) -> HabitRecord? {
         let object = RlmHabitRecord()
         object.id = .generate()
         object.status = ""

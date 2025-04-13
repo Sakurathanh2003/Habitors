@@ -12,10 +12,10 @@ class HabitRecord: Codable, ObservableObject {
     var habitID: String // Liên kết với Habit
     var date: Date
     var status: String // "completed" hoặc "missed"
-    var value: Int? // Số
+    var value: Double? // Số
     var createdAt: Date = Date()
     
-    init(id: String, habitID: String, date: Date, status: String, value: Int? = nil, createdAt: Date) {
+    init(id: String, habitID: String, date: Date, status: String, value: Double? = nil, createdAt: Date) {
         self.id = id
         self.habitID = habitID
         self.date = date

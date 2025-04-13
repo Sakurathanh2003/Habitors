@@ -9,7 +9,14 @@ import Foundation
 import UserNotifications
 import UIKit
 
-class HabitScheduler {
+class HabitScheduler: NSObject {
+    static let shared = HabitScheduler()
+    
+    override init() {
+        super.init()
+        UNUserNotificationCenter.current().delegate = self
+    }
+    
     static var notiID: [String: [String]] {
         get {
             UserDefaults.standard.value(forKey: "notiID") as? [String: [String]] ?? [:]
@@ -77,6 +84,16 @@ class HabitScheduler {
         return content
     }
 }
+
+// MARK: - UNUserNotificationCenterDelegate
+extension HabitScheduler: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.banner, .badge, .sound, .list])
+    }
+}
+
 
 // MARK: - Habit Extension
 extension Habit {

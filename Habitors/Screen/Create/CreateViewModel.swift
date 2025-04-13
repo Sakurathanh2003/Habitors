@@ -49,7 +49,7 @@ final class CreateViewModel: BaseViewModel<CreateViewModelInput, CreateViewModel
 
     // Goal
     @Published var goalUnit: GoalUnit = .count
-    @Published var goalValue: Int = 1
+    @Published var goalValue: Double = 1
     
     
     @Published var isShowingChangeValueGoal: Bool = false
@@ -142,8 +142,8 @@ final class CreateViewModel: BaseViewModel<CreateViewModelInput, CreateViewModel
     }
     
     private func checkHealthPermissionIfNeed(completion: @escaping (String?) -> Void) {
-        if let type = goalUnit.healthType {
-            HealthManager.shared.requestAuthorization(for: type) { isAccess, error in
+        if goalUnit.useAppleHealth {
+            HealthManager.shared.requestAuthorization(for: goalUnit) { isAccess, error in
                 DispatchQueue.main.async {
                     completion(isAccess ? nil : error)
                 }

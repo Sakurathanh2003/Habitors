@@ -24,8 +24,17 @@ final class ChooseTemplateHabitCoordinator: PresentedCoordinator {
     }
 
     override func stop(completion: (() -> Void)? = nil) {
-        super.stop(completion: completion)
         controller.dismiss(animated: true)
+        super.stop(completion: completion)
+    }
+    
+    override func handle(event: any CoordinatorEvent) -> Bool {
+        if event is UserDidCreateHabit {
+            stop()
+            return true
+        }
+        
+        return false
     }
     
     override func childDidStop(_ child: Coordinator) {
@@ -33,6 +42,7 @@ final class ChooseTemplateHabitCoordinator: PresentedCoordinator {
         
         if child is CreateCoordinator {
             self.createHabitCoordinator = nil
+            print("dismiss create habit")
         }
     }
     

@@ -60,7 +60,7 @@ struct CreateView: View {
                 SelectGoalView(viewModel: viewModel)
                 if viewModel.isShowingChangeValueGoal {
                     InputView(value: viewModel.goalValue, titleString: "Enter value (\(viewModel.goalUnit.rawValue)", isShowing: $viewModel.isShowingChangeValueGoal, saveAction: {
-                        if let value = Int($0) {
+                        if let value = Double($0) {
                             viewModel.goalValue = value
                         }
                     })
@@ -256,10 +256,10 @@ struct CreateView: View {
                 .cornerRadius(12)
                 .overlay(
                     HStack {
-                        Text("\(viewModel.goalValue)")
+                        Text("\(viewModel.goalValue.text)")
                             .gilroyBold(18)
                         
-                        + Text(" \(viewModel.goalUnit.rawValue)/day")
+                        + Text(" \(viewModel.goalUnit.description)/day")
                             .gilroySemiBold(18)
                             .foregroundColor(Color("Gray"))
                         

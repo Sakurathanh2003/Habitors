@@ -59,5 +59,29 @@ class HabitRecordViewController: BaseViewController {
         viewModel.routing.showAlert.subscribe(onNext: { [weak self] msg in
             self?.presentAlert(title: "", message: msg)
         }).disposed(by: self.disposeBag)
+        
+        viewModel.routing.presentOption.subscribe(onNext: { [weak self] msg in
+            self?.presentAlertOption()
+        }).disposed(by: self.disposeBag)
+    }
+    
+    private func presentAlertOption() {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        // Add actions (options)
+        alert.addAction(UIAlertAction(title: "Cài đặt thói quen", style: .default, handler: { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.viewModel.input.didTapEditHabit.onNext(())
+            }
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Thêm bản ghi", style: .default, handler: { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.viewModel.input.didTapAddValue.onNext(())
+            }
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Đóng", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }

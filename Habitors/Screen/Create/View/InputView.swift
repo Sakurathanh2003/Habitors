@@ -16,8 +16,8 @@ struct InputView: View {
     
     @FocusState private var keyboardFocused: Bool
     
-    init(value: Int, titleString: String, isShowing: Binding<Bool>, saveAction: @escaping (String) -> Void) {
-        self.text = "\(value)"
+    init(value: Double, titleString: String, isShowing: Binding<Bool>, saveAction: @escaping (String) -> Void) {
+        self.text = value == 0 ? "" : value.text
         self.title = titleString
         self.saveAction = saveAction
         self._isShowing = isShowing

@@ -13,7 +13,7 @@ class Habit: Codable, ObservableObject {
     var name: String
     var icon: String
     var goalUnit: GoalUnit
-    var goalValue: Int
+    var goalValue: Double
     var isTemplate: Bool
     var startedDate: Date
     
@@ -24,7 +24,7 @@ class Habit: Codable, ObservableObject {
          name: String,
          icon: String,
          goalUnit: GoalUnit,
-         goalValue: Int,
+         goalValue: Double,
          isTemplate: Bool,
          startedDate: Date = Date(),
          frequency: Frequency = .init(),
@@ -62,7 +62,7 @@ class Habit: Codable, ObservableObject {
 extension Habit {
     func isCompleted(_ date: Date) -> Bool {
         if let record = records.first(where: { $0.createdAt.isSameDay(date: date) }) {
-            return (record.value ?? 0) >= goalValue
+            return (record.value ?? 0.0) >= goalValue
         }
         
         return false

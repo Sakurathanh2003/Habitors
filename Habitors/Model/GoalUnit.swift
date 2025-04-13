@@ -11,7 +11,6 @@ import HealthKit
 
 enum GoalUnit: String, Codable, PersistableEnum, CaseIterable {
     case count
-    
    
     case kcal
     case lbs
@@ -30,20 +29,61 @@ enum GoalUnit: String, Codable, PersistableEnum, CaseIterable {
     case hours
     
     // Đơn vị liên quan đến Apple Health
-    case exerciseTime = "minute"
+    case exerciseTime
     case steps
     
     static func custom() -> [GoalUnit] {
         [.count, .kcal, .lbs, .ml, .usoz, .mile, .km, .m, .secs, .min, .hours]
     }
+    
+    var description: String {
+        switch self {
+        case .secs: "giây"
+        case .min, .exerciseTime: "phút"
+        case .hours: "giờ"
+        default: self.rawValue
+        }
+    }
 }
 
 extension GoalUnit {
-    var healthType: HKQuantityType? {
+    var useAppleHealth: Bool {
         switch self {
-        case .steps: HKQuantityType(.stepCount)
-        case .exerciseTime: HKQuantityType(.appleExerciseTime)
+        case .steps: true
+        case .exerciseTime: true
+        default: false
+        }
+    }
+    
+    var maximumAllowedValue: Double? {
+        return switch self {
+        case .steps: HKQuantityType(.stepCount).maximumAllowedDuration
+        case .exerciseTime: HKObjectType.workoutType().maximumAllowedDuration
         default: nil
+        }
+    }
+    
+    var readTypes: [HKSampleType] {
+        switch self {
+        case .steps: [
+            HKQuantityType(.stepCount)
+        ]
+        case .exerciseTime: [
+            HKQuantityType(.appleExerciseTime)
+        ]
+        default: []
+        }
+    }
+    
+    var writeTypes: [HKSampleType] {
+        switch self {
+        case .steps: [
+            HKQuantityType(.stepCount)
+        ]
+        case .exerciseTime: [
+            HKObjectType.workoutType()
+        ]
+        default: []
         }
     }
     
@@ -52,6 +92,30 @@ extension GoalUnit {
         case .steps: "Bạn cần cấp quyền cho ứng dụng truy cập và đọc số lượng bước"
         case .exerciseTime: "Bạn cần cấp quyền cho ứng dụng truy cập và đọc thời gian exercise"
         default: ""
+        }
+    }
+    
+    // Quy đổi về đơn vị chuẩn (giây cho thời gian, kcal cho năng lượng, m cho quãng đường)
+    func convertToBaseUnit(from value: Double) -> Double {
+        switch self {
+        case .min:
+            return value * 60    // Quy đổi phút sang giây
+        case .hours:
+            return value * 3600       // Giây vẫn là giây
+        default:
+            return value
+        }
+    }
+    
+    // Quy đổi từ đơn vị chuẩn về đúng đơn vị
+    func convertToUnit(from base: Double) -> Double {
+        switch self {
+        case .min:
+            return base / 60    // Quy đổi phút sang giây
+        case .hours:
+            return base / 3600       // Giây vẫn là giây
+        default:
+            return base
         }
     }
 }

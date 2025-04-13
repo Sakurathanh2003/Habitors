@@ -8,18 +8,27 @@
 import Foundation
 import SwiftUI
 
+enum CalendarMode {
+    case chooseDays
+    case chooseDay
+    case analytic
+}
+
 class CalendarViewModel: ObservableObject {
     @Published var currentMonth = Date()
     @Published var selectedDate = [Date]()
     @Published var daysInMonth = [Date]()
-    let isAllowSelectedMore: Bool
     
-    init(isAllowSelectedMore: Bool, selectedDate: [Date]) {
+    let mode: CalendarMode
+    
+    init(mode: CalendarMode, selectedDate: [Date] = []) {
         self.selectedDate = selectedDate
-        self.isAllowSelectedMore = isAllowSelectedMore
+        self.mode = mode
         
         if let firstDate = selectedDate.first {
             self.currentMonth = firstDate
+        } else {
+            self.currentMonth = Date()
         }
         
         updateDaysInMonth()
@@ -38,19 +47,22 @@ class CalendarViewModel: ObservableObject {
     }
     
     func chooseDay(_ day: Date) {
-        if !isAllowSelectedMore {
+        switch mode {
+        case .chooseDays:
+            
+            if selectedDate.contains(where: { $0.isSameDay(date: day)}) {
+                selectedDate.removeAll(where: { $0.isSameDay(date: day)})
+            } else {
+                selectedDate.append(day)
+            }
+            
+            self.selectedDate.sort()
+        case .chooseDay:
             selectedDate.removeAll()
             selectedDate.append(day)
-            return
+        case .analytic:
+            break
         }
-        
-        if selectedDate.contains(where: { $0.isSameDay(date: day)}) {
-            selectedDate.removeAll(where: { $0.isSameDay(date: day)})
-        } else {
-            selectedDate.append(day)
-        }
-        
-        self.selectedDate.sort()
     }
     
     func updateNextMonth() {

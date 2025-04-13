@@ -12,7 +12,7 @@ class RlmHabitRecord: Object {
     @Persisted(primaryKey: true) var id: ObjectId
     @Persisted var date: Date
     @Persisted var status: String // "completed" hoặc "missed"
-    @Persisted var value: Int? // Số
+    @Persisted var value: Double? // Số
     @Persisted var createdAt: Date = Date()
     
     @Persisted(originProperty: "records") var habit: LinkingObjects<RlmHabit>

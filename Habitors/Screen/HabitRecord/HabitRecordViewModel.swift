@@ -8,9 +8,10 @@
 import UIKit
 import RxSwift
 import SwiftUI
+import HealthKit
 
 struct HabitRecordViewModelInput: InputOutputViewModel {
-    var addValue = PublishSubject<Int>()
+    var addValue = PublishSubject<Double>()
     var didTapEditHabit = PublishSubject<()>()
     
     var startTimer = PublishSubject<()>()
@@ -27,7 +28,7 @@ struct HabitRecordViewModelOutput: InputOutputViewModel {
 struct HabitRecordViewModelRouting: RoutingOutput {
     var stop = PublishSubject<()>()
     var routeToEditHabit = PublishSubject<Habit>()
-    
+    var presentOption = PublishSubject<()>()
     var needToPermission = PublishSubject<String>()
     var showAlert = PublishSubject<String>()
 }
@@ -94,27 +95,27 @@ final class HabitRecordViewModel: BaseViewModel<HabitRecordViewModelInput, Habit
                 return
             }
             
+            if let maximumAllowedValue = unit.maximumAllowedValue, value > maximumAllowedValue {
+                self.routing.showAlert.onNext("Bạn chỉ có thể thêm giá trị không quá \(maximumAllowedValue.text)")
+                return
+            }
+            
             if newValue < 0 && value < 0 {
                 return
             }
             
-            if let healthType = record.habit?.goalUnit.healthType {
+            if let unit = record.habit?.goalUnit, unit.useAppleHealth {
                 Task {
-                    let canAccess = await HealthManager.shared.canAccess(of: healthType)
+                    let canAccess = await HealthManager.shared.canAccess(of: unit)
                     
                     if canAccess {
-                        HealthManager.shared.addSteps(steps: Double(value), date: self.recordDate) { [weak self] isSuccess, error in
-                            guard let self else {
-                                return
-                            }
-                        
-                            self.setValue(newValue)
+                        HealthManager.shared.saveData(for: unit, value: value, date: self.recordDate) { [weak self] isSuccess, error in
+                            self?.setValue(newValue)
                         }
                     } else {
                         self.routing.needToPermission.onNext(self.record.habit?.goalUnit.permissionMessage ?? "")
                     }
                 }
-                
             } else {
                 self.setValue(newValue)
             }
@@ -130,6 +131,11 @@ final class HabitRecordViewModel: BaseViewModel<HabitRecordViewModelInput, Habit
         
         input.startTimer.subscribe(onNext: { [weak self] in
             guard let self else { return }
+            
+            if record.date.isFutureDay {
+                self.routing.showAlert.onNext("Vui lòng đợi đúng ngày nhé 😄")
+                return
+            }
             
             startTimer()
         }).disposed(by: self.disposeBag)
@@ -155,9 +161,9 @@ final class HabitRecordViewModel: BaseViewModel<HabitRecordViewModelInput, Habit
                 return
             }
             
-            if let healthType = record.habit?.goalUnit.healthType {
+            if let unit = record.habit?.goalUnit, unit.useAppleHealth {
                 Task {
-                    let canAccess = await HealthManager.shared.canAccess(of: healthType)
+                    let canAccess = await HealthManager.shared.canAccess(of: unit)
                 
                     if canAccess {
                         self.isShowingAddValue = true
@@ -165,14 +171,11 @@ final class HabitRecordViewModel: BaseViewModel<HabitRecordViewModelInput, Habit
                         self.routing.needToPermission.onNext(self.record.habit?.goalUnit.permissionMessage ?? "")
                     }
                 }
-
             } else {
                 self.isShowingAddValue = true
             }
         }).disposed(by: self.disposeBag)
     }
-    
-    
     
     private func stopTimer() {
         self.isCounting = false
@@ -190,12 +193,12 @@ final class HabitRecordViewModel: BaseViewModel<HabitRecordViewModelInput, Habit
             if currentValue == goalValue {
                 stopTimer()
             } else {
-                setValue(currentValue + 1)
+                self.setValue(self.currentValue + 1)
             }
         })
     }
     
-    private func setValue(_ value: Int) {
+    private func setValue(_ value: Double) {
         record.value = value
         HabitRecordDAO.shared.updateObject(item: record)
         objectWillChange.send()
@@ -208,30 +211,25 @@ extension HabitRecordViewModel {
         return record.habit?.goalUnit ?? .count
     }
     
-    var goalValue: Int {
+    var goalValue: Double {
         let value = record.habit?.goalValue ?? 1
-        
-        switch unit {
-        case .min: return value * 60
-        case .hours: return value * 3600
-        default: return value
-        }
+        return unit.convertToBaseUnit(from: value)
     }
     
-    var currentValue: Int {
-        return record.value ?? 0
+    var currentValue: Double {
+        return max(record.value ?? 0, 0)
     }
     
     var progress: CGFloat {
-        return CGFloat(currentValue) / CGFloat(goalValue)
+        return min(CGFloat(currentValue) / CGFloat(goalValue), 1)
     }
     
-    var leftTimeString: String {
+    var timeString: String {
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.minute, .second]
         formatter.zeroFormattingBehavior = [.pad]
 
-        let formattedTime = formatter.string(from: TimeInterval(goalValue - currentValue)) ?? "00:00"
+        let formattedTime = formatter.string(from: TimeInterval(currentValue)) ?? "00:00"
         return formattedTime
     }
     

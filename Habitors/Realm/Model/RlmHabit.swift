@@ -14,7 +14,7 @@ final class RlmHabit: Object {
     @Persisted var name: String!
     @Persisted var icon: String!
     @Persisted var goalUnit: GoalUnit!
-    @Persisted var goalValue: Int = 0
+    @Persisted var goalValue: Double = 0
     
     @Persisted var frequency: String!
     @Persisted var startDate: Date = Date()

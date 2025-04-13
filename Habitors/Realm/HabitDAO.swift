@@ -26,6 +26,7 @@ final class HabitDAO: RealmDao {
             try self.addObjectAndUpdate(object)
             print("✅ Đã thêm 1 habit: \(item.name)")
             setupStepRecordIfNeed(habit: item)
+            setupExerciseMinRecordIfNeed(habit: item)
             NotificationCenter.default.post(name: .addHabitItem, object: item)
         } catch {
             print("error: \(error)")
@@ -44,7 +45,7 @@ final class HabitDAO: RealmDao {
                 let setDate = startDate.startOfDay
                 
                 if setDate.isDateValid(habit) {
-                    let stepCount = Int(await HealthManager.shared.fetchStepCountDate(endDate: startDate.endOfDay))
+                    let stepCount = await HealthManager.shared.fetchStepCountDate(endDate: startDate.endOfDay)
                     
                     if let record = habit.records.first(where: { $0.date.isSameDay(date: setDate) }) {
                         if record.value != stepCount {
@@ -56,6 +57,31 @@ final class HabitDAO: RealmDao {
                         print("\(setDate.format("dd MMMM yyyy")): \(stepCount)")
                         HabitRecordDAO.shared.addObject(habitID: habit.id, value: stepCount, date: setDate, createdAt: Date())
                     }
+                }
+                
+                startDate = startDate.nextDay
+            }
+        }
+    }
+    
+    func setupExerciseMinRecordIfNeed(habit: Habit) {
+        guard habit.goalUnit == .exerciseTime else {
+            return
+        }
+        
+        Task {
+            var startDate = habit.startedDate
+                        
+            while !startDate.isFutureDay {
+                let setDate = startDate.startOfDay
+                
+                if setDate.isDateValid(habit) {
+                    let excerciseTime = await HealthManager.shared.fetchExerciseTime(endDate: startDate.endOfDay)
+                    
+                    HabitRecordDAO.shared.addObject(habitID: habit.id,
+                                                    value: excerciseTime,
+                                                    date: setDate,
+                                                    createdAt: Date())
                 }
                 
                 startDate = startDate.nextDay

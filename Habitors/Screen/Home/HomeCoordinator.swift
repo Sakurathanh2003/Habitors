@@ -31,10 +31,7 @@ final class HomeCoordinator: WindowBaseCoordinator {
     }
     
     override func handle(event: any CoordinatorEvent) -> Bool {
-        if event is UserDidCreateHabit {
-            self.chooseTemplateCoordinator?.stop()
-            return true
-        }
+        
         
         return false
     }

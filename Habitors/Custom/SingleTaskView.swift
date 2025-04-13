@@ -37,11 +37,11 @@ struct SingleTaskView: View {
                     .foregroundStyle(Color("Black"))
                 
                 if isCompleted {
-                    Text("Completed")
+                    Text("Đã hoàn thành")
                         .gilroyMedium(12)
                         .foregroundStyle(Color("Success"))
                 } else {
-                    Text("\(goalDayValue) \(goalUnit) left to complete!")
+                    Text(description)
                         .gilroyMedium(12)
                         .foregroundStyle(Color("Gray"))
                 }
@@ -60,16 +60,50 @@ struct SingleTaskView: View {
         return habit.frequency.type
     }
     
-    var goalDayValue: Int {
-        let record = habit.records.first(where: { $0.date.isSameDay(date: date )})
-        return habit.goalValue - (record?.value ?? 0)
+    var goalValue: Double {
+        return habit.goalValue
+    }
+    
+    var unit: GoalUnit {
+        return habit.goalUnit
+    }
+    
+    var baseGoalDayValue: Double {
+        unit.convertToBaseUnit(from: goalValue) - (record?.value ?? 0)
+    }
+    
+    var record: HabitRecord? {
+        habit.records.first(where: { $0.date.isSameDay(date: date )})
     }
     
     var isCompleted: Bool {
-        goalDayValue <= 0
+        baseGoalDayValue <= 0
     }
     
-    var goalUnit: String {
-        return habit.goalUnit.rawValue
+    var description: String {
+        switch habit.goalUnit {
+        case .min, .hours, .secs:
+            let hours = Int(baseGoalDayValue) / 3600       // Calculate hours
+            let minutes = (Int(baseGoalDayValue) % 3600) / 60  // Calculate minutes
+            let seconds = Int(baseGoalDayValue) % 60        // Calculate seconds
+            var timeComponents = [String]()
+
+            if hours > 0 {
+                timeComponents.append("\(hours) giờ")
+            }
+
+            if minutes > 0 {
+                timeComponents.append("\(minutes) phút")
+            }
+
+            if seconds > 0 {
+                timeComponents.append("\(seconds) giây")
+            }
+
+            let time = timeComponents.joined(separator: " ")
+            return "Còn \(time) nữa là hoàn thành"
+        default:
+            return "Còn \(unit.convertToUnit(from: baseGoalDayValue).text) \(unit.description) nữa là hoàn thành"
+        }
     }
 }
