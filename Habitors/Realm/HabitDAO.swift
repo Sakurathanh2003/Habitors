@@ -49,12 +49,12 @@ final class HabitDAO: RealmDao {
                     
                     if let record = habit.records.first(where: { $0.date.isSameDay(date: setDate) }) {
                         if record.value != stepCount {
-                            print("\(setDate.format("dd MMMM yyyy")): \(stepCount)")
+                            print("record đã có ngày \(setDate.format("dd MMMM yyyy")): \(stepCount)")
                             record.value = stepCount
                             HabitRecordDAO.shared.updateObject(item: record)
                         }
                     } else {
-                        print("\(setDate.format("dd MMMM yyyy")): \(stepCount)")
+                        print("record mới tạo ngày \(setDate.format("dd MMMM yyyy")): \(stepCount)")
                         HabitRecordDAO.shared.addObject(habitID: habit.id, value: stepCount, date: setDate, createdAt: Date())
                     }
                 }

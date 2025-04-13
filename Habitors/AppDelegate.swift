@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         configRealm()
         configAppCoordinator()
         HabitScheduler.requestNotificationPermission()
-        HealthManager.shared.start()
+        HealthManager.shared.startObserver()
         return true
     }
     
@@ -29,6 +29,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.coodinator = AppCoordinator(window: self.window!)
         self.coodinator.start()
+    }
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        HealthManager.shared.startObserver()
     }
 }
 

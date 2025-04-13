@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SakuraExtension
 
 fileprivate struct Const {
     static let horizontalPadding: CGFloat = 40
@@ -20,11 +21,14 @@ struct CalendarView: View {
         "M", "T", "W", "T", "F", "S", "S"
     ]
     
+    var updateMonth: ((Date) -> Void)?
+    
     var body: some View {
         VStack(spacing: 0) {
             HStack {
                 Button {
                     viewModel.updatePreviousMonth()
+                    updateMonth?(viewModel.currentMonth)
                 } label: {
                     Image("ic_arrow_left")
                         .resizable()
@@ -40,6 +44,7 @@ struct CalendarView: View {
                 
                 Button {
                     viewModel.updateNextMonth()
+                    updateMonth?(viewModel.currentMonth)
                 } label: {
                     Image("ic_arrow_right")
                         .resizable()
@@ -64,22 +69,59 @@ struct CalendarView: View {
             
             LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 7)) {
                 ForEach(viewModel.daysInMonth, id: \.self) { date in
-                    if viewModel.isSameMonth(date) {
-                        Button {
-                            viewModel.chooseDay(date)
-                        } label: {
+                    if viewModel.mode == .analytic {
+                        if viewModel.isSameMonth(date) {
+                            let percent = viewModel.percentInDate(date)
                             Text("\(date.day)")
                                 .gilroyRegular(14)
                                 .frame(width: Const.itemWidth, height: Const.itemWidth)
-                                .background(viewModel.isSelected(date) ? Color("Primary") : Color.clear)
-                                .foregroundColor(viewModel.isSelected(date) ? .white : .black)
+                                .foregroundColor(.black)
+                                .overlay(
+                                    Circle()
+                                        .trim(from: 0, to: percent)
+                                        .stroke(Color(rgb: 0x67D9FB),lineWidth: 2)
+                                        .padding(4)
+                                        .rotationEffect(.degrees(-90))
+                                        .overlay(
+                                            GeometryReader(content: { proxy in
+                                                Image("king")
+                                                    .resizable()
+                                                    .aspectRatio(contentMode: .fit)
+                                                    .frame(width: 10, height: 10)
+                                                    .offset(
+                                                        x: proxy.size.width / 2 ,
+                                                        y: -proxy.size.height / 2
+                                                    )
+                                                    .rotationEffect(.degrees(42))
+                                                    .opacity(percent >= 1 ? 1 : 0)
+                                            })
+                                        )
+                                )
                                 .cornerRadius(8)
+                        } else {
+                            Text("\(date.day)")
+                                .gilroyRegular(14)
+                                .frame(width: Const.itemWidth, height: Const.itemWidth)
+                                .foregroundColor(Color("CBD5E0"))
                         }
                     } else {
-                        Text("\(date.day)")
-                            .gilroyRegular(14)
-                            .frame(width: Const.itemWidth, height: Const.itemWidth)
-                            .foregroundColor(Color("CBD5E0"))
+                        if viewModel.isSameMonth(date) {
+                            Button {
+                                viewModel.chooseDay(date)
+                            } label: {
+                                Text("\(date.day)")
+                                    .gilroyRegular(14)
+                                    .frame(width: Const.itemWidth, height: Const.itemWidth)
+                                    .background(viewModel.isSelected(date) ? Color("Primary") : Color.clear)
+                                    .foregroundColor(viewModel.isSelected(date) ? .white : .black)
+                                    .cornerRadius(8)
+                            }
+                        } else {
+                            Text("\(date.day)")
+                                .gilroyRegular(14)
+                                .frame(width: Const.itemWidth, height: Const.itemWidth)
+                                .foregroundColor(Color("CBD5E0"))
+                        }
                     }
                 }
             }
@@ -87,6 +129,7 @@ struct CalendarView: View {
     }
 }
 
+// MARK: - CalendarDialog
 struct CalendarDialog: View {
     @ObservedObject var viewModel: CalendarViewModel
     
@@ -141,9 +184,10 @@ struct CalendarDialog: View {
 }
 
 #Preview {
-    CalendarDialog(isAllowSelectedMore: false, selectedDate: [], cancelAction: {
-        
-    }, doneAction: { dates in
-        
-    })
+    HomeView(viewModel: .init())
+//    CalendarDialog(isAllowSelectedMore: false, selectedDate: [], cancelAction: {
+//        
+//    }, doneAction: { dates in
+//        
+//    })
 }

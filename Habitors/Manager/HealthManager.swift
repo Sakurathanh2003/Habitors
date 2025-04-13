@@ -20,12 +20,14 @@ class HealthManager: NSObject {
         }
     }
     
+    private var didStartStepObserver: Bool = false
+    
     private override init() {
         super.init()
     }
     
-    func start() {
-        if needToObserverStepCount {
+    func startObserver() {
+        if needToObserverStepCount && !didStartStepObserver {
             startObservingStepCount()
         }
     }
@@ -42,7 +44,6 @@ class HealthManager: NSObject {
                
                 if unit == .steps && !self.needToObserverStepCount {
                     self.needToObserverStepCount = true
-                    self.startObservingStepCount()
                 }
             }
         }
@@ -56,6 +57,7 @@ class HealthManager: NSObject {
     
     // MARK: - Step count
     func startObservingStepCount() {
+        didStartStepObserver = true
         Task {
             guard let stepType = HKObjectType.quantityType(forIdentifier: .stepCount), await canAccess(of: .steps) else {
                 return
@@ -67,7 +69,7 @@ class HealthManager: NSObject {
                     return
                 }
                 
-                for habit in HabitDAO.shared.getAll() {
+                for habit in HabitDAO.shared.getAll().filter({ $0.goalUnit == .steps }) {
                     HabitDAO.shared.setupStepRecordIfNeed(habit: habit)
                 }
                 

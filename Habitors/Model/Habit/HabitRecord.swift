@@ -12,10 +12,10 @@ class HabitRecord: Codable, ObservableObject {
     var habitID: String // Liên kết với Habit
     var date: Date
     var status: String // "completed" hoặc "missed"
-    var value: Double? // Số
+    var value: Double = 0 // Số
     var createdAt: Date = Date()
     
-    init(id: String, habitID: String, date: Date, status: String, value: Double? = nil, createdAt: Date) {
+    init(id: String, habitID: String, date: Date, status: String, value: Double = 0, createdAt: Date) {
         self.id = id
         self.habitID = habitID
         self.date = date
@@ -40,5 +40,37 @@ class HabitRecord: Codable, ObservableObject {
     
     var isExits: Bool {
         (HabitRecordDAO.shared.getHabitRecord(id: self.id) != nil)
+    }
+}
+
+extension HabitRecord {
+    // Mục tiêu hoàn thành
+    var goalValue: Double {
+        return habit?.goalValue ?? 1
+    }
+    
+    // Đơn vị
+    var unit: GoalUnit {
+        return habit?.goalUnit ?? .count
+    }
+    
+    // Cần bao nhiêu nữa để đạt được mục tiêu (base unit)
+    var baseRemainingValue: Double {
+        unit.convertToBaseUnit(from: goalValue) - value
+    }
+    
+    // Cần bao nhiêu nữa để đạt được mục tiêu (unit)
+    var remainingValue: Double {
+        unit.convertToUnit(from: baseRemainingValue)
+    }
+    
+    // Đã hoàn thành hay chưa
+    var isCompleted: Bool {
+        baseRemainingValue <= 0
+    }
+    
+    // Hoàn thành bao nhiêu phần trăm
+    var completedPercent: Double {
+        min(max(value / unit.convertToBaseUnit(from: goalValue), 0), 1)
     }
 }

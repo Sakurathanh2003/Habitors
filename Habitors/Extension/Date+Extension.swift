@@ -64,6 +64,14 @@ extension Date {
         return calendar.date(byAdding: .day, value: 1, to: self) ?? self
     }
     
+    var nextYear: Date {
+        return calendar.date(byAdding: .year, value: 1, to: self) ?? self
+    }
+    
+    var previousYear: Date {
+        return calendar.date(byAdding: .year, value: -1, to: self) ?? self
+    }
+    
     var nextMonth: Date {
         return calendar.date(byAdding: .month, value: 1, to: self) ?? self
     }

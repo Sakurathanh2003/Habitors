@@ -10,7 +10,7 @@ import RxSwift
 
 enum HomeTab: String {
     case home
-    case activity
+    case overall
     case tools
     case discover
 }
@@ -36,8 +36,8 @@ struct HomeView: View {
                 switch viewModel.currentTab {
                 case .home:
                     content
-                case .activity:
-                    HomeActivityView(viewModel: viewModel)
+                case .overall:
+                    HomeActivityView(viewModel: HomeActivityViewModel())
                 case .tools:
                     HomeToolView(viewModel: viewModel, namespace: animation)
                 case .discover:
@@ -124,6 +124,10 @@ struct HomeView: View {
                     proxy.scrollTo(date.format("dd"),
                                    anchor: .center)
                 }
+            }
+            .onAppear {
+                proxy.scrollTo(viewModel.selectedDate.format("dd"),
+                               anchor: .center)
             }
         }
     }
@@ -214,7 +218,7 @@ fileprivate struct HomeTabbarView: View {
     var body: some View {
         HStack {
             tabItemView(.home)
-            tabItemView(.activity)
+            tabItemView(.overall)
             
             Circle()
                 .fill(Color("Black"))
