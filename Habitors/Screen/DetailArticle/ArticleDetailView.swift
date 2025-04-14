@@ -1,0 +1,172 @@
+//
+//  ArticleDetailView.swift
+//  Habitors
+//
+//  Created by Vũ Thị Thanh on 15/4/25.
+//
+import SwiftUI
+import SakuraExtension
+
+struct ArticleDetailView: View {
+    @Environment(\.dismiss) var dismiss
+    var item: Article
+    @State var isAnimating: Bool = false
+    @State var selectedHabit: [Article.Habit] = []
+    
+    @State var isConfirmAddRoutine: Bool = false
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            navigationBar
+            
+            ScrollView(showsIndicators: false) {
+                VStack(alignment: .leading, spacing: 20) {
+                    
+                    if isConfirmAddRoutine {
+                        ForEach(item.habits.indices, id: \.self) { index in
+                            let habit = item.habits[index]
+                            HStack {
+                                Text("\(index + 1).")
+                                    .gilroyBold(16)
+                                    .frame(width: 20)
+                                   
+                                Text(habit.icon + " " + habit.name)
+                                    .gilroyBold(16)
+                                
+                                Spacer(minLength: 10)
+                                
+                                if selectedHabit.contains(where: { $0.icon == habit.icon }) {
+                                    Circle()
+                                        .fill(.black)
+                                        .overlay(
+                                            Image(systemName: "checkmark")
+                                                .renderingMode(.template)
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .padding(1)
+                                                .foregroundStyle(.white)
+                                                .frame(width: 10, height: 10)
+                                        )
+                                        .padding(1)
+                                        .frame(width: 24, height: 24)
+                                } else {
+                                    Circle()
+                                        .stroke(lineWidth: 1)
+                                        .padding(1)
+                                        .frame(width: 24, height: 24)
+                                }
+                                
+                            }
+                            .background(Color.white)
+                            .frame(minHeight: 56)
+                            .padding(10)
+                            .onTapGesture {
+                                if let index = selectedHabit.firstIndex(where: { $0.icon == habit.icon}) {
+                                    selectedHabit.remove(at: index)
+                                } else {
+                                    selectedHabit.append(habit)
+                                }
+                            }
+                            
+                        }
+                    } else {
+                        thumbnailView
+                        
+                        Text(item.title)
+                            .gilroyBold(23)
+                        
+                        Text(item.content)
+                            .gilroyRegular(16)
+                            .lineSpacing(6)
+                    }
+                }
+                .padding(.bottom, 100)
+            }
+        }
+        .padding(.horizontal, 20)
+        .overlay(
+            VStack {
+                Spacer()
+                
+                if !item.habits.isEmpty {
+                    let scale = isAnimating ? 1.1 : 1
+                    Color.black.frame(height: 56)
+                        .overlay(
+                            Text("Add to my routine")
+                                .gilroyBold(16)
+                                .foreColor(.white)
+                        )
+                        .cornerRadius(10)
+                        .padding(.horizontal, 20)
+                        .scaleEffect(x: scale, y: scale)
+                        .animation(.easeInOut.repeatForever(), value: isAnimating)
+                        .padding(.top, 20)
+                        .background(
+                            LinearGradient(colors: [
+                                .clear, .white
+                            ], startPoint: .top, endPoint: .bottom)
+                            .ignoresSafeArea()
+                        )
+                        .onTapGesture {
+                            if isConfirmAddRoutine {
+                                
+                            } else {
+                                isConfirmAddRoutine = true
+                            }
+                        }
+                }
+            }
+        )
+        .background(Color.white.ignoresSafeArea())
+        .onAppear {
+            isAnimating = true
+        }
+    }
+    
+    var thumbnailView: some View {
+        AsyncImage(url: URL(string: item.image)) { phase in
+            switch phase {
+            case .empty:
+                ProgressView().circleprogressColor(Color("Secondary"))
+            case .success(let image):
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .cornerRadius(10)
+            default:
+                ProgressView().circleprogressColor(Color("Secondary"))
+            }
+        }
+    }
+    
+    var navigationBar: some View {
+        HStack {
+            Image("ic_back")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 24, height: 24)
+                .onTapGesture {
+                    dismiss()
+                }
+            
+            Spacer()
+        }
+        .overlay(
+            Text("Article")
+                .gilroyBold(18)
+        )
+        .frame(height: 56)
+    }
+}
+
+#Preview {
+    ArticleDetailView(item: .init(id: "0", image: "https://img.freepik.com/free-vector/world-health-day-background_23-2147783361.jpg?t=st=1744649560~exp=1744653160~hmac=7cd4f4863630d5c118b7d995f548987e1358c0c5311c6a69114c3ccc41f8096e&w=1380", title: "A healthy morning start-pack", content: "A Healthy Morning Start-pack: How to Do it Right!\n\nYour morning routine will determine the tone of your day, so it’s time to start planning accordingly. When you form healthy  behaviours of the morning, you set your day up for success. Here are some healthy ways to start your morning:\n\n🧘🏻‍♂️Meditate\nIncorporating some type of mindfulness practice like meditation into your daily morning routine can help ground you and train your mind and emotions, which then influences how you react to challenges throughout your day.\n\n🛌Make your bed\nIt may seem like a waste of time, or unnecessary but making your bed is a simple action you can take in the morning that makes you start your day feeling accomplished.\n\n🏃🏻‍♀️Move your body\nWhether it’s a brisk walk with your pet, a simple yoga routine, a set of push-ups and sit-ups, or hitting the gym, starting your day with stretching energizes your mind and body for the day ahead.\n\n🍳Eat a nutritious breakfast\nThere’s no one universally good breakfas: It depends on your nutrition goals, preferences, and morning schedule. It also depends on how naturally hungry your are in the morning. If you can’t focus on an empty stomach, a simple breakfast you can prepare ahead of time (like overnight oats or egg white bites) will be key to starting your day.\n\n🌦️Check weather\nBefore starting your day, it’s helpful to know what weather conditions to expect. This can influence your clothing choices and plans for outdoor activities.\n\n📝Review your to-do list\nTake a moment to review your to-do list for the day. This helps you prioritize tasks, allocate time effectively, and mentally prepare for what’s ahead.\n\nTry using the above methods to change your otherwise chaotic morning. A good morning can brighten your day!", habits: [
+        .init(icon: "🧘🏻‍♂️", name: "Meditate"),
+        .init(icon: "🛌", name: "Make your bed"),
+        .init(icon: "🏃🏻‍♀️", name: "Move your body"),
+        .init(icon: "🍳", name: "Eat a nutritious breakfast"),
+        .init(icon: "🌦️", name: "Check weather"),
+        .init(icon: "📝", name: "Review your to-do list")
+    ]))
+  //  HomeView(viewModel: .init())
+}

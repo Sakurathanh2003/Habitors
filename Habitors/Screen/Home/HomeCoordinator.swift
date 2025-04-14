@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 final class HomeCoordinator: WindowBaseCoordinator {
     
@@ -64,5 +65,11 @@ final class HomeCoordinator: WindowBaseCoordinator {
         self.todayOverviewCoordinator = TodayOverviewCoordinator(navigationController: controller.navigationController!)
         self.todayOverviewCoordinator?.start()
         self.addChild(todayOverviewCoordinator)
+    }
+    
+    func routeToArticle(_ item: Article) {
+        let view = ArticleDetailView(item: item)
+        let vc = UIHostingController(rootView: view)
+        controller.navigationController?.pushViewController(vc, animated: true)
     }
 }

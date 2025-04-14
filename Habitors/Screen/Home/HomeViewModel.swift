@@ -15,6 +15,7 @@ struct HomeViewModelInput: InputOutputViewModel {
     var selectHabit = PublishSubject<Habit>()
     
     var selectOverview = PublishSubject<()>()
+    var selectArticle = PublishSubject<Article>()
 }
 
 struct HomeViewModelOutput: InputOutputViewModel {
@@ -27,10 +28,11 @@ struct HomeViewModelRouting: RoutingOutput {
     var routeToOverview = PublishSubject<()>()
     
     var showAlert = PublishSubject<String>()
+    var routeToArticle = PublishSubject<Article>()
 }
 
 final class HomeViewModel: BaseViewModel<HomeViewModelInput, HomeViewModelOutput, HomeViewModelRouting> {
-    @Published var currentTab: HomeTab = .overall
+    @Published var currentTab: HomeTab = .discover
     @Published var dateInMonth = [Date]()
     @Published var selectedDate: Date = Date().nextDay
     
@@ -148,6 +150,10 @@ final class HomeViewModel: BaseViewModel<HomeViewModelInput, HomeViewModelOutput
                     self.routing.routeToHabitRecord.onNext(record)
                 }
             }
+        }).disposed(by: self.disposeBag)
+        
+        input.selectArticle.subscribe(onNext: { [unowned self] item in
+            self.routing.routeToArticle.onNext(item )
         }).disposed(by: self.disposeBag)
     }
     

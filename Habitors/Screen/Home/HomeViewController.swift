@@ -65,5 +65,9 @@ class HomeViewController: BaseViewController {
         viewModel.routing.showAlert.subscribe(onNext: { [weak self] msg in
             self?.presentAlert(title: "Alert", message: msg)
         }).disposed(by: self.disposeBag)
+        
+        viewModel.routing.routeToArticle.subscribe(onNext: { [weak self] item in
+            self?.coordinator?.routeToArticle(item)
+        }).disposed(by: self.disposeBag)
     }
 }

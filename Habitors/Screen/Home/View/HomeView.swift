@@ -241,12 +241,6 @@ fileprivate struct HomeTabbarView: View {
         }
         .frame(height: 60)
         .padding(.top, 10)
-        .background(
-            VStack(spacing: 0) {
-                Color("Secondary").frame(height: 1)
-                Color.white.ignoresSafeArea()
-            }
-        )
     }
     
     @ViewBuilder

@@ -162,6 +162,11 @@ struct SummaryView: View {
 
         case .currentStreak:
             let days = completedDays(records: records, habits: habits).sorted()
+            
+            if days.isEmpty {
+                return 0
+            }
+            
             let calendar = Calendar.current
             let today = calendar.startOfDay(for: Date())
             
@@ -171,6 +176,7 @@ struct SummaryView: View {
             }
             
             var streak = 0
+            
             while days.contains(date) || habitsInDay(date).isEmpty {
                 if !habitsInDay(date).isEmpty {
                     streak += 1
