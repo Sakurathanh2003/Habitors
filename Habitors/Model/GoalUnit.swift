@@ -17,6 +17,7 @@ enum GoalUnit: String, Codable, PersistableEnum, CaseIterable {
     
     case ml
     case usoz = "US oz"
+    case liter
     
     // Đơn vị đo đường
     case mile

@@ -25,6 +25,7 @@ fileprivate struct Const {
 struct HomeDiscoverView: View {
     @ObservedObject var viewModel: HomeViewModel
     @State var categories = [ArticleCategory]()
+    @State var articles = [Article]()
     @State var currentCategoryIndex: Int = 0
     
     var body: some View {
@@ -75,8 +76,8 @@ struct HomeDiscoverView: View {
                         LazyVGrid(columns: [.init(spacing: Const.itemSpacing), .init()],alignment: .center, spacing: Const.itemSpacing, content: {
                             if currentCategoryIndex < categories.count {
                                 let category = categories[currentCategoryIndex]
-                                
-                                ForEach(category.items, id: \.id) { item in
+                                let articles = self.articles.filter({ $0.categoryID == category.id })
+                                ForEach(articles, id: \.id) { item in
                                     discoveryItemView(item)
                                         .onTapGesture {
                                             viewModel.input.selectArticle.onNext(item)
@@ -90,13 +91,16 @@ struct HomeDiscoverView: View {
             }
         }
         .onAppear {
-            let url = Bundle.main.url(forResource: "discoveryData", withExtension: "json")!
+            let categoryURL = Bundle.main.url(forResource: "ArticleCategory", withExtension: "json")!
+            let itemURL = Bundle.main.url(forResource: "ListArticle", withExtension: "json")!
             let decoder = JSONDecoder()
             
             do {
-                let data = try Data(contentsOf: url)
-                let categories = try decoder.decode([ArticleCategory].self, from: data)
-                self.categories = categories
+                let categorydata = try Data(contentsOf: categoryURL)
+                let itemdata = try Data(contentsOf: itemURL)
+
+                self.categories = try decoder.decode([ArticleCategory].self, from: categorydata)
+                self.articles = try decoder.decode([Article].self, from: itemdata)
             } catch {
                 print(error)
             }
@@ -131,13 +135,5 @@ struct HomeDiscoverView: View {
 }
 
 #Preview {
-    ArticleDetailView(item: .init(id: "0", image: "https://img.freepik.com/free-vector/world-health-day-background_23-2147783361.jpg?t=st=1744649560~exp=1744653160~hmac=7cd4f4863630d5c118b7d995f548987e1358c0c5311c6a69114c3ccc41f8096e&w=1380", title: "A healthy morning start-pack", content: "A Healthy Morning Start-pack: How to Do it Right!\n\nYour morning routine will determine the tone of your day, so it’s time to start planning accordingly. When you form healthy  behaviours of the morning, you set your day up for success. Here are some healthy ways to start your morning:\n\n🧘🏻‍♂️Meditate\nIncorporating some type of mindfulness practice like meditation into your daily morning routine can help ground you and train your mind and emotions, which then influences how you react to challenges throughout your day.\n\n🛌Make your bed\nIt may seem like a waste of time, or unnecessary but making your bed is a simple action you can take in the morning that makes you start your day feeling accomplished.\n\n🏃🏻‍♀️Move your body\nWhether it’s a brisk walk with your pet, a simple yoga routine, a set of push-ups and sit-ups, or hitting the gym, starting your day with stretching energizes your mind and body for the day ahead.\n\n🍳Eat a nutritious breakfast\nThere’s no one universally good breakfas: It depends on your nutrition goals, preferences, and morning schedule. It also depends on how naturally hungry your are in the morning. If you can’t focus on an empty stomach, a simple breakfast you can prepare ahead of time (like overnight oats or egg white bites) will be key to starting your day.\n\n🌦️Check weather\nBefore starting your day, it’s helpful to know what weather conditions to expect. This can influence your clothing choices and plans for outdoor activities.\n\n📝Review your to-do list\nTake a moment to review your to-do list for the day. This helps you prioritize tasks, allocate time effectively, and mentally prepare for what’s ahead.\n\nTry using the above methods to change your otherwise chaotic morning. A good morning can brighten your day!", habits: [
-        .init(icon: "🧘🏻‍♂️", name: "Meditate"),
-        .init(icon: "🛌", name: "Make your bed"),
-        .init(icon: "🏃🏻‍♀️", name: "Move your body"),
-        .init(icon: "🍳", name: "Eat a nutritious breakfast"),
-        .init(icon: "🌦️", name: "Check weather"),
-        .init(icon: "📝", name: "Review your to-do list")
-    ]))
-  //  HomeView(viewModel: .init())
+    HomeView(viewModel: .init())
 }

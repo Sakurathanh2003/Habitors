@@ -20,10 +20,7 @@
 		24E9231B2D8A9C0A00E9B96C /* ChooseTemplateHabitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E923172D8A9C0A00E9B96C /* ChooseTemplateHabitViewModel.swift */; };
 		24E9231E2D8A9C2F00E9B96C /* ChooseTemplateHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E9231D2D8A9C2F00E9B96C /* ChooseTemplateHabitView.swift */; };
 		FA03A01F2D81F83F004875F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A01E2D81F83F004875F9 /* AppDelegate.swift */; };
-		FA03A0232D81F83F004875F9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0222D81F83F004875F9 /* ViewController.swift */; };
-		FA03A0262D81F83F004875F9 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = FA03A0252D81F83F004875F9 /* Base */; };
 		FA03A0282D81F844004875F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA03A0272D81F844004875F9 /* Assets.xcassets */; };
-		FA03A02B2D81F844004875F9 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = FA03A02A2D81F844004875F9 /* Base */; };
 		FA03A0392D81F916004875F9 /* SplashCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0342D81F916004875F9 /* SplashCoordinator.swift */; };
 		FA03A03A2D81F916004875F9 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0352D81F916004875F9 /* SplashViewController.swift */; };
 		FA03A03B2D81F916004875F9 /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0362D81F916004875F9 /* SplashViewModel.swift */; };
@@ -45,8 +42,6 @@
 		FA03A0CE2D831C71004875F9 /* DashedLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0CD2D831C71004875F9 /* DashedLineView.swift */; };
 		FA03A0D02D8472EC004875F9 /* HomeDiscoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0CF2D8472EC004875F9 /* HomeDiscoverView.swift */; };
 		FA03A0D22D847566004875F9 /* HomeToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0D12D847566004875F9 /* HomeToolView.swift */; };
-		FA03A0D52D8486FC004875F9 /* Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0D42D8486FB004875F9 /* Tool.swift */; };
-		FA2A0AEB2D84A30400A597DB /* MusicToolDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2A0AEA2D84A30400A597DB /* MusicToolDetailView.swift */; };
 		FA2A0AF12D8516EB00A597DB /* CreateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2A0AED2D8516EB00A597DB /* CreateCoordinator.swift */; };
 		FA2A0AF22D8516EB00A597DB /* CreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2A0AEE2D8516EB00A597DB /* CreateViewController.swift */; };
 		FA2A0AF32D8516EB00A597DB /* CreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2A0AEF2D8516EB00A597DB /* CreateViewModel.swift */; };
@@ -58,16 +53,11 @@
 		FA2A0B012D859CD500A597DB /* SetPeriodDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2A0B002D859CD500A597DB /* SetPeriodDialog.swift */; };
 		FA2A0B042D859E2600A597DB /* TimeDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2A0B032D859E2600A597DB /* TimeDialog.swift */; };
 		FA2A0B062D85A01000A597DB /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2A0B052D85A01000A597DB /* Int+Extension.swift */; };
-		FA343BA82DA383F700E67238 /* TodayOverviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA343BA62DA383F600E67238 /* TodayOverviewViewModel.swift */; };
-		FA343BA92DA383F700E67238 /* TodayOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA343BA42DA383F600E67238 /* TodayOverviewViewController.swift */; };
-		FA343BAA2DA383F700E67238 /* TodayOverviewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA343BA32DA383F600E67238 /* TodayOverviewCoordinator.swift */; };
 		FA6D69602DA10723003A7A84 /* SelectGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6D695F2DA10723003A7A84 /* SelectGoalView.swift */; };
 		FA6D69622DA10F27003A7A84 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6D69612DA10F27003A7A84 /* InputView.swift */; };
-		FA6D69652DA10FBD003A7A84 /* TodayOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6D69642DA10FBD003A7A84 /* TodayOverviewView.swift */; };
 		FA9635DB2DA3BF1E00701FC5 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9635DA2DA3BF1E00701FC5 /* UIViewController+Extension.swift */; };
 		FA9635DE2DA3D99400701FC5 /* HealthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9635DD2DA3D99100701FC5 /* HealthManager.swift */; };
 		FA9635E32DA6B05800701FC5 /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9635E22DA6B05100701FC5 /* UIApplication+Extension.swift */; };
-		FA9635E52DAAA9EA00701FC5 /* Documentation.docc in Sources */ = {isa = PBXBuildFile; fileRef = FA9635E42DAAA9EA00701FC5 /* Documentation.docc */; };
 		FA9635E72DAAB0C100701FC5 /* Num+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9635E62DAAB0BC00701FC5 /* Num+Extension.swift */; };
 		FAABE50E2D8883CE00544254 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAABE50D2D8883CD00544254 /* AppCoordinator.swift */; };
 		FAABE5192D89B0E000544254 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAABE5182D89B0E000544254 /* WidgetKit.framework */; };
@@ -85,7 +75,15 @@
 		FAABE53D2D8C76AF00544254 /* RealmDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAABE53C2D8C76AE00544254 /* RealmDao.swift */; };
 		FAABE5412D8C773400544254 /* HabitDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAABE5402D8C773400544254 /* HabitDAO.swift */; };
 		FAABE5432D8DB2F700544254 /* SelectFrequencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAABE5422D8DB2F700544254 /* SelectFrequencyView.swift */; };
-		FAE4349C2DAD721A008C1DC9 /* discoveryData.json in Resources */ = {isa = PBXBuildFile; fileRef = FAE4349B2DAD721A008C1DC9 /* discoveryData.json */; };
+		FAD110782DAEACFA00F4E629 /* DetailArticleCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD110742DAEACFA00F4E629 /* DetailArticleCoordinator.swift */; };
+		FAD110792DAEACFA00F4E629 /* DetailArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD110752DAEACFA00F4E629 /* DetailArticleViewController.swift */; };
+		FAD1107A2DAEACFA00F4E629 /* DetailArticleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD110772DAEACFA00F4E629 /* DetailArticleViewModel.swift */; };
+		FAD1107E2DAED32400F4E629 /* ArticleCategory.json in Resources */ = {isa = PBXBuildFile; fileRef = FAD1107D2DAED32400F4E629 /* ArticleCategory.json */; };
+		FAD110802DAED96800F4E629 /* ListArticle.json in Resources */ = {isa = PBXBuildFile; fileRef = FAD1107F2DAED96800F4E629 /* ListArticle.json */; };
+		FAD110872DAEE53000F4E629 /* MoodieCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD110832DAEE53000F4E629 /* MoodieCoordinator.swift */; };
+		FAD110882DAEE53000F4E629 /* MoodieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD110842DAEE53000F4E629 /* MoodieViewController.swift */; };
+		FAD110892DAEE53000F4E629 /* MoodieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD110862DAEE53000F4E629 /* MoodieViewModel.swift */; };
+		FAD1108C2DAEE54000F4E629 /* MoodieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD1108B2DAEE54000F4E629 /* MoodieView.swift */; };
 		FAE4349F2DAD7A01008C1DC9 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE4349E2DAD7A01008C1DC9 /* Article.swift */; };
 		FAE434A12DAD7A0A008C1DC9 /* ArticleCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE434A02DAD7A0A008C1DC9 /* ArticleCategory.swift */; };
 		FAE434A32DAD7A21008C1DC9 /* ArticleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE434A22DAD7A21008C1DC9 /* ArticleDetailView.swift */; };
@@ -144,10 +142,7 @@
 		EC7B1BE09FE7CF60A0E460AF /* Pods_Habitors.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Habitors.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA03A01B2D81F83F004875F9 /* Habitors.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Habitors.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA03A01E2D81F83F004875F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FA03A0222D81F83F004875F9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		FA03A0252D81F83F004875F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FA03A0272D81F844004875F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		FA03A02A2D81F844004875F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA03A02C2D81F844004875F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA03A0342D81F916004875F9 /* SplashCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashCoordinator.swift; sourceTree = "<group>"; };
 		FA03A0352D81F916004875F9 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
@@ -170,8 +165,6 @@
 		FA03A0CD2D831C71004875F9 /* DashedLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashedLineView.swift; sourceTree = "<group>"; };
 		FA03A0CF2D8472EC004875F9 /* HomeDiscoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDiscoverView.swift; sourceTree = "<group>"; };
 		FA03A0D12D847566004875F9 /* HomeToolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeToolView.swift; sourceTree = "<group>"; };
-		FA03A0D42D8486FB004875F9 /* Tool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tool.swift; sourceTree = "<group>"; };
-		FA2A0AEA2D84A30400A597DB /* MusicToolDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicToolDetailView.swift; sourceTree = "<group>"; };
 		FA2A0AED2D8516EB00A597DB /* CreateCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCoordinator.swift; sourceTree = "<group>"; };
 		FA2A0AEE2D8516EB00A597DB /* CreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewController.swift; sourceTree = "<group>"; };
 		FA2A0AEF2D8516EB00A597DB /* CreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewModel.swift; sourceTree = "<group>"; };
@@ -183,16 +176,11 @@
 		FA2A0B002D859CD500A597DB /* SetPeriodDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPeriodDialog.swift; sourceTree = "<group>"; };
 		FA2A0B032D859E2600A597DB /* TimeDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeDialog.swift; sourceTree = "<group>"; };
 		FA2A0B052D85A01000A597DB /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
-		FA343BA32DA383F600E67238 /* TodayOverviewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayOverviewCoordinator.swift; sourceTree = "<group>"; };
-		FA343BA42DA383F600E67238 /* TodayOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayOverviewViewController.swift; sourceTree = "<group>"; };
-		FA343BA62DA383F600E67238 /* TodayOverviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayOverviewViewModel.swift; sourceTree = "<group>"; };
 		FA6D695F2DA10723003A7A84 /* SelectGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGoalView.swift; sourceTree = "<group>"; };
 		FA6D69612DA10F27003A7A84 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
-		FA6D69642DA10FBD003A7A84 /* TodayOverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayOverviewView.swift; sourceTree = "<group>"; };
 		FA9635DA2DA3BF1E00701FC5 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		FA9635DD2DA3D99100701FC5 /* HealthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthManager.swift; sourceTree = "<group>"; };
 		FA9635E22DA6B05100701FC5 /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
-		FA9635E42DAAA9EA00701FC5 /* Documentation.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Documentation.docc; sourceTree = "<group>"; };
 		FA9635E62DAAB0BC00701FC5 /* Num+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Num+Extension.swift"; sourceTree = "<group>"; };
 		FAABE50D2D8883CD00544254 /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		FAABE5172D89B0E000544254 /* HabitWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = HabitWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -212,7 +200,15 @@
 		FAABE53F2D8C771B00544254 /* HabitWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HabitWidgetExtension.entitlements; sourceTree = "<group>"; };
 		FAABE5402D8C773400544254 /* HabitDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDAO.swift; sourceTree = "<group>"; };
 		FAABE5422D8DB2F700544254 /* SelectFrequencyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFrequencyView.swift; sourceTree = "<group>"; };
-		FAE4349B2DAD721A008C1DC9 /* discoveryData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = discoveryData.json; sourceTree = "<group>"; };
+		FAD110742DAEACFA00F4E629 /* DetailArticleCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailArticleCoordinator.swift; sourceTree = "<group>"; };
+		FAD110752DAEACFA00F4E629 /* DetailArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailArticleViewController.swift; sourceTree = "<group>"; };
+		FAD110772DAEACFA00F4E629 /* DetailArticleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailArticleViewModel.swift; sourceTree = "<group>"; };
+		FAD1107D2DAED32400F4E629 /* ArticleCategory.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ArticleCategory.json; sourceTree = "<group>"; };
+		FAD1107F2DAED96800F4E629 /* ListArticle.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ListArticle.json; sourceTree = "<group>"; };
+		FAD110832DAEE53000F4E629 /* MoodieCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodieCoordinator.swift; sourceTree = "<group>"; };
+		FAD110842DAEE53000F4E629 /* MoodieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodieViewController.swift; sourceTree = "<group>"; };
+		FAD110862DAEE53000F4E629 /* MoodieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodieViewModel.swift; sourceTree = "<group>"; };
+		FAD1108B2DAEE54000F4E629 /* MoodieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodieView.swift; sourceTree = "<group>"; };
 		FAE4349E2DAD7A01008C1DC9 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		FAE434A02DAD7A0A008C1DC9 /* ArticleCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCategory.swift; sourceTree = "<group>"; };
 		FAE434A22DAD7A21008C1DC9 /* ArticleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailView.swift; sourceTree = "<group>"; };
@@ -315,25 +311,19 @@
 		FA03A01D2D81F83F004875F9 /* Habitors */ = {
 			isa = PBXGroup;
 			children = (
-				FA9635DC2DA3D98B00701FC5 /* Manager */,
-				FAE73E862D9C1C2B00944448 /* ringtone.mp3 */,
-				FAE73E842D9B09AB00944448 /* noisy.mp3 */,
 				FAABE53E2D8C770600544254 /* Habitors.entitlements */,
-				FAABE5392D8C75AE00544254 /* Realm */,
-				FA03A0C82D83066B004875F9 /* Model */,
-				FA03A0BF2D830358004875F9 /* Custom */,
-				FA03A0482D81FBC7004875F9 /* Resources */,
-				FA03A0452D81F99F004875F9 /* Extension */,
-				FA03A03E2D81F965004875F9 /* Core */,
-				FA03A0322D81F905004875F9 /* Screen */,
-				FA03A01E2D81F83F004875F9 /* AppDelegate.swift */,
-				FA03A0222D81F83F004875F9 /* ViewController.swift */,
-				FA03A0242D81F83F004875F9 /* Main.storyboard */,
-				FA03A0272D81F844004875F9 /* Assets.xcassets */,
-				FA03A0292D81F844004875F9 /* LaunchScreen.storyboard */,
 				FA03A02C2D81F844004875F9 /* Info.plist */,
 				24E923102D8A953E00E9B96C /* AppConst.swift */,
-				FA9635E42DAAA9EA00701FC5 /* Documentation.docc */,
+				FA03A01E2D81F83F004875F9 /* AppDelegate.swift */,
+				FA03A0272D81F844004875F9 /* Assets.xcassets */,
+				FA03A03E2D81F965004875F9 /* Core */,
+				FA03A0BF2D830358004875F9 /* Custom */,
+				FA03A0452D81F99F004875F9 /* Extension */,
+				FA9635DC2DA3D98B00701FC5 /* Manager */,
+				FA03A0C82D83066B004875F9 /* Model */,
+				FAABE5392D8C75AE00544254 /* Realm */,
+				FA03A0482D81FBC7004875F9 /* Resources */,
+				FA03A0322D81F905004875F9 /* Screen */,
 			);
 			path = Habitors;
 			sourceTree = "<group>";
@@ -341,15 +331,14 @@
 		FA03A0322D81F905004875F9 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
-				FAE4349D2DAD79DA008C1DC9 /* DetailArticle */,
+				FAD110822DAEE51B00F4E629 /* Moodie */,
 				FAABE50D2D8883CD00544254 /* AppCoordinator.swift */,
 				24E923142D8A9BF800E9B96C /* ChooseHabit */,
 				FA2A0AEC2D8516D400A597DB /* Create */,
+				FAE4349D2DAD79DA008C1DC9 /* DetailArticle */,
 				FAE73E732D944CEE00944448 /* HabitRecord */,
 				FA03A0772D8205DF004875F9 /* Home */,
 				FA03A0332D81F90C004875F9 /* Splash */,
-				FA6D69632DA10F80003A7A84 /* TodayOverview */,
-				FA2A0AE92D84A2F200A597DB /* Tool */,
 			);
 			path = Screen;
 			sourceTree = "<group>";
@@ -393,6 +382,8 @@
 		FA03A0482D81FBC7004875F9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FAD110812DAEE4DC00F4E629 /* Sound */,
+				FAD1107C2DAEBCDE00F4E629 /* Data */,
 				FA03A0492D81FBCC004875F9 /* Font */,
 			);
 			name = Resources;
@@ -452,7 +443,6 @@
 				FAABE5372D8C677300544254 /* Frequency.swift */,
 				24E923122D8A988E00E9B96C /* GoalUnit.swift */,
 				24E923092D8A931400E9B96C /* Habit */,
-				FA03A0D42D8486FB004875F9 /* Tool.swift */,
 				FAABE5322D89D9FB00544254 /* AppTheme.swift */,
 			);
 			path = Model;
@@ -461,21 +451,12 @@
 		FA03A0D32D8475BA004875F9 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				FAE4349B2DAD721A008C1DC9 /* discoveryData.json */,
+				FA03A0D12D847566004875F9 /* HomeToolView.swift */,
 				FA03A0CF2D8472EC004875F9 /* HomeDiscoverView.swift */,
 				FA03A0CB2D831691004875F9 /* HomeActivityView.swift */,
 				FA03A0782D8205EB004875F9 /* HomeView.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		FA2A0AE92D84A2F200A597DB /* Tool */ = {
-			isa = PBXGroup;
-			children = (
-				FA03A0D12D847566004875F9 /* HomeToolView.swift */,
-				FA2A0AEA2D84A30400A597DB /* MusicToolDetailView.swift */,
-			);
-			path = Tool;
 			sourceTree = "<group>";
 		};
 		FA2A0AEC2D8516D400A597DB /* Create */ = {
@@ -516,17 +497,6 @@
 				FA6D695F2DA10723003A7A84 /* SelectGoalView.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		FA6D69632DA10F80003A7A84 /* TodayOverview */ = {
-			isa = PBXGroup;
-			children = (
-				FA6D69642DA10FBD003A7A84 /* TodayOverviewView.swift */,
-				FA343BA32DA383F600E67238 /* TodayOverviewCoordinator.swift */,
-				FA343BA42DA383F600E67238 /* TodayOverviewViewController.swift */,
-				FA343BA62DA383F600E67238 /* TodayOverviewViewModel.swift */,
-			);
-			path = TodayOverview;
 			sourceTree = "<group>";
 		};
 		FA9635DC2DA3D98B00701FC5 /* Manager */ = {
@@ -571,10 +541,42 @@
 			path = Realm;
 			sourceTree = "<group>";
 		};
+		FAD1107C2DAEBCDE00F4E629 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				FAD1107F2DAED96800F4E629 /* ListArticle.json */,
+				FAD1107D2DAED32400F4E629 /* ArticleCategory.json */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		FAD110812DAEE4DC00F4E629 /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				FAE73E862D9C1C2B00944448 /* ringtone.mp3 */,
+				FAE73E842D9B09AB00944448 /* noisy.mp3 */,
+			);
+			path = Sound;
+			sourceTree = "<group>";
+		};
+		FAD110822DAEE51B00F4E629 /* Moodie */ = {
+			isa = PBXGroup;
+			children = (
+				FAD110832DAEE53000F4E629 /* MoodieCoordinator.swift */,
+				FAD110842DAEE53000F4E629 /* MoodieViewController.swift */,
+				FAD110862DAEE53000F4E629 /* MoodieViewModel.swift */,
+				FAD1108B2DAEE54000F4E629 /* MoodieView.swift */,
+			);
+			path = Moodie;
+			sourceTree = "<group>";
+		};
 		FAE4349D2DAD79DA008C1DC9 /* DetailArticle */ = {
 			isa = PBXGroup;
 			children = (
 				FAE434A22DAD7A21008C1DC9 /* ArticleDetailView.swift */,
+				FAD110742DAEACFA00F4E629 /* DetailArticleCoordinator.swift */,
+				FAD110752DAEACFA00F4E629 /* DetailArticleViewController.swift */,
+				FAD110772DAEACFA00F4E629 /* DetailArticleViewModel.swift */,
 			);
 			path = DetailArticle;
 			sourceTree = "<group>";
@@ -688,16 +690,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAD110802DAED96800F4E629 /* ListArticle.json in Resources */,
 				FA03A0282D81F844004875F9 /* Assets.xcassets in Resources */,
 				FAE73E852D9B09AB00944448 /* noisy.mp3 in Resources */,
+				FAD1107E2DAED32400F4E629 /* ArticleCategory.json in Resources */,
 				FA03A0AA2D82073D004875F9 /* Gilroy-Bold.ttf in Resources */,
-				FAE4349C2DAD721A008C1DC9 /* discoveryData.json in Resources */,
-				FA03A02B2D81F844004875F9 /* Base in Resources */,
 				FA03A0B62D82073D004875F9 /* Gilroy-SemiBold.ttf in Resources */,
 				FAE73E872D9C1C2B00944448 /* ringtone.mp3 in Resources */,
 				FA03A0B42D82073D004875F9 /* Gilroy-Regular.ttf in Resources */,
 				FA03A0B22D82073D004875F9 /* Gilroy-Medium.ttf in Resources */,
-				FA03A0262D81F83F004875F9 /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -765,13 +766,14 @@
 				FA2A0B042D859E2600A597DB /* TimeDialog.swift in Sources */,
 				FAABE50E2D8883CE00544254 /* AppCoordinator.swift in Sources */,
 				FAE73E7D2D944D0F00944448 /* HabitRecordView.swift in Sources */,
+				FAD110872DAEE53000F4E629 /* MoodieCoordinator.swift in Sources */,
+				FAD110882DAEE53000F4E629 /* MoodieViewController.swift in Sources */,
+				FAD110892DAEE53000F4E629 /* MoodieViewModel.swift in Sources */,
 				24E923132D8A988E00E9B96C /* GoalUnit.swift in Sources */,
 				FA2A0AF82D85254200A597DB /* HabitToggle.swift in Sources */,
 				24E923112D8A953E00E9B96C /* AppConst.swift in Sources */,
 				FAABE5332D89D9FB00544254 /* AppTheme.swift in Sources */,
 				FA6D69602DA10723003A7A84 /* SelectGoalView.swift in Sources */,
-				FA03A0232D81F83F004875F9 /* ViewController.swift in Sources */,
-				FA2A0AEB2D84A30400A597DB /* MusicToolDetailView.swift in Sources */,
 				24E9230B2D8A931B00E9B96C /* Habit.swift in Sources */,
 				FA03A0392D81F916004875F9 /* SplashCoordinator.swift in Sources */,
 				FA2A0AFA2D85256E00A597DB /* CalendarDialog.swift in Sources */,
@@ -787,12 +789,14 @@
 				FA2A0AF22D8516EB00A597DB /* CreateViewController.swift in Sources */,
 				FA2A0AF32D8516EB00A597DB /* CreateViewModel.swift in Sources */,
 				FAE73E812D9AFBD800944448 /* ChooseIconView.swift in Sources */,
-				FA9635E52DAAA9EA00701FC5 /* Documentation.docc in Sources */,
+				FAD1108C2DAEE54000F4E629 /* MoodieView.swift in Sources */,
 				FAE73E7F2D9454B700944448 /* HabitRecordDAO.swift in Sources */,
 				FA2A0AFF2D85740C00A597DB /* CalendarViewModel.swift in Sources */,
 				FA9635DE2DA3D99400701FC5 /* HealthManager.swift in Sources */,
-				FA03A0D52D8486FC004875F9 /* Tool.swift in Sources */,
 				FA03A03A2D81F916004875F9 /* SplashViewController.swift in Sources */,
+				FAD110782DAEACFA00F4E629 /* DetailArticleCoordinator.swift in Sources */,
+				FAD110792DAEACFA00F4E629 /* DetailArticleViewController.swift in Sources */,
+				FAD1107A2DAEACFA00F4E629 /* DetailArticleViewModel.swift in Sources */,
 				FA9635E32DA6B05800701FC5 /* UIApplication+Extension.swift in Sources */,
 				FA03A03B2D81F916004875F9 /* SplashViewModel.swift in Sources */,
 				FA03A01F2D81F83F004875F9 /* AppDelegate.swift in Sources */,
@@ -805,12 +809,8 @@
 				FA03A0402D81F970004875F9 /* BaseViewController.swift in Sources */,
 				FA2A0AF62D85170500A597DB /* CreateView.swift in Sources */,
 				FA03A0762D81FCA9004875F9 /* Text+Extension.swift in Sources */,
-				FA6D69652DA10FBD003A7A84 /* TodayOverviewView.swift in Sources */,
 				FAABE53D2D8C76AF00544254 /* RealmDao.swift in Sources */,
 				FA2A0B062D85A01000A597DB /* Int+Extension.swift in Sources */,
-				FA343BA82DA383F700E67238 /* TodayOverviewViewModel.swift in Sources */,
-				FA343BA92DA383F700E67238 /* TodayOverviewViewController.swift in Sources */,
-				FA343BAA2DA383F700E67238 /* TodayOverviewCoordinator.swift in Sources */,
 				FA03A0C32D830435004875F9 /* Date+Extension.swift in Sources */,
 				241806742D82B19900E54E41 /* HomeCoordinator.swift in Sources */,
 				FA9635DB2DA3BF1E00701FC5 /* UIViewController+Extension.swift in Sources */,
@@ -859,25 +859,6 @@
 			targetProxy = FAABE5282D89B0E300544254 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		FA03A0242D81F83F004875F9 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FA03A0252D81F83F004875F9 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		FA03A0292D81F844004875F9 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FA03A02A2D81F844004875F9 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		FA03A02D2D81F844004875F9 /* Debug */ = {

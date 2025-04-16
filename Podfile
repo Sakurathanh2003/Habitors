@@ -11,6 +11,7 @@ target 'Habitors' do
 
   pod 'RealmSwift'
   pod 'Swifter'
+  pod 'SVProgressHUD'
 end
 
 post_install do |installer|
@@ -20,3 +21,4 @@ post_install do |installer|
   		end
  	end
 end
+

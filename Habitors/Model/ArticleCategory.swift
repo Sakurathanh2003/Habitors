@@ -9,5 +9,4 @@ import Foundation
 struct ArticleCategory: Codable {
     var id: String
     var title: String
-    var items: [Article]
 }

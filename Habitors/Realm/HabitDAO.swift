@@ -168,6 +168,11 @@ extension HabitDAO {
             day.isDateValid(habit)
         }
     }
+    
+    func isCreated(_ habit: Habit) -> Bool {
+        let object = try? self.objectWithPrimaryKey(type: RlmHabit.self, key: habit.id)
+        return object != nil
+    }
 }
 
 extension Date {

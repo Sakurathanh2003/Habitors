@@ -8,6 +8,7 @@ import Foundation
 
 struct Article: Codable {
     var id: String
+    var categoryID: String
     var image: String
     var title: String
     var content: String
@@ -17,6 +18,8 @@ struct Article: Codable {
     struct Habit: Codable {
         var icon: String
         var name: String
+        var unit: GoalUnit
+        var goalValue: Double
     }
 }
 

@@ -13,7 +13,8 @@ final class HomeCoordinator: WindowBaseCoordinator {
     private var chooseTemplateCoordinator: ChooseTemplateHabitCoordinator?
     private var habitRecordCoordinator: HabitRecordCoordinator?
     
-    private var todayOverviewCoordinator: TodayOverviewCoordinator?
+    private var detailArticleCoordinator: DetailArticleCoordinator?
+    private var moodieCoordinator: MoodieCoordinator?
     
     lazy var controller: HomeViewController = {
         let viewModel = HomeViewModel()
@@ -32,7 +33,11 @@ final class HomeCoordinator: WindowBaseCoordinator {
     }
     
     override func handle(event: any CoordinatorEvent) -> Bool {
-        
+        if event is DetailArticleWantToBackHabitTabEvent {
+            controller.viewModel.currentTab = .home
+            detailArticleCoordinator?.stop()
+            return true
+        }
         
         return false
     }
@@ -46,6 +51,10 @@ final class HomeCoordinator: WindowBaseCoordinator {
         
         if child is HabitRecordCoordinator {
             self.habitRecordCoordinator = nil
+        }
+        
+        if child is DetailArticleCoordinator {
+            self.detailArticleCoordinator = nil
         }
     }
     
@@ -61,15 +70,15 @@ final class HomeCoordinator: WindowBaseCoordinator {
         self.addChild(habitRecordCoordinator)
     }
     
-    func routeToOverview() {
-        self.todayOverviewCoordinator = TodayOverviewCoordinator(navigationController: controller.navigationController!)
-        self.todayOverviewCoordinator?.start()
-        self.addChild(todayOverviewCoordinator)
+    func routeToArticle(_ item: Article) {
+        self.detailArticleCoordinator = DetailArticleCoordinator(article: item, navigationController: controller.navigationController!)
+        self.detailArticleCoordinator?.start()
+        self.addChild(detailArticleCoordinator)
     }
     
-    func routeToArticle(_ item: Article) {
-        let view = ArticleDetailView(item: item)
-        let vc = UIHostingController(rootView: view)
-        controller.navigationController?.pushViewController(vc, animated: true)
+    func routeToMoodie() {
+        self.moodieCoordinator = MoodieCoordinator(navigationController: controller.navigationController!)
+        self.moodieCoordinator?.start()
+        self.addChild(moodieCoordinator)
     }
 }

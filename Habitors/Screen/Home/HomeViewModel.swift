@@ -14,7 +14,6 @@ struct HomeViewModelInput: InputOutputViewModel {
     var selectDate = PublishSubject<Date>()
     var selectHabit = PublishSubject<Habit>()
     
-    var selectOverview = PublishSubject<()>()
     var selectArticle = PublishSubject<Article>()
 }
 
@@ -25,36 +24,20 @@ struct HomeViewModelOutput: InputOutputViewModel {
 struct HomeViewModelRouting: RoutingOutput {
     var routeToCreate = PublishSubject<()>()
     var routeToHabitRecord = PublishSubject<HabitRecord>()
-    var routeToOverview = PublishSubject<()>()
     
     var showAlert = PublishSubject<String>()
     var routeToArticle = PublishSubject<Article>()
+    
+    var routeToMoodie = PublishSubject<()>()
 }
 
 final class HomeViewModel: BaseViewModel<HomeViewModelInput, HomeViewModelOutput, HomeViewModelRouting> {
-    @Published var currentTab: HomeTab = .discover
+    @Published var currentTab: HomeTab = .tools
     @Published var dateInMonth = [Date]()
     @Published var selectedDate: Date = Date().nextDay
     
     @Published var tasks = [Habit]()
     @Published var todayTasks = [Habit]()
-    
-    @Published var showingToolItem: Tool.Item?
-    
-    @Published var tools: [Tool] = [
-        .init(id: UUID().uuidString, name: "Meditations", type: .music, items: [
-            .init(name: "Energy Ball", description: "7 min"),
-            .init(name: "Breath Cycle", description: "5 min"),
-            .init(name: "Mindfulness", description: "5 min"),
-            .init(name: "IDK", description: "5 min")
-        ]),
-        .init(id: UUID().uuidString, name: "Soundscapes", type: .music, items: [
-            .init(name: "Energy Ball", description: "7 min"),
-            .init(name: "Breath Cycle", description: "5 min"),
-            .init(name: "Mindfulness", description: "5 min"),
-            .init(name: "IDK", description: "5 min")
-        ])
-    ]
     
     override init() {
         super.init()
@@ -136,10 +119,6 @@ final class HomeViewModel: BaseViewModel<HomeViewModelInput, HomeViewModelOutput
         input.selectDate.subscribe(onNext: { [unowned self] date in
             self.selectedDate = date
             self.getTasks()
-        }).disposed(by: self.disposeBag)
-        
-        input.selectOverview.subscribe(onNext: { [unowned self] in
-            self.routing.routeToOverview.onNext(())
         }).disposed(by: self.disposeBag)
         
         input.selectHabit.subscribe(onNext: { [unowned self] selectedHabit in

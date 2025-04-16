@@ -58,16 +58,16 @@ class HomeViewController: BaseViewController {
             self?.coordinator?.routeToHabitRecord(record: record)
         }).disposed(by: self.disposeBag)
         
-        viewModel.routing.routeToOverview.subscribe(onNext: { [weak self] in
-            self?.coordinator?.routeToOverview()
-        }).disposed(by: self.disposeBag)
-        
         viewModel.routing.showAlert.subscribe(onNext: { [weak self] msg in
             self?.presentAlert(title: "Alert", message: msg)
         }).disposed(by: self.disposeBag)
         
         viewModel.routing.routeToArticle.subscribe(onNext: { [weak self] item in
             self?.coordinator?.routeToArticle(item)
+        }).disposed(by: self.disposeBag)
+        
+        viewModel.routing.routeToMoodie.subscribe(onNext: { [weak self] in
+            self?.coordinator?.routeToMoodie()
         }).disposed(by: self.disposeBag)
     }
 }
