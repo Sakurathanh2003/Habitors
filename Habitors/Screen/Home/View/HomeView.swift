@@ -7,6 +7,7 @@
 
 import SwiftUI
 import RxSwift
+import SakuraExtension
 
 enum HomeTab: String {
     case home
@@ -53,6 +54,29 @@ struct HomeView: View {
     // MARK: - Home Content
     var content: some View {
         VStack(spacing: 0) {
+            Image("tool_mood")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .overlay(
+                    HStack(spacing: 0) {
+//                        VStack(alignment: .leading) {
+//                            Text("Moodie")
+//                                .gilroyBold(16)
+//                            
+//                            Text("Tap to record")
+//                                .gilroyRegular(12)
+//                        }
+                        
+                        Spacer()
+                    }.padding(20)
+                )
+                .cornerRadius(10, corners: .allCorners)
+                .onTapGesture {
+                    viewModel.routing.routeToMoodie.onNext(())
+                }
+                .padding(.horizontal, 20)
+                .padding(.bottom, 20)
+            
             calendarView
             
             if viewModel.tasks.isEmpty {

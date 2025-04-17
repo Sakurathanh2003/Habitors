@@ -53,26 +53,7 @@ struct HomeToolView: View {
         ScrollView {
             LazyVGrid(columns: [.init(spacing: Const.itemSpacing)], spacing: Const.itemSpacing) {
                 HStack(spacing: Const.itemSpacing) {
-                    HStack(spacing: 0) {
-                        VStack(alignment: .leading) {
-                            Text("Moodie")
-                                .gilroyBold(16)
-                            
-                            Text("Tap to record")
-                                .gilroyRegular(12)
-                        }
-                        
-                        Spacer(minLength: 0)
-                        
-                        Text("🤔")
-                            .font(.system(size: 30))
-                    }
-                    .padding(20)
-                    .background(Color("Secondary").opacity(0.2))
-                    .cornerRadius(10, corners: .allCorners)
-                    .onTapGesture {
-                        viewModel.routing.routeToMoodie.onNext(())
-                    }
+                    
                     
                     HStack(spacing: 0) {
                         VStack(alignment: .leading) {

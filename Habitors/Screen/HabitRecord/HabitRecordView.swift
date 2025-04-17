@@ -250,8 +250,15 @@ struct HabitRecordView: View {
                     .frame(width: 24, height: 24)
                     .frame(width: 30, height: 30)
             })
+            
+            Spacer(minLength: 10)
         
-            Spacer(minLength: 0)
+            Text(viewModel.title)
+                .gilroyBold(30)
+                .autoresize(1)
+                .foregroundStyle(Color("Black"))
+            
+            Spacer(minLength: 10)
             
             Button(action: {
                 viewModel.routing.presentOption.onNext(())
@@ -265,11 +272,6 @@ struct HabitRecordView: View {
             })
         }
         .frame(height: 56)
-        .overlay(
-            Text(viewModel.title)
-                .gilroyBold(30)
-                .foregroundStyle(Color("Black"))
-        )
     }
 }
 

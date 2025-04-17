@@ -5,6 +5,7 @@
 //  Created by Vũ Thị Thanh on 16/4/25.
 //
 
+import RxSwift
 import UIKit
 
 class MoodieViewController: BaseViewController {
@@ -34,6 +35,8 @@ class MoodieViewController: BaseViewController {
     }
 
     func configRoutingOutput() {
-
+        viewModel.routing.stop.subscribe(onNext: { [weak self] in
+            self?.coordinator?.stop()
+        }).disposed(by: self.disposeBag)
     }
 }
