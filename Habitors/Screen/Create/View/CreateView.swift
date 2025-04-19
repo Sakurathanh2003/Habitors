@@ -82,10 +82,14 @@ struct CreateView: View {
                     })
                 }
                 
-               
-                
                 if viewModel.isShowingDeleteDialog {
-                    deleteDialog()
+                    DeleteDialog(objectName: "habit") {
+                        viewModel.input.delete.onNext(())
+                    } cancelAction: {
+                        withAnimation {
+                            viewModel.isShowingDeleteDialog = false
+                        }
+                    }
                 }
             }
         )
@@ -93,61 +97,6 @@ struct CreateView: View {
     }
     
     // MARK: - Delete
-    private func deleteDialog() -> some View {
-        ZStack {
-            Color.black.opacity(0.5).ignoresSafeArea()
-            VStack(spacing: 0) {
-                RoundedRectangle(cornerRadius: 5)
-                    .frame(width: 56, height: 56)
-                    .padding(.top, 20)
-                
-                Text("Would you like to delete this habit?")
-                    .gilroyBold(16)
-                    .multilineTextAlignment(.center)
-                    .padding(.top, 20)
-                
-                Text("You cannot undo this action")
-                    .gilroyRegular(12)
-                    .multilineTextAlignment(.center)
-                    .padding(.top, 5)
-                
-                HStack {
-                    Button {
-                        viewModel.input.delete.onNext(())
-                    } label: {
-                        RoundedRectangle(cornerRadius: 5)
-                            .stroke(.black, lineWidth: 1)
-                            .overlay(
-                                Text("Delete")
-                                    .gilroyBold(16)
-                                    .foregroundStyle(Color("Error"))
-                            )
-                    }
-
-                    Button {
-                        withAnimation {
-                            viewModel.isShowingDeleteDialog = false
-                        }
-                    } label: {
-                        RoundedRectangle(cornerRadius: 5)
-                            .stroke(.black, lineWidth: 1)
-                            .overlay(
-                                Text("Cancel")
-                                    .gilroyBold(16)
-                                    .foregroundStyle(.black)
-                            )
-                    }
-                }
-                .frame(height: 40)
-                .padding(.top, 20)
-            }
-            .padding(20)
-            .background(Color.white)
-            .cornerRadius(5)
-            .padding(.horizontal, 56)
-        }
-    }
-    
     private func deleteButton() -> some View {
         VStack {
             Spacer(minLength: 0)

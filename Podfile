@@ -12,6 +12,7 @@ target 'Habitors' do
   pod 'RealmSwift'
   pod 'Swifter'
   pod 'SVProgressHUD'
+  pod 'WaterfallGrid'
 end
 
 post_install do |installer|

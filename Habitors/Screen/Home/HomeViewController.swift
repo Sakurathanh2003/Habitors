@@ -69,5 +69,9 @@ class HomeViewController: BaseViewController {
         viewModel.routing.routeToMoodie.subscribe(onNext: { [weak self] in
             self?.coordinator?.routeToMoodie()
         }).disposed(by: self.disposeBag)
+        
+        viewModel.routing.routeToQuickNote.subscribe(onNext: { [weak self] in
+            self?.coordinator?.routeToQuickNote()
+        }).disposed(by: self.disposeBag)
     }
 }

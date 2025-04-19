@@ -59,6 +59,15 @@
 		FA9635DE2DA3D99400701FC5 /* HealthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9635DD2DA3D99100701FC5 /* HealthManager.swift */; };
 		FA9635E32DA6B05800701FC5 /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9635E22DA6B05100701FC5 /* UIApplication+Extension.swift */; };
 		FA9635E72DAAB0C100701FC5 /* Num+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9635E62DAAB0BC00701FC5 /* Num+Extension.swift */; };
+		FAA1E8802DB29F2600604ABC /* RlmMoodRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA1E87F2DB29F2600604ABC /* RlmMoodRecord.swift */; };
+		FAA1E8822DB29FED00604ABC /* MoodRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA1E8812DB29FED00604ABC /* MoodRecord.swift */; };
+		FAA1E8842DB2A08600604ABC /* MoodRecordDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA1E8832DB2A08600604ABC /* MoodRecordDAO.swift */; };
+		FAA1E8872DB33F0800604ABC /* MoodHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA1E8862DB33F0800604ABC /* MoodHistory.swift */; };
+		FAA1E8892DB3447400604ABC /* DeleteDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA1E8882DB3447400604ABC /* DeleteDialog.swift */; };
+		FAA1E88E2DB3497200604ABC /* MoodHistoryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA1E88A2DB3497200604ABC /* MoodHistoryCoordinator.swift */; };
+		FAA1E88F2DB3497200604ABC /* MoodHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA1E88B2DB3497200604ABC /* MoodHistoryViewController.swift */; };
+		FAA1E8902DB3497200604ABC /* MoodHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA1E88D2DB3497200604ABC /* MoodHistoryViewModel.swift */; };
+		FAA1E8942DB37BE300604ABC /* QuickNoteHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA1E8932DB37BE300604ABC /* QuickNoteHistory.swift */; };
 		FAABE50E2D8883CE00544254 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAABE50D2D8883CD00544254 /* AppCoordinator.swift */; };
 		FAABE5192D89B0E000544254 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAABE5182D89B0E000544254 /* WidgetKit.framework */; };
 		FAABE51B2D89B0E000544254 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAABE51A2D89B0E000544254 /* SwiftUI.framework */; };
@@ -182,6 +191,15 @@
 		FA9635DD2DA3D99100701FC5 /* HealthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthManager.swift; sourceTree = "<group>"; };
 		FA9635E22DA6B05100701FC5 /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		FA9635E62DAAB0BC00701FC5 /* Num+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Num+Extension.swift"; sourceTree = "<group>"; };
+		FAA1E87F2DB29F2600604ABC /* RlmMoodRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RlmMoodRecord.swift; sourceTree = "<group>"; };
+		FAA1E8812DB29FED00604ABC /* MoodRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodRecord.swift; sourceTree = "<group>"; };
+		FAA1E8832DB2A08600604ABC /* MoodRecordDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodRecordDAO.swift; sourceTree = "<group>"; };
+		FAA1E8862DB33F0800604ABC /* MoodHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodHistory.swift; sourceTree = "<group>"; };
+		FAA1E8882DB3447400604ABC /* DeleteDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteDialog.swift; sourceTree = "<group>"; };
+		FAA1E88A2DB3497200604ABC /* MoodHistoryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodHistoryCoordinator.swift; sourceTree = "<group>"; };
+		FAA1E88B2DB3497200604ABC /* MoodHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodHistoryViewController.swift; sourceTree = "<group>"; };
+		FAA1E88D2DB3497200604ABC /* MoodHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodHistoryViewModel.swift; sourceTree = "<group>"; };
+		FAA1E8932DB37BE300604ABC /* QuickNoteHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickNoteHistory.swift; sourceTree = "<group>"; };
 		FAABE50D2D8883CD00544254 /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		FAABE5172D89B0E000544254 /* HabitWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = HabitWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAABE5182D89B0E000544254 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -331,6 +349,8 @@
 		FA03A0322D81F905004875F9 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				FAA1E8922DB37BC500604ABC /* NoteHistory */,
+				FAA1E8852DB33EEB00604ABC /* MoodHistory */,
 				FAD110822DAEE51B00F4E629 /* Moodie */,
 				FAABE50D2D8883CD00544254 /* AppCoordinator.swift */,
 				24E923142D8A9BF800E9B96C /* ChooseHabit */,
@@ -430,6 +450,7 @@
 				FA03A0CD2D831C71004875F9 /* DashedLineView.swift */,
 				FA2A0AF72D85254200A597DB /* HabitToggle.swift */,
 				FA2A0B002D859CD500A597DB /* SetPeriodDialog.swift */,
+				FAA1E8882DB3447400604ABC /* DeleteDialog.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -438,6 +459,7 @@
 			isa = PBXGroup;
 			children = (
 				FAE4349E2DAD7A01008C1DC9 /* Article.swift */,
+				FAA1E8812DB29FED00604ABC /* MoodRecord.swift */,
 				FAE434A02DAD7A0A008C1DC9 /* ArticleCategory.swift */,
 				24E9230E2D8A94F200E9B96C /* HabitCategory.swift */,
 				FAABE5372D8C677300544254 /* Frequency.swift */,
@@ -516,6 +538,25 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
+		FAA1E8852DB33EEB00604ABC /* MoodHistory */ = {
+			isa = PBXGroup;
+			children = (
+				FAA1E8862DB33F0800604ABC /* MoodHistory.swift */,
+				FAA1E88A2DB3497200604ABC /* MoodHistoryCoordinator.swift */,
+				FAA1E88B2DB3497200604ABC /* MoodHistoryViewController.swift */,
+				FAA1E88D2DB3497200604ABC /* MoodHistoryViewModel.swift */,
+			);
+			path = MoodHistory;
+			sourceTree = "<group>";
+		};
+		FAA1E8922DB37BC500604ABC /* NoteHistory */ = {
+			isa = PBXGroup;
+			children = (
+				FAA1E8932DB37BE300604ABC /* QuickNoteHistory.swift */,
+			);
+			path = NoteHistory;
+			sourceTree = "<group>";
+		};
 		FAABE51C2D89B0E000544254 /* HabitWidget */ = {
 			isa = PBXGroup;
 			children = (
@@ -537,6 +578,7 @@
 				FAABE5402D8C773400544254 /* HabitDAO.swift */,
 				FAE73E7E2D9454B700944448 /* HabitRecordDAO.swift */,
 				FAE73E822D9B071C00944448 /* HabitScheduler.swift */,
+				FAA1E8832DB2A08600604ABC /* MoodRecordDAO.swift */,
 			);
 			path = Realm;
 			sourceTree = "<group>";
@@ -585,6 +627,7 @@
 			isa = PBXGroup;
 			children = (
 				FAE73E6D2D943EDF00944448 /* RlmHabit.swift */,
+				FAA1E87F2DB29F2600604ABC /* RlmMoodRecord.swift */,
 				FAE73E6F2D94430F00944448 /* RlmHabitRecord.swift */,
 			);
 			path = Model;
@@ -743,13 +786,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Habitors/Pods-Habitors-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Habitors/Pods-Habitors-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -782,10 +821,14 @@
 				FAE73E702D94430F00944448 /* RlmHabitRecord.swift in Sources */,
 				FA6D69622DA10F27003A7A84 /* InputView.swift in Sources */,
 				FA03A0C12D830362004875F9 /* DateView.swift in Sources */,
+				FAA1E8872DB33F0800604ABC /* MoodHistory.swift in Sources */,
 				FAABE5382D8C677300544254 /* Frequency.swift in Sources */,
+				FAA1E8802DB29F2600604ABC /* RlmMoodRecord.swift in Sources */,
+				FAA1E8892DB3447400604ABC /* DeleteDialog.swift in Sources */,
 				24E9231E2D8A9C2F00E9B96C /* ChooseTemplateHabitView.swift in Sources */,
 				FA2A0AF12D8516EB00A597DB /* CreateCoordinator.swift in Sources */,
 				FAE4349F2DAD7A01008C1DC9 /* Article.swift in Sources */,
+				FAA1E8842DB2A08600604ABC /* MoodRecordDAO.swift in Sources */,
 				FA2A0AF22D8516EB00A597DB /* CreateViewController.swift in Sources */,
 				FA2A0AF32D8516EB00A597DB /* CreateViewModel.swift in Sources */,
 				FAE73E812D9AFBD800944448 /* ChooseIconView.swift in Sources */,
@@ -818,6 +861,7 @@
 				FA2A0AFC2D85284100A597DB /* Calendar+Extension.swift in Sources */,
 				241806752D82B19900E54E41 /* HomeViewController.swift in Sources */,
 				241806762D82B19900E54E41 /* HomeViewModel.swift in Sources */,
+				FAA1E8822DB29FED00604ABC /* MoodRecord.swift in Sources */,
 				FAE73E722D9444A300944448 /* HabitRecord.swift in Sources */,
 				24E923192D8A9C0A00E9B96C /* ChooseTemplateHabitCoordinator.swift in Sources */,
 				24E9231A2D8A9C0A00E9B96C /* ChooseTemplateHabitViewController.swift in Sources */,
@@ -827,10 +871,14 @@
 				FA2A0B012D859CD500A597DB /* SetPeriodDialog.swift in Sources */,
 				FAE73E6E2D943EDF00944448 /* RlmHabit.swift in Sources */,
 				FAABE53B2D8C76AB00544254 /* RealmManager.swift in Sources */,
+				FAA1E88E2DB3497200604ABC /* MoodHistoryCoordinator.swift in Sources */,
+				FAA1E88F2DB3497200604ABC /* MoodHistoryViewController.swift in Sources */,
+				FAA1E8902DB3497200604ABC /* MoodHistoryViewModel.swift in Sources */,
 				FA03A0792D8205EB004875F9 /* HomeView.swift in Sources */,
 				FA03A0D22D847566004875F9 /* HomeToolView.swift in Sources */,
 				FA03A0C72D8304FE004875F9 /* SingleTaskView.swift in Sources */,
 				FA03A0CE2D831C71004875F9 /* DashedLineView.swift in Sources */,
+				FAA1E8942DB37BE300604ABC /* QuickNoteHistory.swift in Sources */,
 				FA03A0472D81F9BC004875F9 /* UIView+Extension.swift in Sources */,
 				FA03A0442D81F979004875F9 /* Coordinator.swift in Sources */,
 				FAE73E782D944CFF00944448 /* HabitRecordCoordinator.swift in Sources */,

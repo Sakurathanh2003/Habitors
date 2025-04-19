@@ -29,6 +29,23 @@ enum Mood: String, CaseIterable {
         }
     }
     
+    var adjs: [String] {
+        switch self {
+        case .angry:
+            []
+        case .upset:
+            []
+        case .sad:
+            []
+        case .good:
+            []
+        case .happy:
+            []
+        case .spectacular:
+            []
+        }
+    }
+    
     var color: Color {
         return Color(self.rawValue)
     }
@@ -39,24 +56,27 @@ struct MoodieView: View {
     @State var location: CGSize = .zero
     
     @State var offset: [CGSize] = Array(repeating: .zero, count: 6)
-    @State var currentIndex = 0
+    @Namespace var animation
     
     var currentMood: Mood {
-        return Mood.allCases[currentIndex]
+        return viewModel.mood(of: viewModel.currentIndex)
     }
+    
 
     var body: some View {
         ZStack {
             currentMood.color.opacity(0.4).ignoresSafeArea()
-                .animation(.default, value: currentIndex)
+                .animation(.default, value: viewModel.currentIndex)
             
             VStack {
                 ZStack {
-                    ForEach(Mood.allCases.indices, id: \.self) { index in
-                        let mood = Mood.allCases[index]
+                    ForEach(viewModel.moods.indices, id: \.self) { index in
+                        let mood = viewModel.mood(of: index)
                         
-                        moodView(mood)
-                            .zIndex(Double(currentIndex == index ? 6 : currentIndex - index))
+                        MoodCardView(choosedMood: $viewModel.addSuccessMood,
+                                     animation: animation,
+                                     mood: mood)
+                            .zIndex(Double(viewModel.currentIndex == index ? 6 : viewModel.currentIndex - index))
                             .rotationEffect(.degrees(offset[index].width / 3.0))
                             .offset(offset[index])
                             .gesture(
@@ -76,9 +96,9 @@ struct MoodieView: View {
                                         withAnimation {
                                             offset[index] = .init(width: x * 2,
                                                                   height: y * 2)
-                                            currentIndex = (index + 1) % Mood.allCases.count
+                                            viewModel.currentIndex = (index + 1) % Mood.allCases.count
                                             offset[index] = .zero
-                                            offset[(currentIndex + 1) % Mood.allCases.count] = .zero
+                                            offset[(viewModel.currentIndex + 1) % viewModel.moods.count] = .zero
                                         }
                                     })
                             )
@@ -96,7 +116,56 @@ struct MoodieView: View {
                             .foreColor(.white)
                     )
                     .cornerRadius(56, corners: .allCorners)
+                    .onTapGesture {
+                        viewModel.input.selectMood.onNext(())
+                    }
                     .padding(20)
+            }
+            
+            if let mood = viewModel.addSuccessMood {
+                ZStack {
+                    Color.clear
+                    VStack {
+                        Spacer(minLength: 0)
+                        Image("\(mood.rawValue)_\(mood.thumbnailCount)")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .matchedGeometryEffect(id: "mood_\(mood.rawValue)_thumbnail", in: animation)
+                        
+                        Spacer(minLength: 0)
+                        
+                        Text("We've Recorded Your Mood")
+                            .matchedGeometryEffect(id: "mood_\(mood.rawValue)_question", in: animation)
+                            .font(.system(size: 25, weight: .bold, design: .rounded))
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal)
+                        
+                        Text("We've recorded your emotional state.\nOur goal is to provide you with tailored support to enhance your well-being and productivity.")
+                            .multilineTextAlignment(.center)
+                        
+                        Spacer(minLength: 0)
+                        
+                        Color.black.frame(height: 56)
+                            .overlay(
+                                Text("View Mode History")
+                                    .gilroyBold(16)
+                                    .foreColor(.white)
+                            )
+                            .cornerRadius(56, corners: .allCorners)
+                            .onTapGesture {
+                                viewModel.routing.history.onNext(())
+                            }
+                            .padding(20)
+                        
+                        Spacer(minLength: 0)
+                    }.padding(20)
+                }.zIndex(1)
+                    .background(
+                        mood.color
+                            .matchedGeometryEffect(id: "mood_\(mood.rawValue)_background", in: animation)
+                            .ignoresSafeArea()
+                    )
+                
             }
         }
         .background(Color.white.ignoresSafeArea())
@@ -122,28 +191,55 @@ struct MoodieView: View {
         }
         .frame(height: 56)
     }
-    
-    func moodView(_ mood: Mood) -> some View {
-        VStack(spacing: 0) {
-            Text("How are you feeling today?")
-                .font(.system(size: 36,weight: .bold ,design: .rounded))
-                .multilineTextAlignment(.center)
-                .padding(.top, 48)
-            
-            Text(mood.rawValue.capitalized)
-                .font(.system(size: 24,weight: .medium ,design: .rounded))
-                .padding(.top, 20)
-            
-            Image("\(mood.rawValue)_\(mood.thumbnailCount)")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-        }
-        .background(mood.color)
-        .cornerRadius(24, corners: .allCorners)
-        .frame(width: UIScreen.main.bounds.width - 20 * 2)
-    }
 }
 
+// MARK: -  MoodCardView
+struct MoodCardView: View {
+    @Binding var choosedMood: Mood?
+    var animation: Namespace.ID
+    var mood: Mood
+    
+    var body: some View {
+        ZStack {
+            if mood != choosedMood {
+                mood.color
+                    .matchedGeometryEffect(id: "mood_\(mood.rawValue)_background", in: animation)
+                    .ignoresSafeArea()
+            }
+            
+            VStack(spacing: 0) {
+                if mood != choosedMood {
+                    Text("How are you feeling today?")
+                        .matchedGeometryEffect(id: "mood_\(mood.rawValue)_question", in: animation)
+                        .font(.system(size: 36, weight: .bold, design: .rounded))
+                        .multilineTextAlignment(.center)
+                        .padding(.top, 48)
+                }
+                
+                Text(mood.rawValue.capitalized)
+                    .font(.system(size: 24, weight: .medium, design: .rounded))
+                    .padding(.top, 20)
+                
+                if mood != choosedMood {
+                    Image("\(mood.rawValue)_\(mood.thumbnailCount)")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .matchedGeometryEffect(id: "mood_\(mood.rawValue)_thumbnail", in: animation)
+                }
+            }
+        }
+        .cornerRadius(24, corners: .allCorners)
+        .frame(width: width, height: height)
+    }
+    
+    var width: CGFloat {
+        UIScreen.main.bounds.width - 20 * 2
+    }
+    
+    var height: CGFloat {
+        width / 335 * 411
+    }
+}
 #Preview {
     MoodieView(viewModel: MoodieViewModel())
 }

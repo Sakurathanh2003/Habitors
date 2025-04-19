@@ -72,6 +72,9 @@ struct HomeToolView: View {
                     .padding(20)
                     .background(Color("Warning").opacity(0.1))
                     .cornerRadius(10, corners: .allCorners)
+                    .onTapGesture {
+                        viewModel.routing.routeToQuickNote.onNext(())
+                    }
                 }
                 
                 

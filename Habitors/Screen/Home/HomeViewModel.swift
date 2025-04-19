@@ -29,6 +29,7 @@ struct HomeViewModelRouting: RoutingOutput {
     var routeToArticle = PublishSubject<Article>()
     
     var routeToMoodie = PublishSubject<()>()
+    var routeToQuickNote = PublishSubject<()>()
 }
 
 final class HomeViewModel: BaseViewModel<HomeViewModelInput, HomeViewModelOutput, HomeViewModelRouting> {

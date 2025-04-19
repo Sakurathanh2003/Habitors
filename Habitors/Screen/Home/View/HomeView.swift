@@ -36,7 +36,7 @@ struct HomeView: View {
                 
                 switch viewModel.currentTab {
                 case .home:
-                    content
+                    content()
                 case .overall:
                     HomeActivityView(viewModel: HomeActivityViewModel())
                 case .tools:
@@ -52,30 +52,31 @@ struct HomeView: View {
     }
     
     // MARK: - Home Content
-    var content: some View {
+    @ViewBuilder
+    func content() -> some View {
         VStack(spacing: 0) {
-            Image("tool_mood")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .overlay(
-                    HStack(spacing: 0) {
-//                        VStack(alignment: .leading) {
-//                            Text("Moodie")
-//                                .gilroyBold(16)
-//                            
-//                            Text("Tap to record")
-//                                .gilroyRegular(12)
-//                        }
+            if let mood = Mood.allCases.randomElement() {
+                HStack {
+                    VStack(alignment: .leading, spacing: 5) {
+                        Text("How do you feel?")
+                            .gilroySemiBold(16)
                         
-                        Spacer()
-                    }.padding(20)
-                )
-                .cornerRadius(10, corners: .allCorners)
-                .onTapGesture {
-                    viewModel.routing.routeToMoodie.onNext(())
+                        Text("Tap to record")
+                            .gilroyRegular(12)
+                            .foreColor(.black.opacity(0.8))
+                    }
+                    Spacer()
+                    Image("icon_\(mood.rawValue)")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 50, height: 50)
                 }
+                .padding(10)
+                .background(mood.color.opacity(0.6))
+                .cornerRadius(5, corners: .allCorners)
                 .padding(.horizontal, 20)
                 .padding(.bottom, 20)
+            }
             
             calendarView
             

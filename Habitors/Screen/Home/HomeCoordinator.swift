@@ -81,4 +81,9 @@ final class HomeCoordinator: WindowBaseCoordinator {
         self.moodieCoordinator?.start()
         self.addChild(moodieCoordinator)
     }
+    
+    func routeToQuickNote() {
+        let hostingController = UIHostingController(rootView: QuickNoteHistory())
+        controller.navigationController?.pushViewController(hostingController, animated: true)
+    }
 }

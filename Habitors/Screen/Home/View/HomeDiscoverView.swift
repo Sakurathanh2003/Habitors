@@ -99,8 +99,10 @@ struct HomeDiscoverView: View {
                 let categorydata = try Data(contentsOf: categoryURL)
                 let itemdata = try Data(contentsOf: itemURL)
 
-                self.categories = try decoder.decode([ArticleCategory].self, from: categorydata)
+                
                 self.articles = try decoder.decode([Article].self, from: itemdata)
+                
+                self.categories = try decoder.decode([ArticleCategory].self, from: categorydata).filter({ category in  self.articles.contains(where: { $0.categoryID == category.id})})
             } catch {
                 print(error)
             }

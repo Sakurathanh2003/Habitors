@@ -1,18 +1,17 @@
 //
-//  MoodieViewController.swift
+//  MoodHistoryViewController.swift
 //  Habitors
 //
-//  Created by Vũ Thị Thanh on 16/4/25.
+//  Created by Vũ Thị Thanh on 19/4/25.
 //
 
-import RxSwift
 import UIKit
 
-class MoodieViewController: BaseViewController {
-    var viewModel: MoodieViewModel
-    weak var coordinator: MoodieCoordinator?
+class MoodHistoryViewController: BaseViewController {
+    var viewModel: MoodHistoryViewModel
+    weak var coordinator: MoodHistoryCoordinator?
 
-    init(viewModel: MoodieViewModel, coordinator: MoodieCoordinator) {
+    init(viewModel: MoodHistoryViewModel, coordinator: MoodHistoryCoordinator) {
         self.viewModel = viewModel
         self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
@@ -30,17 +29,23 @@ class MoodieViewController: BaseViewController {
 
     // MARK: - Config
     func config() {
-        insertFullScreen(MoodieView(viewModel: viewModel))
+        insertFullScreen(MoodHistory(viewModel: viewModel))
+        configViewModelInput()
+        configViewModelOutput()
         configRoutingOutput()
+    }
+
+    func configViewModelInput() {
+
+    }
+
+    func configViewModelOutput() {
+        
     }
 
     func configRoutingOutput() {
         viewModel.routing.stop.subscribe(onNext: { [weak self] in
-            self?.coordinator?.stop()
-        }).disposed(by: self.disposeBag)
-        
-        viewModel.routing.history.subscribe(onNext: { [weak self] in
-            self?.coordinator?.routeToHistory()
+            self?.coordinator?.dismiss()
         }).disposed(by: self.disposeBag)
     }
 }
