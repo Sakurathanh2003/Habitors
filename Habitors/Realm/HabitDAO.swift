@@ -27,9 +27,41 @@ final class HabitDAO: RealmDao {
             print("✅ Đã thêm 1 habit: \(item.name)")
             setupStepRecordIfNeed(habit: item)
             setupExerciseMinRecordIfNeed(habit: item)
+            setupWaterRecordIfNeed(habit: item)
             NotificationCenter.default.post(name: .addHabitItem, object: item)
         } catch {
             print("error: \(error)")
+        }
+    }
+    
+    func setupWaterRecordIfNeed(habit: Habit) {
+        guard habit.goalUnit == .water else {
+            return
+        }
+        
+        Task {
+            var startDate = habit.startedDate
+                        
+            while !startDate.isFutureDay {
+                let setDate = startDate.startOfDay
+                
+                if setDate.isDateValid(habit) {
+                    let stepCount = await HealthManager.shared.fetchWaterInDate(endDate: startDate.endOfDay)
+                    
+                    if let record = habit.records.first(where: { $0.date.isSameDay(date: setDate) }) {
+                        if record.value != stepCount {
+                            print("record đã có ngày \(setDate.format("dd MMMM yyyy")): \(stepCount)")
+                            record.value = stepCount
+                            HabitRecordDAO.shared.updateObject(item: record)
+                        }
+                    } else {
+                        print("record mới tạo ngày \(setDate.format("dd MMMM yyyy")): \(stepCount)")
+                        HabitRecordDAO.shared.addObject(habitID: habit.id, value: stepCount, date: setDate, createdAt: Date())
+                    }
+                }
+                
+                startDate = startDate.nextDay
+            }
         }
     }
     
@@ -98,6 +130,7 @@ final class HabitDAO: RealmDao {
             
             removeRecordIfNeed(habit: item)
             setupStepRecordIfNeed(habit: item)
+            setupWaterRecordIfNeed(habit: item)
             
             print("Đã update habit:\(item.name) thành công")
             NotificationCenter.default.post(name: .updateHabitItem, object: item)

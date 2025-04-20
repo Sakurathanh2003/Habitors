@@ -1,5 +1,5 @@
 {
-  "originHash" : "d2b03d571b31716b76ec4d98c427241a6befc4a1647f9b1870bb1a3fdbd84aaf",
+  "originHash" : "3d7ad7edf6e1ad3c9a19a6c40e415e54fbb131e6a81fe053efab0e0c37cbecee",
   "pins" : [
     {
       "identity" : "sakuraextension",
@@ -8,6 +8,15 @@
       "state" : {
         "branch" : "develop",
         "revision" : "21155db5b4fc84991fbb3376a2ff6331a80733fb"
+      }
+    },
+    {
+      "identity" : "seekbar",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kim-minseong/SeekBar.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "aad83f51a597c4ca1fb8512f284cd8de016073fb"
       }
     }
   ],

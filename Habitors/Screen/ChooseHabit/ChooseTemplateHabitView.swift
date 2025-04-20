@@ -39,7 +39,7 @@ struct ChooseTemplateHabitView: View {
                         .foregroundColor(.black)
                     })
                     
-                    ForEach(AppConst.habitCategories, id: \.id) { category in
+                    ForEach(viewModel.habitCategories, id: \.id) { category in
                         VStack(alignment: .leading) {
                             Text(category.name)
                                 .gilroyBold(24)

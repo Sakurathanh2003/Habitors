@@ -143,9 +143,21 @@ final class CreateViewModel: BaseViewModel<CreateViewModelInput, CreateViewModel
     
     private func checkHealthPermissionIfNeed(completion: @escaping (String?) -> Void) {
         if goalUnit.useAppleHealth {
-            HealthManager.shared.requestAuthorization(for: goalUnit) { isAccess, error in
+            HealthManager.shared.requestAuthorization(for: goalUnit) { [weak self] canRead, canWrite in
+                guard let self else {
+                    return
+                }
+                
+                var message: String?
+                
+                if !canRead {
+                    message = goalUnit.permissionReadMessage
+                } else if !canWrite {
+                    message = goalUnit.permissionReadMessage
+                }
+                
                 DispatchQueue.main.async {
-                    completion(isAccess ? nil : error)
+                    completion(message)
                 }
             }
         } else {
@@ -156,6 +168,11 @@ final class CreateViewModel: BaseViewModel<CreateViewModelInput, CreateViewModel
     private func addHabit() {
         guard let icon else {
             self.routing.showAlert.onNext("Vui lòng chọn icon cho habit!")
+            return
+        }
+        
+        guard !name.isEmpty else {
+            self.routing.showAlert.onNext("Vui lòng nhập tên!")
             return
         }
         
@@ -187,6 +204,11 @@ final class CreateViewModel: BaseViewModel<CreateViewModelInput, CreateViewModel
     // MARK: - Update habit
     private func updateHabit() {
         guard let habit else {
+            return
+        }
+        
+        guard !name.isEmpty else {
+            self.routing.showAlert.onNext("Vui lòng nhập tên!")
             return
         }
         

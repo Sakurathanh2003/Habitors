@@ -32,6 +32,7 @@ enum GoalUnit: String, Codable, PersistableEnum, CaseIterable {
     // Đơn vị liên quan đến Apple Health
     case exerciseTime
     case steps
+    case water
     
     static func custom() -> [GoalUnit] {
         [.count, .kcal, .lbs, .ml, .usoz, .mile, .km, .m, .secs, .min, .hours]
@@ -41,6 +42,7 @@ enum GoalUnit: String, Codable, PersistableEnum, CaseIterable {
         switch self {
         case .secs: "giây"
         case .min, .exerciseTime: "phút"
+        case .water: "ml"
         case .hours: "giờ"
         default: self.rawValue
         }
@@ -52,6 +54,7 @@ extension GoalUnit {
         switch self {
         case .steps: true
         case .exerciseTime: true
+        case .water: true
         default: false
         }
     }
@@ -60,38 +63,43 @@ extension GoalUnit {
         return switch self {
         case .steps: HKQuantityType(.stepCount).maximumAllowedDuration
         case .exerciseTime: HKObjectType.workoutType().maximumAllowedDuration
+        case .water: HKQuantityType(.dietaryWater).maximumAllowedDuration
         default: nil
         }
     }
     
-    var readTypes: [HKSampleType] {
+    var readType: HKSampleType? {
         switch self {
-        case .steps: [
-            HKQuantityType(.stepCount)
-        ]
-        case .exerciseTime: [
-            HKQuantityType(.appleExerciseTime)
-        ]
-        default: []
+        case .steps: HKQuantityType(.stepCount)
+        case .exerciseTime: HKQuantityType(.appleExerciseTime)
+        case .water: HKQuantityType(.dietaryWater)
+        default: nil
+        }
+    }
+        
+    var writeType: HKSampleType? {
+        switch self {
+        case .steps: HKQuantityType(.stepCount)
+        case .exerciseTime: HKObjectType.workoutType()
+        case .water: HKQuantityType(.dietaryWater)
+        default: nil
         }
     }
     
-    var writeTypes: [HKSampleType] {
+    var permissionReadMessage: String {
         switch self {
-        case .steps: [
-            HKQuantityType(.stepCount)
-        ]
-        case .exerciseTime: [
-            HKObjectType.workoutType()
-        ]
-        default: []
+        case .steps: "Bạn cần cấp quyền ứng dụng đọc số lượng bước"
+        case .exerciseTime: "Bạn cần cấp quyền ứng dụng đọc thời gian tập thể dục"
+        case .water: "Bạn cần cấp quyền ứng dụng đọc số lượng nước đã uống"
+        default: ""
         }
     }
     
-    var permissionMessage: String {
+    var permissionWriteMessage: String {
         switch self {
-        case .steps: "Bạn cần cấp quyền cho ứng dụng truy cập và đọc số lượng bước"
-        case .exerciseTime: "Bạn cần cấp quyền cho ứng dụng truy cập và đọc thời gian exercise"
+        case .steps: "Bạn cần cấp quyền cho ứng dụng ghi số lượng bước"
+        case .exerciseTime: "Bạn cần cấp quyền cho ứng dụng ghi thời gian workout"
+        case .water: "Bạn cần cấp quyền ứng dụng ghi số lượng nước đã uống"
         default: ""
         }
     }

@@ -19,6 +19,23 @@
 		24E9231A2D8A9C0A00E9B96C /* ChooseTemplateHabitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E923162D8A9C0A00E9B96C /* ChooseTemplateHabitViewController.swift */; };
 		24E9231B2D8A9C0A00E9B96C /* ChooseTemplateHabitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E923172D8A9C0A00E9B96C /* ChooseTemplateHabitViewModel.swift */; };
 		24E9231E2D8A9C2F00E9B96C /* ChooseTemplateHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E9231D2D8A9C2F00E9B96C /* ChooseTemplateHabitView.swift */; };
+		FA00B69A2DB423DC00B49125 /* percussion.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FA00B6972DB423DC00B49125 /* percussion.mp3 */; };
+		FA00B69B2DB423DC00B49125 /* cricket.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FA00B6952DB423DC00B49125 /* cricket.mp3 */; };
+		FA00B69C2DB423DC00B49125 /* rain_and_thunder.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FA00B6982DB423DC00B49125 /* rain_and_thunder.mp3 */; };
+		FA00B69D2DB423DC00B49125 /* river.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FA00B6992DB423DC00B49125 /* river.mp3 */; };
+		FA00B69E2DB423DC00B49125 /* fireplace.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FA00B6962DB423DC00B49125 /* fireplace.mp3 */; };
+		FA00B6A12DB4AD1300B49125 /* SeekBar in Frameworks */ = {isa = PBXBuildFile; productRef = FA00B6A02DB4AD1300B49125 /* SeekBar */; };
+		FA00B6A22DB4B49E00B49125 /* SeekBar in Embed Frameworks */ = {isa = PBXBuildFile; productRef = FA00B6A02DB4AD1300B49125 /* SeekBar */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		FA00B6AB2DB4B98D00B49125 /* a_golden_morning.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FA00B6A52DB4B98D00B49125 /* a_golden_morning.mp3 */; };
+		FA00B6AC2DB4B98D00B49125 /* breath_cycle.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FA00B6A62DB4B98D00B49125 /* breath_cycle.mp3 */; };
+		FA00B6AD2DB4B98D00B49125 /* laringeal.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FA00B6A92DB4B98D00B49125 /* laringeal.mp3 */; };
+		FA00B6AE2DB4B98D00B49125 /* mindfulness.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FA00B6AA2DB4B98D00B49125 /* mindfulness.mp3 */; };
+		FA00B6AF2DB4B98D00B49125 /* hair_dryer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FA00B6A82DB4B98D00B49125 /* hair_dryer.mp3 */; };
+		FA00B6B02DB4B98D00B49125 /* energy_ball.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FA00B6A72DB4B98D00B49125 /* energy_ball.mp3 */; };
+		FA00B6B32DB4BCB100B49125 /* flying.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FA00B6B22DB4BCB100B49125 /* flying.mp3 */; };
+		FA00B6B52DB4BD6100B49125 /* the_hidden_valley.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FA00B6B42DB4BD6100B49125 /* the_hidden_valley.mp3 */; };
+		FA00B6B82DB4BE9300B49125 /* sailing_the_harbor.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FA00B6B72DB4BE9200B49125 /* sailing_the_harbor.mp3 */; };
+		FA00B6BA2DB4BE9800B49125 /* autumn_breeze.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FA00B6B92DB4BE9800B49125 /* autumn_breeze.mp3 */; };
 		FA03A01F2D81F83F004875F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A01E2D81F83F004875F9 /* AppDelegate.swift */; };
 		FA03A0282D81F844004875F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA03A0272D81F844004875F9 /* Assets.xcassets */; };
 		FA03A0392D81F916004875F9 /* SplashCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0342D81F916004875F9 /* SplashCoordinator.swift */; };
@@ -121,6 +138,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		FA00B6A32DB4B49E00B49125 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				FA00B6A22DB4B49E00B49125 /* SeekBar in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FAABE52E2D89B0E300544254 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -149,6 +177,21 @@
 		24E923172D8A9C0A00E9B96C /* ChooseTemplateHabitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTemplateHabitViewModel.swift; sourceTree = "<group>"; };
 		24E9231D2D8A9C2F00E9B96C /* ChooseTemplateHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTemplateHabitView.swift; sourceTree = "<group>"; };
 		EC7B1BE09FE7CF60A0E460AF /* Pods_Habitors.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Habitors.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA00B6952DB423DC00B49125 /* cricket.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = cricket.mp3; sourceTree = "<group>"; };
+		FA00B6962DB423DC00B49125 /* fireplace.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = fireplace.mp3; sourceTree = "<group>"; };
+		FA00B6972DB423DC00B49125 /* percussion.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = percussion.mp3; sourceTree = "<group>"; };
+		FA00B6982DB423DC00B49125 /* rain_and_thunder.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = rain_and_thunder.mp3; sourceTree = "<group>"; };
+		FA00B6992DB423DC00B49125 /* river.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = river.mp3; sourceTree = "<group>"; };
+		FA00B6A52DB4B98D00B49125 /* a_golden_morning.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = a_golden_morning.mp3; sourceTree = "<group>"; };
+		FA00B6A62DB4B98D00B49125 /* breath_cycle.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = breath_cycle.mp3; sourceTree = "<group>"; };
+		FA00B6A72DB4B98D00B49125 /* energy_ball.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = energy_ball.mp3; sourceTree = "<group>"; };
+		FA00B6A82DB4B98D00B49125 /* hair_dryer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = hair_dryer.mp3; sourceTree = "<group>"; };
+		FA00B6A92DB4B98D00B49125 /* laringeal.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = laringeal.mp3; sourceTree = "<group>"; };
+		FA00B6AA2DB4B98D00B49125 /* mindfulness.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mindfulness.mp3; sourceTree = "<group>"; };
+		FA00B6B22DB4BCB100B49125 /* flying.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = flying.mp3; sourceTree = "<group>"; };
+		FA00B6B42DB4BD6100B49125 /* the_hidden_valley.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = the_hidden_valley.mp3; sourceTree = "<group>"; };
+		FA00B6B72DB4BE9200B49125 /* sailing_the_harbor.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sailing_the_harbor.mp3; sourceTree = "<group>"; };
+		FA00B6B92DB4BE9800B49125 /* autumn_breeze.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = autumn_breeze.mp3; sourceTree = "<group>"; };
 		FA03A01B2D81F83F004875F9 /* Habitors.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Habitors.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA03A01E2D81F83F004875F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA03A0272D81F844004875F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -249,6 +292,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA00B6A12DB4AD1300B49125 /* SeekBar in Frameworks */,
 				23312E1699B2096F7EA3DAD6 /* Pods_Habitors.framework in Frameworks */,
 				FAABE5362D8B04E100544254 /* SakuraExtension in Frameworks */,
 			);
@@ -303,6 +347,49 @@
 				FAABE51A2D89B0E000544254 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FA00B6942DB4237800B49125 /* Soundscapes */ = {
+			isa = PBXGroup;
+			children = (
+				FA00B6952DB423DC00B49125 /* cricket.mp3 */,
+				FA00B6962DB423DC00B49125 /* fireplace.mp3 */,
+				FA00B6972DB423DC00B49125 /* percussion.mp3 */,
+				FA00B6982DB423DC00B49125 /* rain_and_thunder.mp3 */,
+				FA00B6992DB423DC00B49125 /* river.mp3 */,
+			);
+			path = Soundscapes;
+			sourceTree = "<group>";
+		};
+		FA00B6A42DB4B97400B49125 /* Meditative */ = {
+			isa = PBXGroup;
+			children = (
+				FA00B6A52DB4B98D00B49125 /* a_golden_morning.mp3 */,
+				FA00B6A62DB4B98D00B49125 /* breath_cycle.mp3 */,
+				FA00B6A72DB4B98D00B49125 /* energy_ball.mp3 */,
+				FA00B6A82DB4B98D00B49125 /* hair_dryer.mp3 */,
+				FA00B6A92DB4B98D00B49125 /* laringeal.mp3 */,
+				FA00B6AA2DB4B98D00B49125 /* mindfulness.mp3 */,
+			);
+			path = Meditative;
+			sourceTree = "<group>";
+		};
+		FA00B6B12DB4BCA900B49125 /* Relaxing */ = {
+			isa = PBXGroup;
+			children = (
+				FA00B6B42DB4BD6100B49125 /* the_hidden_valley.mp3 */,
+				FA00B6B22DB4BCB100B49125 /* flying.mp3 */,
+			);
+			path = Relaxing;
+			sourceTree = "<group>";
+		};
+		FA00B6B62DB4BE8800B49125 /* Natural Sound */ = {
+			isa = PBXGroup;
+			children = (
+				FA00B6B92DB4BE9800B49125 /* autumn_breeze.mp3 */,
+				FA00B6B72DB4BE9200B49125 /* sailing_the_harbor.mp3 */,
+			);
+			path = "Natural Sound";
 			sourceTree = "<group>";
 		};
 		FA03A0122D81F83F004875F9 = {
@@ -595,6 +682,10 @@
 		FAD110812DAEE4DC00F4E629 /* Sound */ = {
 			isa = PBXGroup;
 			children = (
+				FA00B6B62DB4BE8800B49125 /* Natural Sound */,
+				FA00B6B12DB4BCA900B49125 /* Relaxing */,
+				FA00B6A42DB4B97400B49125 /* Meditative */,
+				FA00B6942DB4237800B49125 /* Soundscapes */,
 				FAE73E862D9C1C2B00944448 /* ringtone.mp3 */,
 				FAE73E842D9B09AB00944448 /* noisy.mp3 */,
 			);
@@ -657,6 +748,7 @@
 				FA03A0192D81F83F004875F9 /* Resources */,
 				BAEBE67ACB25C89959A792EA /* [CP] Embed Pods Frameworks */,
 				FAABE52E2D89B0E300544254 /* Embed Foundation Extensions */,
+				FA00B6A32DB4B49E00B49125 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -666,6 +758,7 @@
 			name = Habitors;
 			packageProductDependencies = (
 				FAABE5352D8B04E100544254 /* SakuraExtension */,
+				FA00B6A02DB4AD1300B49125 /* SeekBar */,
 			);
 			productName = Habitors;
 			productReference = FA03A01B2D81F83F004875F9 /* Habitors.app */;
@@ -717,6 +810,7 @@
 			mainGroup = FA03A0122D81F83F004875F9;
 			packageReferences = (
 				FAABE5342D8B04E100544254 /* XCRemoteSwiftPackageReference "SakuraExtension" */,
+				FA00B69F2DB4AD1300B49125 /* XCRemoteSwiftPackageReference "SeekBar" */,
 			);
 			productRefGroup = FA03A01C2D81F83F004875F9 /* Products */;
 			projectDirPath = "";
@@ -734,6 +828,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAD110802DAED96800F4E629 /* ListArticle.json in Resources */,
+				FA00B6AB2DB4B98D00B49125 /* a_golden_morning.mp3 in Resources */,
+				FA00B6AC2DB4B98D00B49125 /* breath_cycle.mp3 in Resources */,
+				FA00B6B52DB4BD6100B49125 /* the_hidden_valley.mp3 in Resources */,
+				FA00B6AD2DB4B98D00B49125 /* laringeal.mp3 in Resources */,
+				FA00B6AE2DB4B98D00B49125 /* mindfulness.mp3 in Resources */,
+				FA00B6AF2DB4B98D00B49125 /* hair_dryer.mp3 in Resources */,
+				FA00B6B02DB4B98D00B49125 /* energy_ball.mp3 in Resources */,
 				FA03A0282D81F844004875F9 /* Assets.xcassets in Resources */,
 				FAE73E852D9B09AB00944448 /* noisy.mp3 in Resources */,
 				FAD1107E2DAED32400F4E629 /* ArticleCategory.json in Resources */,
@@ -741,6 +842,14 @@
 				FA03A0B62D82073D004875F9 /* Gilroy-SemiBold.ttf in Resources */,
 				FAE73E872D9C1C2B00944448 /* ringtone.mp3 in Resources */,
 				FA03A0B42D82073D004875F9 /* Gilroy-Regular.ttf in Resources */,
+				FA00B69A2DB423DC00B49125 /* percussion.mp3 in Resources */,
+				FA00B69B2DB423DC00B49125 /* cricket.mp3 in Resources */,
+				FA00B69C2DB423DC00B49125 /* rain_and_thunder.mp3 in Resources */,
+				FA00B69D2DB423DC00B49125 /* river.mp3 in Resources */,
+				FA00B69E2DB423DC00B49125 /* fireplace.mp3 in Resources */,
+				FA00B6B32DB4BCB100B49125 /* flying.mp3 in Resources */,
+				FA00B6BA2DB4BE9800B49125 /* autumn_breeze.mp3 in Resources */,
+				FA00B6B82DB4BE9300B49125 /* sailing_the_harbor.mp3 in Resources */,
 				FA03A0B22D82073D004875F9 /* Gilroy-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -786,9 +895,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Habitors/Pods-Habitors-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Habitors/Pods-Habitors-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1199,6 +1312,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		FA00B69F2DB4AD1300B49125 /* XCRemoteSwiftPackageReference "SeekBar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kim-minseong/SeekBar.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		FAABE5342D8B04E100544254 /* XCRemoteSwiftPackageReference "SakuraExtension" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Sakurathanh2003/SakuraExtension.git";
@@ -1210,6 +1331,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		FA00B6A02DB4AD1300B49125 /* SeekBar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FA00B69F2DB4AD1300B49125 /* XCRemoteSwiftPackageReference "SeekBar" */;
+			productName = SeekBar;
+		};
 		FAABE5352D8B04E100544254 /* SakuraExtension */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FAABE5342D8B04E100544254 /* XCRemoteSwiftPackageReference "SakuraExtension" */;

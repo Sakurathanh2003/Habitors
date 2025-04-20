@@ -32,14 +32,46 @@ class HealthManager: NSObject {
         }
     }
     
+    // MARK: - Check Permission
+    // Kiểm tra quyền ghi dữ liệu vào HealthKit
+    func checkHealthKitWritePermission(type: HKSampleType, completion: ((Bool) -> Void)? = nil) {
+        let status = healthStore.authorizationStatus(for: type)
+        completion?(status == .sharingAuthorized)
+    }
+       
+    // Kiểm tra quyền đọc dữ liệu từ HealthKit (có thể kết hợp để kiểm tra quyền đọc/ghi)
+    func checkHealthKitReadPermission(type: HKSampleType, completion: ((Bool) -> Void)? = nil) {
+        healthStore.requestAuthorization(toShare: nil, read: Set([type])) { success, error in
+            completion?(success)
+        }
+    }
+    
+    func checkHealthKitWritePermission(type: HKSampleType) async -> Bool {
+        return await withUnsafeContinuation { continuation in
+            let status = healthStore.authorizationStatus(for: type)
+            continuation.resume(returning: status == .sharingAuthorized)
+        }
+        
+    }
+       
+    // Kiểm tra quyền đọc dữ liệu từ HealthKit (có thể kết hợp để kiểm tra quyền đọc/ghi)
+    func checkHealthKitReadPermission(type: HKSampleType) async -> Bool {
+        return await withUnsafeContinuation { continuation in
+            healthStore.requestAuthorization(toShare: nil, read: Set([type])) { success, error in
+                continuation.resume(returning: success)
+            }
+        }
+    }
+    
     // MARK: - Request
-    func requestAuthorization(for unit: GoalUnit, completion: @escaping @Sendable (Bool, String?) -> Void) {
-        healthStore.requestAuthorization(toShare: Set(unit.writeTypes), read: Set(unit.readTypes)) { success, error in
+    func requestAuthorization(for unit: GoalUnit, completion: @escaping @Sendable (Bool, Bool) -> Void) {
+        healthStore.requestAuthorization(toShare: Set([unit.writeType!]), read: Set([unit.readType!])) { success, error in
             Task {
-                let isGrant = await self.canAccess(of: unit)
+                let canRead = await self.checkHealthKitReadPermission(type: unit.readType!)
+                let canWrite = await self.checkHealthKitWritePermission(type: unit.writeType!)
                 
                 DispatchQueue.main.async {
-                    completion(isGrant, unit.requestMessage)
+                    completion(canRead, canWrite)
                 }
                
                 if unit == .steps && !self.needToObserverStepCount {
@@ -50,16 +82,46 @@ class HealthManager: NSObject {
     }
     
     func canAccess(of unit: GoalUnit) async -> Bool {
-        let status = try? await healthStore.statusForAuthorizationRequest(toShare: Set(unit.writeTypes),
-                                                                          read: Set(unit.readTypes))
-        return status == .unnecessary
+        return await withUnsafeContinuation { continuation in
+            self.checkHealthKitReadPermission(type: unit.readType!) { canRead in
+                self.checkHealthKitWritePermission(type: unit.writeType!) { canWrite in
+                    let isGrant = canRead && canWrite
+                    continuation.resume(returning: isGrant)
+                }
+            }
+        }
+    }
+    
+    // MARK: - Water
+    func fetchWaterInDate(endDate: Date) async -> Double {
+        let dateEnd = endDate
+        let dateStart = endDate.startOfDay
+        
+        // To get daily steps data
+        let dayComponent = DateComponents(day: 1)
+        
+        let predicate = HKQuery.predicateForSamples(withStart: dateStart, end: dateEnd, options: .strictStartDate)
+        let samplePredicate = HKSamplePredicate.quantitySample(type: HKQuantityType(.dietaryWater), predicate: predicate)
+        
+        let descriptor = HKStatisticsCollectionQueryDescriptor(
+            predicate: samplePredicate, options: .cumulativeSum, anchorDate: dateStart, intervalComponents: dayComponent
+        )
+        
+        let result = try? await descriptor.result(for: HKHealthStore())
+        
+        return await withUnsafeContinuation { continuation in
+            result?.enumerateStatistics(from: dateStart, to: dateEnd) { statistics, stop in
+                let ml = statistics.sumQuantity()?.doubleValue(for: .literUnit(with: .milli)) ?? 0
+                continuation.resume(returning: ml)
+            }
+        }
     }
     
     // MARK: - Step count
     func startObservingStepCount() {
         didStartStepObserver = true
         Task {
-            guard let stepType = HKObjectType.quantityType(forIdentifier: .stepCount), await canAccess(of: .steps) else {
+            guard let stepType = HKObjectType.quantityType(forIdentifier: .stepCount), await checkHealthKitReadPermission(type: stepType) else {
                 return
             }
             
@@ -222,18 +284,22 @@ class HealthManager: NSObject {
             addSteps(steps: value, date: date, completion: completion)
         case .exerciseTime:
             saveWorkout(byAdding: .minute, time: value, date: date, completion: completion)
+        case .water:
+            addWater(ml: value, date: date, completion: completion)
         default: break
         }
     }
-}
-
-extension GoalUnit {
-    var requestMessage: String {
-        switch self {
-        case .steps: "Bạn cần cấp quyền đọc thời gian đứng"
-        case .exerciseTime: "Bạn cần cấp quyền đọc thời gian tập"
-        default:
-            "Bạn cần cấp quyền vừa yêu cầu"
+    
+    func addWater(ml: Double, date: Date, completion: ((Bool, Error?) -> Void)? = nil) {
+        let type = HKQuantityType.quantityType(forIdentifier: .dietaryWater)!
+        let quantity = HKQuantity(unit: .literUnit(with: .milli), doubleValue: ml)
+        let sample = HKQuantitySample(type: type, quantity: quantity, start: date, end: date)
+        
+        healthStore.save(sample) { success, error in
+            DispatchQueue.main.async {
+                completion?(success, error)
+                print(error)
+            }
         }
     }
 }

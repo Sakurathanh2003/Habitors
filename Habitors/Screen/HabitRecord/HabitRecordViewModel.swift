@@ -105,15 +105,19 @@ final class HabitRecordViewModel: BaseViewModel<HabitRecordViewModelInput, Habit
             }
             
             if let unit = record.habit?.goalUnit, unit.useAppleHealth {
-                Task {
-                    let canAccess = await HealthManager.shared.canAccess(of: unit)
+                HealthManager.shared.checkHealthKitWritePermission(type: unit.writeType!) { [weak self] canWrite in
+                    guard let self else {
+                        return
+                    }
                     
-                    if canAccess {
-                        HealthManager.shared.saveData(for: unit, value: value, date: self.recordDate) { [weak self] isSuccess, error in
-                            self?.setValue(newValue)
+                    DispatchQueue.main.async {
+                        if canWrite {
+                            HealthManager.shared.saveData(for: unit, value: value, date: self.recordDate) { [weak self] isSuccess, error in
+                                self?.setValue(newValue)
+                            }
+                        } else {
+                            self.routing.needToPermission.onNext(self.record.habit?.goalUnit.permissionWriteMessage ?? "")
                         }
-                    } else {
-                        self.routing.needToPermission.onNext(self.record.habit?.goalUnit.permissionMessage ?? "")
                     }
                 }
             } else {
@@ -162,13 +166,17 @@ final class HabitRecordViewModel: BaseViewModel<HabitRecordViewModelInput, Habit
             }
             
             if let unit = record.habit?.goalUnit, unit.useAppleHealth {
-                Task {
-                    let canAccess = await HealthManager.shared.canAccess(of: unit)
-                
-                    if canAccess {
-                        self.isShowingAddValue = true
-                    } else {
-                        self.routing.needToPermission.onNext(self.record.habit?.goalUnit.permissionMessage ?? "")
+                HealthManager.shared.checkHealthKitWritePermission(type: unit.writeType!) { [weak self] canWrite in
+                    guard let self else {
+                        return
+                    }
+                    
+                    DispatchQueue.main.async {
+                        if canWrite {
+                            self.isShowingAddValue = true
+                        } else {
+                            self.routing.needToPermission.onNext(self.record.habit?.goalUnit.permissionWriteMessage ?? "")
+                        }
                     }
                 }
             } else {
@@ -199,9 +207,12 @@ final class HabitRecordViewModel: BaseViewModel<HabitRecordViewModelInput, Habit
     }
     
     private func setValue(_ value: Double) {
-        record.value = value
         HabitRecordDAO.shared.updateObject(item: record)
-        objectWillChange.send()
+        
+        DispatchQueue.main.async {
+            self.record.value = value
+            self.objectWillChange.send()
+        }
     }
 }
 

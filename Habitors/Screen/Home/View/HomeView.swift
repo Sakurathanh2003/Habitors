@@ -24,38 +24,63 @@ struct HomeView: View {
     @ObservedObject var viewModel: HomeViewModel
     @Namespace var animation
     
+    @ObservedObject var player: AudioPlayer = .shared
+    @State var isAudioOpening: Bool = false
+    
     var theme: AppTheme {
         return .theme1
     }
     
+    @ViewBuilder
     var body: some View {
-        ZStack {
-            VStack(spacing: 0) {
-                navigationBar
-                    .padding(.horizontal, Const.horizontalPadding)
-                
-                switch viewModel.currentTab {
-                case .home:
-                    content()
-                case .overall:
-                    HomeActivityView(viewModel: HomeActivityViewModel())
-                case .tools:
-                    HomeToolView(viewModel: viewModel, namespace: animation)
-                case .discover:
-                    HomeDiscoverView(viewModel: viewModel)
-                }
-                
-                HomeTabbarView(viewModel: viewModel)
+        if let tool = viewModel.currentTool {
+            ToolItemView(animation: animation, tool: tool, isOpening: true) {
+                viewModel.currentTool = nil
             }
+        } else if let currentItem = player.getItem(), isAudioOpening {
+            AudioView(player: player, item: currentItem, isOpen: $isAudioOpening)
+                .matchedGeometryEffect(id: "audioplayer", in: animation)
+        } else {
+            ZStack {
+                VStack(spacing: 0) {
+                    navigationBar
+                        .padding(.horizontal, Const.horizontalPadding)
+                    
+                    switch viewModel.currentTab {
+                    case .home:
+                        content()
+                    case .overall:
+                        HomeActivityView(viewModel: HomeActivityViewModel())
+                    case .tools:
+                        HomeToolView(viewModel: viewModel, namespace: animation)
+                    case .discover:
+                        HomeDiscoverView(viewModel: viewModel)
+                    }
+                    
+                    if let currentItem = player.getItem(), !isAudioOpening {
+                        Color.black.frame(height: 1)
+                        AudioView(player: player, item: currentItem, isOpen: $isAudioOpening)
+                            .matchedGeometryEffect(id: "audioplayer", in: animation)
+                            .onTapGesture {
+                                withAnimation {
+                                    isAudioOpening = true
+                                }
+                            }
+                        Color.black.frame(height: 1)
+                    }
+                    
+                    HomeTabbarView(viewModel: viewModel)
+                }
+            }.background(theme.backgroundColor.ignoresSafeArea())
         }
-        .background(theme.backgroundColor.ignoresSafeArea())
     }
     
     // MARK: - Home Content
+    @State var mood = Mood.allCases.randomElement()
     @ViewBuilder
     func content() -> some View {
         VStack(spacing: 0) {
-            if let mood = Mood.allCases.randomElement() {
+            if let mood {
                 HStack {
                     VStack(alignment: .leading, spacing: 5) {
                         Text("How do you feel?")
@@ -74,6 +99,9 @@ struct HomeView: View {
                 .padding(10)
                 .background(mood.color.opacity(0.6))
                 .cornerRadius(5, corners: .allCorners)
+                .onTapGesture {
+                    viewModel.routing.routeToMoodie.onNext(())
+                }
                 .padding(.horizontal, 20)
                 .padding(.bottom, 20)
             }

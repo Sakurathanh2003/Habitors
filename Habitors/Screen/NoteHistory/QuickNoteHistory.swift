@@ -237,10 +237,26 @@ struct QuickNoteHistory: View {
                                     .frame(height: 25)
                                     .padding(.horizontal, 20)
                                     
-                                    
-                                    WaterfallGrid(notes, id: \.id) { note in
-                                        item(note: note)
-                                    } .padding(.horizontal, 20)
+                                    if notes.count == 1 {
+                                        HStack(alignment: .top, spacing: 0) {
+                                            item(note: notes[0])
+                                            Spacer()
+                                            item(note: notes[0])
+                                                .hidden()
+                                        }.padding(.horizontal, 20)
+                                    } else if notes.count == 2 {
+                                        HStack(alignment: .top, spacing: 0) {
+                                            item(note: notes[0])
+                                            Spacer()
+                                            item(note: notes[1])
+                                        }.padding(.horizontal, 20)
+                                    } else {
+                                        WaterfallGrid(notes, id: \.id) { note in
+                                            item(note: note)
+                                        }
+                                        .scrollOptions(direction: .vertical)
+                                        .padding(.horizontal, 20)
+                                    }
                                 }
                             }
                         }
@@ -365,6 +381,8 @@ struct NoteView: View {
             Text(viewModel.note.content)
                 .gilroyRegular(width / 13)
                 .padding(10)
+                .frame(maxHeight: 100)
+                .fixedSize(horizontal: false, vertical: true)
                 .frame(width: width, alignment: .topLeading)
                 .background(color)
                 .cornerRadius(5)
