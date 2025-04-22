@@ -36,6 +36,7 @@
 		FA00B6B52DB4BD6100B49125 /* the_hidden_valley.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FA00B6B42DB4BD6100B49125 /* the_hidden_valley.mp3 */; };
 		FA00B6B82DB4BE9300B49125 /* sailing_the_harbor.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FA00B6B72DB4BE9200B49125 /* sailing_the_harbor.mp3 */; };
 		FA00B6BA2DB4BE9800B49125 /* autumn_breeze.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FA00B6B92DB4BE9800B49125 /* autumn_breeze.mp3 */; };
+		FA00B6BC2DB4DC8F00B49125 /* HealthStepManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA00B6BB2DB4DC8B00B49125 /* HealthStepManager.swift */; };
 		FA03A01F2D81F83F004875F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A01E2D81F83F004875F9 /* AppDelegate.swift */; };
 		FA03A0282D81F844004875F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA03A0272D81F844004875F9 /* Assets.xcassets */; };
 		FA03A0392D81F916004875F9 /* SplashCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03A0342D81F916004875F9 /* SplashCoordinator.swift */; };
@@ -192,6 +193,7 @@
 		FA00B6B42DB4BD6100B49125 /* the_hidden_valley.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = the_hidden_valley.mp3; sourceTree = "<group>"; };
 		FA00B6B72DB4BE9200B49125 /* sailing_the_harbor.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sailing_the_harbor.mp3; sourceTree = "<group>"; };
 		FA00B6B92DB4BE9800B49125 /* autumn_breeze.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = autumn_breeze.mp3; sourceTree = "<group>"; };
+		FA00B6BB2DB4DC8B00B49125 /* HealthStepManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthStepManager.swift; sourceTree = "<group>"; };
 		FA03A01B2D81F83F004875F9 /* Habitors.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Habitors.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA03A01E2D81F83F004875F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA03A0272D81F844004875F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -611,6 +613,7 @@
 		FA9635DC2DA3D98B00701FC5 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				FA00B6BB2DB4DC8B00B49125 /* HealthStepManager.swift */,
 				FA9635DD2DA3D99100701FC5 /* HealthManager.swift */,
 			);
 			path = Manager;
@@ -957,6 +960,7 @@
 				FA03A03B2D81F916004875F9 /* SplashViewModel.swift in Sources */,
 				FA03A01F2D81F83F004875F9 /* AppDelegate.swift in Sources */,
 				FAE434A32DAD7A21008C1DC9 /* ArticleDetailView.swift in Sources */,
+				FA00B6BC2DB4DC8F00B49125 /* HealthStepManager.swift in Sources */,
 				FA03A0CC2D831691004875F9 /* HomeActivityView.swift in Sources */,
 				FAABE5432D8DB2F700544254 /* SelectFrequencyView.swift in Sources */,
 				FA03A0422D81F975004875F9 /* BaseViewModel.swift in Sources */,
