@@ -317,8 +317,23 @@ struct HomeActivityView: View {
             }
             .frame(height: 50)
             .background(
-                Color.white
-                    .shadow(color: .black.opacity(0.1),radius: 5, y: 10)
+                ZStack {
+                    if User.isTurnDarkMode {
+                        Color.black
+                    } else {
+                        Color.white
+                    }
+                    
+                    VStack(spacing: 0) {
+                        Spacer()
+                        
+                        if !User.isTurnDarkMode {
+                            Color.black.frame(height: 1)
+                        } else {
+                            Color.white.frame(height: 1)
+                        }
+                    }
+                }
             )
             .zIndex(1)
             

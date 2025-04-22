@@ -7,6 +7,7 @@
 
 import SwiftUI
 import RxSwift
+import SakuraExtension
 
 fileprivate struct Const {
     static let horizontalPadding: CGFloat = 24
@@ -93,7 +94,7 @@ struct CreateView: View {
                 }
             }
         )
-        .background(Color.white.ignoresSafeArea())
+        .background(backgroundColor.ignoresSafeArea())
     }
     
     // MARK: - Delete
@@ -320,10 +321,12 @@ struct CreateView: View {
                 viewModel.routing.stop.onNext(())
             }, label: {
                 Image("ic_back")
+                    .renderingMode(.template)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 24, height: 24)
                     .frame(width: 30, height: 30)
+                    .foreColor(mainColor)
             })
         
             Spacer(minLength: 0)
@@ -340,7 +343,7 @@ struct CreateView: View {
         .overlay(
             Text(viewModel.title)
                 .gilroyBold(20)
-                .foregroundStyle(Color("Black"))
+                .foreColor(mainColor)
         )
     }
 }
@@ -351,7 +354,7 @@ extension CreateView {
         HStack {
             Text(text)
                 .gilroyBold(18)
-                .foregroundStyle(Color("Black"))
+                .foreColor(mainColor)
             
             Spacer()
             
@@ -360,6 +363,14 @@ extension CreateView {
             }
         }
         .frame(height: 29)
+    }
+    
+    var backgroundColor: Color {
+        return viewModel.isTurnDarkMode ? .black : .white
+    }
+    
+    var mainColor: Color {
+        return viewModel.isTurnDarkMode ? .white : .black
     }
 }
 

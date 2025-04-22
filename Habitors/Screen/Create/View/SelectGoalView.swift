@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftUIIntrospect
+import SakuraExtension
 
 struct SelectGoalView: View {
     @ObservedObject var viewModel: CreateViewModel
@@ -15,20 +16,23 @@ struct SelectGoalView: View {
     
     var body: some View {
         ZStack {
-            Color.white.ignoresSafeArea()
+            backgroundColor.ignoresSafeArea()
             
             VStack(spacing: 0) {
                 VStack(spacing: 0) {
                     HStack {
-                        Image("ic_x")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 22, height: 22)
-                            .onTapGesture {
-                                withAnimation {
-                                    viewModel.isShowingSelectGoalView = false
-                                }
+                        Button {
+                            withAnimation {
+                                viewModel.isShowingSelectGoalView = false
                             }
+                        } label: {
+                            Image("ic_x")
+                                .renderingMode(.template)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 22, height: 22)
+                                .foreColor(mainColor)
+                        }
                         
                         Spacer()
                     }
@@ -37,6 +41,7 @@ struct SelectGoalView: View {
                     .overlay(
                         Text("Goal")
                             .gilroyBold(30)
+                            .foreColor(mainColor)
                     )
                     
                     unitView
@@ -137,7 +142,7 @@ struct SelectGoalView: View {
                 .cornerRadius(12)
                 .overlay(
                     HStack {
-                        Text("\(viewModel.goalValue)")
+                        Text("\(viewModel.goalValue.text)")
                             .gilroyBold(18)
                         
                         + Text(" \(viewModel.goalUnit.rawValue)/day")
@@ -192,7 +197,7 @@ struct SelectGoalView: View {
         HStack {
             Text(text)
                 .gilroyBold(23)
-                .foregroundStyle(Color("Black"))
+                .foreColor(mainColor)
             
             Spacer()
             
@@ -201,6 +206,15 @@ struct SelectGoalView: View {
             }
         }
         .frame(height: 29)
+    }
+    
+    // MARK: - Get
+    var backgroundColor: Color {
+        return viewModel.isTurnDarkMode ? .black : .white
+    }
+    
+    var mainColor: Color {
+        return viewModel.isTurnDarkMode ? .white : .black
     }
 }
 

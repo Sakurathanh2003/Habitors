@@ -66,6 +66,7 @@ struct HomeToolView: View {
                     }
                     .padding(20)
                     .background(Color("Warning").opacity(0.1))
+                    .background(.white)
                     .cornerRadius(10, corners: .allCorners)
                     .onTapGesture {
                         viewModel.routing.routeToQuickNote.onNext(())
@@ -551,9 +552,7 @@ extension Tool {
 }
 
 #Preview {
-    ToolItemView(animation: Namespace().wrappedValue,
-                 tool: Tool.soundscapeMusic,
-                 isOpening: true)
+    HomeView(viewModel: .init())
 }
 
 extension View {

@@ -36,27 +36,27 @@ struct HomeDiscoverView: View {
                         ForEach(0..<categories.count, id: \.self) { index in
                             let isSelected = currentCategoryIndex == index
                             let category = categories[index]
+                            
                             if isSelected {
                                 Text(category.title)
                                     .gilroySemiBold(15)
                                     .padding(.horizontal, 10)
                                     .frame(height: 40)
-                                    .background(.black)
+                                    .background(viewModel.isTurnDarkMode ? .white : .black)
                                     .cornerRadius(5)
-                                    .foreColor(.white)
+                                    .foreColor(viewModel.isTurnDarkMode ? .black : .white)
                                     .id(index)
                             } else {
-                                Text(category.title)
-                                    .gilroyRegular(15)
-                                    .padding(.horizontal, 10)
-                                    .frame(height: 40)
-                                    .background(.white)
-                                    .cornerRadius(5)
-                                    .foreColor(currentCategoryIndex == index ? .white : .black)
-                                    .id(index)
-                                    .onTapGesture {
-                                        currentCategoryIndex = index
-                                    }
+                                Button {
+                                    currentCategoryIndex = index
+                                } label: {
+                                    Text(category.title)
+                                        .gilroyRegular(15)
+                                        .padding(.horizontal, 10)
+                                        .frame(height: 40)
+                                        .cornerRadius(5)
+                                        .foreColor(viewModel.isTurnDarkMode ? .white : .black)
+                                }.id(index)
                             }
                         }
                     }

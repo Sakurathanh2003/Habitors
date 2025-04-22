@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct DateView: View {
+    @Binding var isDarkMode: Bool
     var date: Date
     var isSelected: Bool
     
@@ -18,7 +19,7 @@ struct DateView: View {
                 .padding(1)
             
             RoundedRectangle(cornerRadius: 12)
-                .fill(Color("Black"))
+                .fill(isDarkMode ? .white : .black)
                 .frame(
                     width: isSelected ? nil : 0,
                     height: isSelected ? nil : 0
@@ -38,10 +39,14 @@ struct DateView: View {
     }
     
     var textColor: Color {
-        return isSelected ? .white : Color("Gray")
+        if isSelected {
+            return isDarkMode ? .black : .white
+        }
+        
+        return Color("Gray")
     }
 }
 
 #Preview {
-    DateView(date: Date(), isSelected: true)
+    DateView(isDarkMode: .constant(true), date: Date(), isSelected: true)
 }

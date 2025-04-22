@@ -19,6 +19,11 @@
 		24E9231A2D8A9C0A00E9B96C /* ChooseTemplateHabitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E923162D8A9C0A00E9B96C /* ChooseTemplateHabitViewController.swift */; };
 		24E9231B2D8A9C0A00E9B96C /* ChooseTemplateHabitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E923172D8A9C0A00E9B96C /* ChooseTemplateHabitViewModel.swift */; };
 		24E9231E2D8A9C2F00E9B96C /* ChooseTemplateHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E9231D2D8A9C2F00E9B96C /* ChooseTemplateHabitView.swift */; };
+		B23110D72DB76331009777FE /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23110D52DB76331009777FE /* SettingViewModel.swift */; };
+		B23110D82DB76331009777FE /* SettingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23110D22DB76331009777FE /* SettingCoordinator.swift */; };
+		B23110D92DB76331009777FE /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23110D32DB76331009777FE /* SettingViewController.swift */; };
+		B23110DB2DB7633F009777FE /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23110DA2DB7633F009777FE /* SettingView.swift */; };
+		B23110DD2DB76352009777FE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23110DC2DB7634E009777FE /* User.swift */; };
 		FA00B69A2DB423DC00B49125 /* percussion.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FA00B6972DB423DC00B49125 /* percussion.mp3 */; };
 		FA00B69B2DB423DC00B49125 /* cricket.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FA00B6952DB423DC00B49125 /* cricket.mp3 */; };
 		FA00B69C2DB423DC00B49125 /* rain_and_thunder.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FA00B6982DB423DC00B49125 /* rain_and_thunder.mp3 */; };
@@ -87,15 +92,6 @@
 		FAA1E8902DB3497200604ABC /* MoodHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA1E88D2DB3497200604ABC /* MoodHistoryViewModel.swift */; };
 		FAA1E8942DB37BE300604ABC /* QuickNoteHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA1E8932DB37BE300604ABC /* QuickNoteHistory.swift */; };
 		FAABE50E2D8883CE00544254 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAABE50D2D8883CD00544254 /* AppCoordinator.swift */; };
-		FAABE5192D89B0E000544254 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAABE5182D89B0E000544254 /* WidgetKit.framework */; };
-		FAABE51B2D89B0E000544254 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAABE51A2D89B0E000544254 /* SwiftUI.framework */; };
-		FAABE51E2D89B0E000544254 /* HabitWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAABE51D2D89B0E000544254 /* HabitWidgetBundle.swift */; };
-		FAABE5202D89B0E000544254 /* HabitWidgetLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAABE51F2D89B0E000544254 /* HabitWidgetLiveActivity.swift */; };
-		FAABE5222D89B0E000544254 /* HabitWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAABE5212D89B0E000544254 /* HabitWidget.swift */; };
-		FAABE5242D89B0E000544254 /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAABE5232D89B0E000544254 /* AppIntent.swift */; };
-		FAABE5262D89B0E300544254 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAABE5252D89B0E300544254 /* Assets.xcassets */; };
-		FAABE52A2D89B0E300544254 /* HabitWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = FAABE5172D89B0E000544254 /* HabitWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		FAABE5332D89D9FB00544254 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAABE5322D89D9FB00544254 /* AppTheme.swift */; };
 		FAABE5362D8B04E100544254 /* SakuraExtension in Frameworks */ = {isa = PBXBuildFile; productRef = FAABE5352D8B04E100544254 /* SakuraExtension */; };
 		FAABE5382D8C677300544254 /* Frequency.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAABE5372D8C677300544254 /* Frequency.swift */; };
 		FAABE53B2D8C76AB00544254 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAABE53A2D8C76AA00544254 /* RealmManager.swift */; };
@@ -128,16 +124,6 @@
 		FAE73E872D9C1C2B00944448 /* ringtone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FAE73E862D9C1C2B00944448 /* ringtone.mp3 */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		FAABE5282D89B0E300544254 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = FA03A0132D81F83F004875F9 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = FAABE5162D89B0E000544254;
-			remoteInfo = HabitWidgetExtension;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		FA00B6A32DB4B49E00B49125 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -156,7 +142,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				FAABE52A2D89B0E300544254 /* HabitWidgetExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -177,6 +162,11 @@
 		24E923162D8A9C0A00E9B96C /* ChooseTemplateHabitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTemplateHabitViewController.swift; sourceTree = "<group>"; };
 		24E923172D8A9C0A00E9B96C /* ChooseTemplateHabitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTemplateHabitViewModel.swift; sourceTree = "<group>"; };
 		24E9231D2D8A9C2F00E9B96C /* ChooseTemplateHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTemplateHabitView.swift; sourceTree = "<group>"; };
+		B23110D22DB76331009777FE /* SettingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCoordinator.swift; sourceTree = "<group>"; };
+		B23110D32DB76331009777FE /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		B23110D52DB76331009777FE /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
+		B23110DA2DB7633F009777FE /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		B23110DC2DB7634E009777FE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		EC7B1BE09FE7CF60A0E460AF /* Pods_Habitors.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Habitors.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA00B6952DB423DC00B49125 /* cricket.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = cricket.mp3; sourceTree = "<group>"; };
 		FA00B6962DB423DC00B49125 /* fireplace.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = fireplace.mp3; sourceTree = "<group>"; };
@@ -246,16 +236,8 @@
 		FAA1E88D2DB3497200604ABC /* MoodHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodHistoryViewModel.swift; sourceTree = "<group>"; };
 		FAA1E8932DB37BE300604ABC /* QuickNoteHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickNoteHistory.swift; sourceTree = "<group>"; };
 		FAABE50D2D8883CD00544254 /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
-		FAABE5172D89B0E000544254 /* HabitWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = HabitWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAABE5182D89B0E000544254 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		FAABE51A2D89B0E000544254 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		FAABE51D2D89B0E000544254 /* HabitWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitWidgetBundle.swift; sourceTree = "<group>"; };
-		FAABE51F2D89B0E000544254 /* HabitWidgetLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitWidgetLiveActivity.swift; sourceTree = "<group>"; };
-		FAABE5212D89B0E000544254 /* HabitWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitWidget.swift; sourceTree = "<group>"; };
-		FAABE5232D89B0E000544254 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
-		FAABE5252D89B0E300544254 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		FAABE5272D89B0E300544254 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FAABE5322D89D9FB00544254 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		FAABE5372D8C677300544254 /* Frequency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Frequency.swift; sourceTree = "<group>"; };
 		FAABE53A2D8C76AA00544254 /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		FAABE53C2D8C76AE00544254 /* RealmDao.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmDao.swift; sourceTree = "<group>"; };
@@ -300,15 +282,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FAABE5142D89B0E000544254 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FAABE51B2D89B0E000544254 /* SwiftUI.framework in Frameworks */,
-				FAABE5192D89B0E000544254 /* WidgetKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -339,6 +312,17 @@
 				24E9231D2D8A9C2F00E9B96C /* ChooseTemplateHabitView.swift */,
 			);
 			path = ChooseHabit;
+			sourceTree = "<group>";
+		};
+		B23110D12DB76326009777FE /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				B23110D22DB76331009777FE /* SettingCoordinator.swift */,
+				B23110D32DB76331009777FE /* SettingViewController.swift */,
+				B23110D52DB76331009777FE /* SettingViewModel.swift */,
+				B23110DA2DB7633F009777FE /* SettingView.swift */,
+			);
+			path = Setting;
 			sourceTree = "<group>";
 		};
 		C769EF5CB3D0651AAB002413 /* Frameworks */ = {
@@ -399,7 +383,6 @@
 			children = (
 				FAABE53F2D8C771B00544254 /* HabitWidgetExtension.entitlements */,
 				FA03A01D2D81F83F004875F9 /* Habitors */,
-				FAABE51C2D89B0E000544254 /* HabitWidget */,
 				FA03A01C2D81F83F004875F9 /* Products */,
 				1D6C327FB0C0DD1A02024FED /* Pods */,
 				C769EF5CB3D0651AAB002413 /* Frameworks */,
@@ -410,7 +393,6 @@
 			isa = PBXGroup;
 			children = (
 				FA03A01B2D81F83F004875F9 /* Habitors.app */,
-				FAABE5172D89B0E000544254 /* HabitWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -418,6 +400,7 @@
 		FA03A01D2D81F83F004875F9 /* Habitors */ = {
 			isa = PBXGroup;
 			children = (
+				B23110DC2DB7634E009777FE /* User.swift */,
 				FAABE53E2D8C770600544254 /* Habitors.entitlements */,
 				FA03A02C2D81F844004875F9 /* Info.plist */,
 				24E923102D8A953E00E9B96C /* AppConst.swift */,
@@ -438,6 +421,7 @@
 		FA03A0322D81F905004875F9 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				B23110D12DB76326009777FE /* Setting */,
 				FAA1E8922DB37BC500604ABC /* NoteHistory */,
 				FAA1E8852DB33EEB00604ABC /* MoodHistory */,
 				FAD110822DAEE51B00F4E629 /* Moodie */,
@@ -554,7 +538,6 @@
 				FAABE5372D8C677300544254 /* Frequency.swift */,
 				24E923122D8A988E00E9B96C /* GoalUnit.swift */,
 				24E923092D8A931400E9B96C /* Habit */,
-				FAABE5322D89D9FB00544254 /* AppTheme.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -645,19 +628,6 @@
 				FAA1E8932DB37BE300604ABC /* QuickNoteHistory.swift */,
 			);
 			path = NoteHistory;
-			sourceTree = "<group>";
-		};
-		FAABE51C2D89B0E000544254 /* HabitWidget */ = {
-			isa = PBXGroup;
-			children = (
-				FAABE51D2D89B0E000544254 /* HabitWidgetBundle.swift */,
-				FAABE51F2D89B0E000544254 /* HabitWidgetLiveActivity.swift */,
-				FAABE5212D89B0E000544254 /* HabitWidget.swift */,
-				FAABE5232D89B0E000544254 /* AppIntent.swift */,
-				FAABE5252D89B0E300544254 /* Assets.xcassets */,
-				FAABE5272D89B0E300544254 /* Info.plist */,
-			);
-			path = HabitWidget;
 			sourceTree = "<group>";
 		};
 		FAABE5392D8C75AE00544254 /* Realm */ = {
@@ -756,7 +726,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				FAABE5292D89B0E300544254 /* PBXTargetDependency */,
 			);
 			name = Habitors;
 			packageProductDependencies = (
@@ -766,23 +735,6 @@
 			productName = Habitors;
 			productReference = FA03A01B2D81F83F004875F9 /* Habitors.app */;
 			productType = "com.apple.product-type.application";
-		};
-		FAABE5162D89B0E000544254 /* HabitWidgetExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = FAABE52B2D89B0E300544254 /* Build configuration list for PBXNativeTarget "HabitWidgetExtension" */;
-			buildPhases = (
-				FAABE5132D89B0E000544254 /* Sources */,
-				FAABE5142D89B0E000544254 /* Frameworks */,
-				FAABE5152D89B0E000544254 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = HabitWidgetExtension;
-			productName = HabitWidgetExtension;
-			productReference = FAABE5172D89B0E000544254 /* HabitWidgetExtension.appex */;
-			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -795,9 +747,6 @@
 				LastUpgradeCheck = 1540;
 				TargetAttributes = {
 					FA03A01A2D81F83F004875F9 = {
-						CreatedOnToolsVersion = 15.4;
-					};
-					FAABE5162D89B0E000544254 = {
 						CreatedOnToolsVersion = 15.4;
 					};
 				};
@@ -820,7 +769,6 @@
 			projectRoot = "";
 			targets = (
 				FA03A01A2D81F83F004875F9 /* Habitors */,
-				FAABE5162D89B0E000544254 /* HabitWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -857,14 +805,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FAABE5152D89B0E000544254 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FAABE5262D89B0E300544254 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -898,13 +838,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Habitors/Pods-Habitors-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Habitors/Pods-Habitors-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -927,7 +863,6 @@
 				24E923132D8A988E00E9B96C /* GoalUnit.swift in Sources */,
 				FA2A0AF82D85254200A597DB /* HabitToggle.swift in Sources */,
 				24E923112D8A953E00E9B96C /* AppConst.swift in Sources */,
-				FAABE5332D89D9FB00544254 /* AppTheme.swift in Sources */,
 				FA6D69602DA10723003A7A84 /* SelectGoalView.swift in Sources */,
 				24E9230B2D8A931B00E9B96C /* Habit.swift in Sources */,
 				FA03A0392D81F916004875F9 /* SplashCoordinator.swift in Sources */,
@@ -945,6 +880,7 @@
 				FA2A0AF12D8516EB00A597DB /* CreateCoordinator.swift in Sources */,
 				FAE4349F2DAD7A01008C1DC9 /* Article.swift in Sources */,
 				FAA1E8842DB2A08600604ABC /* MoodRecordDAO.swift in Sources */,
+				B23110DB2DB7633F009777FE /* SettingView.swift in Sources */,
 				FA2A0AF22D8516EB00A597DB /* CreateViewController.swift in Sources */,
 				FA2A0AF32D8516EB00A597DB /* CreateViewModel.swift in Sources */,
 				FAE73E812D9AFBD800944448 /* ChooseIconView.swift in Sources */,
@@ -989,7 +925,11 @@
 				FAE73E6E2D943EDF00944448 /* RlmHabit.swift in Sources */,
 				FAABE53B2D8C76AB00544254 /* RealmManager.swift in Sources */,
 				FAA1E88E2DB3497200604ABC /* MoodHistoryCoordinator.swift in Sources */,
+				B23110D72DB76331009777FE /* SettingViewModel.swift in Sources */,
+				B23110D82DB76331009777FE /* SettingCoordinator.swift in Sources */,
+				B23110D92DB76331009777FE /* SettingViewController.swift in Sources */,
 				FAA1E88F2DB3497200604ABC /* MoodHistoryViewController.swift in Sources */,
+				B23110DD2DB76352009777FE /* User.swift in Sources */,
 				FAA1E8902DB3497200604ABC /* MoodHistoryViewModel.swift in Sources */,
 				FA03A0792D8205EB004875F9 /* HomeView.swift in Sources */,
 				FA03A0D22D847566004875F9 /* HomeToolView.swift in Sources */,
@@ -1004,26 +944,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FAABE5132D89B0E000544254 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FAABE51E2D89B0E000544254 /* HabitWidgetBundle.swift in Sources */,
-				FAABE5242D89B0E000544254 /* AppIntent.swift in Sources */,
-				FAABE5202D89B0E000544254 /* HabitWidgetLiveActivity.swift in Sources */,
-				FAABE5222D89B0E000544254 /* HabitWidget.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		FAABE5292D89B0E300544254 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = FAABE5162D89B0E000544254 /* HabitWidgetExtension */;
-			targetProxy = FAABE5282D89B0E300544254 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		FA03A02D2D81F844004875F9 /* Debug */ = {
@@ -1155,7 +1076,7 @@
 				CODE_SIGN_ENTITLEMENTS = Habitors/Habitors.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = NS9ZL6QW8L;
+				DEVELOPMENT_TEAM = H9KPQ3526P;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Habitors/Info.plist;
@@ -1174,7 +1095,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.thanh.Habitors;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thanh.Habitors.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -1196,7 +1117,7 @@
 				CODE_SIGN_ENTITLEMENTS = Habitors/Habitors.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = NS9ZL6QW8L;
+				DEVELOPMENT_TEAM = H9KPQ3526P;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Habitors/Info.plist;
@@ -1215,7 +1136,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.thanh.Habitors;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thanh.Habitors.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -1224,62 +1145,6 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Release;
-		};
-		FAABE52C2D89B0E300544254 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = HabitWidgetExtension.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = NS9ZL6QW8L;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = HabitWidget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = HabitWidget;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.thanh.Habitors.HabitWidget;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		FAABE52D2D89B0E300544254 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = HabitWidgetExtension.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = NS9ZL6QW8L;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = HabitWidget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = HabitWidget;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.thanh.Habitors.HabitWidget;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -1300,15 +1165,6 @@
 			buildConfigurations = (
 				FA03A0302D81F844004875F9 /* Debug */,
 				FA03A0312D81F844004875F9 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		FAABE52B2D89B0E300544254 /* Build configuration list for PBXNativeTarget "HabitWidgetExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				FAABE52C2D89B0E300544254 /* Debug */,
-				FAABE52D2D89B0E300544254 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

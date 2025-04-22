@@ -185,13 +185,16 @@ struct QuickNoteHistory: View {
         } else {
             VStack {
                 HStack {
-                    Image("ic_back")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 24, height: 24)
-                        .onTapGesture {
-                            dismiss()
-                        }
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image("ic_back")
+                            .renderingMode(.template)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 24, height: 24)
+                            .foreColor(mainColor)
+                    }
                     
                     Spacer()
                     
@@ -200,7 +203,7 @@ struct QuickNoteHistory: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 20, height: 20)
-                        .foreColor(.black)
+                        .foreColor(mainColor)
                         .onTapGesture {
                             withAnimation {
                                 viewModel.currentNote = Note()
@@ -210,6 +213,7 @@ struct QuickNoteHistory: View {
                 .overlay(
                     Text("Quick Note")
                         .gilroyBold(16)
+                        .foreColor(mainColor)
                 )
                 .frame(height: 56)
                 .padding(.horizontal, 20)
@@ -222,6 +226,7 @@ struct QuickNoteHistory: View {
                         .frame(width: 150, height: 150)
                     Text("You haven't logged any notes yet.")
                         .gilroyRegular(16)
+                        .foregroundStyle(.gray)
                         .padding(.top, 5)
                     Spacer()
                 } else {
@@ -232,6 +237,7 @@ struct QuickNoteHistory: View {
                                     HStack {
                                         Text(date.format("dd MMMM yyyy"))
                                             .gilroyBold(15)
+                                            .foreColor(mainColor)
                                         Spacer()
                                     }
                                     .frame(height: 25)
@@ -263,6 +269,7 @@ struct QuickNoteHistory: View {
                     }
                 }
             }
+            .background(backgroundColor.ignoresSafeArea())
         }
     }
     
@@ -275,6 +282,14 @@ struct QuickNoteHistory: View {
                     viewModel.currentNote = note
                 }
             }
+    }
+    
+    var backgroundColor: Color {
+        return User.isTurnDarkMode ? .black : .white
+    }
+    
+    var mainColor: Color {
+        return User.isTurnDarkMode ? .white : .black
     }
 }
 

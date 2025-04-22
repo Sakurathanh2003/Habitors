@@ -73,5 +73,9 @@ class HomeViewController: BaseViewController {
         viewModel.routing.routeToQuickNote.subscribe(onNext: { [weak self] in
             self?.coordinator?.routeToQuickNote()
         }).disposed(by: self.disposeBag)
+        
+        viewModel.routing.routeToSetting.subscribe(onNext: { [weak self] in
+            self?.coordinator?.routeToSetting()
+        }).disposed(by: self.disposeBag)
     }
 }

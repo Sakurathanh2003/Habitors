@@ -7,6 +7,7 @@
 
 import SwiftUI
 import RxSwift
+import SakuraExtension
 
 struct ChooseTemplateHabitView: View {
     @ObservedObject var viewModel: ChooseTemplateHabitViewModel
@@ -21,11 +22,12 @@ struct ChooseTemplateHabitView: View {
                     }, label: {
                         HStack(spacing: 0) {
                             Image(systemName: "plus.circle.fill")
+                                .renderingMode(.template)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 24, height: 24)
                                 .padding(.trailing, 16)
-                                
+                        
                             Text("Create Custom Habit")
                                 .gilroyBold(16)
                                 .autoresize(1)
@@ -43,6 +45,7 @@ struct ChooseTemplateHabitView: View {
                         VStack(alignment: .leading) {
                             Text(category.name)
                                 .gilroyBold(24)
+                                .foreColor(mainColor)
                             
                             LazyVGrid(columns: [.init(spacing: 15), .init()], spacing: 15, content: {
                                 
@@ -73,13 +76,14 @@ struct ChooseTemplateHabitView: View {
                 .padding(.bottom, 100)
             }
         }
-        .background(Color.white.ignoresSafeArea())
+        .background(backgroundColor.ignoresSafeArea())
     }
     
     var navigationBar: some View {
         HStack {
             Text("Choose Habit")
                 .gilroyBold(30)
+                .foreColor(mainColor)
             
             Spacer()
             
@@ -87,13 +91,26 @@ struct ChooseTemplateHabitView: View {
                 viewModel.routing.stop.onNext(())
             }, label: {
                 Image("ic_x")
+                    .renderingMode(.template)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 22, height: 22)
+                    .foreColor(mainColor)
             })
         }
         .frame(height: 56)
         .padding(.horizontal, 20)
+    }
+}
+
+// MARK: - Get
+extension ChooseTemplateHabitView {
+    var backgroundColor: Color {
+        return viewModel.isTurnDarkMode ? .black : .white
+    }
+    
+    var mainColor: Color {
+        return viewModel.isTurnDarkMode ? .white : .black
     }
 }
 

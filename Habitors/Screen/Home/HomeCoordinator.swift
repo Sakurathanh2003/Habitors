@@ -16,6 +16,8 @@ final class HomeCoordinator: WindowBaseCoordinator {
     private var detailArticleCoordinator: DetailArticleCoordinator?
     private var moodieCoordinator: MoodieCoordinator?
     
+    private var settingCoordinator: SettingCoordinator?
+    
     lazy var controller: HomeViewController = {
         let viewModel = HomeViewModel()
         let controller = HomeViewController(viewModel: viewModel, coordinator: self)
@@ -56,6 +58,10 @@ final class HomeCoordinator: WindowBaseCoordinator {
         if child is DetailArticleCoordinator {
             self.detailArticleCoordinator = nil
         }
+        
+        if child is SettingCoordinator {
+            self.settingCoordinator = nil
+        }
     }
     
     func routeToCreate() {
@@ -85,5 +91,11 @@ final class HomeCoordinator: WindowBaseCoordinator {
     func routeToQuickNote() {
         let hostingController = UIHostingController(rootView: QuickNoteHistory())
         controller.navigationController?.pushViewController(hostingController, animated: true)
+    }
+    
+    func routeToSetting() {
+        self.settingCoordinator = SettingCoordinator(navigationController: controller.navigationController!)
+        self.settingCoordinator?.start()
+        self.addChild(settingCoordinator)
     }
 }

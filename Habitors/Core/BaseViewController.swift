@@ -14,7 +14,7 @@ open class BaseViewController: UIViewController {
     var disposeBag = DisposeBag()
         
     open override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .darkContent
+        return User.isTurnDarkMode ? .lightContent : .darkContent
     }
     
     open override var supportedInterfaceOrientations: UIInterfaceOrientationMask {

@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import SakuraExtension
 
 struct SelectFrequencyView: View {
     @State var type: Frequency.RepeatType = .daily
@@ -34,21 +35,24 @@ struct SelectFrequencyView: View {
     
     var body: some View {
         ZStack {
-            Color.white.ignoresSafeArea()
+            backgroundColor.ignoresSafeArea()
             
             VStack(spacing: 0) {
                 VStack {
                     HStack {
-                        Image("ic_x")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 22, height: 22)
-                            .onTapGesture {
-                                withAnimation {
-                                    didAppear = false
-                                    cancelAction()
-                                }
+                        Button {
+                            withAnimation {
+                                didAppear = false
+                                cancelAction()
                             }
+                        } label: {
+                            Image("ic_x")
+                                .renderingMode(.template)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 22, height: 22)
+                                .foreColor(mainColor)
+                        }
                         
                         Spacer()
                     }
@@ -57,6 +61,7 @@ struct SelectFrequencyView: View {
                     .overlay(
                         Text("Frequency")
                             .gilroyBold(30)
+                            .foreColor(mainColor)
                     )
                     
                     ScrollView(.vertical, showsIndicators: false) {
@@ -71,13 +76,15 @@ struct SelectFrequencyView: View {
                                     let dates = ["M", "T", "W", "T", "F", "S", "S"]
                                     ForEach(0..<dates.count, id: \.self) { index in
                                         let isSelected = isSelectedDay(index)
+                                        let selectedColor: Color = User.isTurnDarkMode ? .white : .black
+                                        let unselectedColor: Color =  User.isTurnDarkMode ? Color("Black") : Color("Gray02")
                                         Circle()
-                                            .fill(isSelected ? Color("Black") : Color("Gray02"))
+                                            .fill(isSelected ? selectedColor : unselectedColor)
                                             .overlay(
                                                 Text(dates[index])
                                                     .gilroyBold(16)
                                                     .foregroundStyle(
-                                                        isSelected ? Color.white : Color("Black")
+                                                        isSelected ? User.isTurnDarkMode ? .black : .white : !User.isTurnDarkMode ? .black : .white
                                                     )
                                             )
                                             .onTapGesture {
@@ -99,15 +106,21 @@ struct SelectFrequencyView: View {
                                 
                                 HStack(spacing: 5) {
                                     ForEach(1..<7, id: \.self) { index in
+                                        let selectedColor: Color = User.isTurnDarkMode ? .white : .black
+                                        let unselectedColor: Color = User.isTurnDarkMode ? Color("Black") : Color("Gray01")
+                                        
+                                        let selectedTextColor: Color = User.isTurnDarkMode ? .black : .white
+                                        let unselectedTextColor: Color = User.isTurnDarkMode ? .white : .black
+                                        
                                         let isSelected = index == weekly.frequency
                                         RoundedRectangle(cornerRadius: 5)
-                                            .fill(isSelected ? Color("Black") : Color("Gray02"))
+                                            .fill(isSelected ? selectedColor : unselectedColor)
                                             .frame(height: 50)
                                             .overlay(
                                                 Text("\(index)")
                                                     .gilroyBold(16)
                                                     .foregroundStyle(
-                                                        isSelected ? Color.white : Color("Black")
+                                                        isSelected ? selectedTextColor : unselectedTextColor
                                                     )
                                             )
                                             .onTapGesture {
@@ -123,11 +136,17 @@ struct SelectFrequencyView: View {
                                 HStack(spacing: 12) {
                                     ForEach(Frequency.Monthly.TimeOfMonth.allCases, id: \.self) { type in
                                         ZStack {
-                                            type == self.monthly.type ? Color("Black") : Color("Gray01")
+                                            let selectedColor: Color = User.isTurnDarkMode ? .white : .black
+                                            let unselectedColor: Color = User.isTurnDarkMode ? Color("Black") : Color("Gray01")
+                                            
+                                            let selectedTextColor: Color = User.isTurnDarkMode ? .black : .white
+                                            let unselectedTextColor: Color = User.isTurnDarkMode ? .white : .black
+                                            
+                                            type == self.monthly.type ? selectedColor : unselectedColor
                                             
                                             Text(type.rawValue.capitalized)
                                                 .gilroyBold(18)
-                                                .foregroundStyle(type == self.monthly.type ? Color.white : Color("Black"))
+                                                .foregroundStyle(type == self.monthly.type ? selectedTextColor : unselectedTextColor)
                                         }
                                         .frame(height: 50)
                                         .cornerRadius(5)
@@ -419,11 +438,17 @@ struct SelectFrequencyView: View {
         HStack(spacing: 12) {
             ForEach(Frequency.RepeatType.allCases, id: \.self) { type in
                 ZStack {
-                    type == self.type ? Color("Black") : Color("Gray01")
+                    let selectedColor: Color = User.isTurnDarkMode ? .white : .black
+                    let unselectedColor: Color = User.isTurnDarkMode ? Color("Black") : Color("Gray01")
+                    
+                    let selectedTextColor: Color = User.isTurnDarkMode ? .black : .white
+                    let unselectedTextColor: Color = User.isTurnDarkMode ? .white : .black
+                    
+                    type == self.type ? selectedColor : unselectedColor
                     
                     Text(type.rawValue.capitalized)
                         .gilroyBold(18)
-                        .foregroundStyle(type == self.type ? Color.white : Color("Black"))
+                        .foregroundStyle(type == self.type ? selectedTextColor : unselectedTextColor)
                 }
                 .frame(height: 50)
                 .cornerRadius(5)
@@ -436,13 +461,24 @@ struct SelectFrequencyView: View {
     
     func sectionTitle(_ text: String) -> some View {
         HStack {
-            Text(text).gilroyBold(23)
+            Text(text)
+                .gilroyBold(23)
+                .foreColor(mainColor)
             Spacer()
         }
     }
     
     func isSelectedDay(_ index: Int) -> Bool {
         return daily.selectedDays.contains(where: { $0 == index + 2})
+    }
+    
+    // MARK: - Get
+    var backgroundColor: Color {
+        return User.isTurnDarkMode ? .black : .white
+    }
+    
+    var mainColor: Color {
+        return User.isTurnDarkMode ? .white : .black
     }
 }
 

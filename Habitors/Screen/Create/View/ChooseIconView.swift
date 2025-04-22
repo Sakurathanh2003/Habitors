@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import SwiftUIIntrospect
+import SakuraExtension
 
 struct IconCategory {
     var name: String
@@ -38,21 +39,24 @@ struct ChooseIconView: View {
 
     var body: some View {
         ZStack {
-            Color.white.ignoresSafeArea()
+            backgroundColor.ignoresSafeArea()
             
             VStack(spacing: 0) {
                 VStack {
                     HStack {
-                        Image("ic_x")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 22, height: 22)
-                            .onTapGesture {
-                                withAnimation {
-                                    didAppear = false
-                                    cancelAction()
-                                }
+                        Button {
+                            withAnimation {
+                                didAppear = false
+                                cancelAction()
                             }
+                        } label: {
+                            Image("ic_x")
+                                .renderingMode(.template)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 22, height: 22)
+                                .foreColor(mainColor)
+                        }
                         
                         Spacer()
                     }
@@ -61,6 +65,7 @@ struct ChooseIconView: View {
                     .overlay(
                         Text("Icon")
                             .gilroyBold(30)
+                            .foreColor(mainColor)
                     )
                 }
                 
@@ -69,13 +74,13 @@ struct ChooseIconView: View {
                         ForEach(categories.indices, id: \.self) { index in
                             let name = categories[index].name
                             let isSelected = index == currentIndex
-                            
+                        
                             Text(name.capitalized)
                                 .gilroyBold(16)
                                 .padding(.horizontal, 15)
                                 .frame(height: 28)
-                                .background(isSelected ? Color("Black"): Color("Gray02"))
-                                .foregroundColor(isSelected ? .white : .black)
+                                .background(isSelected ? User.isTurnDarkMode ? .white : .black : .clear)
+                                .foregroundColor(isSelected ? User.isTurnDarkMode ? .black : .white : .white)
                                 .cornerRadius(5)
                                 .onTapGesture {
                                     currentIndex = index
@@ -86,7 +91,6 @@ struct ChooseIconView: View {
                 }
                 .padding(.top, 10)
                 
-                                
                 if !currentCategory.enterKeyboard {
                     ScrollView {
                         listItem()
@@ -140,8 +144,6 @@ struct ChooseIconView: View {
         return nil
     }
     
-    
-    
     // MARK: - List Item
     func listItem() -> some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 50))], content: {
@@ -159,6 +161,17 @@ struct ChooseIconView: View {
             }
         })
         .padding(20)
+    }
+}
+
+// MARK: - Get
+extension ChooseIconView {
+    var backgroundColor: Color {
+        return User.isTurnDarkMode ? .black : .white
+    }
+    
+    var mainColor: Color {
+        return User.isTurnDarkMode ? .white : .black
     }
 }
 

@@ -27,10 +27,6 @@ struct HomeView: View {
     @ObservedObject var player: AudioPlayer = .shared
     @State var isAudioOpening: Bool = false
     
-    var theme: AppTheme {
-        return .theme1
-    }
-    
     @ViewBuilder
     var body: some View {
         if let tool = viewModel.currentTool {
@@ -71,7 +67,7 @@ struct HomeView: View {
                     
                     HomeTabbarView(viewModel: viewModel)
                 }
-            }.background(theme.backgroundColor.ignoresSafeArea())
+            }.background(backgroundColor.ignoresSafeArea())
         }
     }
     
@@ -98,6 +94,7 @@ struct HomeView: View {
                 }
                 .padding(10)
                 .background(mood.color.opacity(0.6))
+                .background(.white)
                 .cornerRadius(5, corners: .allCorners)
                 .onTapGesture {
                     viewModel.routing.routeToMoodie.onNext(())
@@ -111,10 +108,13 @@ struct HomeView: View {
             if viewModel.tasks.isEmpty {
                 VStack(spacing: 16) {
                     Image("ic_empty_task")
+                        .renderingMode(.template)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 50)
                         .padding(.top, 20)
+                        .foreColor(.gray)
+                        
                     Text("You have no habits scheduled for this day. Keep up the good work and enjoy your break! 😊")
                         .gilroyRegular(16)
                         .lineSpacing(5)
@@ -139,7 +139,7 @@ struct HomeView: View {
                 .mask(
                     LinearGradient(stops: [
                         .init(color: .clear, location: 0),
-                        .init(color: .black, location: 0.1)
+                        .init(color: .black, location: 0.05)
                     ], startPoint: .top, endPoint: .bottom)
                 )
             }
@@ -152,7 +152,8 @@ struct HomeView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
                     ForEach(viewModel.dateInMonth, id: \.timeIntervalSince1970) { date in
-                        DateView(date: date,
+                        DateView(isDarkMode: $viewModel.isTurnDarkMode,
+                                 date: date,
                                  isSelected: viewModel.isSelectedDate(date))
                         .id(date.format("dd"))
                         .onTapGesture {
@@ -180,14 +181,20 @@ struct HomeView: View {
         HStack {
             Text(viewModel.currentTab.rawValue.capitalized)
                 .gilroyBold(28)
-                .foregroundStyle(Color("Black"))
+                .foregroundStyle(textColor)
             
             Spacer()
-                        
-            Image("ic_setting")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 24, height: 24)
+                    
+            Button {
+                viewModel.routing.routeToSetting.onNext(())
+            } label: {
+                Image("ic_setting")
+                    .renderingMode(.template)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 24, height: 24)
+                    .foregroundStyle(textColor)
+            }
         }
         .frame(height: 56)
     }
@@ -199,9 +206,11 @@ fileprivate struct HomeTabbarView: View {
     
     var body: some View {
         HStack {
+            Spacer(minLength: 0)
             tabItemView(.home)
+            Spacer(minLength: 0)
             tabItemView(.overall)
-            
+            Spacer(minLength: 0)
             Circle()
                 .fill(Color("Black"))
                 .frame(width: 59, height: 59)
@@ -217,9 +226,11 @@ fileprivate struct HomeTabbarView: View {
                 .onTapGesture {
                     viewModel.routing.routeToCreate.onNext(())
                 }
-            
+            Spacer(minLength: 0)
             tabItemView(.discover)
+            Spacer(minLength: 0)
             tabItemView(.tools)
+            Spacer(minLength: 0)
         }
         .frame(height: 60)
         .padding(.top, 10)
@@ -227,30 +238,49 @@ fileprivate struct HomeTabbarView: View {
     
     @ViewBuilder
     func tabItemView(_ tab: HomeTab) -> some View {
-        ZStack {
-            Color.clear
-            if viewModel.isSelected(tab) {
-                VStack(spacing: 4) {
-                    Text(tab.rawValue.capitalized)
-                        .gilroyBold(14)
-                        .frame(height: 24)
-                        .foregroundColor(Color("Black"))
-                    
-                    Color("Primary")
-                        .frame(width: 10, height: 3)
-                        .cornerRadius(3)
-                }
-               
-            } else {
-                Image("tab_\(tab.rawValue)")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 24, height: 24)
-            }
-        }
-        .onTapGesture {
+        Button {
             viewModel.input.selectTab.onNext(tab)
+        } label: {
+            ZStack {
+                Color.clear
+                if viewModel.isSelected(tab) {
+                    VStack(spacing: 4) {
+                        Text(tab.rawValue.capitalized)
+                            .gilroyBold(14)
+                            .frame(height: 24)
+                            .foregroundColor(textColor)
+                        
+                        Color("Primary")
+                            .frame(width: 10, height: 3)
+                            .cornerRadius(3)
+                    }
+                   
+                } else {
+                    Image("tab_\(tab.rawValue)")
+                        .renderingMode(.template)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 24, height: 24)
+                        .foreColor(.gray)
+                }
+            }
+            .frame(width: 60)
         }
+    }
+    
+    var textColor: Color {
+        return viewModel.isTurnDarkMode ? .white : .black
+    }
+}
+
+// MARK: - Get
+extension HomeView {
+    var backgroundColor: Color {
+        return viewModel.isTurnDarkMode ? .black : .white
+    }
+    
+    var textColor: Color {
+        return viewModel.isTurnDarkMode ? .white : .black
     }
 }
 
