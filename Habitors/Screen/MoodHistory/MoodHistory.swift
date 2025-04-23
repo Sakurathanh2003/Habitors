@@ -7,6 +7,7 @@
 
 import SwiftUI
 import RxSwift
+import SakuraExtension
 
 struct MoodHistory: View {
     @ObservedObject var viewModel: MoodHistoryViewModel
@@ -15,22 +16,12 @@ struct MoodHistory: View {
     
     var body: some View {
         VStack {
-            HStack {
-                Image("ic_back")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 24, height: 24)
-                    .onTapGesture {
-                        viewModel.routing.stop.onNext(())
-                    }
-                Spacer()
-            }
-            .frame(height: 56)
-            .overlay(
-                Text("Mood History")
-                    .gilroyBold(16)
-            )
-            .padding(.horizontal, 20)
+            NavigationBarView(
+                title: "Mood History",
+                secondItem: nil,
+                isDarkMode: viewModel.isTurnDarkMode) {
+                    viewModel.routing.stop.onNext(())
+                }
             
             if moodGroup.isEmpty {
                 Spacer().frame(height: 100)
@@ -40,6 +31,7 @@ struct MoodHistory: View {
                     .frame(width: 150, height: 150)
                 Text("You haven't logged any moods yet.")
                     .gilroyRegular(16)
+                    .foreColor(.gray)
                     .padding(.top, 5)
                 Spacer()
             } else {
@@ -51,6 +43,8 @@ struct MoodHistory: View {
                             HStack {
                                 Text(date.format("dd MMMM yyyy"))
                                     .gilroyBold(18)
+                                    .foreColor(mainColor)
+                                
                                 Spacer()
                             }.frame(height: 25)
                             
@@ -81,7 +75,7 @@ struct MoodHistory: View {
                 }
             }
         )
-        .background(Color.white.ignoresSafeArea())
+        .background(backgroundColor.ignoresSafeArea())
         .onAppear {
             getListRecord()
         }
@@ -136,6 +130,14 @@ struct MoodHistory: View {
         moodGroup = Dictionary(grouping: listMood) { record in
             Calendar.current.startOfDay(for: record.createdDate)
         }
+    }
+    
+    var backgroundColor: Color {
+        return viewModel.isTurnDarkMode ? .black : .white
+    }
+    
+    var mainColor: Color {
+        return viewModel.isTurnDarkMode ? .white : .black
     }
 }
 

@@ -6,6 +6,7 @@
 //
 import RxSwift
 import SwiftUI
+import SakuraExtension
 
 struct InputView: View {
     @Binding var isShowing: Bool
@@ -33,13 +34,16 @@ struct InputView: View {
                     
                     Spacer()
                     
-                    Image("ic_x")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 22, height: 22)
-                        .onTapGesture {
-                            dismiss()
-                        }
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image("ic_x")
+                            .renderingMode(.template)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 22, height: 22)
+                            .foreColor(.black)
+                    }
                 }
                 .padding(.horizontal, 20)
                 .frame(height: 46)

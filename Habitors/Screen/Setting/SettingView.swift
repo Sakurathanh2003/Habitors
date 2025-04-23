@@ -28,7 +28,7 @@ struct SettingView: View {
                 Spacer()
             }
             .overlay(
-                Text(title)
+                Text("Setting")
                     .gilroyBold(20)
                     .foregroundStyle(mainColor)
             )
@@ -38,7 +38,7 @@ struct SettingView: View {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {
                     HStack {
-                        Text(viewModel.isVietnameseLanguage ? "Ngôn ngữ" : "Language")
+                        Text("Language")
                             .gilroySemiBold(16)
                             .foregroundStyle(mainColor)
                         
@@ -80,13 +80,13 @@ struct SettingView: View {
                     }.frame(height: 56)
                     
                     HStack {
-                        Text(viewModel.isVietnameseLanguage ? "Chế độ tối" : "Dark Mode")
+                        Text("Dark Mode")
                             .gilroySemiBold(16)
                             .foregroundStyle(mainColor)
                         
                         Spacer()
                         
-                        Text(viewModel.isVietnameseLanguage ? "Tắt" : "Off")
+                        Text("Off")
                             .gilroyBold(16)
                             .foregroundStyle(!viewModel.isTurnDarkMode ? mainColor : .gray)
                         HStack {
@@ -112,7 +112,7 @@ struct SettingView: View {
                             }
                         }
                         
-                        Text(viewModel.isVietnameseLanguage ? "Bật" : "On")
+                        Text("On")
                             .gilroyBold(16)
                             .foregroundStyle(viewModel.isTurnDarkMode ? mainColor : .gray)
                     }.frame(height: 56)
@@ -120,6 +120,7 @@ struct SettingView: View {
             }
         }
         .background(backgroundColor.ignoresSafeArea())
+        .environment(\.locale, viewModel.isVietnameseLanguage ? Locale(identifier: "VI") : Locale(identifier: "EN"))
     }
 }
 
@@ -138,14 +139,6 @@ extension SettingView {
         }
         
         return .black
-    }
-    
-    var title: String {
-        if viewModel.isVietnameseLanguage {
-            return "Cài đặt"
-        }
-        
-        return "Setting"
     }
 }
 

@@ -12,9 +12,10 @@ extension Date {
         return Calendar.current
     }
     
-    func format(_ format: String) -> String {
+    func format(_ format: String, isVietnamese: Bool = false) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = format
+        formatter.locale = isVietnamese ? Locale(identifier: "VI") :  Locale(identifier: "EN")
         return formatter.string(from: self)
     }
     

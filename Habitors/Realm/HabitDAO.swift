@@ -25,17 +25,15 @@ final class HabitDAO: RealmDao {
         do {
             try self.addObjectAndUpdate(object)
             print("✅ Đã thêm 1 habit: \(item.name)")
-            setupStepRecordIfNeed(habit: item)
-            setupExerciseMinRecordIfNeed(habit: item)
-            setupWaterRecordIfNeed(habit: item)
+            setupRecordIfNeed(habit: item)
             NotificationCenter.default.post(name: .addHabitItem, object: item)
         } catch {
             print("error: \(error)")
         }
     }
     
-    func setupWaterRecordIfNeed(habit: Habit) {
-        guard habit.goalUnit == .water else {
+    func setupRecordIfNeed(habit: Habit) {
+        guard let service = habit.goalUnit.healthService else {
             return
         }
         
@@ -46,74 +44,18 @@ final class HabitDAO: RealmDao {
                 let setDate = startDate.startOfDay
                 
                 if setDate.isDateValid(habit) {
-                    let stepCount = await HealthManager.shared.fetchWaterInDate(endDate: startDate.endOfDay)
+                    let newValue = await service.fetchData(for: startDate.endOfDay)
                     
                     if let record = habit.records.first(where: { $0.date.isSameDay(date: setDate) }) {
-                        if record.value != stepCount {
-                            print("record đã có ngày \(setDate.format("dd MMMM yyyy")): \(stepCount)")
-                            record.value = stepCount
+                        if record.value != newValue {
+                            print("record đã có ngày \(setDate.format("dd MMMM yyyy")): \(newValue)")
+                            record.value = newValue
                             HabitRecordDAO.shared.updateObject(item: record)
                         }
                     } else {
-                        print("record mới tạo ngày \(setDate.format("dd MMMM yyyy")): \(stepCount)")
-                        HabitRecordDAO.shared.addObject(habitID: habit.id, value: stepCount, date: setDate, createdAt: Date())
+                        print("record mới tạo ngày \(setDate.format("dd MMMM yyyy")): \(newValue)")
+                        HabitRecordDAO.shared.addObject(habitID: habit.id, value: newValue, date: setDate, createdAt: Date())
                     }
-                }
-                
-                startDate = startDate.nextDay
-            }
-        }
-    }
-    
-    func setupStepRecordIfNeed(habit: Habit) {
-        guard habit.goalUnit == .steps else {
-            return
-        }
-        
-        Task {
-            var startDate = habit.startedDate
-                        
-            while !startDate.isFutureDay {
-                let setDate = startDate.startOfDay
-                
-                if setDate.isDateValid(habit) {
-                    let stepCount = await HealthManager.shared.fetchStepCountDate(endDate: startDate.endOfDay)
-                    
-                    if let record = habit.records.first(where: { $0.date.isSameDay(date: setDate) }) {
-                        if record.value != stepCount {
-                            print("record đã có ngày \(setDate.format("dd MMMM yyyy")): \(stepCount)")
-                            record.value = stepCount
-                            HabitRecordDAO.shared.updateObject(item: record)
-                        }
-                    } else {
-                        print("record mới tạo ngày \(setDate.format("dd MMMM yyyy")): \(stepCount)")
-                        HabitRecordDAO.shared.addObject(habitID: habit.id, value: stepCount, date: setDate, createdAt: Date())
-                    }
-                }
-                
-                startDate = startDate.nextDay
-            }
-        }
-    }
-    
-    func setupExerciseMinRecordIfNeed(habit: Habit) {
-        guard habit.goalUnit == .exerciseTime else {
-            return
-        }
-        
-        Task {
-            var startDate = habit.startedDate
-                        
-            while !startDate.isFutureDay {
-                let setDate = startDate.startOfDay
-                
-                if setDate.isDateValid(habit) {
-                    let excerciseTime = await HealthManager.shared.fetchExerciseTime(endDate: startDate.endOfDay)
-                    
-                    HabitRecordDAO.shared.addObject(habitID: habit.id,
-                                                    value: excerciseTime,
-                                                    date: setDate,
-                                                    createdAt: Date())
                 }
                 
                 startDate = startDate.nextDay
@@ -127,11 +69,7 @@ final class HabitDAO: RealmDao {
         
         do {
             try self.addObjectAndUpdate(object)
-            
-            removeRecordIfNeed(habit: item)
-            setupStepRecordIfNeed(habit: item)
-            setupWaterRecordIfNeed(habit: item)
-            
+            setupRecordIfNeed(habit: item)
             print("Đã update habit:\(item.name) thành công")
             NotificationCenter.default.post(name: .updateHabitItem, object: item)
         } catch {

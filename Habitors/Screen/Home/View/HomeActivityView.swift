@@ -92,6 +92,7 @@ struct SummaryView: View {
         }
     }
     
+    @ObservedObject var viewModel: HomeActivityViewModel
     @Binding var currentMonth: Date
     
     var habits: [Habit]
@@ -125,10 +126,11 @@ struct SummaryView: View {
                 Spacer()
             }
             
+            let unitString = viewModel.translate("\(type.unit)")
             Text(value.text).gilroyBold(16)
-            + Text(" \(type.unit)").gilroyRegular(10)
+            + Text(" \(unitString)").gilroyRegular(10)
                
-            Text(type.title)
+            Text(viewModel.translate(type.title))
                 .gilroyRegular(10)
                 .padding(.top, 3)
         }
@@ -250,16 +252,6 @@ struct SummaryView: View {
     }
 }
 
-class HomeActivityViewModel: NSObject, ObservableObject {
-    @Published var habits: [Habit] = []
-    @Published var currentHabit: Habit?
-    
-    override init() {
-        super.init()
-        habits = HabitDAO.shared.getAll()
-    }
-}
-
 // MARK: - HomeActivityView
 struct HomeActivityView: View {
     @ObservedObject var viewModel: HomeActivityViewModel
@@ -323,16 +315,6 @@ struct HomeActivityView: View {
                     } else {
                         Color.white
                     }
-                    
-                    VStack(spacing: 0) {
-                        Spacer()
-                        
-                        if !User.isTurnDarkMode {
-                            Color.black.frame(height: 1)
-                        } else {
-                            Color.white.frame(height: 1)
-                        }
-                    }
                 }
             )
             .zIndex(1)
@@ -349,16 +331,20 @@ struct HomeActivityView: View {
                                      habit: currentHabit)
                     } else {
                         LazyVGrid(columns: [.init(), .init()]) {
-                            SummaryView(currentMonth: $currentMonth,
+                            SummaryView(viewModel: viewModel,
+                                        currentMonth: $currentMonth,
                                         habits: viewModel.habits,
                                         type: .doneInMonth)
-                            SummaryView(currentMonth: $currentMonth,
+                            SummaryView(viewModel: viewModel,
+                                currentMonth: $currentMonth,
                                         habits: viewModel.habits,
                                         type: .totalDone)
-                            SummaryView(currentMonth: $currentMonth,
+                            SummaryView(viewModel: viewModel,
+                                currentMonth: $currentMonth,
                                         habits: viewModel.habits,
                                         type: .currentStreak)
-                            SummaryView(currentMonth: $currentMonth,
+                            SummaryView(viewModel: viewModel,
+                                currentMonth: $currentMonth,
                                         habits: viewModel.habits,
                                         type: .bestStreak)
                         }
@@ -376,16 +362,20 @@ struct HomeActivityView: View {
     var summaryView: some View {
         if let currentHabit = viewModel.currentHabit {
             LazyVGrid(columns: [.init(), .init()]) {
-                SummaryView(currentMonth: $currentMonth,
+                SummaryView(viewModel: viewModel,
+                    currentMonth: $currentMonth,
                             habits: [currentHabit],
                             type: .doneInMonth)
-                SummaryView(currentMonth: $currentMonth,
+                SummaryView(viewModel: viewModel,
+                    currentMonth: $currentMonth,
                             habits: [currentHabit],
                             type: .totalDone)
-                SummaryView(currentMonth: $currentMonth,
+                SummaryView(viewModel: viewModel,
+                            currentMonth: $currentMonth,
                             habits: [currentHabit],
                             type: .currentStreak)
-                SummaryView(currentMonth: $currentMonth,
+                SummaryView(viewModel: viewModel,
+                            currentMonth: $currentMonth,
                             habits: [currentHabit],
                             type: .bestStreak)
             }

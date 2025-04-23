@@ -48,8 +48,6 @@ struct HomeToolView: View {
         ScrollView {
             LazyVGrid(columns: [.init(spacing: Const.itemSpacing)], spacing: Const.itemSpacing) {
                 HStack(spacing: Const.itemSpacing) {
-                    
-                    
                     HStack(spacing: 0) {
                         VStack(alignment: .leading) {
                             Text("Quick Note")
@@ -73,7 +71,7 @@ struct HomeToolView: View {
                     }
                 }
                 
-                GroupItemView(animation: namespace, tools: [
+                GroupItemView(viewModel: viewModel, animation: namespace, tools: [
                     .relaxingMusic,
                     .natureSounds,
                     .meditativeMusic,
@@ -85,12 +83,14 @@ struct HomeToolView: View {
                 })
             }
             .padding(.horizontal, Const.horizontalPadding)
+            .padding(.bottom, 100)
         }
     }
 }
 
 // MARK: - GroupItemView
 fileprivate struct GroupItemView: View {
+    @ObservedObject var viewModel: HomeViewModel
     var animation: Namespace.ID
     var tools: [Tool]
     var selectTool: (Tool) -> Void
@@ -99,7 +99,7 @@ fileprivate struct GroupItemView: View {
         HStack(spacing: Const.itemSpacing) {
             VStack(spacing: Const.itemSpacing) {
                 if tools.count > 0 {
-                    ToolItemView(animation: animation, index: 0, tool: tools[0])
+                    ToolItemView(viewModel: viewModel, animation: animation, index: 0, tool: tools[0])
                         .onTapGesture {
                             selectTool(tools[0])
                         }
@@ -108,7 +108,7 @@ fileprivate struct GroupItemView: View {
                 }
                 
                 if tools.count > 2 {
-                    ToolItemView(animation: animation, index: 2, tool: tools[2])
+                    ToolItemView(viewModel: viewModel, animation: animation, index: 2, tool: tools[2])
                         .onTapGesture {
                             selectTool(tools[2])
                         }
@@ -119,7 +119,7 @@ fileprivate struct GroupItemView: View {
             
             VStack(spacing: Const.itemSpacing) {
                 if tools.count > 1 {
-                    ToolItemView(animation: animation, index: 1, tool: tools[1])
+                    ToolItemView(viewModel: viewModel, animation: animation, index: 1, tool: tools[1])
                         .onTapGesture {
                             selectTool(tools[1])
                         }
@@ -128,7 +128,7 @@ fileprivate struct GroupItemView: View {
                 }
                 
                 if tools.count > 3 {
-                    ToolItemView(animation: animation, index: 3, tool: tools[3])
+                    ToolItemView(viewModel: viewModel, animation: animation, index: 3, tool: tools[3])
                         .onTapGesture {
                             selectTool(tools[3])
                         }
@@ -144,93 +144,17 @@ fileprivate struct GroupItemView: View {
     }
 }
 
-// MARK: - Audio Player
-class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
-    static let shared = AudioPlayer()
-    private var player = AVAudioPlayer()
-    
-    @Published var isPlaying: Bool = false
-    @Published var currentURL: URL?
-    @Published var progress: CGFloat = 0
-    private var timer: Timer?
-    
-    func play(_ url: URL) {
-        do {
-            try AVAudioSession.sharedInstance().setCategory(.playback)
-            if currentURL == url {
-                self.player.play()
-                self.isPlaying = true
-                startTimer()
-                return
-            }
-            
-            self.player = try AVAudioPlayer(contentsOf: url)
-            self.player.delegate = self
-            self.player.play()
-            self.currentURL = url
-            self.isPlaying = true
-            startTimer()
-        } catch {
-            print("Error: \(error)")
-            self.isPlaying = false
-        }
-    }
-    
-    func pause() {
-        self.isPlaying = false
-        self.player.pause()
-        stopTimer()
-    }
-    
-    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        self.isPlaying = false
-    }
-    
-    func audioPlayerBeginInterruption(_ player: AVAudioPlayer) {
-        self.pause()
-    }
-    
-    func getItem() -> String? {
-        return currentURL?.deletingPathExtension().lastPathComponent
-    }
-    
-    func startTimer() {
-        stopTimer() // Xoá timer cũ nếu có
-        
-        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [unowned self] _ in
-            self.progress = player.currentTime / player.duration
-        }
-    }
-    
-    func stopTimer() {
-        timer?.invalidate()
-        timer = nil
-    }
-    
-    func seek(to value: Double) {
-        player.currentTime = value * player.duration
-    }
-    
-    func forward(seconds: TimeInterval = 15) {
-        let newTime = min(player.currentTime + seconds, player.duration)
-        player.currentTime = newTime
-    }
-    
-    func rewind(seconds: TimeInterval = 15) {
-        let newTime = max(player.currentTime - seconds, 0)
-        player.currentTime = newTime
-    }
-}
-
+// MARK: - ToolItemView
 struct ToolItemView: View {
+    @ObservedObject var viewModel: HomeViewModel
+    @ObservedObject var player: AudioPlayer = .shared
+    @State var isAudioOpening: Bool = false
+    
     var animation: Namespace.ID
     var index: Int = 0
     var tool: Tool
     var isOpening: Bool = false
     var closeAction: (() -> Void)?
-    
-    @ObservedObject var player: AudioPlayer = .shared
-    @State var isAudioOpening: Bool = false
     
     @ViewBuilder
     var body: some View {
@@ -250,7 +174,7 @@ struct ToolItemView: View {
                         .padding(.leading, 20)
                     
                     VStack(alignment: .leading) {
-                        Text(tool.rawValue)
+                        Text(viewModel.translate(tool.rawValue))
                             .gilroyBold(30)
                             .padding(.horizontal, 20)
                             .padding(.bottom, 60)
@@ -336,7 +260,7 @@ struct ToolItemView: View {
                 .overlay(
                     ZStack(alignment: .bottomLeading) {
                         Color.clear
-                        Text(tool.rawValue)
+                        Text(viewModel.translate(tool.rawValue))
                             .gilroyBold(18)
                             .foreColor(.white)
                             .padding(10)
@@ -355,6 +279,7 @@ struct ToolItemView: View {
     }
 }
 
+// MARK: - AudioView
 struct AudioView: View {
     @ObservedObject var player: AudioPlayer
     var item: String

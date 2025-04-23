@@ -16,8 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         configRealm()
         configAppCoordinator()
+        configAppleHealthService()
         HabitScheduler.requestNotificationPermission()
-        HealthManager.shared.startObserver()
+        
+        
         return true
     }
     
@@ -31,8 +33,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.coodinator.start()
     }
     
+    private func configAppleHealthService() {
+        Task {
+            await WaterService().startObserver()
+            await StepCountService().startObserver()
+            await ExerciseTimeService().startObserver()
+            await StandService().startObserver()
+        }
+    }
+    
     func applicationDidEnterBackground(_ application: UIApplication) {
-        HealthManager.shared.startObserver()
+        
     }
 }
 

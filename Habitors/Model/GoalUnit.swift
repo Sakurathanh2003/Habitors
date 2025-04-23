@@ -33,6 +33,7 @@ enum GoalUnit: String, Codable, PersistableEnum, CaseIterable {
     case exerciseTime
     case steps
     case water
+    case standHour
     
     static func custom() -> [GoalUnit] {
         [.count, .kcal, .lbs, .ml, .usoz, .mile, .km, .m, .secs, .min, .hours]
@@ -41,7 +42,7 @@ enum GoalUnit: String, Codable, PersistableEnum, CaseIterable {
     var description: String {
         switch self {
         case .secs: "giây"
-        case .min, .exerciseTime: "phút"
+        case .min, .exerciseTime, .standHour: "phút"
         case .water: "ml"
         case .hours: "giờ"
         default: self.rawValue
@@ -52,9 +53,7 @@ enum GoalUnit: String, Codable, PersistableEnum, CaseIterable {
 extension GoalUnit {
     var useAppleHealth: Bool {
         switch self {
-        case .steps: true
-        case .exerciseTime: true
-        case .water: true
+        case .steps, .exerciseTime, .water, .standHour: true
         default: false
         }
     }
@@ -64,6 +63,7 @@ extension GoalUnit {
         case .steps: HKQuantityType(.stepCount).maximumAllowedDuration
         case .exerciseTime: HKObjectType.workoutType().maximumAllowedDuration
         case .water: HKQuantityType(.dietaryWater).maximumAllowedDuration
+        case .standHour: HKQuantityType(.appleStandTime).maximumAllowedDuration
         default: nil
         }
     }
@@ -73,6 +73,7 @@ extension GoalUnit {
         case .steps: HKQuantityType(.stepCount)
         case .exerciseTime: HKQuantityType(.appleExerciseTime)
         case .water: HKQuantityType(.dietaryWater)
+        case .standHour: HKQuantityType(.appleStandTime)
         default: nil
         }
     }
@@ -80,7 +81,6 @@ extension GoalUnit {
     var writeType: HKSampleType? {
         switch self {
         case .steps: HKQuantityType(.stepCount)
-        case .exerciseTime: HKObjectType.workoutType()
         case .water: HKQuantityType(.dietaryWater)
         default: nil
         }
@@ -91,6 +91,7 @@ extension GoalUnit {
         case .steps: "Bạn cần cấp quyền ứng dụng đọc số lượng bước"
         case .exerciseTime: "Bạn cần cấp quyền ứng dụng đọc thời gian tập thể dục"
         case .water: "Bạn cần cấp quyền ứng dụng đọc số lượng nước đã uống"
+        case .standHour: "Bạn cần cấp quyền ứng dụng đọc số giờ đứng"
         default: ""
         }
     }
@@ -125,6 +126,26 @@ extension GoalUnit {
             return base / 3600       // Giây vẫn là giây
         default:
             return base
+        }
+    }
+    
+    var canSetData: Bool {
+        switch self {
+        case .exerciseTime, .standHour: false
+        default: true
+        }
+    }
+}
+
+// MARK: - Apple Health
+extension GoalUnit {
+    var healthService: HealthService? {
+        switch self {
+        case .exerciseTime: ExerciseTimeService()
+        case .water: WaterService()
+        case .steps: StepCountService()
+        case .standHour: StandService()
+        default: nil
         }
     }
 }

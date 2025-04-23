@@ -104,16 +104,18 @@ final class HabitRecordViewModel: BaseViewModel<HabitRecordViewModelInput, Habit
                 return
             }
             
-            if let unit = record.habit?.goalUnit, unit.useAppleHealth {
-                HealthManager.shared.checkHealthKitWritePermission(type: unit.writeType!) { [weak self] canWrite in
+            if let unit = record.habit?.goalUnit, let appleService = unit.healthService {
+                appleService.checkWritePermission { [weak self] canWrite in
                     guard let self else {
                         return
                     }
                     
                     DispatchQueue.main.async {
                         if canWrite {
-                            HealthManager.shared.saveData(for: unit, value: value, date: self.recordDate) { [weak self] isSuccess, error in
-                                self?.setValue(newValue)
+                            appleService.saveData(value, in: self.recordDate) { [weak self] isSuccess, error in
+                                if let error {
+                                    self?.routing.showAlert.onNext(error.localizedDescription)
+                                }
                             }
                         } else {
                             self.routing.needToPermission.onNext(self.record.habit?.goalUnit.permissionWriteMessage ?? "")
@@ -165,8 +167,8 @@ final class HabitRecordViewModel: BaseViewModel<HabitRecordViewModelInput, Habit
                 return
             }
             
-            if let unit = record.habit?.goalUnit, unit.useAppleHealth {
-                HealthManager.shared.checkHealthKitWritePermission(type: unit.writeType!) { [weak self] canWrite in
+            if let service = record.habit?.goalUnit.healthService {
+                service.checkWritePermission { [weak self] canWrite in
                     guard let self else {
                         return
                     }
@@ -198,11 +200,7 @@ final class HabitRecordViewModel: BaseViewModel<HabitRecordViewModelInput, Habit
                 return
             }
             
-            if currentValue == goalValue {
-                stopTimer()
-            } else {
-                self.setValue(self.currentValue + 1)
-            }
+            self.setValue(self.currentValue + 1)
         })
     }
     
@@ -228,7 +226,7 @@ extension HabitRecordViewModel {
     }
     
     var currentValue: Double {
-        return max(record.value ?? 0, 0)
+        return max(record.value, 0)
     }
     
     var progress: CGFloat {
@@ -239,7 +237,7 @@ extension HabitRecordViewModel {
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.minute, .second]
         formatter.zeroFormattingBehavior = [.pad]
-
+        
         let formattedTime = formatter.string(from: TimeInterval(currentValue)) ?? "00:00"
         return formattedTime
     }

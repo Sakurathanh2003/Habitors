@@ -37,7 +37,7 @@ struct SingleTaskView: View {
                     .foregroundStyle(Color("Black"))
                 
                 if isCompleted {
-                    Text("Đã hoàn thành")
+                    Text("Completed")
                         .gilroyMedium(12)
                         .foregroundStyle(Color("Success"))
                 } else {

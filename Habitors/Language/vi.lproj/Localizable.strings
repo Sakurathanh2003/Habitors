@@ -1,0 +1,29 @@
+/* 
+  Localizable.strings
+  Habitors
+
+  Created by Thanh Vu on 23/4/25.
+  
+*/
+
+"Setting" = "Cài đặt";
+"Home" = "Trang chủ";
+"Overall" = "Tổng quan";
+"Discover" = "Khám phá";
+"Tools" = "Công cụ";
+"How do you feel?" = "Bạn cảm thấy thể nào?";
+"Tap to record" = "Chạm để ghi tâm trạng";
+"Quick Note" = "Ghi chú nhanh";
+"Tap to add" = "Chạm để thêm";
+
+"Relaxing Music" = "Nhạc thư giãn";
+"Nature Sounds" = "Âm thanh thiên nhiên";
+"Meditative Music" = "Nhạc thiền";
+"Soundscape Music" = "Nhạc âm thanh cảnh vật";
+
+"Done in month" = "Hoàn thành trong tháng";
+"Total Done" = "Tổng hoàn thành";
+"Current Streak" = "Chuỗi hiện tại";
+"Best Streak" = "Kỷ lục chuỗi";
+
+"Day" = "Ngày";

@@ -51,7 +51,6 @@ final class CreateViewModel: BaseViewModel<CreateViewModelInput, CreateViewModel
     @Published var goalUnit: GoalUnit = .count
     @Published var goalValue: Double = 1
     
-    
     @Published var isShowingChangeValueGoal: Bool = false
     @Published var isShowingSelectGoalView: Bool = false
     
@@ -142,8 +141,8 @@ final class CreateViewModel: BaseViewModel<CreateViewModelInput, CreateViewModel
     }
     
     private func checkHealthPermissionIfNeed(completion: @escaping (String?) -> Void) {
-        if goalUnit.useAppleHealth {
-            HealthManager.shared.requestAuthorization(for: goalUnit) { [weak self] canRead, canWrite in
+        if let appleService = goalUnit.healthService {
+            appleService.requestAuthorization { [weak self] canRead, canWrite in
                 guard let self else {
                     return
                 }

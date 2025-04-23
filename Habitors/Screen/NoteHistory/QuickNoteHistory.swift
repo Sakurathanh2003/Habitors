@@ -457,7 +457,7 @@ struct ColorPickerSheet: View {
                     }
                 }
             }
-            .alert("Màu quá tối! Vui lòng chọn màu sáng hơn.", isPresented: $showAlert) {
+            .alert("The color is too dark! Please choose a lighter color", isPresented: $showAlert) {
                 Button("OK", role: .cancel) {}
             }
         }

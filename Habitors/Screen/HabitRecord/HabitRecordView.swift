@@ -7,6 +7,7 @@
 
 import SwiftUI
 import RxSwift
+import SakuraExtension
 
 fileprivate struct Const {
     static let linewidth: CGFloat = 20
@@ -15,21 +16,77 @@ fileprivate struct Const {
 struct HabitRecordView: View {
     @ObservedObject var viewModel: HabitRecordViewModel
     
+    var navigationBar: some View {
+        HStack {
+            Button(action: {
+                 viewModel.routing.stop.onNext(())
+            }, label: {
+                Image("ic_back")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 24, height: 24)
+                    .frame(width: 30, height: 30)
+            })
+            
+            Spacer(minLength: 10)
+        
+            Text(viewModel.title)
+                .gilroyBold(30)
+                .autoresize(1)
+                .foregroundStyle(Color("Black"))
+            
+            Spacer(minLength: 10)
+            
+            
+        }
+        .frame(height: 56)
+    }
+    
+    var moreButton: some View {
+        Button(action: {
+            viewModel.routing.presentOption.onNext(())
+        }, label: {
+            Image(systemName: "ellipsis")
+                .renderingMode(.template)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 24, height: 24)
+                .frame(width: 30, height: 30)
+                .foregroundStyle(viewModel.mainColor)
+        })
+    }
+    
     var body: some View {
         VStack(spacing: 0) {
-            navigationBar.padding(.horizontal, 20)
-            
+            NavigationBarView(
+                title: viewModel.title,
+                secondItem: moreButton as? AnyView,
+                isDarkMode: viewModel.isTurnDarkMode,
+                backAction: {
+                    viewModel.routing.stop.onNext(())
+                }).padding(.horizontal, 20)
+                        
             GeometryReader { proxy in
                 ScrollView {
                     VStack(spacing: 0) {
                         displayValueView
-                        changeValueView
+                        
+                        if viewModel.unit.canSetData {
+                            changeValueView
+                        } else {
+                            Spacer()
+                            Text("Relevant data will be retrieved from the Health app.")
+                                .padding(.horizontal, 20)
+                                .multilineTextAlignment(.center)
+                                .gilroyBold(20)
+                                .foreColor(viewModel.mainColor)
+                        }
                     }
                     .frame(height: proxy.size.height)
                 }
             }
         }
-        .background(Color.white.ignoresSafeArea())
+        .background(viewModel.backgroundColor.ignoresSafeArea())
         .overlay(
             ZStack {
                 if viewModel.isShowingAddValue {
@@ -72,6 +129,7 @@ struct HabitRecordView: View {
                     Text("\(viewModel.currentValue.text)")
                         .gilroyBold(UIScreen.main.bounds.width / 5)
                         .autoresize(1)
+                        .foreColor(viewModel.mainColor)
                     
                     Text("\(Double(viewModel.progress * 100).textWithDecimal(2))%")
                         .gilroyBold(20)
@@ -81,6 +139,7 @@ struct HabitRecordView: View {
                     Text(viewModel.timeString)
                         .gilroyBold(UIScreen.main.bounds.width / 5)
                         .autoresize(1)
+                        .foreColor(viewModel.mainColor)
                 }
             }
             .padding(.horizontal, 30)
@@ -172,6 +231,7 @@ struct HabitRecordView: View {
             HStack {
                 Text("Quick Add")
                     .gilroyBold(20)
+                    .foreColor(viewModel.mainColor)
                 
                 Spacer()
             }
@@ -237,48 +297,17 @@ struct HabitRecordView: View {
         .padding(.horizontal, 20)
         .padding(.bottom, 10)
     }
-    
-    // MARK: - Navigation Bar
-    var navigationBar: some View {
-        HStack {
-            Button(action: {
-                 viewModel.routing.stop.onNext(())
-            }, label: {
-                Image("ic_back")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 24, height: 24)
-                    .frame(width: 30, height: 30)
-            })
-            
-            Spacer(minLength: 10)
-        
-            Text(viewModel.title)
-                .gilroyBold(30)
-                .autoresize(1)
-                .foregroundStyle(Color("Black"))
-            
-            Spacer(minLength: 10)
-            
-            Button(action: {
-                viewModel.routing.presentOption.onNext(())
-            }, label: {
-                Image(systemName: "ellipsis")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 24, height: 24)
-                    .frame(width: 30, height: 30)
-                    .foregroundStyle(.black)
-            })
-        }
-        .frame(height: 56)
-    }
 }
 
 #Preview {
     HabitRecordView(
         viewModel:
-                .init(record: .init(id: "", habitID: "",date: Date(), status: "", value: 0,createdAt: Date())))
+                .init(record: .init(id: "",
+                                    habitID: "",
+                                    date: Date(),
+                                    status: "",
+                                    value: 0,
+                                    createdAt: Date())))
 }
 
 // MARK: - LongPressButtonView

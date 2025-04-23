@@ -28,6 +28,7 @@ final class ChooseTemplateHabitViewModel: BaseViewModel<ChooseTemplateHabitViewM
         HabitCategory(id: "appleHealth", name: "Apple Health", icon: "<3", description: "Health habits are linked witth Apple Health App", items: [
             .init(id: "Walk", name: "Walk", icon: "🚶🏻‍♀️‍➡️", goalUnit: .steps, goalValue: 1000, isTemplate: true),
             .init(id: "Exercise", name: "Exercise", icon: "🏃🏻", goalUnit: .exerciseTime, goalValue: 2, isTemplate: true),
+            .init(id: "Stand", name: "Stand", icon: "🧍🏻", goalUnit: .standHour, goalValue: 12, isTemplate: true),
             .init(id: "DrinkWater", name: "Drink Water", icon: "💧", goalUnit: .water, goalValue: 2000, isTemplate: true)
         ]),
         HabitCategory(id: "mind", name: "Mind", icon: "", description: "", items: [

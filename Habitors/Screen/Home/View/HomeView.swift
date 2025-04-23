@@ -29,46 +29,50 @@ struct HomeView: View {
     
     @ViewBuilder
     var body: some View {
-        if let tool = viewModel.currentTool {
-            ToolItemView(animation: animation, tool: tool, isOpening: true) {
-                viewModel.currentTool = nil
-            }
-        } else if let currentItem = player.getItem(), isAudioOpening {
-            AudioView(player: player, item: currentItem, isOpen: $isAudioOpening)
-                .matchedGeometryEffect(id: "audioplayer", in: animation)
-        } else {
-            ZStack {
-                VStack(spacing: 0) {
-                    navigationBar
-                        .padding(.horizontal, Const.horizontalPadding)
-                    
-                    switch viewModel.currentTab {
-                    case .home:
-                        content()
-                    case .overall:
-                        HomeActivityView(viewModel: HomeActivityViewModel())
-                    case .tools:
-                        HomeToolView(viewModel: viewModel, namespace: animation)
-                    case .discover:
-                        HomeDiscoverView(viewModel: viewModel)
-                    }
-                    
-                    if let currentItem = player.getItem(), !isAudioOpening {
-                        Color.black.frame(height: 1)
-                        AudioView(player: player, item: currentItem, isOpen: $isAudioOpening)
-                            .matchedGeometryEffect(id: "audioplayer", in: animation)
-                            .onTapGesture {
-                                withAnimation {
-                                    isAudioOpening = true
-                                }
-                            }
-                        Color.black.frame(height: 1)
-                    }
-                    
-                    HomeTabbarView(viewModel: viewModel)
+        ZStack {
+            if let tool = viewModel.currentTool {
+                ToolItemView(viewModel: viewModel, animation: animation, tool: tool, isOpening: true) {
+                    viewModel.currentTool = nil
                 }
-            }.background(backgroundColor.ignoresSafeArea())
+            } else if let currentItem = player.getItem(), isAudioOpening {
+                AudioView(player: player, item: currentItem, isOpen: $isAudioOpening)
+                    .matchedGeometryEffect(id: "audioplayer", in: animation)
+            } else {
+                ZStack {
+                    VStack(spacing: 0) {
+                        navigationBar
+                            .padding(.horizontal, Const.horizontalPadding)
+                        
+                        switch viewModel.currentTab {
+                        case .home:
+                            content()
+                        case .overall:
+                            HomeActivityView(viewModel: HomeActivityViewModel())
+                        case .tools:
+                            HomeToolView(viewModel: viewModel, namespace: animation)
+                        case .discover:
+                            HomeDiscoverView(viewModel: viewModel)
+                        }
+                        
+                        if let currentItem = player.getItem(), !isAudioOpening {
+                            Color.black.frame(height: 1)
+                            AudioView(player: player, item: currentItem, isOpen: $isAudioOpening)
+                                .matchedGeometryEffect(id: "audioplayer", in: animation)
+                                .onTapGesture {
+                                    withAnimation {
+                                        isAudioOpening = true
+                                    }
+                                }
+                            Color.black.frame(height: 1)
+                        }
+                        
+                        HomeTabbarView(viewModel: viewModel)
+                    }
+                }
+                .background(backgroundColor.ignoresSafeArea())
+            }
         }
+        .environment(\.locale, viewModel.isVietnameseLanguage ? Locale(identifier: "VI") : Locale(identifier: "EN"))
     }
     
     // MARK: - Home Content
@@ -179,7 +183,7 @@ struct HomeView: View {
     // MARK: - NavigationBar
     var navigationBar: some View {
         HStack {
-            Text(viewModel.currentTab.rawValue.capitalized)
+            Text(viewModel.translate(viewModel.currentTab.rawValue.capitalized))
                 .gilroyBold(28)
                 .foregroundStyle(textColor)
             
@@ -245,8 +249,9 @@ fileprivate struct HomeTabbarView: View {
                 Color.clear
                 if viewModel.isSelected(tab) {
                     VStack(spacing: 4) {
-                        Text(tab.rawValue.capitalized)
+                        Text(viewModel.translate(tab.rawValue.capitalized))
                             .gilroyBold(14)
+                            .autoresize(1)
                             .frame(height: 24)
                             .foregroundColor(textColor)
                         

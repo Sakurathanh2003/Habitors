@@ -41,7 +41,7 @@ class CalendarViewModel: ObservableObject {
     }
     
     var month: String {
-        return currentMonth.format("MMMM yyyy")
+        return currentMonth.format("MMMM yyyy", isVietnamese: User.isVietnamese).capitalized
     }
     
     func isSameMonth(_ day: Date) -> Bool {
