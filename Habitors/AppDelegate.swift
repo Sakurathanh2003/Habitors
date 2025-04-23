@@ -18,8 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         configAppCoordinator()
         configAppleHealthService()
         HabitScheduler.requestNotificationPermission()
-        
-        
         return true
     }
     

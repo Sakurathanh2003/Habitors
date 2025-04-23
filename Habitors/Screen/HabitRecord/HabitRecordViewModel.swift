@@ -205,12 +205,8 @@ final class HabitRecordViewModel: BaseViewModel<HabitRecordViewModelInput, Habit
     }
     
     private func setValue(_ value: Double) {
-        HabitRecordDAO.shared.updateObject(item: record)
-        
-        DispatchQueue.main.async {
-            self.record.value = value
-            self.objectWillChange.send()
-        }
+        let updatedRecord = self.record.replaceValue(value)
+        HabitRecordDAO.shared.updateObject(item: updatedRecord)
     }
 }
 

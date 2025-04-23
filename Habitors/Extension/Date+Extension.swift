@@ -110,6 +110,16 @@ extension Date {
     func isSameDay(date: Date) -> Bool {
         calendar.isDate(self, inSameDayAs: date)
     }
+    
+    func isSameWeek(date: Date) -> Bool {
+        let weekOfYear1 = calendar.component(.weekOfYear, from: self)
+        let weekOfYear2 = calendar.component(.weekOfYear, from: date)
+        
+        let yearForWeek1 = calendar.component(.yearForWeekOfYear, from: self)
+        let yearForWeek2 = calendar.component(.yearForWeekOfYear, from: date)
+        
+        return weekOfYear1 == weekOfYear2 && yearForWeek1 == yearForWeek2
+    }
 }
 
 // MARK: - Next Time

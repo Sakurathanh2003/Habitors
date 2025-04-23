@@ -41,6 +41,10 @@ class HabitRecord: Codable, ObservableObject {
     var isExits: Bool {
         (HabitRecordDAO.shared.getHabitRecord(id: self.id) != nil)
     }
+    
+    func replaceValue(_ value: Double) -> HabitRecord {
+        return .init(id: id, habitID: habitID, date: date, status: status, value: value, createdAt: createdAt)
+    }
 }
 
 extension HabitRecord {
