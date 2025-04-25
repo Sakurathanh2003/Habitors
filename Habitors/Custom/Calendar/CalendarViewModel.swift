@@ -11,21 +11,18 @@ import SwiftUI
 enum CalendarMode {
     case chooseDays
     case chooseDay
-    case analytic
 }
 
 class CalendarViewModel: ObservableObject {
     @Published var currentMonth = Date()
     @Published var selectedDate = [Date]()
     @Published var daysInMonth = [Date]()
-    @Published var habits: [Habit] = []
 
     let mode: CalendarMode
     
-    init(mode: CalendarMode, selectedDate: [Date] = [], habits: [Habit] = []) {
+    init(mode: CalendarMode, selectedDate: [Date] = []) {
         self.selectedDate = selectedDate
         self.mode = mode
-        self.habits = habits
         
         if let firstDate = selectedDate.first {
             self.currentMonth = firstDate
@@ -34,10 +31,6 @@ class CalendarViewModel: ObservableObject {
         }
         
         updateDaysInMonth()
-    }
-    
-    var records: [HabitRecord] {
-        return habits.flatMap({ $0.records })
     }
     
     var month: String {
@@ -66,8 +59,6 @@ class CalendarViewModel: ObservableObject {
         case .chooseDay:
             selectedDate.removeAll()
             selectedDate.append(day)
-        case .analytic:
-            break
         }
     }
     
@@ -99,22 +90,6 @@ class CalendarViewModel: ObservableObject {
         }
         
         self.daysInMonth = days
-    }
-    
-    func percentInDate(_ date: Date) -> Double {
-        let habitsInDay = self.habits.filter { date.isDateValid($0) }
-        var percents: Double = 0
-        for habit in habitsInDay {
-            if let record = habit.records.first(where: { $0.date.isSameDay(date: date) }) {
-                percents += record.completedPercent
-            }
-        }
-        
-        if habitsInDay.isEmpty {
-            return 0
-        }
-        
-        return percents/Double(habitsInDay.count)
     }
 }
 

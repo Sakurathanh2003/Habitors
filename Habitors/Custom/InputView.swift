@@ -30,7 +30,7 @@ struct InputView: View {
             VStack {
                 HStack {
                     Text(title)
-                        .gilroyBold(20)
+                        .fontBold(20)
                     
                     Spacer()
                     
@@ -51,11 +51,11 @@ struct InputView: View {
                 HStack {
                     TextField(text: $text) {
                         Text("Enter Value")
-                            .gilroyBold(18)
+                            .fontBold(18)
                     }
                     .keyboardType(.numberPad)
                     .focused($keyboardFocused)
-                    .gilroyBold(18)
+                    .fontBold(18)
                     .foregroundColor(.black)
                     .padding(.horizontal, 20)
                     .frame(height: 56)
@@ -63,7 +63,7 @@ struct InputView: View {
                     .cornerRadius(10)
                     
                     Text("Save")
-                        .gilroyBold(16)
+                        .fontBold(16)
                         .padding(.horizontal, 15)
                         .padding(.vertical, 10)
                         .background(Color("Error"))

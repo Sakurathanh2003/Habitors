@@ -39,7 +39,7 @@ struct HomeDiscoverView: View {
                             
                             if isSelected {
                                 Text(category.title)
-                                    .gilroySemiBold(15)
+                                    .fontSemiBold(15)
                                     .padding(.horizontal, 10)
                                     .frame(height: 40)
                                     .background(viewModel.isTurnDarkMode ? .white : .black)
@@ -51,7 +51,7 @@ struct HomeDiscoverView: View {
                                     currentCategoryIndex = index
                                 } label: {
                                     Text(category.title)
-                                        .gilroyRegular(15)
+                                        .fontRegular(15)
                                         .padding(.horizontal, 10)
                                         .frame(height: 40)
                                         .cornerRadius(5)
@@ -130,7 +130,7 @@ struct HomeDiscoverView: View {
             .cornerRadius(Const.itemCorner)
             
             Text(item.title)
-                .gilroyRegular(15)
+                .fontRegular(15)
                 .lineLimit(2)
         }
     }

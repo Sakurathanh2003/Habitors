@@ -38,7 +38,7 @@ struct NavigationBarView: View {
         }
         .overlay(
             Text(title)
-                .gilroyBold(18)
+                .fontBold(18)
                 .foreColor(isDarkMode ? .white : .black)
         )
         .frame(height: 56)

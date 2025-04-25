@@ -40,7 +40,7 @@ struct SelectGoalView: View {
                     .frame(height: 46)
                     .overlay(
                         Text("Goal")
-                            .gilroyBold(30)
+                            .fontBold(30)
                             .foreColor(mainColor)
                     )
                     
@@ -76,7 +76,7 @@ struct SelectGoalView: View {
             VStack {
                 HStack(spacing: 0) {
                     Text("Cancel")
-                        .gilroyRegular(18)
+                        .fontRegular(18)
                         .onTapGesture {
                             withAnimation {
                                 isShowingSelectUnit = false
@@ -85,7 +85,7 @@ struct SelectGoalView: View {
                     
                     Spacer()
                     Text("Done")
-                        .gilroySemiBold(18)
+                        .fontSemiBold(18)
                         .foregroundStyle(Color("Error"))
                         .onTapGesture {
                             viewModel.goalUnit = currentUnit
@@ -98,13 +98,13 @@ struct SelectGoalView: View {
                 .frame(height: 56)
                 .overlay(
                     Text("Select Unit")
-                        .gilroySemiBold(18)
+                        .fontSemiBold(18)
                 )
                 
                 Picker("", selection: $currentUnit) {
                     ForEach(GoalUnit.custom(), id: \.self) { unit in
                         Text(unit.rawValue.capitalized)
-                            .gilroySemiBold(18)
+                            .fontSemiBold(18)
                             .frame(height: 40)
                             .tag(unit)
                     }
@@ -143,10 +143,10 @@ struct SelectGoalView: View {
                 .overlay(
                     HStack {
                         Text("\(viewModel.goalValue.text)")
-                            .gilroyBold(18)
+                            .fontBold(18)
                         
                         + Text(" \(viewModel.goalUnit.rawValue)/day")
-                            .gilroySemiBold(18)
+                            .fontSemiBold(18)
                             .foregroundColor(Color("Gray"))
                         
                         Spacer(minLength: 0)
@@ -173,7 +173,7 @@ struct SelectGoalView: View {
                 .overlay(
                     HStack {
                         Text(viewModel.goalUnit.rawValue.capitalized)
-                            .gilroyBold(19)
+                            .fontBold(19)
                             .foregroundColor(Color("Black"))
                         
                         Spacer(minLength: 0)
@@ -196,7 +196,7 @@ struct SelectGoalView: View {
     func sectionTitle(_ text: String, toggle: Binding<Bool>? = nil) -> some View {
         HStack {
             Text(text)
-                .gilroyBold(23)
+                .fontBold(23)
                 .foreColor(mainColor)
             
             Spacer()

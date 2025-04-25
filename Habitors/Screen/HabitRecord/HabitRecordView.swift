@@ -31,7 +31,7 @@ struct HabitRecordView: View {
             Spacer(minLength: 10)
         
             Text(viewModel.title)
-                .gilroyBold(30)
+                .fontBold(30)
                 .autoresize(1)
                 .foregroundStyle(Color("Black"))
             
@@ -78,7 +78,7 @@ struct HabitRecordView: View {
                             Text("Relevant data will be retrieved from the Health app.")
                                 .padding(.horizontal, 20)
                                 .multilineTextAlignment(.center)
-                                .gilroyBold(20)
+                                .fontBold(20)
                                 .foreColor(viewModel.mainColor)
                         }
                     }
@@ -121,23 +121,23 @@ struct HabitRecordView: View {
             VStack {
                 if !viewModel.isTimeUnit {
                     Text("/\(viewModel.goalValue.text)")
-                        .gilroyRegular(20)
+                        .fontRegular(20)
                         .autoresize(1)
                         .foregroundStyle(Color("Gray03"))
                         .opacity(0)
                     
                     Text("\(viewModel.currentValue.text)")
-                        .gilroyBold(UIScreen.main.bounds.width / 5)
+                        .fontBold(UIScreen.main.bounds.width / 5)
                         .autoresize(1)
                         .foreColor(viewModel.mainColor)
                     
                     Text("\(Double(viewModel.progress * 100).textWithDecimal(2))%")
-                        .gilroyBold(20)
+                        .fontBold(20)
                         .autoresize(1)
                         .foregroundStyle(Color("Gray03"))
                 } else {
                     Text(viewModel.timeString)
-                        .gilroyBold(UIScreen.main.bounds.width / 5)
+                        .fontBold(UIScreen.main.bounds.width / 5)
                         .autoresize(1)
                         .foreColor(viewModel.mainColor)
                 }
@@ -196,7 +196,7 @@ struct HabitRecordView: View {
             Spacer()
             
             Text(viewModel.isCounting ? "Stop" : "Start")
-                .gilroyBold(20)
+                .fontBold(20)
                 .frame(width: UIScreen.main.bounds.width / 2.5, height: 56)
                 .background(Color("Error"))
                 .cornerRadius(5)
@@ -210,7 +210,7 @@ struct HabitRecordView: View {
                 }
             
             Text("Reset")
-                .gilroyBold(20)
+                .fontBold(20)
                 .frame(width: UIScreen.main.bounds.width / 2.5, height: 56)
                 .background(Color("Gray03"))
                 .cornerRadius(5)
@@ -230,7 +230,7 @@ struct HabitRecordView: View {
         VStack {
             HStack {
                 Text("Quick Add")
-                    .gilroyBold(20)
+                    .fontBold(20)
                     .foreColor(viewModel.mainColor)
                 
                 Spacer()
@@ -244,7 +244,7 @@ struct HabitRecordView: View {
                         .frame(height: 56)
                         .overlay(
                             Text("5")
-                                .gilroyBold(20)
+                                .fontBold(20)
                                 .foregroundStyle(.white)
                         )
                         .cornerRadius(5)
@@ -257,7 +257,7 @@ struct HabitRecordView: View {
                         .frame(height: 56)
                         .overlay(
                             Text("10")
-                                .gilroyBold(20)
+                                .fontBold(20)
                                 .foregroundStyle(.white)
                         )
                         .cornerRadius(5)
@@ -272,7 +272,7 @@ struct HabitRecordView: View {
                         .frame(height: 56)
                         .overlay(
                             Text("15")
-                                .gilroyBold(20)
+                                .fontBold(20)
                                 .foregroundStyle(.white)
                         )
                         .cornerRadius(5)
@@ -287,7 +287,7 @@ struct HabitRecordView: View {
                         .frame(height: 56)
                         .overlay(
                             Text("Other")
-                                .gilroyBold(20)
+                                .fontBold(20)
                                 .foregroundStyle(.white)
                         )
                         .cornerRadius(5)

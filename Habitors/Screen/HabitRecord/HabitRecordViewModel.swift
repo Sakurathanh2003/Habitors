@@ -68,7 +68,7 @@ final class HabitRecordViewModel: BaseViewModel<HabitRecordViewModelInput, Habit
         }
         
         if let updatedHabit = notification.object as? Habit {
-            if let record = updatedHabit.records.first(where: { $0.id == record.id }) {
+            if updatedHabit.records.first(where: { $0.id == record.id }) != nil {
                 self.objectWillChange.send()
             }
         }

@@ -31,12 +31,12 @@ fileprivate struct AddHabitView: View {
                         let habit = habits[index]
                         HStack {
                             Text("\(index + 1).")
-                                .gilroyBold(16)
+                                .fontBold(16)
                                 .foreColor(mainColor)
                                 .frame(width: 20)
                                
                             Text(habit.icon + " " + habit.name)
-                                .gilroyBold(16)
+                                .fontBold(16)
                                 .foreColor(mainColor)
                             
                             Spacer(minLength: 10)
@@ -86,7 +86,7 @@ fileprivate struct AddHabitView: View {
                 mainColor.frame(height: 56)
                     .overlay(
                         Text("Save")
-                            .gilroyBold(16)
+                            .fontBold(16)
                             .foreColor(backgroundColor)
                     )
                     .cornerRadius(10)
@@ -130,11 +130,11 @@ struct ArticleDetailView: View {
                     thumbnailView
                     
                     Text(viewModel.item.title)
-                        .gilroyBold(23)
+                        .fontBold(23)
                         .foreColor(mainColor)
                     
                     Text(viewModel.item.content)
-                        .gilroyRegular(16)
+                        .fontRegular(16)
                         .lineSpacing(6)
                         .foreColor(mainColor)
                 }
@@ -152,7 +152,7 @@ struct ArticleDetailView: View {
                     mainColor.frame(height: 56)
                         .overlay(
                             Text("Add to my routine")
-                                .gilroyBold(16)
+                                .fontBold(16)
                                 .foreColor(backgroundColor)
                         )
                         .cornerRadius(10)

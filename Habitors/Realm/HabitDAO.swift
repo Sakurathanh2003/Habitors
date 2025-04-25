@@ -70,6 +70,7 @@ final class HabitDAO: RealmDao {
         do {
             try self.addObjectAndUpdate(object)
             setupRecordIfNeed(habit: item)
+            removeRecordIfNeed(habit: item)
             print("Đã update habit:\(item.name) thành công")
             NotificationCenter.default.post(name: .updateHabitItem, object: item)
         } catch {

@@ -60,7 +60,7 @@ struct SelectFrequencyView: View {
                     .frame(height: 46)
                     .overlay(
                         Text("Frequency")
-                            .gilroyBold(30)
+                            .fontBold(30)
                             .foreColor(mainColor)
                     )
                     
@@ -82,7 +82,7 @@ struct SelectFrequencyView: View {
                                             .fill(isSelected ? selectedColor : unselectedColor)
                                             .overlay(
                                                 Text(dates[index])
-                                                    .gilroyBold(16)
+                                                    .fontBold(16)
                                                     .foregroundStyle(
                                                         isSelected ? User.isTurnDarkMode ? .black : .white : !User.isTurnDarkMode ? .black : .white
                                                     )
@@ -118,7 +118,7 @@ struct SelectFrequencyView: View {
                                             .frame(height: 50)
                                             .overlay(
                                                 Text("\(index)")
-                                                    .gilroyBold(16)
+                                                    .fontBold(16)
                                                     .foregroundStyle(
                                                         isSelected ? selectedTextColor : unselectedTextColor
                                                     )
@@ -145,7 +145,7 @@ struct SelectFrequencyView: View {
                                             type == self.monthly.type ? selectedColor : unselectedColor
                                             
                                             Text(type.rawValue.capitalized)
-                                                .gilroyBold(18)
+                                                .fontBold(18)
                                                 .foregroundStyle(type == self.monthly.type ? selectedTextColor : unselectedTextColor)
                                         }
                                         .frame(height: 50)
@@ -158,7 +158,7 @@ struct SelectFrequencyView: View {
                                 .padding(.top, 5)
                                 
                                 Text(monthly.type.description)
-                                    .gilroyRegular(12)
+                                    .fontRegular(12)
                                     .foregroundStyle(Color("Gray"))
                                     .padding(.top, 5)
                             }
@@ -171,7 +171,7 @@ struct SelectFrequencyView: View {
                 }
                 
                 Text("Done")
-                    .gilroyBold(20)
+                    .fontBold(20)
                     .frame(height: 28)
                     .padding(.horizontal, 25)
                     .padding(.vertical, 15)
@@ -258,7 +258,7 @@ struct SelectFrequencyView: View {
                     .overlay(
                         HStack {
                             Text(time.description)
-                                .gilroyBold(18)
+                                .fontBold(18)
                                 
                             Spacer()
                             
@@ -291,7 +291,7 @@ struct SelectFrequencyView: View {
                     .overlay(
                         HStack {
                             Text(time.description)
-                                .gilroyBold(18)
+                                .fontBold(18)
                                 
                             Spacer()
                             
@@ -322,7 +322,7 @@ struct SelectFrequencyView: View {
                 .overlay(
                     HStack {
                         Text("Add")
-                            .gilroyBold(18)
+                            .fontBold(18)
                             
                         Spacer()
                     }.padding(.horizontal, 16)
@@ -343,7 +343,7 @@ struct SelectFrequencyView: View {
             .overlay(
                 HStack {
                     Text("None")
-                        .gilroyBold(18)
+                        .fontBold(18)
                         
                     Spacer()
                     
@@ -366,7 +366,7 @@ struct SelectFrequencyView: View {
             .overlay(
                 HStack {
                     Text("Morning")
-                        .gilroyBold(18)
+                        .fontBold(18)
                         
                     Spacer()
                     
@@ -389,7 +389,7 @@ struct SelectFrequencyView: View {
             .overlay(
                 HStack {
                     Text("Afternoon")
-                        .gilroyBold(18)
+                        .fontBold(18)
                         
                     Spacer()
                     
@@ -412,7 +412,7 @@ struct SelectFrequencyView: View {
             .overlay(
                 HStack {
                     Text("Evening")
-                        .gilroyBold(18)
+                        .fontBold(18)
                         
                     Spacer()
                     
@@ -447,7 +447,7 @@ struct SelectFrequencyView: View {
                     type == self.type ? selectedColor : unselectedColor
                     
                     Text(type.rawValue.capitalized)
-                        .gilroyBold(18)
+                        .fontBold(18)
                         .foregroundStyle(type == self.type ? selectedTextColor : unselectedTextColor)
                 }
                 .frame(height: 50)
@@ -462,7 +462,7 @@ struct SelectFrequencyView: View {
     func sectionTitle(_ text: String) -> some View {
         HStack {
             Text(text)
-                .gilroyBold(23)
+                .fontBold(23)
                 .foreColor(mainColor)
             Spacer()
         }

@@ -29,13 +29,13 @@ struct SetPeriodDialog: View {
             
             VStack(spacing: 0) {
                 Text("Set Period")
-                    .gilroyBold(20)
+                    .fontBold(20)
                     .foregroundStyle(Color("Black"))
                 
                 VStack(spacing: 16) {
                     HStack {
                         Text("Morning")
-                            .gilroySemiBold(18)
+                            .fontSemiBold(18)
                             .foregroundStyle(Color("Black"))
                         Spacer()
                         HabitToggle(isOn: $isMorning)
@@ -44,7 +44,7 @@ struct SetPeriodDialog: View {
                     
                     HStack {
                         Text("Evening")
-                            .gilroySemiBold(18)
+                            .fontSemiBold(18)
                             .foregroundStyle(Color("Black"))
                         Spacer()
                         HabitToggle(isOn: $isEvening)
@@ -60,7 +60,7 @@ struct SetPeriodDialog: View {
                         cancelAction()
                     }, label: {
                         Text("Cancel")
-                            .gilroyMedium(14)
+                            .fontMedium(14)
                             .foregroundStyle(Color("Black"))
                     })
                     
@@ -68,7 +68,7 @@ struct SetPeriodDialog: View {
                         doneAction(isMorning, isEvening)
                     }, label: {
                         Text("Done")
-                            .gilroyMedium(14)
+                            .fontMedium(14)
                             .foregroundStyle(Color("Primary"))
                     })
                 }

@@ -30,7 +30,7 @@ struct MoodHistory: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 150, height: 150)
                 Text("You haven't logged any moods yet.")
-                    .gilroyRegular(16)
+                    .fontRegular(16)
                     .foreColor(.gray)
                     .padding(.top, 5)
                 Spacer()
@@ -42,7 +42,7 @@ struct MoodHistory: View {
                             
                             HStack {
                                 Text(date.format("dd MMMM yyyy"))
-                                    .gilroyBold(18)
+                                    .fontBold(18)
                                     .foreColor(mainColor)
                                 
                                 Spacer()
@@ -92,10 +92,10 @@ struct MoodHistory: View {
                 .frame(width: 50, height: 50)
             VStack(alignment: .leading, spacing: 0) {
                 Text(mood.rawValue.capitalized)
-                    .gilroyBold(16)
+                    .fontBold(16)
                     .frame(height: 20)
                 Text(record.createdDate.format("HH:mm"))
-                    .gilroyRegular(10)
+                    .fontRegular(10)
                     .frame(height: 16)
             }
             

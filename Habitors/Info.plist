@@ -4,10 +4,14 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Gilroy-SemiBold.ttf</string>
 		<string>Gilroy-Bold.ttf</string>
-		<string>Gilroy-Regular.ttf</string>
 		<string>Gilroy-Medium.ttf</string>
+		<string>Gilroy-Regular.ttf</string>
+		<string>Gilroy-SemiBold.ttf</string>
+		<string>SVN-Gilroy Bold.otf</string>
+		<string>SVN-Gilroy Medium.otf</string>
+		<string>SVN-Gilroy Regular.otf</string>
+		<string>SVN-Gilroy SemiBold.otf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

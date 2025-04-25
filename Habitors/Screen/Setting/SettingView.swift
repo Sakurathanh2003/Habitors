@@ -29,7 +29,7 @@ struct SettingView: View {
             }
             .overlay(
                 Text("Setting")
-                    .gilroyBold(20)
+                    .fontBold(20)
                     .foregroundStyle(mainColor)
             )
             .frame(height: 56)
@@ -39,13 +39,13 @@ struct SettingView: View {
                 VStack {
                     HStack {
                         Text("Language")
-                            .gilroySemiBold(16)
+                            .fontSemiBold(16)
                             .foregroundStyle(mainColor)
                         
                         Spacer()
                         
                         Text("VN")
-                            .gilroyBold(16)
+                            .fontBold(16)
                             .foregroundStyle(viewModel.isVietnameseLanguage ? mainColor : .gray)
                         HStack {
                             if !viewModel.isVietnameseLanguage {
@@ -75,19 +75,19 @@ struct SettingView: View {
                         }
                         
                         Text("US")
-                            .gilroyBold(16)
+                            .fontBold(16)
                             .foregroundStyle(!viewModel.isVietnameseLanguage ? mainColor : .gray)
                     }.frame(height: 56)
                     
                     HStack {
                         Text("Dark Mode")
-                            .gilroySemiBold(16)
+                            .fontSemiBold(16)
                             .foregroundStyle(mainColor)
                         
                         Spacer()
                         
                         Text("Off")
-                            .gilroyBold(16)
+                            .fontBold(16)
                             .foregroundStyle(!viewModel.isTurnDarkMode ? mainColor : .gray)
                         HStack {
                             if viewModel.isTurnDarkMode {
@@ -113,7 +113,7 @@ struct SettingView: View {
                         }
                         
                         Text("On")
-                            .gilroyBold(16)
+                            .fontBold(16)
                             .foregroundStyle(viewModel.isTurnDarkMode ? mainColor : .gray)
                     }.frame(height: 56)
                 }.padding(.horizontal, 20)

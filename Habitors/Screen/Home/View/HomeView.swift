@@ -47,7 +47,7 @@ struct HomeView: View {
                         case .home:
                             content()
                         case .overall:
-                            HomeActivityView(viewModel: HomeActivityViewModel())
+                            HomeOverallView(viewModel: viewModel)
                         case .tools:
                             HomeToolView(viewModel: viewModel, namespace: animation)
                         case .discover:
@@ -76,37 +76,9 @@ struct HomeView: View {
     }
     
     // MARK: - Home Content
-    @State var mood = Mood.allCases.randomElement()
     @ViewBuilder
     func content() -> some View {
         VStack(spacing: 0) {
-            if let mood {
-                HStack {
-                    VStack(alignment: .leading, spacing: 5) {
-                        Text("How do you feel?")
-                            .gilroySemiBold(16)
-                        
-                        Text("Tap to record")
-                            .gilroyRegular(12)
-                            .foreColor(.black.opacity(0.8))
-                    }
-                    Spacer()
-                    Image("icon_\(mood.rawValue)")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 50, height: 50)
-                }
-                .padding(10)
-                .background(mood.color.opacity(0.6))
-                .background(.white)
-                .cornerRadius(5, corners: .allCorners)
-                .onTapGesture {
-                    viewModel.routing.routeToMoodie.onNext(())
-                }
-                .padding(.horizontal, 20)
-                .padding(.bottom, 20)
-            }
-            
             calendarView
             
             if viewModel.tasks.isEmpty {
@@ -120,7 +92,7 @@ struct HomeView: View {
                         .foreColor(.gray)
                         
                     Text("You have no habits scheduled for this day. Keep up the good work and enjoy your break! 😊")
-                        .gilroyRegular(16)
+                        .fontRegular(16)
                         .lineSpacing(5)
                         .multilineTextAlignment(.center)
                         .foregroundStyle(Color("Gray"))
@@ -183,8 +155,8 @@ struct HomeView: View {
     // MARK: - NavigationBar
     var navigationBar: some View {
         HStack {
-            Text(viewModel.translate(viewModel.currentTab.rawValue.capitalized))
-                .gilroyBold(28)
+            Text(viewModel.title)
+                .fontBold(28)
                 .foregroundStyle(textColor)
             
             Spacer()
@@ -250,7 +222,7 @@ fileprivate struct HomeTabbarView: View {
                 if viewModel.isSelected(tab) {
                     VStack(spacing: 4) {
                         Text(viewModel.translate(tab.rawValue.capitalized))
-                            .gilroyBold(14)
+                            .fontBold(14)
                             .autoresize(1)
                             .frame(height: 24)
                             .foregroundColor(textColor)

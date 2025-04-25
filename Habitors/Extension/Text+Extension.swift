@@ -9,30 +9,38 @@ import Foundation
 import SwiftUI
 
 extension Font {
-    static func golroyMedium(_ size: CGFloat) -> Font {
+    static func fontMedium(_ size: CGFloat) -> Font {
         return Font.custom("Gilroy-Medium", size: size)
     }
     
-    static func golroySemiBold(_ size: CGFloat) -> Font {
+    static func fontSemiBold(_ size: CGFloat) -> Font {
         return Font.custom("Gilroy-SemiBold", size: size)
+    }
+    
+    static func fontRegular(_ size: CGFloat) -> Font {
+        return Font.custom("Gilroy-Regular", size: size)
+    }
+    
+    static func fontBold(_ size: CGFloat) -> Font {
+        return Font.custom("SVN-Gilroy Bold", size: size)
     }
 }
 
 extension Text {
-    func gilroyRegular(_ size: CGFloat) -> Text {
-        self.font(.custom("Gilroy-Regular", size: size))
+    func fontRegular(_ size: CGFloat) -> Text {
+        self.font(.fontRegular(size))
     }
     
-    func gilroyBold(_ size: CGFloat) -> Text {
-        self.font(.custom("Gilroy-Bold", size: size))
+    func fontBold(_ size: CGFloat) -> Text {
+        self.font(.fontBold(size))
     }
     
-    func gilroySemiBold(_ size: CGFloat) -> Text {
-        self.font(.custom("Gilroy-SemiBold", size: size))
+    func fontSemiBold(_ size: CGFloat) -> Text {
+        self.font(.fontSemiBold(size))
     }
     
-    func gilroyMedium(_ size: CGFloat) -> Text {
-        self.font(.custom("Gilroy-Medium", size: size))
+    func fontMedium(_ size: CGFloat) -> Text {
+        self.font(.fontMedium(size))
     }
     
     func autoresize(_ numberOfLine: Int) -> some View {
@@ -43,19 +51,19 @@ extension Text {
 }
 
 extension View {
-    func gilroyRegular(_ size: CGFloat) -> some View {
-        self.font(.custom("Gilroy-Regular", size: size))
+    func fontRegular(_ size: CGFloat) -> some View {
+        self.font(.fontRegular(size))
     }
     
-    func gilroyBold(_ size: CGFloat) -> some View {
-        self.font(.custom("Gilroy-Bold", size: size))
+    func fontBold(_ size: CGFloat) -> some View {
+        self.font(.fontBold(size))
     }
     
-    func gilroySemiBold(_ size: CGFloat) -> some View {
-        self.font(.custom("Gilroy-SemiBold", size: size))
+    func fontSemiBold(_ size: CGFloat) -> some View {
+        self.font(.fontSemiBold(size))
     }
     
-    func gilroyMedium(_ size: CGFloat) -> some View {
-        self.font(.custom("Gilroy-Medium", size: size))
+    func fontMedium(_ size: CGFloat) -> some View {
+        self.font(.fontMedium(size))
     }
 }

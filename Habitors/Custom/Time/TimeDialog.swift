@@ -35,7 +35,7 @@ struct TimeDialog: View {
                     Picker(selection: $hour, label: /*@START_MENU_TOKEN@*/Text("Picker")/*@END_MENU_TOKEN@*/) {
                         ForEach(0...23, id: \.self) { value in
                             Text(value.format("%02d"))
-                                .gilroySemiBold(18)
+                                .fontSemiBold(18)
                                 .frame(height: 28)
                                 .tag(value)
                         }
@@ -49,7 +49,7 @@ struct TimeDialog: View {
                     Picker(selection: $minutes, label: /*@START_MENU_TOKEN@*/Text("Picker")/*@END_MENU_TOKEN@*/) {
                         ForEach(0...59, id: \.self) { value in
                             Text(value.format("%02d"))
-                                .gilroySemiBold(18)
+                                .fontSemiBold(18)
                                 .frame(height: 28)
                                 .tag(value)
                         }
@@ -84,7 +84,7 @@ struct TimeDialog: View {
                         cancelAction()
                     }, label: {
                         Text("Cancel")
-                            .gilroyMedium(14)
+                            .fontMedium(14)
                             .foregroundStyle(Color("Black"))
                     })
                     
@@ -92,7 +92,7 @@ struct TimeDialog: View {
                         doneAction(.init(hour: hour, minutes: minutes))
                     }, label: {
                         Text("Done")
-                            .gilroyMedium(14)
+                            .fontMedium(14)
                             .foregroundStyle(Color("Primary"))
                     })
                 }

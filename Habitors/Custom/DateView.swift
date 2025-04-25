@@ -27,11 +27,11 @@ struct DateView: View {
             
             VStack(spacing: 12) {
                 Text(date.format("E"))
-                    .gilroyRegular(12)
+                    .fontRegular(12)
                     .foregroundStyle(textColor)
                 
                 Text(date.format("dd"))
-                    .gilroySemiBold(16)
+                    .fontSemiBold(16)
                     .foregroundStyle(textColor)
             }
         }

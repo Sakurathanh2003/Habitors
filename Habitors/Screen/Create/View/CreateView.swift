@@ -113,7 +113,7 @@ struct CreateView: View {
                         .frame(width: 25, height: 25)
                     
                     Text("Delete this habit")
-                        .gilroyBold(18)
+                        .fontBold(18)
                     
                     Spacer()
                 }
@@ -139,7 +139,7 @@ struct CreateView: View {
                 .overlay(
                     HStack {
                         Text(viewModel.frequency.description)
-                            .gilroyBold(18)
+                            .fontBold(18)
                         
                         Spacer(minLength: 0)
                     }.padding(.horizontal, 16)
@@ -162,7 +162,7 @@ struct CreateView: View {
                 .overlay(
                     HStack {
                         Text(viewModel.habitStartDateString)
-                            .gilroyBold(18)
+                            .fontBold(18)
                         
                         Spacer(minLength: 0)
                     }.padding(.horizontal, 16)
@@ -185,7 +185,7 @@ struct CreateView: View {
                 TextField(text: $viewModel.name) {
                     Text("Enter your habit name")
                 }
-                .gilroyBold(18)
+                .fontBold(18)
                 .foregroundColor(Color("Black"))
                 .frame(height: 56)
                 .padding(.leading, 16)
@@ -207,10 +207,10 @@ struct CreateView: View {
                 .overlay(
                     HStack {
                         Text("\(viewModel.goalValue.text)")
-                            .gilroyBold(18)
+                            .fontBold(18)
                         
                         + Text(" \(viewModel.goalUnit.description)/day")
-                            .gilroySemiBold(18)
+                            .fontSemiBold(18)
                             .foregroundColor(Color("Gray"))
                         
                         Spacer(minLength: 0)
@@ -335,14 +335,14 @@ struct CreateView: View {
                 viewModel.input.save.onNext(())
             } label: {
                 Text("Save")
-                    .gilroyBold(18)
+                    .fontBold(18)
                     .foregroundStyle(Color("Primary"))
             }
         }
         .frame(height: 56)
         .overlay(
             Text(viewModel.title)
-                .gilroyBold(20)
+                .fontBold(20)
                 .foreColor(mainColor)
         )
     }
@@ -353,7 +353,7 @@ extension CreateView {
     func sectionTitle(_ text: String, toggle: Binding<Bool>? = nil) -> some View {
         HStack {
             Text(text)
-                .gilroyBold(18)
+                .fontBold(18)
                 .foreColor(mainColor)
             
             Spacer()

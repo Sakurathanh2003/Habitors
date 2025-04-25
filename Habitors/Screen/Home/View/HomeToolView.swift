@@ -42,19 +42,47 @@ fileprivate struct Const {
 
 struct HomeToolView: View {
     @ObservedObject var viewModel: HomeViewModel
+    @State var mood = Mood.allCases.randomElement()
     var namespace: Namespace.ID
     
     var body: some View {
         ScrollView {
             LazyVGrid(columns: [.init(spacing: Const.itemSpacing)], spacing: Const.itemSpacing) {
+                if let mood {
+                    HStack {
+                        Image("icon_\(mood.rawValue)")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 50, height: 50)
+                        
+                        Spacer()
+                        
+                        VStack(alignment: .trailing, spacing: 5) {
+                            Text("How do you feel?")
+                                .fontSemiBold(16)
+                            
+                            Text("Tap to record")
+                                .fontRegular(12)
+                                .foreColor(.black.opacity(0.8))
+                        }
+                    }
+                    .padding(20)
+                    .background(mood.color.opacity(0.6))
+                    .background(.white)
+                    .cornerRadius(5, corners: .allCorners)
+                    .onTapGesture {
+                        viewModel.routing.routeToMoodie.onNext(())
+                    }
+                }
+                
                 HStack(spacing: Const.itemSpacing) {
                     HStack(spacing: 0) {
                         VStack(alignment: .leading) {
                             Text("Quick Note")
-                                .gilroyBold(16)
+                                .fontBold(16)
                             
                             Text("Tap to add")
-                                .gilroyRegular(12)
+                                .fontRegular(12)
                         }
                         
                         Spacer(minLength: 0)
@@ -175,7 +203,7 @@ struct ToolItemView: View {
                     
                     VStack(alignment: .leading) {
                         Text(viewModel.translate(tool.rawValue))
-                            .gilroyBold(30)
+                            .fontBold(30)
                             .padding(.horizontal, 20)
                             .padding(.bottom, 60)
                            
@@ -201,7 +229,7 @@ struct ToolItemView: View {
                                         .cornerRadius(5)
                                     
                                     Text(name)
-                                        .gilroyRegular(16)
+                                        .fontRegular(16)
                                         .padding(.leading, 15)
                                     
                                     Spacer(minLength: 0)
@@ -261,7 +289,7 @@ struct ToolItemView: View {
                     ZStack(alignment: .bottomLeading) {
                         Color.clear
                         Text(viewModel.translate(tool.rawValue))
-                            .gilroyBold(18)
+                            .fontBold(18)
                             .foreColor(.white)
                             .padding(10)
                     }
@@ -378,13 +406,6 @@ struct AudioView: View {
                     .ignoresSafeArea()
                     .blur(radius: 10)
             )
-            .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    let image = self.body.snapshot()
-                    let brightness = image.averageBrightness()
-                    self.iconColor = brightness < 0.5 ? .white : .black
-                }
-            }
         } else {
             HStack(spacing: 20) {
                 Image(item)
@@ -402,7 +423,7 @@ struct AudioView: View {
                         isRotating = true
                     }
                 
-                Text(name).gilroyRegular(16)
+                Text(name).fontRegular(16)
                 
                 Spacer()
                 
@@ -479,50 +500,3 @@ extension Tool {
 #Preview {
     HomeView(viewModel: .init())
 }
-
-extension View {
-    func snapshot() -> UIImage {
-        let controller = UIHostingController(rootView: self)
-        let view = controller.view
-
-        let targetSize = controller.view.intrinsicContentSize
-        view?.bounds = CGRect(origin: .zero, size: targetSize)
-        view?.backgroundColor = .clear
-
-        let renderer = UIGraphicsImageRenderer(size: targetSize)
-        return renderer.image { _ in
-            view?.drawHierarchy(in: view!.bounds, afterScreenUpdates: true)
-        }
-    }
-}
-
-extension UIImage {
-    func averageBrightness() -> CGFloat {
-        guard let cgImage = self.cgImage else { return 1 }
-        let ciImage = CIImage(cgImage: cgImage)
-        let extent = ciImage.extent
-
-        let context = CIContext()
-        let filter = CIFilter(name: "CIAreaAverage", parameters: [
-            kCIInputImageKey: ciImage,
-            kCIInputExtentKey: CIVector(cgRect: extent)
-        ])!
-
-        guard let outputImage = filter.outputImage else { return 1 }
-        var bitmap = [UInt8](repeating: 0, count: 4)
-
-        context.render(outputImage,
-                       toBitmap: &bitmap,
-                       rowBytes: 4,
-                       bounds: CGRect(x: 0, y: 0, width: 1, height: 1),
-                       format: .RGBA8,
-                       colorSpace: CGColorSpaceCreateDeviceRGB())
-
-        let r = CGFloat(bitmap[0]) / 255
-        let g = CGFloat(bitmap[1]) / 255
-        let b = CGFloat(bitmap[2]) / 255
-
-        return 0.299 * r + 0.587 * g + 0.114 * b
-    }
-}
-

@@ -112,7 +112,7 @@ struct MoodieView: View {
                 Color.black.frame(height: 56)
                     .overlay(
                         Text("Select Mood")
-                            .gilroyBold(16)
+                            .fontBold(16)
                             .foreColor(.white)
                     )
                     .cornerRadius(56, corners: .allCorners)
@@ -148,7 +148,7 @@ struct MoodieView: View {
                         Color.black.frame(height: 56)
                             .overlay(
                                 Text("View Mode History")
-                                    .gilroyBold(16)
+                                    .fontBold(16)
                                     .foreColor(.white)
                             )
                             .cornerRadius(56, corners: .allCorners)

@@ -212,7 +212,7 @@ struct QuickNoteHistory: View {
                 }
                 .overlay(
                     Text("Quick Note")
-                        .gilroyBold(16)
+                        .fontBold(16)
                         .foreColor(mainColor)
                 )
                 .frame(height: 56)
@@ -225,7 +225,7 @@ struct QuickNoteHistory: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 150, height: 150)
                     Text("You haven't logged any notes yet.")
-                        .gilroyRegular(16)
+                        .fontRegular(16)
                         .foregroundStyle(.gray)
                         .padding(.top, 5)
                     Spacer()
@@ -236,7 +236,7 @@ struct QuickNoteHistory: View {
                                 if let notes = viewModel.noteGroup[date]?.sorted(by: { $0.createdDate >= $1.createdDate }) {
                                     HStack {
                                         Text(date.format("dd MMMM yyyy"))
-                                            .gilroyBold(15)
+                                            .fontBold(15)
                                             .foreColor(mainColor)
                                         Spacer()
                                     }
@@ -339,7 +339,7 @@ struct NoteView: View {
                     
                     if viewModel.isEditing {
                         Text("Save")
-                            .gilroyBold(16)
+                            .fontBold(16)
                             .onTapGesture {
                                 viewModel.done()
                             }
@@ -361,7 +361,7 @@ struct NoteView: View {
                 
                 TextEditor(text: $viewModel.currentText)
                     .transparentScrolling()
-                    .gilroyRegular(16)
+                    .fontRegular(16)
                     .padding(.horizontal, 20)
                     .onChange(of: viewModel.currentText, perform: { _ in
                         viewModel.isEditing = true
@@ -394,7 +394,7 @@ struct NoteView: View {
             }
         } else {
             Text(viewModel.note.content)
-                .gilroyRegular(width / 13)
+                .fontRegular(width / 13)
                 .padding(10)
                 .frame(maxHeight: 100)
                 .fixedSize(horizontal: false, vertical: true)
@@ -433,7 +433,7 @@ struct ColorPickerSheet: View {
                 .font(.custom("Gilroy-Regular", size: 16))
                 
                 Text("Default Color")
-                    .gilroySemiBold(20)
+                    .fontSemiBold(20)
                     .padding(.vertical, 15)
                 LazyVGrid(columns: [.init(.adaptive(minimum: 50))]) {
                     ForEach(Note.NoteColor.allCases, id: \.value) { color in

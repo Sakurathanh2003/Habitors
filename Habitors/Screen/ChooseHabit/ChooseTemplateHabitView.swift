@@ -29,7 +29,7 @@ struct ChooseTemplateHabitView: View {
                                 .padding(.trailing, 16)
                         
                             Text("Create Custom Habit")
-                                .gilroyBold(16)
+                                .fontBold(16)
                                 .autoresize(1)
                             
                             Spacer(minLength: 0)
@@ -44,7 +44,7 @@ struct ChooseTemplateHabitView: View {
                     ForEach(viewModel.habitCategories, id: \.id) { category in
                         VStack(alignment: .leading) {
                             Text(category.name)
-                                .gilroyBold(24)
+                                .fontBold(24)
                                 .foreColor(mainColor)
                             
                             LazyVGrid(columns: [.init(spacing: 15), .init()], spacing: 15, content: {
@@ -52,10 +52,10 @@ struct ChooseTemplateHabitView: View {
                                 ForEach(category.items, id: \.name) { item in
                                     HStack(spacing: 0) {
                                         Text(item.icon)
-                                            .gilroyBold(16)
+                                            .fontBold(16)
                                             .padding(.trailing, 16)
                                         Text(item.name)
-                                            .gilroyBold(16)
+                                            .fontBold(16)
                                             .autoresize(1)
                                         
                                         Spacer(minLength: 0)
@@ -82,7 +82,7 @@ struct ChooseTemplateHabitView: View {
     var navigationBar: some View {
         HStack {
             Text("Choose Habit")
-                .gilroyBold(30)
+                .fontBold(30)
                 .foreColor(mainColor)
             
             Spacer()

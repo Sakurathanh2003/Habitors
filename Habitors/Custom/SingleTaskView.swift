@@ -33,16 +33,16 @@ struct SingleTaskView: View {
             
             VStack(alignment: .leading, spacing: 10) {
                 Text(habit.name)
-                    .gilroySemiBold(16)
+                    .fontSemiBold(16)
                     .foregroundStyle(Color("Black"))
                 
                 if isCompleted {
                     Text("Completed")
-                        .gilroyMedium(12)
+                        .fontMedium(12)
                         .foregroundStyle(Color("Success"))
                 } else {
                     Text(description)
-                        .gilroyMedium(12)
+                        .fontMedium(12)
                         .foregroundStyle(Color("Gray"))
                 }
             }

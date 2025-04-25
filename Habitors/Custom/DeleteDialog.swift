@@ -21,12 +21,12 @@ struct DeleteDialog: View {
                     .padding(.top, 20)
                 
                 Text("Would you like to delete this \(objectName)?")
-                    .gilroyBold(16)
+                    .fontBold(16)
                     .multilineTextAlignment(.center)
                     .padding(.top, 20)
                 
                 Text("You cannot undo this action")
-                    .gilroyRegular(12)
+                    .fontRegular(12)
                     .multilineTextAlignment(.center)
                     .padding(.top, 5)
                 
@@ -38,7 +38,7 @@ struct DeleteDialog: View {
                             .stroke(.black, lineWidth: 1)
                             .overlay(
                                 Text("Delete")
-                                    .gilroyBold(16)
+                                    .fontBold(16)
                                     .foregroundStyle(Color("Error"))
                             )
                     }
@@ -50,7 +50,7 @@ struct DeleteDialog: View {
                             .stroke(.black, lineWidth: 1)
                             .overlay(
                                 Text("Cancel")
-                                    .gilroyBold(16)
+                                    .fontBold(16)
                                     .foregroundStyle(.black)
                             )
                     }

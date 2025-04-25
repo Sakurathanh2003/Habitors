@@ -64,7 +64,7 @@ struct ChooseIconView: View {
                     .frame(height: 46)
                     .overlay(
                         Text("Icon")
-                            .gilroyBold(30)
+                            .fontBold(30)
                             .foreColor(mainColor)
                     )
                 }
@@ -76,7 +76,7 @@ struct ChooseIconView: View {
                             let isSelected = index == currentIndex
                         
                             Text(name.capitalized)
-                                .gilroyBold(16)
+                                .fontBold(16)
                                 .padding(.horizontal, 15)
                                 .frame(height: 28)
                                 .background(isSelected ? User.isTurnDarkMode ? .white : .black : .clear)
@@ -110,7 +110,7 @@ struct ChooseIconView: View {
                         .padding(.top, 40)
                     
                     Text("Select this emoji")
-                        .gilroySemiBold(20)
+                        .fontSemiBold(20)
                         .foregroundStyle(.white)
                         .padding()
                         .background(Color("Error"))
