@@ -7,11 +7,16 @@
 
 import UIKit
 
-struct MoodHistoryWantToDismissEvent: CoordinatorEvent {
-    
-}
+struct MoodHistoryWantToDismissEvent: CoordinatorEvent { }
 
 final class MoodHistoryCoordinator: NavigationBaseCoordinator {
+    var needBackToHome: Bool
+    
+    init(needBackToHome: Bool, navigationController: UINavigationController) {
+        self.needBackToHome = needBackToHome
+        super.init(navigationController: navigationController)
+    }
+    
     lazy var controller: MoodHistoryViewController = {
         let viewModel = MoodHistoryViewModel()
         let controller = MoodHistoryViewController(viewModel: viewModel, coordinator: self)
@@ -29,6 +34,10 @@ final class MoodHistoryCoordinator: NavigationBaseCoordinator {
     }
     
     func dismiss() {
-        self.send(event: MoodHistoryWantToDismissEvent())
+        if needBackToHome {
+            self.send(event: MoodHistoryWantToDismissEvent())
+        } else {
+            self.stop()
+        }
     }
 }

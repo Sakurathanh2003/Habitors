@@ -22,6 +22,7 @@ struct MoodHistory: View {
                 isDarkMode: viewModel.isTurnDarkMode) {
                     viewModel.routing.stop.onNext(())
                 }
+                .padding(.horizontal, 20)
             
             if moodGroup.isEmpty {
                 Spacer().frame(height: 100)

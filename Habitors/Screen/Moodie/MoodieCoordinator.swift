@@ -48,8 +48,8 @@ final class MoodieCoordinator: NavigationBaseCoordinator {
         }
     }
     
-    func routeToHistory() {
-        self.historyCoodinator = MoodHistoryCoordinator(navigationController: navigationController)
+    func routeToHistory(needBackToHome: Bool) {
+        self.historyCoodinator = MoodHistoryCoordinator(needBackToHome: needBackToHome, navigationController: navigationController)
         self.historyCoodinator!.start()
         self.addChild(historyCoodinator)
     }

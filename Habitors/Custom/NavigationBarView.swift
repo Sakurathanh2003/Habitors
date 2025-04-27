@@ -8,12 +8,17 @@
 import SwiftUI
 import SakuraExtension
 
+enum SecondItemType {
+    case more
+}
+
 struct NavigationBarView: View {
     var title: String
-    var secondItem: AnyView?
+    var secondItem: SecondItemType?
     var isDarkMode: Bool
    
     var backAction: (() -> Void)
+    var secondAction: (() -> Void)?
     
     var body: some View {
         HStack {
@@ -30,17 +35,34 @@ struct NavigationBarView: View {
                     .foreColor(isDarkMode ? .white : .black)
             }
             
-            Spacer()
+            Spacer(minLength: 10)
             
-            if let secondItem {
-                secondItem
-            }
-        }
-        .overlay(
             Text(title)
                 .fontBold(18)
+                .autoresize(1)
                 .foreColor(isDarkMode ? .white : .black)
-        )
+            
+            Spacer(minLength: 10)
+            
+            if let secondItem {
+                switch secondItem {
+                case .more:
+                    Button(action: {
+                        secondAction?()
+                    }, label: {
+                        Image(systemName: "ellipsis")
+                            .renderingMode(.template)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 24, height: 24)
+                            .frame(width: 30, height: 30)
+                            .foreColor(isDarkMode ? .white : .black)
+                    })
+                }
+            } else {
+                Spacer(minLength: 34)
+            }
+        }
         .frame(height: 56)
     }
 }

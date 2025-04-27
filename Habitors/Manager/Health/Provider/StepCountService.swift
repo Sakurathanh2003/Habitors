@@ -10,6 +10,21 @@ import HealthKit
 
 class StepCountService: HealthService {
     private let healthStore = HKHealthStore()
+    private var didObserver: Bool = false
+
+    var didRequestPermission: Bool {
+        get {
+            UserDefaults.standard.bool(forKey: "StepCountService")
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "StepCountService")
+            if newValue {
+                Task {
+                    await self.startObserver()
+                }
+            }
+        }
+    }
     
     // MARK: - Fetch
     func fetchData(for date: Date) async -> Double {
@@ -50,7 +65,7 @@ class StepCountService: HealthService {
     
     // MARK: - Observer
     func startObserver() async {
-        guard let stepType = HKObjectType.quantityType(forIdentifier: .stepCount), await checkReadPermission() else {
+        guard !didObserver && didRequestPermission, let stepType = HKObjectType.quantityType(forIdentifier: .stepCount), await checkReadPermission() else {
             return
         }
         
@@ -71,7 +86,8 @@ class StepCountService: HealthService {
         
         do {
             try await healthStore.enableBackgroundDelivery(for: stepType, frequency: .immediate)
-            print("✅ Background delivery enabled")
+            print("✅ Theo dõi sự thay đổi về bước đi thành công!")
+            
         } catch {
             print("❌ Error enabling background delivery: \(error.localizedDescription)")
         }
@@ -84,6 +100,7 @@ class StepCountService: HealthService {
             return
         }
         
+        self.didRequestPermission = true
         healthStore.requestAuthorization(toShare: Set([type]), read: Set([type])) { success, error in
             Task {
                 let canRead = await self.checkReadPermission()

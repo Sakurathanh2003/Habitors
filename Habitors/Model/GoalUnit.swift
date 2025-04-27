@@ -135,6 +135,13 @@ extension GoalUnit {
         default: true
         }
     }
+    
+    var maxValue: Double? {
+        switch self {
+        case .standHour: 1440
+        default: nil
+        }
+    }
 }
 
 // MARK: - Apple Health

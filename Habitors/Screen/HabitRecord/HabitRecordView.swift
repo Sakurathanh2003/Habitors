@@ -15,57 +15,15 @@ fileprivate struct Const {
 
 struct HabitRecordView: View {
     @ObservedObject var viewModel: HabitRecordViewModel
-    
-    var navigationBar: some View {
-        HStack {
-            Button(action: {
-                 viewModel.routing.stop.onNext(())
-            }, label: {
-                Image("ic_back")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 24, height: 24)
-                    .frame(width: 30, height: 30)
-            })
-            
-            Spacer(minLength: 10)
-        
-            Text(viewModel.title)
-                .fontBold(30)
-                .autoresize(1)
-                .foregroundStyle(Color("Black"))
-            
-            Spacer(minLength: 10)
-            
-            
-        }
-        .frame(height: 56)
-    }
-    
-    var moreButton: some View {
-        Button(action: {
-            viewModel.routing.presentOption.onNext(())
-        }, label: {
-            Image(systemName: "ellipsis")
-                .renderingMode(.template)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 24, height: 24)
-                .frame(width: 30, height: 30)
-                .foregroundStyle(viewModel.mainColor)
-        })
-    }
-    
+
     var body: some View {
         VStack(spacing: 0) {
-            NavigationBarView(
-                title: viewModel.title,
-                secondItem: moreButton as? AnyView,
-                isDarkMode: viewModel.isTurnDarkMode,
-                backAction: {
-                    viewModel.routing.stop.onNext(())
-                }).padding(.horizontal, 20)
-                        
+            NavigationBarView(title: viewModel.title, secondItem: .more, isDarkMode: viewModel.isTurnDarkMode) {
+                viewModel.routing.stop.onNext(())
+            } secondAction: {
+                viewModel.routing.presentOption.onNext(())
+            }.padding(.horizontal, 20)
+            
             GeometryReader { proxy in
                 ScrollView {
                     VStack(spacing: 0) {

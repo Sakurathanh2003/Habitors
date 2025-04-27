@@ -9,6 +9,7 @@ import UIKit
 import SwiftUI
 import RxSwift
 import HealthKit
+import SVProgressHUD
 
 struct CreateViewModelInput: InputOutputViewModel {
     var selectAddReminder = PublishSubject<()>()
@@ -103,14 +104,20 @@ final class CreateViewModel: BaseViewModel<CreateViewModelInput, CreateViewModel
         }).disposed(by: self.disposeBag)
         
         input.save.subscribe(onNext: { [unowned self] _ in
-            if habit != nil {
-                if isExits {
-                    updateHabit()
+            self.validateData { [weak self] canSet in
+                guard let self, canSet else {
+                    return
+                }
+                
+                if habit != nil {
+                    if isExits {
+                        updateHabit()
+                    } else {
+                        addHabit()
+                    }
                 } else {
                     addHabit()
                 }
-            } else {
-                addHabit()
             }
         }).disposed(by: self.disposeBag)
         
@@ -140,9 +147,83 @@ final class CreateViewModel: BaseViewModel<CreateViewModelInput, CreateViewModel
         }).disposed(by: self.disposeBag)
     }
     
+    // MARK: - Add Habit
+    private func addHabit() {
+        let habit = Habit(id: habit?.id ?? UUID().uuidString,
+                          name: self.name,
+                          icon: icon!,
+                          goalUnit: self.goalUnit,
+                          goalValue: self.goalValue,
+                          isTemplate: habit?.isTemplate ?? false,
+                          startedDate: self.startedDate.startOfDay,
+                          frequency: self.frequency,
+                          records: [])
+    
+        HabitDAO.shared.addObject(item: habit)
+        self.routing.didCreate.onNext(())
+    }
+    
+    // MARK: - Update habit
+    private func updateHabit() {
+        guard let habit else {
+            return
+        }
+        
+        habit.name = name
+        habit.icon = icon ?? ""
+        habit.goalValue = goalValue
+        habit.goalUnit = goalUnit
+        habit.startedDate = startedDate
+        habit.frequency = frequency
+        HabitDAO.shared.updateObject(item: habit)
+        self.routing.stop.onNext(())
+    }
+    
+    // MARK: - Validate
+    func validateData(completion: @escaping (Bool) -> Void) {
+        if icon == nil {
+            completion(false)
+            self.routing.showAlert.onNext("Vui lòng chọn icon cho habit!")
+            return
+        }
+        
+        if name.isEmpty {
+            completion(false)
+            self.routing.showAlert.onNext("Vui lòng nhập tên!")
+            return
+        }
+    
+        if let maxValue = goalUnit.maxValue, goalValue > maxValue {
+            completion(false)
+            self.routing.showAlert.onNext("Vui lòng nhập giá trị nhỏ hơn \(maxValue.text)")
+            return
+        }
+        
+        if goalValue <= 0 {
+            completion(false)
+            self.routing.showAlert.onNext("Vui lòng nhập giá trị lớn hơn 0")
+            return
+        }
+        
+        self.checkHealthPermissionIfNeed { [weak self] error  in
+            guard let self else {
+                return
+            }
+            
+            if let error {
+                completion(false)
+                self.routing.showAlert.onNext(error)
+            } else {
+                completion(true)
+            }
+        }
+    }
+    
     private func checkHealthPermissionIfNeed(completion: @escaping (String?) -> Void) {
         if let appleService = goalUnit.healthService {
+            SVProgressHUD.show()
             appleService.requestAuthorization { [weak self] canRead, canWrite in
+                SVProgressHUD.dismiss()
                 guard let self else {
                     return
                 }
@@ -162,63 +243,6 @@ final class CreateViewModel: BaseViewModel<CreateViewModelInput, CreateViewModel
         } else {
             completion(nil)
         }
-    }
-    
-    private func addHabit() {
-        guard let icon else {
-            self.routing.showAlert.onNext("Vui lòng chọn icon cho habit!")
-            return
-        }
-        
-        guard !name.isEmpty else {
-            self.routing.showAlert.onNext("Vui lòng nhập tên!")
-            return
-        }
-        
-        self.checkHealthPermissionIfNeed { [weak self] message in
-            guard let self else {
-                return
-            }
-            
-            if let message {
-                self.routing.needPermisson.onNext(message)
-                return
-            }
-            
-            let habit = Habit(id: habit?.id ?? UUID().uuidString,
-                              name: self.name,
-                              icon: icon,
-                              goalUnit: self.goalUnit,
-                              goalValue: self.goalValue,
-                              isTemplate: habit?.isTemplate ?? false,
-                              startedDate: self.startedDate.startOfDay,
-                              frequency: self.frequency,
-                              records: [])
-        
-            HabitDAO.shared.addObject(item: habit)
-            self.routing.didCreate.onNext(())
-        }
-    }
-    
-    // MARK: - Update habit
-    private func updateHabit() {
-        guard let habit else {
-            return
-        }
-        
-        guard !name.isEmpty else {
-            self.routing.showAlert.onNext("Vui lòng nhập tên!")
-            return
-        }
-        
-        habit.name = name
-        habit.icon = icon ?? ""
-        habit.goalValue = goalValue
-        habit.goalUnit = goalUnit
-        habit.startedDate = startedDate
-        habit.frequency = frequency
-        HabitDAO.shared.updateObject(item: habit)
-        self.routing.stop.onNext(())
     }
 }
 

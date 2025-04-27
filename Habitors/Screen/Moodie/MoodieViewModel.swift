@@ -19,7 +19,7 @@ struct MoodieViewModelOutput: InputOutputViewModel {
 
 struct MoodieViewModelRouting: RoutingOutput {
     var stop = PublishSubject<()>()
-    var history = PublishSubject<()>()
+    var history = PublishSubject<Bool>() // Có back thẳng về màn home hay không
 }
 
 final class MoodieViewModel: BaseViewModel<MoodieViewModelInput, MoodieViewModelOutput, MoodieViewModelRouting> {

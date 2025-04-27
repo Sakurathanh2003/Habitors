@@ -10,7 +10,22 @@ import HealthKit
 
 class WaterService: HealthService {
     private let healthStore = HKHealthStore()
-    
+    private var didObserver: Bool = false
+
+    var didRequestPermission: Bool {
+        get {
+            UserDefaults.standard.bool(forKey: "WaterService")
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "WaterService")
+            if newValue {
+                Task {
+                    await self.startObserver()
+                }
+            }
+        }
+    }
+
     func fetchData(for date: Date) async -> Double {
         let dateEnd = date
         let dateStart = date.startOfDay
@@ -48,7 +63,7 @@ class WaterService: HealthService {
     }
     
     func startObserver() async {
-        guard let stepType = HKObjectType.quantityType(forIdentifier: .dietaryWater), await checkReadPermission() else {
+        guard !didObserver && didRequestPermission, let stepType = HKObjectType.quantityType(forIdentifier: .dietaryWater), await checkReadPermission() else {
             return
         }
         
@@ -69,7 +84,7 @@ class WaterService: HealthService {
         
         do {
             try await healthStore.enableBackgroundDelivery(for: stepType, frequency: .immediate)
-            print("✅ Background delivery enabled")
+            print("✅ Theo dõi sự thay đổi về nước uống thành công!")
         } catch {
             print("❌ Error enabling background delivery: \(error.localizedDescription)")
         }
@@ -82,6 +97,7 @@ class WaterService: HealthService {
             return
         }
         
+        self.didRequestPermission = true
         healthStore.requestAuthorization(toShare: Set([type]), read: Set([type])) { success, error in
             Task {
                 let canRead = await self.checkReadPermission()

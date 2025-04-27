@@ -8,6 +8,8 @@ import Foundation
 import HealthKit
 
 protocol HealthService {
+    var didRequestPermission: Bool { get set }
+    
     func checkWritePermission(completion: ((Bool) -> Void)?)
     func checkReadPermission(completion: ((Bool) -> Void)?)
     

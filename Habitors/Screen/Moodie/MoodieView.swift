@@ -56,13 +56,13 @@ struct MoodieView: View {
     @State var location: CGSize = .zero
     
     @State var offset: [CGSize] = Array(repeating: .zero, count: 6)
+    @State var zIndex: [Int] = [5, 4, 3, 2, 1, 0]
     @Namespace var animation
     
     var currentMood: Mood {
         return viewModel.mood(of: viewModel.currentIndex)
     }
     
-
     var body: some View {
         ZStack {
             currentMood.color.opacity(0.4).ignoresSafeArea()
@@ -76,7 +76,7 @@ struct MoodieView: View {
                         MoodCardView(choosedMood: $viewModel.addSuccessMood,
                                      animation: animation,
                                      mood: mood)
-                            .zIndex(Double(viewModel.currentIndex == index ? 6 : viewModel.currentIndex - index))
+                            .zIndex(Double(zIndex[index]))
                             .rotationEffect(.degrees(offset[index].width / 3.0))
                             .offset(offset[index])
                             .gesture(
@@ -97,8 +97,12 @@ struct MoodieView: View {
                                             offset[index] = .init(width: x * 2,
                                                                   height: y * 2)
                                             viewModel.currentIndex = (index + 1) % Mood.allCases.count
-                                            offset[index] = .zero
-                                            offset[(viewModel.currentIndex + 1) % viewModel.moods.count] = .zero
+                                            
+                                            for i in 0..<6 {
+                                                zIndex[i] = (zIndex[i] + 1) % zIndex.count
+                                            }
+                                            
+                                            offset = Array(repeating: .zero, count: 6)
                                         }
                                     })
                             )
@@ -153,7 +157,7 @@ struct MoodieView: View {
                             )
                             .cornerRadius(56, corners: .allCorners)
                             .onTapGesture {
-                                viewModel.routing.history.onNext(())
+                                viewModel.routing.history.onNext(true)
                             }
                             .padding(20)
                         
@@ -188,6 +192,14 @@ struct MoodieView: View {
                 }
             
             Spacer()
+            
+            Image("history")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 24, height: 24)
+                .onTapGesture {
+                    viewModel.routing.history.onNext(false)
+                }
         }
         .frame(height: 56)
     }

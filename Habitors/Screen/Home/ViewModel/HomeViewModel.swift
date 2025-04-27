@@ -166,7 +166,7 @@ final class HomeViewModel: BaseViewModel<HomeViewModelInput, HomeViewModelOutput
     }
     
     private func getTasks() {
-        print("update habit data")
+        print("Cập nhật dữ liệu về habit trong màn home thành công")
         self.allHabit = HabitDAO.shared.getAll()
         self.tasks = HabitDAO.shared.getHabitDay(selectedDate)
         self.todayTasks = HabitDAO.shared.getHabitDay(Date())
@@ -426,6 +426,10 @@ extension HomeViewModel {
     var title: String {
         if currentTab == .home {
             return Date().format("EEEE dd, yyyy", isVietnamese: isVietnameseLanguage)
+        }
+        
+        if let currentHabit, currentTab == .overall {
+            return currentHabit.name
         }
         
         return translate(currentTab.rawValue.capitalized)

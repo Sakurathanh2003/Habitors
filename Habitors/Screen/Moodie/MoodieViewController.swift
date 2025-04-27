@@ -39,8 +39,8 @@ class MoodieViewController: BaseViewController {
             self?.coordinator?.stop()
         }).disposed(by: self.disposeBag)
         
-        viewModel.routing.history.subscribe(onNext: { [weak self] in
-            self?.coordinator?.routeToHistory()
+        viewModel.routing.history.subscribe(onNext: { [weak self] needBackToHome in
+            self?.coordinator?.routeToHistory(needBackToHome: needBackToHome)
         }).disposed(by: self.disposeBag)
     }
 }

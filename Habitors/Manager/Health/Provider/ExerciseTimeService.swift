@@ -10,6 +10,21 @@ import HealthKit
  
 class ExerciseTimeService: HealthService {
     private let healthStore = HKHealthStore()
+    private var didObserver: Bool = false
+    
+    var didRequestPermission: Bool {
+        get {
+            UserDefaults.standard.bool(forKey: "ExerciseTimeService")
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "ExerciseTimeService")
+            if newValue {
+                Task {
+                    await self.startObserver()
+                }
+            }
+        }
+    }
     
     func fetchData(for date: Date) async -> Double {
         let startDate = date.startOfDay
@@ -69,8 +84,9 @@ class ExerciseTimeService: HealthService {
         }
     }
     
+    // MARK: - Obersever
     func startObserver() async {
-        guard let stepType = HKObjectType.quantityType(forIdentifier: .appleExerciseTime), await checkReadPermission() else {
+        guard !didObserver && didRequestPermission, let stepType = HKObjectType.quantityType(forIdentifier: .appleExerciseTime), await checkReadPermission() else {
             return
         }
         
@@ -91,7 +107,8 @@ class ExerciseTimeService: HealthService {
         
         do {
             try await healthStore.enableBackgroundDelivery(for: stepType, frequency: .immediate)
-            print("✅ Background delivery enabled")
+            self.didObserver = true
+            print("✅ Theo dõi sự thay đổi về thời gian tập luyện thành công!")
         } catch {
             print("❌ Error enabling background delivery: \(error.localizedDescription)")
         }
@@ -105,7 +122,7 @@ class ExerciseTimeService: HealthService {
         }
         
         let writeType = HKObjectType.workoutType()
-        
+        self.didRequestPermission = true
         healthStore.requestAuthorization(toShare: Set([writeType]), read: Set([readType])) { success, error in
             Task {
                 let canRead = await self.checkReadPermission()

@@ -23,7 +23,7 @@ fileprivate struct AddHabitView: View {
                 withAnimation {
                     isPresenting = false
                 }
-            }.padding(.horizontal, 20)
+            }
             
             ScrollView {
                 VStack(spacing: 0) {
