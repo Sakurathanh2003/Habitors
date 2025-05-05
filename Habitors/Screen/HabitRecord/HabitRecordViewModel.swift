@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import SwiftUI
+import Audio
 import HealthKit
 
 struct HabitRecordViewModelInput: InputOutputViewModel {
@@ -63,8 +64,18 @@ final class HabitRecordViewModel: BaseViewModel<HabitRecordViewModelInput, Habit
     
     @objc func updateRecordIfNeed(notification: Notification) {
         if let updatedRecord = notification.object as? HabitRecord, updatedRecord.id == record.id && updatedRecord.value != record.value {
+            let oldProgress = progress
+            
             self.record = updatedRecord
             self.objectWillChange.send()
+            
+            if progress >= 1 && oldProgress < 1 {
+                self.routing.showAlert.onNext("Chúc mừng bạn đã đạt mục tiêu 🎊")
+                
+                if let url = Bundle.main.url(forResource: "congratulation", withExtension: "mp3") {
+                    Audio.shared.play(url: url)
+                }
+            }
         }
         
         if let updatedHabit = notification.object as? Habit {
@@ -226,7 +237,7 @@ extension HabitRecordViewModel {
     }
     
     var progress: CGFloat {
-        return min(CGFloat(currentValue) / CGFloat(goalValue), 1)
+        return CGFloat(currentValue) / CGFloat(goalValue)
     }
     
     var timeString: String {

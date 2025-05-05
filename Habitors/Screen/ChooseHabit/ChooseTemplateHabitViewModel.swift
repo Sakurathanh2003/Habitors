@@ -60,4 +60,8 @@ final class ChooseTemplateHabitViewModel: BaseViewModel<ChooseTemplateHabitViewM
             }
         }).disposed(by: self.disposeBag)
     }
+    
+    var title: String {
+        return isVietnameseLanguage ? "Chọn thói quen" : "Choose Habit"
+    }
 }

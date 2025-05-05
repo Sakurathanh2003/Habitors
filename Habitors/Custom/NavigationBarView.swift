@@ -60,7 +60,7 @@ struct NavigationBarView: View {
                     })
                 }
             } else {
-                Spacer(minLength: 34)
+                Spacer().frame(width: 24)
             }
         }
         .frame(height: 56)

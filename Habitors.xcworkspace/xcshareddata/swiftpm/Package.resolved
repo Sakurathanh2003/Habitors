@@ -1,6 +1,15 @@
 {
-  "originHash" : "3d7ad7edf6e1ad3c9a19a6c40e415e54fbb131e6a81fe053efab0e0c37cbecee",
+  "originHash" : "df5639115b3a9fb5c55c6b4c8cac6b282a3384cb853866ae3a3c271c0493c70d",
   "pins" : [
+    {
+      "identity" : "audio",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kenmueller/Audio.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "c0b7ea48b42d18849179ad6fda6ca7a79a88cebd"
+      }
+    },
     {
       "identity" : "sakuraextension",
       "kind" : "remoteSourceControl",

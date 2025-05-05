@@ -43,30 +43,33 @@ struct HomeView: View {
                         navigationBar
                             .padding(.horizontal, Const.horizontalPadding)
                         
-                        switch viewModel.currentTab {
-                        case .home:
-                            content()
-                        case .overall:
-                            HomeOverallView(viewModel: viewModel)
-                        case .tools:
-                            HomeToolView(viewModel: viewModel, namespace: animation)
-                        case .discover:
-                            HomeDiscoverView(viewModel: viewModel)
-                        }
-                        
-                        if let currentItem = player.getItem(), !isAudioOpening {
-                            Color.black.frame(height: 1)
-                            AudioView(player: player, item: currentItem, isOpen: $isAudioOpening)
-                                .matchedGeometryEffect(id: "audioplayer", in: animation)
-                                .onTapGesture {
-                                    withAnimation {
-                                        isAudioOpening = true
-                                    }
+                        ZStack(alignment: .bottom) {
+                            switch viewModel.currentTab {
+                            case .home:
+                                content()
+                            case .overall:
+                                HomeOverallView(viewModel: viewModel)
+                            case .tools:
+                                HomeToolView(viewModel: viewModel, namespace: animation)
+                            case .discover:
+                                HomeDiscoverView(viewModel: viewModel)
+                            }
+                            
+                            
+                            VStack {
+                                if let currentItem = player.getItem(), !isAudioOpening {
+                                    AudioView(player: player, item: currentItem, isOpen: $isAudioOpening)
+                                        .matchedGeometryEffect(id: "audioplayer", in: animation)
+                                        .onTapGesture {
+                                            withAnimation {
+                                                isAudioOpening = true
+                                            }
+                                        }
                                 }
-                            Color.black.frame(height: 1)
+                                
+                                HomeTabbarView(viewModel: viewModel)
+                            }
                         }
-                        
-                        HomeTabbarView(viewModel: viewModel)
                     }
                 }
                 .background(backgroundColor.ignoresSafeArea())
@@ -188,7 +191,7 @@ fileprivate struct HomeTabbarView: View {
             tabItemView(.overall)
             Spacer(minLength: 0)
             Circle()
-                .fill(Color("Black"))
+                .fill(viewModel.isTurnDarkMode ? .white : Color("Black"))
                 .frame(width: 59, height: 59)
                 .overlay(
                     Image("ic_plus")
@@ -196,7 +199,7 @@ fileprivate struct HomeTabbarView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 24, height: 24)
-                        .foregroundColor(.white)
+                        .foregroundColor(viewModel.backgroundColor)
                         
                 )
                 .onTapGesture {
@@ -209,6 +212,10 @@ fileprivate struct HomeTabbarView: View {
             Spacer(minLength: 0)
         }
         .frame(height: 60)
+        .padding(.top, 10)
+        .background(
+            BlurSwiftUIView(effect: .init(style: viewModel.isTurnDarkMode ? .dark : .light)).ignoresSafeArea()
+        )
         .padding(.top, 10)
     }
     

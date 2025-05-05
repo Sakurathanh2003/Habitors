@@ -28,7 +28,7 @@ struct ChooseTemplateHabitView: View {
                                 .frame(width: 24, height: 24)
                                 .padding(.trailing, 16)
                         
-                            Text("Create Custom Habit")
+                            Text(viewModel.isVietnameseLanguage ? "Tự tạo thói quen" : "Custom Habit")
                                 .fontBold(16)
                                 .autoresize(1)
                             
@@ -81,8 +81,8 @@ struct ChooseTemplateHabitView: View {
     
     var navigationBar: some View {
         HStack {
-            Text("Choose Habit")
-                .fontBold(30)
+            Text(viewModel.title)
+                .fontBold(28)
                 .foreColor(mainColor)
             
             Spacer()

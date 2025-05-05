@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,6 +19,13 @@
 		24E9231A2D8A9C0A00E9B96C /* ChooseTemplateHabitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E923162D8A9C0A00E9B96C /* ChooseTemplateHabitViewController.swift */; };
 		24E9231B2D8A9C0A00E9B96C /* ChooseTemplateHabitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E923172D8A9C0A00E9B96C /* ChooseTemplateHabitViewModel.swift */; };
 		24E9231E2D8A9C2F00E9B96C /* ChooseTemplateHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E9231D2D8A9C2F00E9B96C /* ChooseTemplateHabitView.swift */; };
+		2A36BFDC2DC67B6A00C6395C /* Orkney.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2A36BFDB2DC67B6A00C6395C /* Orkney.mp3 */; };
+		2A36BFE22DC695D200C6395C /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A36BFB02DC3C4B300C6395C /* UserNotifications.framework */; };
+		2A36BFE32DC695D200C6395C /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A36BFB22DC3C4B300C6395C /* UserNotificationsUI.framework */; };
+		2A36BFED2DC695D200C6395C /* HabitorContentExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 2A36BFE12DC695D200C6395C /* HabitorContentExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		2A795E122DC1FC5E00CA91B0 /* AudioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A795E112DC1FC5E00CA91B0 /* AudioView.swift */; };
+		2A795E152DC206FC00CA91B0 /* Audio in Frameworks */ = {isa = PBXBuildFile; productRef = 2A795E142DC206FC00CA91B0 /* Audio */; };
+		2A795E172DC2074600CA91B0 /* congratulation.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2A795E162DC2074600CA91B0 /* congratulation.mp3 */; };
 		B230D77A2DB7EB800040359E /* HealthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B230D7792DB7EB800040359E /* HealthService.swift */; };
 		B230D77E2DB7ED5F0040359E /* ExerciseTimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B230D77D2DB7ED560040359E /* ExerciseTimeService.swift */; };
 		B230D7802DB7EE170040359E /* WaterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B230D77F2DB7EE140040359E /* WaterService.swift */; };
@@ -139,6 +146,16 @@
 		FAE73E872D9C1C2B00944448 /* ringtone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FAE73E862D9C1C2B00944448 /* ringtone.mp3 */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		2A36BFEB2DC695D200C6395C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FA03A0132D81F83F004875F9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2A36BFE02DC695D200C6395C;
+			remoteInfo = HabitorContentExtension;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		FA00B6A32DB4B49E00B49125 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -157,6 +174,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				2A36BFED2DC695D200C6395C /* HabitorContentExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -177,6 +195,13 @@
 		24E923162D8A9C0A00E9B96C /* ChooseTemplateHabitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTemplateHabitViewController.swift; sourceTree = "<group>"; };
 		24E923172D8A9C0A00E9B96C /* ChooseTemplateHabitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTemplateHabitViewModel.swift; sourceTree = "<group>"; };
 		24E9231D2D8A9C2F00E9B96C /* ChooseTemplateHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTemplateHabitView.swift; sourceTree = "<group>"; };
+		2A36BFB02DC3C4B300C6395C /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		2A36BFB22DC3C4B300C6395C /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
+		2A36BFC22DC513FB00C6395C /* Habitors-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Habitors-Bridging-Header.h"; sourceTree = "<group>"; };
+		2A36BFDB2DC67B6A00C6395C /* Orkney.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Orkney.mp3; sourceTree = "<group>"; };
+		2A36BFE12DC695D200C6395C /* HabitorContentExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = HabitorContentExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A795E112DC1FC5E00CA91B0 /* AudioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioView.swift; sourceTree = "<group>"; };
+		2A795E162DC2074600CA91B0 /* congratulation.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = congratulation.mp3; sourceTree = "<group>"; };
 		B230D7792DB7EB800040359E /* HealthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthService.swift; sourceTree = "<group>"; };
 		B230D77D2DB7ED560040359E /* ExerciseTimeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseTimeService.swift; sourceTree = "<group>"; };
 		B230D77F2DB7EE140040359E /* WaterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterService.swift; sourceTree = "<group>"; };
@@ -301,7 +326,30 @@
 		FAE73E862D9C1C2B00944448 /* ringtone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ringtone.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		2A36BFEE2DC695D200C6395C /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 2A36BFE02DC695D200C6395C /* HabitorContentExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		2A36BFE42DC695D200C6395C /* HabitorContentExtension */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (2A36BFEE2DC695D200C6395C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = HabitorContentExtension; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
+		2A36BFDE2DC695D200C6395C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A36BFE32DC695D200C6395C /* UserNotificationsUI.framework in Frameworks */,
+				2A36BFE22DC695D200C6395C /* UserNotifications.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FA03A0182D81F83F004875F9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -309,6 +357,7 @@
 				FA00B6A12DB4AD1300B49125 /* SeekBar in Frameworks */,
 				23312E1699B2096F7EA3DAD6 /* Pods_Habitors.framework in Frameworks */,
 				FAABE5362D8B04E100544254 /* SakuraExtension in Frameworks */,
+				2A795E152DC206FC00CA91B0 /* Audio in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,6 +474,8 @@
 				EC7B1BE09FE7CF60A0E460AF /* Pods_Habitors.framework */,
 				FAABE5182D89B0E000544254 /* WidgetKit.framework */,
 				FAABE51A2D89B0E000544254 /* SwiftUI.framework */,
+				2A36BFB02DC3C4B300C6395C /* UserNotifications.framework */,
+				2A36BFB22DC3C4B300C6395C /* UserNotificationsUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -476,6 +527,7 @@
 			isa = PBXGroup;
 			children = (
 				FA03A01D2D81F83F004875F9 /* Habitors */,
+				2A36BFE42DC695D200C6395C /* HabitorContentExtension */,
 				FA03A01C2D81F83F004875F9 /* Products */,
 				1D6C327FB0C0DD1A02024FED /* Pods */,
 				C769EF5CB3D0651AAB002413 /* Frameworks */,
@@ -486,6 +538,7 @@
 			isa = PBXGroup;
 			children = (
 				FA03A01B2D81F83F004875F9 /* Habitors.app */,
+				2A36BFE12DC695D200C6395C /* HabitorContentExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -498,6 +551,7 @@
 				FAABE53E2D8C770600544254 /* Habitors.entitlements */,
 				FA03A02C2D81F844004875F9 /* Info.plist */,
 				24E923102D8A953E00E9B96C /* AppConst.swift */,
+				2A36BFC22DC513FB00C6395C /* Habitors-Bridging-Header.h */,
 				FA03A01E2D81F83F004875F9 /* AppDelegate.swift */,
 				FA03A0272D81F844004875F9 /* Assets.xcassets */,
 				FA03A03E2D81F965004875F9 /* Core */,
@@ -623,6 +677,7 @@
 		FA03A0D32D8475BA004875F9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2A795E112DC1FC5E00CA91B0 /* AudioView.swift */,
 				FA03A0D12D847566004875F9 /* HomeToolView.swift */,
 				FA03A0CF2D8472EC004875F9 /* HomeDiscoverView.swift */,
 				FA03A0782D8205EB004875F9 /* HomeView.swift */,
@@ -736,6 +791,8 @@
 				FA00B6A42DB4B97400B49125 /* Meditative */,
 				FA00B6942DB4237800B49125 /* Soundscapes */,
 				FAE73E862D9C1C2B00944448 /* ringtone.mp3 */,
+				2A36BFDB2DC67B6A00C6395C /* Orkney.mp3 */,
+				2A795E162DC2074600CA91B0 /* congratulation.mp3 */,
 				FAE73E842D9B09AB00944448 /* noisy.mp3 */,
 			);
 			path = Sound;
@@ -787,6 +844,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		2A36BFE02DC695D200C6395C /* HabitorContentExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2A36BFEF2DC695D200C6395C /* Build configuration list for PBXNativeTarget "HabitorContentExtension" */;
+			buildPhases = (
+				2A36BFDD2DC695D200C6395C /* Sources */,
+				2A36BFDE2DC695D200C6395C /* Frameworks */,
+				2A36BFDF2DC695D200C6395C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				2A36BFE42DC695D200C6395C /* HabitorContentExtension */,
+			);
+			name = HabitorContentExtension;
+			packageProductDependencies = (
+			);
+			productName = HabitorContentExtension;
+			productReference = 2A36BFE12DC695D200C6395C /* HabitorContentExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		FA03A01A2D81F83F004875F9 /* Habitors */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = FA03A02F2D81F844004875F9 /* Build configuration list for PBXNativeTarget "Habitors" */;
@@ -802,11 +881,13 @@
 			buildRules = (
 			);
 			dependencies = (
+				2A36BFEC2DC695D200C6395C /* PBXTargetDependency */,
 			);
 			name = Habitors;
 			packageProductDependencies = (
 				FAABE5352D8B04E100544254 /* SakuraExtension */,
 				FA00B6A02DB4AD1300B49125 /* SeekBar */,
+				2A795E142DC206FC00CA91B0 /* Audio */,
 			);
 			productName = Habitors;
 			productReference = FA03A01B2D81F83F004875F9 /* Habitors.app */;
@@ -819,11 +900,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1540;
+				LastSwiftUpdateCheck = 1630;
 				LastUpgradeCheck = 1540;
 				TargetAttributes = {
+					2A36BFE02DC695D200C6395C = {
+						CreatedOnToolsVersion = 16.3;
+					};
 					FA03A01A2D81F83F004875F9 = {
 						CreatedOnToolsVersion = 15.4;
+						LastSwiftMigration = 1630;
 					};
 				};
 			};
@@ -840,17 +925,26 @@
 			packageReferences = (
 				FAABE5342D8B04E100544254 /* XCRemoteSwiftPackageReference "SakuraExtension" */,
 				FA00B69F2DB4AD1300B49125 /* XCRemoteSwiftPackageReference "SeekBar" */,
+				2A795E132DC206FC00CA91B0 /* XCRemoteSwiftPackageReference "Audio" */,
 			);
 			productRefGroup = FA03A01C2D81F83F004875F9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				FA03A01A2D81F83F004875F9 /* Habitors */,
+				2A36BFE02DC695D200C6395C /* HabitorContentExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		2A36BFDF2DC695D200C6395C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FA03A0192D81F83F004875F9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -859,11 +953,13 @@
 				FA00B6AB2DB4B98D00B49125 /* a_golden_morning.mp3 in Resources */,
 				B2DFA3272DBAB1EE0035308F /* Gilroy-Bold.ttf in Resources */,
 				B2DFA3282DBAB1EE0035308F /* Gilroy-Medium.ttf in Resources */,
+				2A36BFDC2DC67B6A00C6395C /* Orkney.mp3 in Resources */,
 				B2DFA3292DBAB1EE0035308F /* Gilroy-Regular.ttf in Resources */,
 				B2DFA32A2DBAB1EE0035308F /* Gilroy-SemiBold.ttf in Resources */,
 				FA00B6AC2DB4B98D00B49125 /* breath_cycle.mp3 in Resources */,
 				B2DFA31C2DBAB1200035308F /* SVN-Gilroy Regular.otf in Resources */,
 				FA00B6B52DB4BD6100B49125 /* the_hidden_valley.mp3 in Resources */,
+				2A795E172DC2074600CA91B0 /* congratulation.mp3 in Resources */,
 				FA00B6AD2DB4B98D00B49125 /* laringeal.mp3 in Resources */,
 				FA00B6AE2DB4B98D00B49125 /* mindfulness.mp3 in Resources */,
 				FA00B6AF2DB4B98D00B49125 /* hair_dryer.mp3 in Resources */,
@@ -936,6 +1032,13 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		2A36BFDD2DC695D200C6395C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FA03A0172D81F83F004875F9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1037,10 +1140,19 @@
 				FAE73E782D944CFF00944448 /* HabitRecordCoordinator.swift in Sources */,
 				FAE73E792D944CFF00944448 /* HabitRecordViewController.swift in Sources */,
 				FAE73E7A2D944CFF00944448 /* HabitRecordViewModel.swift in Sources */,
+				2A795E122DC1FC5E00CA91B0 /* AudioView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2A36BFEC2DC695D200C6395C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2A36BFE02DC695D200C6395C /* HabitorContentExtension */;
+			targetProxy = 2A36BFEB2DC695D200C6395C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		B230D78B2DB8134F0040359E /* Localizable.strings */ = {
@@ -1055,6 +1167,60 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		2A36BFF02DC695D200C6395C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NS9ZL6QW8L;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HabitorContentExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = HabitorContentExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thanhvu.habitors.HabitorContentExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2A36BFF12DC695D200C6395C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NS9ZL6QW8L;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HabitorContentExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = HabitorContentExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thanhvu.habitors.HabitorContentExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		FA03A02D2D81F844004875F9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1180,9 +1346,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 06D8F555F47B0B82B4DDFF30 /* Pods-Habitors.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Habitors/Habitors.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -1214,6 +1380,8 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Habitors/Habitors-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1223,9 +1391,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0CDF5891CE71BFD804C379EF /* Pods-Habitors.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Habitors/Habitors.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -1257,6 +1425,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Habitors/Habitors-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1265,6 +1434,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		2A36BFEF2DC695D200C6395C /* Build configuration list for PBXNativeTarget "HabitorContentExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2A36BFF02DC695D200C6395C /* Debug */,
+				2A36BFF12DC695D200C6395C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		FA03A0162D81F83F004875F9 /* Build configuration list for PBXProject "Habitors" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1286,6 +1464,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		2A795E132DC206FC00CA91B0 /* XCRemoteSwiftPackageReference "Audio" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kenmueller/Audio.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		FA00B69F2DB4AD1300B49125 /* XCRemoteSwiftPackageReference "SeekBar" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kim-minseong/SeekBar.git";
@@ -1305,6 +1491,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2A795E142DC206FC00CA91B0 /* Audio */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2A795E132DC206FC00CA91B0 /* XCRemoteSwiftPackageReference "Audio" */;
+			productName = Audio;
+		};
 		FA00B6A02DB4AD1300B49125 /* SeekBar */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FA00B69F2DB4AD1300B49125 /* XCRemoteSwiftPackageReference "SeekBar" */;

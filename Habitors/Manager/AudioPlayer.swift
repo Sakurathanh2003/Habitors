@@ -17,6 +17,9 @@ class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
     @Published var isPlaying: Bool = false
     @Published var currentURL: URL?
     @Published var progress: CGFloat = 0
+    @Published var currentTime: String = "00:00"
+    @Published var durationTime: String = "00:00"
+    
     private var timer: Timer?
     
     override init() {
@@ -41,6 +44,7 @@ class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
             self.isPlaying = true
             self.startTimer()
             self.setupNowPlaying(title: url.deletingPathExtension().lastPathComponent, duration: player.duration)
+            self.durationTime = convertToString(seconds: player.duration)
         } catch {
             print("Error: \(error)")
             self.isPlaying = false
@@ -70,6 +74,7 @@ class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
         
         timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [unowned self] _ in
             self.progress = player.currentTime / player.duration
+            self.currentTime = convertToString(seconds: player.currentTime)
         }
     }
     
@@ -80,16 +85,26 @@ class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
     
     func seek(to value: Double) {
         player.currentTime = value * player.duration
+        self.currentTime = convertToString(seconds: player.currentTime)
     }
     
     func forward(seconds: TimeInterval = 15) {
         let newTime = min(player.currentTime + seconds, player.duration)
         player.currentTime = newTime
+        self.currentTime = convertToString(seconds: player.currentTime)
     }
     
     func rewind(seconds: TimeInterval = 15) {
         let newTime = max(player.currentTime - seconds, 0)
         player.currentTime = newTime
+        self.currentTime = convertToString(seconds: player.currentTime)
+    }
+    
+    func convertToString(seconds: Double) -> String {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.minute, .second]  // Only show minutes and seconds
+        formatter.zeroFormattingBehavior = .pad     // Ensure two digits (e.g., 02:05)
+        return formatter.string(from: seconds) ?? "00:00"
     }
     
     // MARK: - MPRemoteCommandCenter

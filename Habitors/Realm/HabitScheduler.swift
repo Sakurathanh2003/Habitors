@@ -17,7 +17,7 @@ class HabitScheduler: NSObject {
         UNUserNotificationCenter.current().delegate = self
     }
     
-    static var notiID: [String: [String]] {
+    private var notiID: [String: [String]] {
         get {
             UserDefaults.standard.value(forKey: "notiID") as? [String: [String]] ?? [:]
         }
@@ -26,11 +26,13 @@ class HabitScheduler: NSObject {
         }
     }
     
-    static func requestNotificationPermission() {
+    func requestNotificationPermission() {
         let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options: [.criticalAlert, .alert, .sound, .badge]) { granted, error in
+        center.requestAuthorization(options: [.alert, .sound, .badge, .provisional, .providesAppNotificationSettings]) { granted, error in
             if granted {
                 print("Permission granted!")
+                UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+                UNUserNotificationCenter.current().removeAllDeliveredNotifications()
             } else {
                 print("Permission denied!")
             }
@@ -38,49 +40,59 @@ class HabitScheduler: NSObject {
     }
     
     // MARK: - Delete schedule
-    static func deleteSchedule(for item: Habit) {
+    func deleteSchedule(for item: Habit) {
         if let ids = notiID[item.id] {
             UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: ids)
             UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ids)
         }
     }
     
-    static func startSchedule(for item: Habit) {
+    func startSchedule(for item: Habit) {
         self.deleteSchedule(for: item)
         
-        let frequency = item.frequency
-        let repeatType = frequency.type
-        
         if let nearestReminderDay = item.nearestReminderDay {
-            let content = UNMutableNotificationContent()
-            content.title = "Thông báo 1"
-            content.body = "Đây là thông báo đầu tiên."
-            content.sound = UNNotificationSound.default
-            content.categoryIdentifier = "alarm"
+            let notificationContent = notificationContent(for: item)
             
-            let dateComponent = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: nearestReminderDay)
-            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: false)
-            let request = UNNotificationRequest(identifier: "Notification1", content: content, trigger: trigger)
+            var dateComponent = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute],
+                                                                from: nearestReminderDay)
+            var requests = [UNNotificationRequest]()
+            for index in 0..<15 {
+                let id = UUID().uuidString
+                
+                dateComponent.second = index * 2
+                notificationContent.subtitle = "\(index)"
+                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: false)
+
+                let request = UNNotificationRequest(identifier: id,
+                                                    content: notificationContent,
+                                                    trigger: trigger)
+                
+                notiID[item.id]?.append(id)
+                requests.append(request)
+            }
             
-            // Thêm vào hệ thống
-            UNUserNotificationCenter.current().add(request) { error in
-                if let error {
-                    print("Lỗi khi thêm thông báo 1: \(error.localizedDescription)")
+            for request in requests {
+                UNUserNotificationCenter.current().add(request) { error in
+                    if let error {
+                        print("Lỗi khi thêm thông báo 1: \(error.localizedDescription)")
+                    }
                 }
             }
         }
     }
         
-    private static func notificationContent(for item: Habit) -> UNMutableNotificationContent {
+    private func notificationContent(for item: Habit) -> UNMutableNotificationContent {
         let content = UNMutableNotificationContent()
-        content.interruptionLevel = .critical
-        content.title = "Mở ứng dụng ngay!"
+        content.interruptionLevel = .active
+        content.title = "Bạn có nhắc nhở!"
         
         let body = "habit: \(item.name) "
         content.body = body
         
-        let sound = UNNotificationSound(named: UNNotificationSoundName("ringtone.mp3"))
-        content.sound = sound // Thay "ringtone.mp3" bằng tên tệp của bạn
+        content.sound = .criticalSoundNamed(UNNotificationSoundName("Orkney.mp3"),
+                                            withAudioVolume: 1) // Thay "ringtone.mp3" bằng tên tệp của bạn
+    
+        content.categoryIdentifier = "myNotificationCategory"
         return content
     }
 }
@@ -90,78 +102,53 @@ extension HabitScheduler: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.banner, .badge, .sound, .list])
+        completionHandler([.alert, .badge, .sound])
     }
 }
-
 
 // MARK: - Habit Extension
 extension Habit {
     var nearestReminderDay: Date? {
+        var reminder = [Time]()
         switch frequency.type {
         case .daily:
+            reminder = frequency.daily.reminder
             if frequency.daily.reminder.isEmpty || frequency.daily.selectedDays.isEmpty {
                 return nil
-            } else {
-                let daily = frequency.daily
-                let currentDay = Date()
-                let calendar = Calendar.current
-                let currentWeekday = calendar.component(.weekday, from: currentDay) // Lấy ngày trong tuần hiện tại (1 = Chủ nhật, 7 = Thứ 7)
-                
-                let sortedReminder = daily.reminder.sorted { $0.hour <= $1.hour && $0.minutes <= $1.minutes }
-                let sortedSelectedDays = daily.selectedDays.map({ $0 == 8 ? 1 : $0 }).sorted { $0 <= $1 }
-                
-                // Lọc ra các ngày trong tuần mà người dùng đã chọn và lớn hơn hoặc bằng ngày hôm nay
-                var validDays = sortedSelectedDays.filter { $0 >= currentWeekday }
-                
-                if validDays.isEmpty {
-                    validDays.append(sortedSelectedDays.first!)
-                }
-                
-                var valueDay: Date? = nil
-                
-                // Duyệt qua tất cả các nhắc nhở trong ngày
-                for selectedDay in daily.selectedDays {
-                    guard let nextValidDay = currentDay.nextWeekday(selectedDay) else {
-                        continue
-                    }
-                    
-                    for reminder in sortedReminder {
-                        let reminderHour = reminder.hour
-                        let reminderMinute = reminder.minutes
-                        
-                        // Tính toán thời gian nhắc nhở cho ngày hợp lệ tiếp theo
-                        var components = calendar.dateComponents([.year, .month, .day], from: nextValidDay)
-                        components.hour = reminderHour
-                        components.minute = reminderMinute
-                        
-                        guard let reminderDate = calendar.date(from: components) else {
-                            continue
-                        }
-                        
-                        // Nếu thời gian nhắc nhở đã qua, tính toán lại vào tuần sau
-                        var validReminderDate = reminderDate
-                        if validReminderDate < currentDay {
-                            validReminderDate = calendar.date(byAdding: .weekOfMonth, value: 1, to: validReminderDate)!
-                        }
-                        
-                        // Cập nhật valueDay nếu validReminderDate sớm hơn
-                        valueDay = valueDay == nil ? validReminderDate : min(valueDay!, validReminderDate)
-                    }
-                }
-                
-                return valueDay
             }
         case .weekly:
-            if frequency.daily.reminder.isEmpty {
+            reminder = frequency.weekly.reminder
+            if frequency.weekly.reminder.isEmpty {
                 return nil
             }
         case .monthly:
-            if frequency.daily.reminder.isEmpty {
+            reminder = frequency.monthly.reminder
+            if frequency.monthly.reminder.isEmpty {
                 return nil
             }
         }
         
-        return nil
+        reminder = reminder.sorted(by: { $0.hour <= $1.hour && $0.minutes <= $1.minutes })
+        var day = Date()
+        
+        while true {
+            if day.isDateValid(self) {
+                break
+            }
+            
+            day = day.tomorrow
+        }
+        
+        if let item = reminder.first {
+            var component = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: day)
+            component.minute = item.minutes
+            component.hour = item.hour
+            
+            if let finalDay = Calendar.current.date(from: component) {
+                day = finalDay
+            }
+        }
+        
+        return day
     }
 }

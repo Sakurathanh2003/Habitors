@@ -37,7 +37,7 @@ struct HomeViewModelRouting: RoutingOutput {
 }
 
 final class HomeViewModel: BaseViewModel<HomeViewModelInput, HomeViewModelOutput, HomeViewModelRouting> {
-    @Published var currentTab: HomeTab = .home
+    @Published var currentTab: HomeTab = .tools
     @Published var dateInMonth = [Date]()
     @Published var selectedDate: Date = Date().nextDay
     

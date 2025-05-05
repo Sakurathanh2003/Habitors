@@ -27,6 +27,7 @@ final class HabitDAO: RealmDao {
             print("✅ Đã thêm 1 habit: \(item.name)")
             setupRecordIfNeed(habit: item)
             NotificationCenter.default.post(name: .addHabitItem, object: item)
+            HabitScheduler.shared.startSchedule(for: item)
         } catch {
             print("error: \(error)")
         }
@@ -69,10 +70,11 @@ final class HabitDAO: RealmDao {
         
         do {
             try self.addObjectAndUpdate(object)
-            setupRecordIfNeed(habit: item)
-            removeRecordIfNeed(habit: item)
-            print("Đã update habit:\(item.name) thành công")
+//            setupRecordIfNeed(habit: item)
+//            removeRecordIfNeed(habit: item)
+//            print("Đã update habit:\(item.name) thành công")
             NotificationCenter.default.post(name: .updateHabitItem, object: item)
+            HabitScheduler.shared.startSchedule(for: item)
         } catch {
             print("error: \(error)")
         }
@@ -101,7 +103,7 @@ final class HabitDAO: RealmDao {
                 realm.delete(object)
             }
             
-            HabitScheduler.deleteSchedule(for: item)
+            HabitScheduler.shared.deleteSchedule(for: item)
             
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: .didDeleteRecord, object: item.records)

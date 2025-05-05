@@ -40,6 +40,12 @@ struct SelectFrequencyView: View {
             VStack(spacing: 0) {
                 VStack {
                     HStack {
+                        Text("Frequency")
+                            .fontBold(28)
+                            .foreColor(mainColor)
+                        
+                        Spacer()
+                        
                         Button {
                             withAnimation {
                                 didAppear = false
@@ -53,16 +59,9 @@ struct SelectFrequencyView: View {
                                 .frame(width: 22, height: 22)
                                 .foreColor(mainColor)
                         }
-                        
-                        Spacer()
                     }
                     .padding(.horizontal, 20)
                     .frame(height: 46)
-                    .overlay(
-                        Text("Frequency")
-                            .fontBold(30)
-                            .foreColor(mainColor)
-                    )
                     
                     ScrollView(.vertical, showsIndicators: false) {
                         VStack {
