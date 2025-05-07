@@ -8,10 +8,11 @@
 import UIKit
 import BackgroundTasks
 import UserNotifications
+import AppTrackingTransparency
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
     private var coodinator: AppCoordinator!
     
@@ -20,7 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         configAppCoordinator()
         configAppleHealthService()
         HabitScheduler.shared.requestNotificationPermission()
-        registerBackgroundTask()
         return true
     }
     
@@ -43,53 +43,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        scheduleBackgroundTask()
+    let notificationCenter = UNUserNotificationCenter.current()
+    var mainRequests = [UNNotificationRequest]()
+    
+    // MARK: - Life Cycle
+    func applicationWillTerminate(_ application: UIApplication) {
+        
     }
     
-    func registerBackgroundTask() {
-        BGTaskScheduler.shared.register(forTaskWithIdentifier: "com.thanhvu.habitors.fetchData", using: nil) { task in
-            self.handleBackgroundFetch(task: task)
-        }
+    func applicationDidBecomeActive(_ application: UIApplication) {
     }
+}
 
-    func scheduleBackgroundTask() {
-        let request = BGProcessingTaskRequest(identifier: "com.thanhvu.habitors.fetchData")
-        request.requiresExternalPower = false
-        request.requiresNetworkConnectivity = false
-        request.earliestBeginDate = Date()
-        do {
-            try BGTaskScheduler.shared.submit(request)
-        } catch {
-            print("Failed to submit background task: \(error)")
-        }
-    }
-
-    func handleBackgroundFetch(task: BGTask) {
-        let content = UNMutableNotificationContent()
-        content.interruptionLevel = .active
-        content.title = "Bạn có nhắc nhở!"
-        
-        let body = "Test"
-        content.body = body
-        
-        content.sound = .criticalSoundNamed(UNNotificationSoundName("Orkney.mp3"),
-                                            withAudioVolume: 1) // Thay "ringtone.mp3" bằng tên tệp của bạn
-    
-        content.categoryIdentifier = "myNotificationCategory"
-        
-
-        let request = UNNotificationRequest(identifier: UUID().uuidString,
-                                            content: content,
-                                            trigger: nil)
-        
-        // Thêm vào hệ thống
-        UNUserNotificationCenter.current().add(request) { error in
-            if let error {
-                print("Lỗi khi thêm thông báo 1: \(error.localizedDescription)")
-            }
-        }
-        task.setTaskCompleted(success: true)
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .banner, .list])
     }
 }
 

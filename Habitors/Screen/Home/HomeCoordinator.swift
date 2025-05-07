@@ -10,6 +10,7 @@ import SwiftUI
 
 final class HomeCoordinator: WindowBaseCoordinator {
     
+    private var listHabitCoordinator: ListHabitCoordinator?
     private var chooseTemplateCoordinator: ChooseTemplateHabitCoordinator?
     private var habitRecordCoordinator: HabitRecordCoordinator?
     
@@ -62,6 +63,16 @@ final class HomeCoordinator: WindowBaseCoordinator {
         if child is SettingCoordinator {
             self.settingCoordinator = nil
         }
+        
+        if child is ListHabitCoordinator {
+            self.listHabitCoordinator = nil
+        }
+    }
+    
+    func routeToListHabit() {
+        self.listHabitCoordinator = ListHabitCoordinator(navigationController: controller.navigationController!)
+        self.listHabitCoordinator?.start()
+        self.addChild(listHabitCoordinator)
     }
     
     func routeToCreate() {

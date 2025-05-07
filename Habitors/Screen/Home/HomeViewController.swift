@@ -36,17 +36,7 @@ class HomeViewController: BaseViewController {
     // MARK: - Config
     func config() {
         insertFullScreen(HomeView(viewModel: viewModel))
-        configViewModelInput()
-        configViewModelOutput()
         configRoutingOutput()
-    }
-
-    func configViewModelInput() {
-
-    }
-
-    func configViewModelOutput() {
-        
     }
 
     func configRoutingOutput() {
@@ -76,6 +66,10 @@ class HomeViewController: BaseViewController {
         
         viewModel.routing.routeToSetting.subscribe(onNext: { [weak self] in
             self?.coordinator?.routeToSetting()
+        }).disposed(by: self.disposeBag)
+        
+        viewModel.routing.routeToListHabit.subscribe(onNext: { [weak self] in
+            self?.coordinator?.routeToListHabit()
         }).disposed(by: self.disposeBag)
     }
 }

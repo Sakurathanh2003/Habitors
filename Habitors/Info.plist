@@ -20,7 +20,6 @@
 		<string>audio</string>
 		<string>critical-alerts</string>
 		<string>processing</string>
-		<string>fetch</string>
 	</array>
 </dict>
 </plist>

@@ -78,10 +78,48 @@ struct HomeView: View {
         .environment(\.locale, viewModel.isVietnameseLanguage ? Locale(identifier: "VI") : Locale(identifier: "EN"))
     }
     
+    func summaryHabitView() -> some View {
+        HStack(spacing: 0) {
+            VStack(alignment: .leading, spacing: 10) {
+                Text("You have \(viewModel.allHabit.count) habits")
+                    .fontBold(20)
+                Text("Tap to see")
+                    .fontRegular(14)
+                    .underline()
+                    
+            }
+            
+            Spacer(minLength: 0)
+            
+            Image("home_need_to_do")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 100)
+        }
+        .foregroundColor(.white)
+        .padding(.horizontal, 20)
+        .background(
+            Color("Primary")
+                .overlay(
+                    Image("background_region")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .offset(x: -UIScreen.main.bounds.width / 3)
+                )
+        )
+        .cornerRadius(9)
+        .onTapGesture {
+            viewModel.routing.routeToListHabit.onNext(())
+        }
+        .padding(.horizontal, 20)
+    }
+    
     // MARK: - Home Content
     @ViewBuilder
     func content() -> some View {
         VStack(spacing: 0) {
+            summaryHabitView()
+                .padding(.bottom, 10)
             calendarView
             
             if viewModel.tasks.isEmpty {

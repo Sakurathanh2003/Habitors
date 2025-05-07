@@ -33,6 +33,14 @@ final class HabitRecordCoordinator: NavigationBaseCoordinator {
         super.stop(completion: completion)
     }
     
+    override func childDidStop(_ child: Coordinator) {
+        super.childDidStop(child)
+        
+        if child is CreateCoordinator {
+            self.createHabitCoordinator = nil
+        }
+    }
+    
     func routeToCreate(habit: Habit?) {
         self.createHabitCoordinator = CreateCoordinator(habit: habit, controller: controller)
         self.createHabitCoordinator?.start()

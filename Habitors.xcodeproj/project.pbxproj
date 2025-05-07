@@ -23,9 +23,13 @@
 		2A36BFE22DC695D200C6395C /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A36BFB02DC3C4B300C6395C /* UserNotifications.framework */; };
 		2A36BFE32DC695D200C6395C /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A36BFB22DC3C4B300C6395C /* UserNotificationsUI.framework */; };
 		2A36BFED2DC695D200C6395C /* HabitorContentExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 2A36BFE12DC695D200C6395C /* HabitorContentExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		2A36BFFB2DCA57E500C6395C /* ListHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A36BFFA2DCA57E500C6395C /* ListHabitView.swift */; };
 		2A795E122DC1FC5E00CA91B0 /* AudioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A795E112DC1FC5E00CA91B0 /* AudioView.swift */; };
 		2A795E152DC206FC00CA91B0 /* Audio in Frameworks */ = {isa = PBXBuildFile; productRef = 2A795E142DC206FC00CA91B0 /* Audio */; };
 		2A795E172DC2074600CA91B0 /* congratulation.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2A795E162DC2074600CA91B0 /* congratulation.mp3 */; };
+		2A9CD4B02DCA592F000A4B57 /* ListHabitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9CD4AC2DCA592F000A4B57 /* ListHabitViewController.swift */; };
+		2A9CD4B12DCA592F000A4B57 /* ListHabitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9CD4AE2DCA592F000A4B57 /* ListHabitViewModel.swift */; };
+		2A9CD4B22DCA592F000A4B57 /* ListHabitCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9CD4AB2DCA592F000A4B57 /* ListHabitCoordinator.swift */; };
 		B230D77A2DB7EB800040359E /* HealthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B230D7792DB7EB800040359E /* HealthService.swift */; };
 		B230D77E2DB7ED5F0040359E /* ExerciseTimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B230D77D2DB7ED560040359E /* ExerciseTimeService.swift */; };
 		B230D7802DB7EE170040359E /* WaterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B230D77F2DB7EE140040359E /* WaterService.swift */; };
@@ -200,8 +204,12 @@
 		2A36BFC22DC513FB00C6395C /* Habitors-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Habitors-Bridging-Header.h"; sourceTree = "<group>"; };
 		2A36BFDB2DC67B6A00C6395C /* Orkney.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Orkney.mp3; sourceTree = "<group>"; };
 		2A36BFE12DC695D200C6395C /* HabitorContentExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = HabitorContentExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A36BFFA2DCA57E500C6395C /* ListHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListHabitView.swift; sourceTree = "<group>"; };
 		2A795E112DC1FC5E00CA91B0 /* AudioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioView.swift; sourceTree = "<group>"; };
 		2A795E162DC2074600CA91B0 /* congratulation.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = congratulation.mp3; sourceTree = "<group>"; };
+		2A9CD4AB2DCA592F000A4B57 /* ListHabitCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListHabitCoordinator.swift; sourceTree = "<group>"; };
+		2A9CD4AC2DCA592F000A4B57 /* ListHabitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListHabitViewController.swift; sourceTree = "<group>"; };
+		2A9CD4AE2DCA592F000A4B57 /* ListHabitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListHabitViewModel.swift; sourceTree = "<group>"; };
 		B230D7792DB7EB800040359E /* HealthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthService.swift; sourceTree = "<group>"; };
 		B230D77D2DB7ED560040359E /* ExerciseTimeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseTimeService.swift; sourceTree = "<group>"; };
 		B230D77F2DB7EE140040359E /* WaterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterService.swift; sourceTree = "<group>"; };
@@ -393,6 +401,17 @@
 			path = ChooseHabit;
 			sourceTree = "<group>";
 		};
+		2A36BFF92DCA57D200C6395C /* ListHabit */ = {
+			isa = PBXGroup;
+			children = (
+				2A36BFFA2DCA57E500C6395C /* ListHabitView.swift */,
+				2A9CD4AB2DCA592F000A4B57 /* ListHabitCoordinator.swift */,
+				2A9CD4AC2DCA592F000A4B57 /* ListHabitViewController.swift */,
+				2A9CD4AE2DCA592F000A4B57 /* ListHabitViewModel.swift */,
+			);
+			path = ListHabit;
+			sourceTree = "<group>";
+		};
 		B230D77B2DB7EB830040359E /* Health */ = {
 			isa = PBXGroup;
 			children = (
@@ -569,6 +588,7 @@
 		FA03A0322D81F905004875F9 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				2A36BFF92DCA57D200C6395C /* ListHabit */,
 				FAABE50D2D8883CD00544254 /* AppCoordinator.swift */,
 				24E923142D8A9BF800E9B96C /* ChooseHabit */,
 				FA2A0AEC2D8516D400A597DB /* Create */,
@@ -1114,6 +1134,9 @@
 				FAA1E8822DB29FED00604ABC /* MoodRecord.swift in Sources */,
 				B245D9312DB7D6F400E857FA /* AudioPlayer.swift in Sources */,
 				FAE73E722D9444A300944448 /* HabitRecord.swift in Sources */,
+				2A9CD4B02DCA592F000A4B57 /* ListHabitViewController.swift in Sources */,
+				2A9CD4B12DCA592F000A4B57 /* ListHabitViewModel.swift in Sources */,
+				2A9CD4B22DCA592F000A4B57 /* ListHabitCoordinator.swift in Sources */,
 				24E923192D8A9C0A00E9B96C /* ChooseTemplateHabitCoordinator.swift in Sources */,
 				24E9231A2D8A9C0A00E9B96C /* ChooseTemplateHabitViewController.swift in Sources */,
 				24E9231B2D8A9C0A00E9B96C /* ChooseTemplateHabitViewModel.swift in Sources */,
@@ -1139,6 +1162,7 @@
 				FA03A0442D81F979004875F9 /* Coordinator.swift in Sources */,
 				FAE73E782D944CFF00944448 /* HabitRecordCoordinator.swift in Sources */,
 				FAE73E792D944CFF00944448 /* HabitRecordViewController.swift in Sources */,
+				2A36BFFB2DCA57E500C6395C /* ListHabitView.swift in Sources */,
 				FAE73E7A2D944CFF00944448 /* HabitRecordViewModel.swift in Sources */,
 				2A795E122DC1FC5E00CA91B0 /* AudioView.swift in Sources */,
 			);
