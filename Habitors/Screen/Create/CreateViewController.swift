@@ -53,6 +53,10 @@ class CreateViewController: BaseViewController {
             self?.coordinator?.didCreateHabit()
         }).disposed(by: self.disposeBag)
         
+        viewModel.routing.presentDeleteDialog.subscribe(onNext: { [weak self] in
+            self?.coordinator?.presentDeleteDialog()
+        }).disposed(by: self.disposeBag)
+        
         viewModel.routing.showAlert.subscribe(onNext: { [weak self] message in
             let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: "Ok", style: .cancel)

@@ -16,9 +16,9 @@ struct YearStatusView: View {
         let spacing = 1.0
         let itemWidth = (width - spacing * (numberOfWeek - 1)) / numberOfWeek
         
-        VStack(spacing: 10) {
+        VStack(alignment: .leading, spacing: 10) {
             HStack {
-                Text("Yearly status").fontSemiBold(14)
+                Text(viewModel.isVietnameseLanguage ? "Tình hình cả năm" : "Yearly status").fontSemiBold(14)
                 Spacer()
                 
                 HStack(spacing: 2) {
@@ -58,6 +58,22 @@ struct YearStatusView: View {
             }
             .frame(width: width,
                    height: itemWidth * 7 + spacing * 6)
+            
+            HStack {
+                RoundedRectangle(cornerRadius: 0)
+                    .stroke(lineWidth: 1)
+                    .frame(width: 5, height: 5)
+                
+                Text(viewModel.isVietnameseLanguage ? "Hôm nay" : "Today")
+                    .fontRegular(10)
+                
+                RoundedRectangle(cornerSize: .zero)
+                    .fill(Color("Primary"))
+                    .frame(width: 5, height: 5)
+                
+                Text(viewModel.isVietnameseLanguage ? "Hoàn thành" : "Done")
+                    .fontRegular(10)
+            }
         }
         .padding(20)
         .background(.white)
@@ -77,6 +93,14 @@ struct YearStatusView: View {
             RoundedRectangle(cornerSize: .zero)
                 .fill(Color("Primary").opacity(completedPercent))
                 .background(Color("Gray02"))
+                .overlay(
+                    ZStack {
+                        if date.isToday {
+                            RoundedRectangle(cornerSize: .zero)
+                                .stroke(lineWidth: 1)
+                        }
+                    }
+                )
         }
     }
 }

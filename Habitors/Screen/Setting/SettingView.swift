@@ -38,7 +38,7 @@ struct SettingView: View {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {
                     HStack {
-                        Text("Language")
+                        Text(viewModel.isVietnameseLanguage ? "Ngôn ngữ" : "Language")
                             .fontSemiBold(16)
                             .foregroundStyle(mainColor)
                         
@@ -80,13 +80,13 @@ struct SettingView: View {
                     }.frame(height: 56)
                     
                     HStack {
-                        Text("Dark Mode")
+                        Text(viewModel.isVietnameseLanguage ? "Chế độ tối" : "Dark Mode")
                             .fontSemiBold(16)
                             .foregroundStyle(mainColor)
                         
                         Spacer()
                         
-                        Text("Off")
+                        Text(viewModel.isVietnameseLanguage ? "Tắt" : "Off")
                             .fontBold(16)
                             .foregroundStyle(!viewModel.isTurnDarkMode ? mainColor : .gray)
                         HStack {
@@ -112,7 +112,7 @@ struct SettingView: View {
                             }
                         }
                         
-                        Text("On")
+                        Text(viewModel.isVietnameseLanguage ? "Bật" : "On")
                             .fontBold(16)
                             .foregroundStyle(viewModel.isTurnDarkMode ? mainColor : .gray)
                     }.frame(height: 56)

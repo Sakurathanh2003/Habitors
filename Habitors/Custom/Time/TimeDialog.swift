@@ -99,6 +99,7 @@ struct TimeDialog: View {
             }
             .padding(24)
             .background(Color.white)
+            .cornerRadius(20)
             .padding(24)
         }
     }

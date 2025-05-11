@@ -36,6 +36,7 @@ struct CreateViewModelRouting: RoutingOutput {
     var didCreate = PublishSubject<()>()
     
     var needPermisson = PublishSubject<String>()
+    var presentDeleteDialog = PublishSubject<()>()
 }
 
 final class CreateViewModel: BaseViewModel<CreateViewModelInput, CreateViewModelOutput, CreateViewModelRouting> {
@@ -47,7 +48,8 @@ final class CreateViewModel: BaseViewModel<CreateViewModelInput, CreateViewModel
     // Date Start
     @Published var startedDate: Date = Date()
     @Published var frequency: Frequency = .init()
-
+    @Published var reminder: [Time] = []
+    
     // Goal
     @Published var goalUnit: GoalUnit = .count
     @Published var goalValue: Double = 1
@@ -58,7 +60,9 @@ final class CreateViewModel: BaseViewModel<CreateViewModelInput, CreateViewModel
     @Published var isShowingCalendar: Bool = false
     @Published var isShowingFrequency: Bool = false
     @Published var isShowingIcon: Bool = false
-    @Published var isShowingDeleteDialog: Bool = false
+    
+    @Published var isShowingTimeDialog = false
+    @Published var editingTime: Time?
     
     init(habit: Habit?) {
         self.habit = habit
@@ -70,6 +74,7 @@ final class CreateViewModel: BaseViewModel<CreateViewModelInput, CreateViewModel
             self.goalValue = habit.goalValue
             self.startedDate = habit.startedDate
             self.frequency = habit.frequency
+            self.reminder = habit.reminder
         }
         
         super.init()
@@ -122,9 +127,7 @@ final class CreateViewModel: BaseViewModel<CreateViewModelInput, CreateViewModel
         }).disposed(by: self.disposeBag)
         
         input.wantToDelete.subscribe(onNext: { [unowned self] _ in
-            withAnimation {
-                self.isShowingDeleteDialog = true
-            }
+            self.routing.presentDeleteDialog.onNext(())
         }).disposed(by: self.disposeBag)
         
         input.delete.subscribe(onNext: { [unowned self] _ in
@@ -157,7 +160,7 @@ final class CreateViewModel: BaseViewModel<CreateViewModelInput, CreateViewModel
                           isTemplate: habit?.isTemplate ?? false,
                           startedDate: self.startedDate.startOfDay,
                           frequency: self.frequency,
-                          records: [])
+                          reminder: reminder)
     
         HabitDAO.shared.addObject(item: habit)
         self.routing.didCreate.onNext(())
@@ -175,6 +178,7 @@ final class CreateViewModel: BaseViewModel<CreateViewModelInput, CreateViewModel
         habit.goalUnit = goalUnit
         habit.startedDate = startedDate
         habit.frequency = frequency
+        habit.reminder = reminder
         HabitDAO.shared.updateObject(item: habit)
         self.routing.stop.onNext(())
     }
@@ -250,10 +254,10 @@ final class CreateViewModel: BaseViewModel<CreateViewModelInput, CreateViewModel
 extension CreateViewModel {
     var habitStartDateString: String {
         if startedDate.isToday {
-            return "Today"
+            return isVietnameseLanguage ? "Hôm nay" : "Today"
         }
       
-        return startedDate.format("dd MMMM yyyy")
+        return startedDate.format("dd MMMM yyyy", isVietnamese: isVietnameseLanguage)
     }
     
     var title: String {
@@ -261,11 +265,11 @@ extension CreateViewModel {
             return habit.name
         }
         
-        return "Custom"
+        return isVietnameseLanguage ? "Tuỳ chỉnh" : "Custom"
     }
     
     var goalSectionTitle: String {
-        return "Goal (\(goalUnit.rawValue))"
+        return isVietnameseLanguage ? "Mục tiêu" : "Goal"
     }
     
     var canChangeName: Bool {

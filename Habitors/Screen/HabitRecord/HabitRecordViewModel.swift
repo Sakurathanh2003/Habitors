@@ -56,10 +56,14 @@ final class HabitRecordViewModel: BaseViewModel<HabitRecordViewModelInput, Habit
         NotificationCenter.default.addObserver(self, selector: #selector(updateRecordIfNeed(notification:)),
                                                name: .updateHabitItem, object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(dismissIfNeed(notification:)),
-                                               name: .didDeleteRecord, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateRecordIfNeed(notification:)),
                                                name: .didUpdateRecord, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(dismissIfNeed(notification:)),
+                                               name: .deleteHabitItem, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(dismissIfNeed(notification:)),
+                                               name: .didDeleteRecord, object: nil)
     }
     
     @objc func updateRecordIfNeed(notification: Notification) {
@@ -90,6 +94,10 @@ final class HabitRecordViewModel: BaseViewModel<HabitRecordViewModelInput, Habit
             if deletedRecords.contains(where: { $0.id == record.id }) {
                 self.routing.stop.onNext(())
             }
+        }
+        
+        if let habit = notification.object as? Habit, habit.id == self.record.habitID {
+            self.routing.stop.onNext(())
         }
     }
     

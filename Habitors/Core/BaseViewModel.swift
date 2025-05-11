@@ -35,6 +35,7 @@ public class BaseViewModel<Input: InputOutputViewModel, Output: InputOutputViewM
     @objc func updateSetting() {
         self.isVietnameseLanguage = User.isVietnamese
         self.isTurnDarkMode = User.isTurnDarkMode
+        self.objectWillChange.send()
     }
 }
 

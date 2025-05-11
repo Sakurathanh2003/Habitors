@@ -38,7 +38,7 @@ struct HomeViewModelRouting: RoutingOutput {
 }
 
 final class HomeViewModel: BaseViewModel<HomeViewModelInput, HomeViewModelOutput, HomeViewModelRouting> {
-    @Published var currentTab: HomeTab = .home
+    @Published var currentTab: HomeTab = .overall
     @Published var dateInMonth = [Date]()
     @Published var selectedDate: Date = Date().nextDay
     
@@ -147,10 +147,8 @@ final class HomeViewModel: BaseViewModel<HomeViewModelInput, HomeViewModelOutput
         input.selectHabit.subscribe(onNext: { [unowned self] selectedHabit in
             if let record = selectedHabit.records.first(where: { $0.date.isSameDay(date: selectedDate) }) {
                 self.routing.routeToHabitRecord.onNext(record)
-            } else {
-                if let record = HabitRecordDAO.shared.addObject(habitID: selectedHabit.id, value: 0, date: selectedDate, createdAt: Date()) {
-                    self.routing.routeToHabitRecord.onNext(record)
-                }
+            } else if let record = HabitRecordDAO.shared.addObject(habitID: selectedHabit.id, value: 0, date: selectedDate) {
+                self.routing.routeToHabitRecord.onNext(record)
             }
         }).disposed(by: self.disposeBag)
         
@@ -308,7 +306,7 @@ extension HomeViewModel {
             habits.append(contentsOf: allHabit)
         }
         
-        let records = habits.flatMap({ $0.records })
+        let records = habits.flatMap({ HabitRecordDAO.shared.getRecord(habitID: $0.id) })
         let days = completedDays(records: records, habits: habits)
         self.totalDoneDate = days.sorted()
         

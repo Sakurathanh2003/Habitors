@@ -14,13 +14,9 @@ struct SelectFrequencyView: View {
     @State var daily: Frequency.Daily = .init(selectedDays: [2, 3, 4, 5, 6, 7, 8])
     @State var weekly: Frequency.Weekly = .init(frequency: 1)
     @State var monthly: Frequency.Monthly = .init(type: .beginning)
-    
-    @State var times = [Time]()
-    @State var isShowingTimeDialog: Bool = false
-    @State var editTimeIndex: Int? = nil
-    
+        
     @State var didAppear: Bool = false
-    @State var editingTime: Time?
+    
     var cancelAction: (() -> Void)
     var doneAction: ((Frequency) -> Void)
     
@@ -161,8 +157,6 @@ struct SelectFrequencyView: View {
                                     .foregroundStyle(Color("Gray"))
                                     .padding(.top, 5)
                             }
-                            
-                            reminderSection
                         }
                         .padding(.horizontal, 20)
                     }
@@ -185,248 +179,12 @@ struct SelectFrequencyView: View {
                     }
             }
         }
-        .overlay(
-            ZStack {
-                if isShowingTimeDialog {
-                    let currentTime = Date()
-                    let time = editingTime ?? .init(hour: currentTime.hour, minutes: currentTime.minute)
-                    TimeDialog(time: time) {
-                        self.editingTime = nil
-                        withAnimation {
-                            self.isShowingTimeDialog = false
-                        }
-                    } doneAction: { time in
-                        if let editingTime {
-                            switch type {
-                            case .daily:
-                                if let index = daily.reminder.firstIndex(of: editingTime) {
-                                    daily.reminder[index] = time
-                                }
-                            case .weekly:
-                                break
-                            case .monthly:
-                                if let index = monthly.reminder.firstIndex(of: editingTime) {
-                                    monthly.reminder[index] = time
-                                }
-                            }
-                        } else {
-                            switch type {
-                            case .daily:
-                                if !daily.reminder.contains(where: { $0 == time }) {
-                                    daily.reminder.append(time)
-                                }
-                            case .weekly:
-                                break
-                            case .monthly:
-                                if !monthly.reminder.contains(where: { $0 == time }) {
-                                    monthly.reminder.append(time)
-                                }
-                            }
-                        }
-                        
-                        self.editingTime = nil
-                        
-                        withAnimation {
-                            self.isShowingTimeDialog = false
-                        }
-                    }
-                }
-            }
-        )
         .offset(y: didAppear ? 0 : UIScreen.main.bounds.height)
         .onAppear {
             withAnimation {
                 didAppear = true
             }
         }
-    }
-    
-    // MARK: - Reminder
-    @ViewBuilder
-    var reminderSection: some View {
-        sectionTitle("Reminder")
-            .padding(.top, 20)
-        
-        switch type {
-        case .daily:
-            ForEach(daily.reminder.indices, id: \.self) { index in
-                let time = daily.reminder[index]
-                Color("Gray01")
-                    .frame(height: 56)
-                    .cornerRadius(12)
-                    .overlay(
-                        HStack {
-                            Text(time.description)
-                                .fontBold(18)
-                                
-                            Spacer()
-                            
-                            Image("ic_x")
-                                .renderingMode(.template)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 21, height: 21)
-                                .foregroundColor(Color("Secondary"))
-                                .onTapGesture {
-                                    daily.reminder.removeAll(where: { $0 == time })
-                                }
-                        }.padding(.horizontal, 16)
-                    )
-                    .onTapGesture {
-                        self.editingTime = time
-                        withAnimation {
-                            self.isShowingTimeDialog = true
-                        }
-                    }
-            }
-        case .weekly:
-            reminderWeekly()
-        case .monthly:
-            ForEach(monthly.reminder.indices, id: \.self) { index in
-                let time = monthly.reminder[index]
-                Color("Gray01")
-                    .frame(height: 56)
-                    .cornerRadius(12)
-                    .overlay(
-                        HStack {
-                            Text(time.description)
-                                .fontBold(18)
-                                
-                            Spacer()
-                            
-                            Image("ic_x")
-                                .renderingMode(.template)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 21, height: 21)
-                                .foregroundColor(Color("Secondary"))
-                                .onTapGesture {
-                                    monthly.reminder.removeAll(where: { $0 == time })
-                                }
-                        }.padding(.horizontal, 16)
-                    )
-                    .onTapGesture {
-                        self.editingTime = time
-                        withAnimation {
-                            self.isShowingTimeDialog = true
-                        }
-                    }
-            }
-        }
-        
-        if type != .weekly {
-            Color("Gray01")
-                .frame(height: 56)
-                .cornerRadius(12)
-                .overlay(
-                    HStack {
-                        Text("Add")
-                            .fontBold(18)
-                            
-                        Spacer()
-                    }.padding(.horizontal, 16)
-                )
-                .onTapGesture {
-                    withAnimation {
-                        self.isShowingTimeDialog = true
-                    }
-                }
-        }
-    }
-    
-    @ViewBuilder
-    func reminderWeekly() -> some View {
-        Color("Gray01")
-            .frame(height: 56)
-            .cornerRadius(12)
-            .overlay(
-                HStack {
-                    Text("None")
-                        .fontBold(18)
-                        
-                    Spacer()
-                    
-                    if weekly.reminder.isEmpty {
-                        Image(systemName: "checkmark")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 21, height: 21)
-                            .foregroundColor(Color("Primary"))
-                    }
-                }.padding(.horizontal, 16)
-            )
-            .onTapGesture {
-                weekly.reminder = []
-            }
-        
-        Color("Gray01")
-            .frame(height: 56)
-            .cornerRadius(12)
-            .overlay(
-                HStack {
-                    Text("Morning")
-                        .fontBold(18)
-                        
-                    Spacer()
-                    
-                    if weekly.reminder.contains(where: { $0 == Time.morning()}) {
-                        Image(systemName: "checkmark")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 21, height: 21)
-                            .foregroundColor(Color("Primary"))
-                    }
-                }.padding(.horizontal, 16)
-            )
-            .onTapGesture {
-                weekly.reminder = [Time.morning()]
-            }
-        
-        Color("Gray01")
-            .frame(height: 56)
-            .cornerRadius(12)
-            .overlay(
-                HStack {
-                    Text("Afternoon")
-                        .fontBold(18)
-                        
-                    Spacer()
-                    
-                    if weekly.reminder.contains(where: { $0 == Time.afternoon()}) {
-                        Image(systemName: "checkmark")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 21, height: 21)
-                            .foregroundColor(Color("Primary"))
-                    }
-                }.padding(.horizontal, 16)
-            )
-            .onTapGesture {
-                weekly.reminder = [Time.afternoon()]
-            }
-        
-        Color("Gray01")
-            .frame(height: 56)
-            .cornerRadius(12)
-            .overlay(
-                HStack {
-                    Text("Evening")
-                        .fontBold(18)
-                        
-                    Spacer()
-                    
-                    if weekly.reminder.contains(where: { $0 == Time.evening()}) {
-                        Image(systemName: "checkmark")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 21, height: 21)
-                            .foregroundColor(Color("Primary"))
-                    }
-                }.padding(.horizontal, 16)
-            )
-            .onTapGesture {
-                weekly.reminder = [Time.evening()]
-            }
     }
     
     // MARK: - Repeat type

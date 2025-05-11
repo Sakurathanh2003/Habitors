@@ -42,5 +42,13 @@ class ListHabitViewController: BaseViewController {
         viewModel.routing.routeToHabit.subscribe(onNext: { [weak self] habit in
             self?.coordinator?.routeToEditHabit(habit: habit)
         }).disposed(by: self.disposeBag)
+        
+        viewModel.routing.presentDeleteDialog.subscribe(onNext: { [weak self] in
+            self?.coordinator?.presentDeleteDialog()
+        }).disposed(by: self.disposeBag)
+        
+        viewModel.routing.presentAlert.subscribe(onNext: { [weak self] message in
+            self?.presentAlert(title: "", message: message)
+        }).disposed(by: self.disposeBag)
     }
 }

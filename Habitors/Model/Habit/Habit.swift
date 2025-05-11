@@ -18,7 +18,7 @@ class Habit: Codable, ObservableObject {
     var startedDate: Date
     
     var frequency: Frequency
-    var records: [HabitRecord] = []
+    var reminder: [Time] = []
     
     init(id: String, 
          name: String,
@@ -28,7 +28,8 @@ class Habit: Codable, ObservableObject {
          isTemplate: Bool,
          startedDate: Date = Date(),
          frequency: Frequency = .init(),
-         records: [HabitRecord] = []) {
+         reminder: [Time] = []
+    ) {
         self.id = id
         self.name = name
         self.icon = icon
@@ -37,34 +38,51 @@ class Habit: Codable, ObservableObject {
         self.isTemplate = isTemplate
         self.startedDate = startedDate
         self.frequency = frequency
-        self.records = records
+        self.reminder = reminder
+    }
+}
+
+// MARK: - Realm
+extension Habit {
+    func rlmObject() -> RlmHabit {
+        let object = RlmHabit()
+        object.id = self.id
+        object.name = self.name
+        object.icon = self.icon
+        object.goalUnit = self.goalUnit
+        object.goalValue = self.goalValue
+        object.frequency = self.frequency.json
+        object.startDate = self.startedDate
+        object.isTemplate = self.isTemplate
+        object.reminder = self.reminder.map({ $0.rlmValue() }).joined(separator: "|")
+       
+        return object
     }
     
-    init(rlm: RlmHabit) {
-        self.id = rlm.id
-        self.name = rlm.name
-        self.icon = rlm.icon
-        self.goalUnit = rlm.goalUnit
-        self.goalValue = rlm.goalValue
-        self.isTemplate = rlm.isTemplate
-        
+    convenience init(rlm: RlmHabit) {
+        var frequency: Frequency
+    
         if let data = rlm.frequency.data(using: .utf8), let object = try? JSONDecoder().decode(Frequency.self, from: data){
-            self.frequency = object
+            frequency = object
         } else {
-            self.frequency = .init()
+            frequency = .init()
         }
         
-        self.startedDate = rlm.startDate
-        self.records = rlm.records.map({ HabitRecord(id: $0.id.stringValue, habitID: self.id, date: $0.date, status: $0.status, value: $0.value,createdAt: $0.createdAt)})
+        let reminder = rlm.reminder.split(separator: "|")
+                                    .compactMap({ String($0)})
+                                    .map({ Time(rlmValue: $0) })
+        self.init(id: rlm.id, name: rlm.name, icon: rlm.icon,
+                  goalUnit: rlm.goalUnit, goalValue: rlm.goalValue,
+                  isTemplate: rlm.isTemplate,
+                  startedDate: rlm.startDate,
+                  frequency: frequency,
+                  reminder: reminder
+        )
     }
 }
 
 extension Habit {
-    func isCompleted(_ date: Date) -> Bool {
-        if let record = records.first(where: { $0.createdAt.isSameDay(date: date) }) {
-            return (record.value ?? 0.0) >= goalValue
-        }
-        
-        return false
+    var records: [HabitRecord] {
+        return HabitRecordDAO.shared.getRecord(habitID: self.id)
     }
 }

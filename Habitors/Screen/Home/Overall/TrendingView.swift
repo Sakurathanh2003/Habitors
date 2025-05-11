@@ -14,6 +14,7 @@ struct ChartData {
 
 // MARK: - Trending
 struct TrendingView: View {
+    @ObservedObject var viewModel: HomeViewModel
     @State var currentTab = TimePeriod.week
     var records: [HabitRecord]
     var habit: Habit
@@ -22,12 +23,12 @@ struct TrendingView: View {
     var body: some View {
         VStack(spacing: 30) {
             HStack {
-                Text("Trending").fontBold(16)
+                Text(viewModel.isVietnameseLanguage ? "Xu hướng" : "Trending").fontBold(16)
                 
                 Spacer(minLength: 0)
                 HStack(spacing: 0) {
                     ForEach(TimePeriod.allCases, id: \.self) { type in
-                        TabItemView(type: type, isSelected: currentTab == type)
+                        TabItemView(viewModel: viewModel, type: type, isSelected: currentTab == type)
                             .onTapGesture {
                                 currentTab = type
                             }
@@ -125,6 +126,7 @@ struct TrendingView: View {
 }
 
 fileprivate struct TabItemView: View {
+    @ObservedObject var viewModel: HomeViewModel
     var type: TimePeriod
     var isSelected: Bool
     
@@ -132,12 +134,23 @@ fileprivate struct TabItemView: View {
         ZStack {
             isSelected ? Color("Black") : Color.clear
             
-            Text("1 " + type.rawValue.capitalized)
+            Text("1 " + title)
                 .fontMedium(9)
                 .foregroundStyle(!isSelected ? Color("Gray") : Color("White"))
         }
         .frame(width: 50, height: 20)
         .cornerRadius(2)
+    }
+    
+    var title: String {
+        switch type {
+        case .week:
+            return viewModel.isVietnameseLanguage ? "Tuần" : "Week"
+        case .month:
+            return viewModel.isVietnameseLanguage ? "Tháng" : "Month"
+        case .year:
+            return viewModel.isVietnameseLanguage ? "Năm" : "Year"
+        }
     }
 }
 

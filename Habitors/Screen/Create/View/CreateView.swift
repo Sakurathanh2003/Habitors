@@ -36,6 +36,7 @@ struct CreateView: View {
                         
                         dateAndPeriodView
                         repeatView
+                        reminderView
                     }
                     .padding(.top, 30)
                 }
@@ -83,12 +84,30 @@ struct CreateView: View {
                     })
                 }
                 
-                if viewModel.isShowingDeleteDialog {
-                    DeleteDialog(objectName: "habit") {
-                        viewModel.input.delete.onNext(())
-                    } cancelAction: {
+                if viewModel.isShowingTimeDialog {
+                    let currentTime = Date()
+                    let time = viewModel.editingTime ?? .init(hour: currentTime.hour, minutes: currentTime.minute)
+                    TimeDialog(time: time) {
+                        viewModel.editingTime = nil
                         withAnimation {
-                            viewModel.isShowingDeleteDialog = false
+                            viewModel.isShowingTimeDialog = false
+                        }
+                    } doneAction: { time in
+                        
+                        if let editingTime = viewModel.editingTime {
+                            if let index = viewModel.reminder.firstIndex(where: { $0.hour == editingTime.hour && $0.minutes == editingTime.minutes}) {
+                                viewModel.reminder[index] = time
+                            }
+                        } else {
+                            if !viewModel.reminder.contains(where: { $0.hour == time.hour && $0.minutes == time.minutes }) {
+                                viewModel.reminder.append(time)
+                            }
+                        }
+                        
+                        viewModel.editingTime = nil
+                        
+                        withAnimation {
+                            viewModel.isShowingTimeDialog = false
                         }
                     }
                 }
@@ -112,7 +131,7 @@ struct CreateView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 25, height: 25)
                     
-                    Text("Delete this habit")
+                    Text(viewModel.isVietnameseLanguage ? "Xoá thói quen này" : "Delete this habit")
                         .fontBold(18)
                     
                     Spacer()
@@ -130,8 +149,8 @@ struct CreateView: View {
     // MARK: - Frequency
     @ViewBuilder
     var repeatView: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            sectionTitle("Frequency")
+        VStack(alignment: .leading) {
+            sectionTitle(viewModel.isVietnameseLanguage ? "Tần suất" : "Frequency")
             
             Color("Gray01")
                 .frame(height: 56)
@@ -147,6 +166,64 @@ struct CreateView: View {
                 .onTapGesture {
                     viewModel.isShowingFrequency = true
                 }
+        }
+    }
+    
+    // MARK: - Reminder
+    @ViewBuilder
+    var reminderView: some View {
+        VStack(alignment: .leading) {
+            sectionTitle(viewModel.isVietnameseLanguage ? "Nhắc nhở" : "Reminder")
+            
+            VStack(spacing: 10) {
+                ForEach(viewModel.reminder.indices, id: \.self) { index in
+                    let time = viewModel.reminder[index]
+                    Color("Gray01")
+                        .frame(height: 56)
+                        .cornerRadius(12)
+                        .overlay(
+                            HStack {
+                                Text(time.description)
+                                    .fontBold(18)
+                                
+                                Spacer()
+                                
+                                Image("ic_x")
+                                    .renderingMode(.template)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 21, height: 21)
+                                    .foregroundColor(Color("Secondary"))
+                                    .onTapGesture {
+                                        viewModel.reminder.removeAll(where: { $0 == time })
+                                    }
+                            }.padding(.horizontal, 16)
+                        )
+                        .onTapGesture {
+                            viewModel.editingTime = time
+                            withAnimation {
+                                viewModel.isShowingTimeDialog = true
+                            }
+                        }
+                }
+                
+                Color("Gray01")
+                    .frame(height: 56)
+                    .cornerRadius(12)
+                    .overlay(
+                        HStack {
+                            Text(viewModel.isVietnameseLanguage ? "Thêm" : "Add")
+                                .fontBold(18)
+                            
+                            Spacer()
+                        }.padding(.horizontal, 16)
+                    )
+                    .onTapGesture {
+                        withAnimation {
+                            viewModel.isShowingTimeDialog = true
+                        }
+                    }
+            }
         }
     }
     
@@ -180,7 +257,7 @@ struct CreateView: View {
     var nameField: some View {
         if viewModel.canChangeName {
             VStack(alignment: .leading) {
-                sectionTitle("Name")
+                sectionTitle(viewModel.isVietnameseLanguage ? "Tên thói quen" : "Name")
                 
                 TextField(text: $viewModel.name) {
                     Text("Enter your habit name")
@@ -322,7 +399,7 @@ struct CreateView: View {
             Button {
                 viewModel.input.save.onNext(())
             } label: {
-                Text("Save")
+                Text(viewModel.isVietnameseLanguage ? "Lưu" : "Save")
                     .fontBold(18)
                     .foregroundStyle(Color("Primary"))
             }
@@ -332,6 +409,9 @@ struct CreateView: View {
             Text(viewModel.title)
                 .fontBold(20)
                 .foreColor(mainColor)
+                .multilineTextAlignment(.center)
+                .lineLimit(2)
+                .padding(.horizontal, 40)
         )
     }
 }

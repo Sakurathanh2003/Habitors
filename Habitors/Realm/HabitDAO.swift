@@ -55,7 +55,7 @@ final class HabitDAO: RealmDao {
                         }
                     } else {
                         print("record mới tạo ngày \(setDate.format("dd MMMM yyyy")): \(newValue)")
-                        HabitRecordDAO.shared.addObject(habitID: habit.id, value: newValue, date: setDate, createdAt: Date())
+                        HabitRecordDAO.shared.addObject(habitID: habit.id, value: newValue, date: setDate)
                     }
                 }
                 
@@ -97,20 +97,14 @@ final class HabitDAO: RealmDao {
         }
         
         do {
-            let realm = try Realm()
-            try realm.safeTransaction {
-                realm.delete(object.records)
-                realm.delete(object)
-            }
-            
+            try HabitRecordDAO.shared.deleteObject(from: item)
+            try self.deleteObject(object)
             HabitScheduler.shared.deleteSchedule(for: item)
             
+            print("Đã xoá habit: \(item.name)")
             DispatchQueue.main.async {
-                NotificationCenter.default.post(name: .didDeleteRecord, object: item.records)
                 NotificationCenter.default.post(name: .deleteHabitItem, object: item)
             }
-            
-            print("Đã xoá habit: \(item.name)")
         } catch {
             print("error: \(error)")
         }
@@ -161,10 +155,10 @@ extension Date {
             return dayCondition && habit.frequency.daily.isSelectedDay(self)
         case .weekly:
             // Tìm những ngày đã có record trong cùng 1 tuần
-            let records = habit.records.filter({ $0.createdAt.isSameWeek(date: self)})
+            let records = habit.records.filter({ $0.date.isSameWeek(date: self)})
             
             // Nếu ngày này là 1 trong những ngày đã record
-            if records.contains(where: { $0.createdAt.isSameDay(date: self)}) {
+            if records.contains(where: { $0.date.isSameDay(date: self)}) {
                 return true
             }
             

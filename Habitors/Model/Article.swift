@@ -22,5 +22,3 @@ struct Article: Codable {
         var goalValue: Double
     }
 }
-
-

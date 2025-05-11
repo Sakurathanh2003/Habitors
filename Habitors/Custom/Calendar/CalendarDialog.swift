@@ -146,12 +146,3 @@ struct CalendarDialog: View {
         }
     }
 }
-
-#Preview {
-    HomeView(viewModel: .init())
-//    CalendarDialog(isAllowSelectedMore: false, selectedDate: [], cancelAction: {
-//        
-//    }, doneAction: { dates in
-//        
-//    })
-}

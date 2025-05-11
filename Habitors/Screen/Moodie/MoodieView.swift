@@ -10,46 +10,7 @@ import SakuraExtension
 import RxSwift
 import SwiftUIIntrospect
 
-enum Mood: String, CaseIterable {
-    case angry
-    case upset
-    case sad
-    case good
-    case happy
-    case spectacular
-    
-    var thumbnailCount: Int {
-        switch self {
-        case .angry: 3
-        case .upset: 3
-        case .sad: 3
-        case .good: 3
-        case .happy: 3
-        case .spectacular: 4
-        }
-    }
-    
-    var adjs: [String] {
-        switch self {
-        case .angry:
-            []
-        case .upset:
-            []
-        case .sad:
-            []
-        case .good:
-            []
-        case .happy:
-            []
-        case .spectacular:
-            []
-        }
-    }
-    
-    var color: Color {
-        return Color(self.rawValue)
-    }
-}
+
 
 struct MoodieView: View {
     @ObservedObject var viewModel: MoodieViewModel

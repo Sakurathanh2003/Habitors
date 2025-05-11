@@ -81,12 +81,11 @@ struct HomeView: View {
     func summaryHabitView() -> some View {
         HStack(spacing: 0) {
             VStack(alignment: .leading, spacing: 10) {
-                Text("You have \(viewModel.allHabit.count) habits")
+                Text(viewModel.isVietnameseLanguage ? "Bạn có \(viewModel.allHabit.count) thói quen" : "You have \(viewModel.allHabit.count) habits")
                     .fontBold(20)
-                Text("Tap to see")
+                Text(viewModel.isVietnameseLanguage ? "Nhấn để xem" : "Tap to see")
                     .fontRegular(14)
                     .underline()
-                    
             }
             
             Spacer(minLength: 0)
@@ -152,6 +151,7 @@ struct HomeView: View {
                     }
                     .padding(.horizontal, Const.horizontalPadding)
                     .padding(.vertical, 24)
+                    .padding(.bottom, 100)
                 }
                 .mask(
                     LinearGradient(stops: [
@@ -169,7 +169,7 @@ struct HomeView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
                     ForEach(viewModel.dateInMonth, id: \.timeIntervalSince1970) { date in
-                        DateView(isDarkMode: $viewModel.isTurnDarkMode,
+                        DateView(isDarkMode: $viewModel.isTurnDarkMode, isVietname: $viewModel.isVietnameseLanguage,
                                  date: date,
                                  isSelected: viewModel.isSelectedDate(date))
                         .id(date.format("dd"))
@@ -251,10 +251,17 @@ fileprivate struct HomeTabbarView: View {
         }
         .frame(height: 60)
         .padding(.top, 10)
-        .background(
-            BlurSwiftUIView(effect: .init(style: viewModel.isTurnDarkMode ? .dark : .light)).ignoresSafeArea()
-        )
+        .background(backgroundView)
         .padding(.top, 10)
+    }
+    
+    @ViewBuilder
+    var backgroundView: some View {
+        if viewModel.isTurnDarkMode {
+            BlurSwiftUIView(effect: .init(style: .dark)).ignoresSafeArea()
+        } else {
+            BlurSwiftUIView(effect: .init(style: .light)).ignoresSafeArea()
+        }
     }
     
     @ViewBuilder

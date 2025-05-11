@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DateView: View {
     @Binding var isDarkMode: Bool
+    @Binding var isVietname: Bool
     var date: Date
     var isSelected: Bool
     
@@ -26,11 +27,11 @@ struct DateView: View {
                 )
             
             VStack(spacing: 12) {
-                Text(date.format("E"))
+                Text(date.format("E", isVietnamese: isVietname))
                     .fontRegular(12)
                     .foregroundStyle(textColor)
                 
-                Text(date.format("dd"))
+                Text(date.format("dd", isVietnamese: isVietname))
                     .fontSemiBold(16)
                     .foregroundStyle(textColor)
             }
@@ -45,8 +46,4 @@ struct DateView: View {
         
         return Color("Gray")
     }
-}
-
-#Preview {
-    DateView(isDarkMode: .constant(true), date: Date(), isSelected: true)
 }

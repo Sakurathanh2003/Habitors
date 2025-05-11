@@ -11,39 +11,28 @@ class HabitRecord: Codable, ObservableObject {
     var id: String
     var habitID: String // Liên kết với Habit
     var date: Date
-    var status: String // "completed" hoặc "missed"
     var value: Double = 0 // Số
-    var createdAt: Date = Date()
     
-    init(id: String, habitID: String, date: Date, status: String, value: Double = 0, createdAt: Date) {
+    init(id: String, habitID: String, date: Date, value: Double = 0) {
         self.id = id
         self.habitID = habitID
         self.date = date
-        self.status = status
         self.value = value
-        self.createdAt = createdAt
     }
     
     init(from rlm: RlmHabitRecord) {
         self.id = rlm.id.stringValue
-        self.habitID = rlm.habit.first?.id ?? ""
+        self.habitID = rlm.habitID
         self.date = rlm.date
-        self.status = rlm.status
         self.value = rlm.value
-        self.createdAt = rlm.createdAt
-        self.status = rlm.status
     }
     
     var habit: Habit? {
         HabitDAO.shared.getAll().first(where: { $0.id == habitID })
     }
     
-    var isExits: Bool {
-        (HabitRecordDAO.shared.getHabitRecord(id: self.id) != nil)
-    }
-    
     func replaceValue(_ value: Double) -> HabitRecord {
-        return .init(id: id, habitID: habitID, date: date, status: status, value: value, createdAt: createdAt)
+        return .init(id: id, habitID: habitID, date: date, value: value)
     }
 }
 

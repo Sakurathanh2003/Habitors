@@ -90,7 +90,8 @@ struct HomeOverallView: View {
                         }
                         .padding(.horizontal, 20)
                         
-                        TrendingView(records: currentHabit.records,
+                        TrendingView(viewModel: viewModel,
+                                     records: currentHabit.records,
                                      habit: currentHabit)
                     } else {
                         LazyVGrid(columns: [.init(), .init()]) {

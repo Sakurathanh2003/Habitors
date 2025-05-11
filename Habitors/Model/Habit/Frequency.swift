@@ -7,36 +7,6 @@
 
 import Foundation
 
-class Time: NSObject, Codable {
-    var hour: Int
-    var minutes: Int
-    
-    init(hour: Int, minutes: Int) {
-        self.hour = hour
-        self.minutes = minutes
-    }
-    
-    static func morning() -> Time {
-        return .init(hour: 8, minutes: 00)
-    }
-    
-    static func afternoon() -> Time {
-        return .init(hour: 13, minutes: 00)
-    }
-    
-    static func evening() -> Time {
-        return .init(hour: 19, minutes: 00)
-    }
-    
-    override var description: String {
-        return String(format: "%02d:%02d", hour, minutes)
-    }
-    
-    static func == (lhs: Time, rhs: Time) -> Bool {
-        return lhs.hour == rhs.hour && lhs.minutes == rhs.minutes
-    }
-}
-
 class Frequency: Codable {
     var id: String
     var type: RepeatType
@@ -67,7 +37,6 @@ class Frequency: Codable {
     }
     
     struct Daily: Codable {
-        var reminder: [Time] = []
         var selectedDays: [Int]
         
         init(selectedDays: [Int]) {
@@ -76,7 +45,6 @@ class Frequency: Codable {
     }
     
     struct Weekly: Codable {
-        var reminder: [Time] = []
         var frequency: Int
         
         init(frequency: Int) {
@@ -85,7 +53,6 @@ class Frequency: Codable {
     }
     
     struct Monthly: Codable {
-        var reminder: [Time] = []
         var type: TimeOfMonth
         
         init(type: TimeOfMonth) {

@@ -263,9 +263,7 @@ struct HabitRecordView: View {
                 .init(record: .init(id: "",
                                     habitID: "",
                                     date: Date(),
-                                    status: "",
-                                    value: 0,
-                                    createdAt: Date())))
+                                    value: 0)))
 }
 
 // MARK: - LongPressButtonView

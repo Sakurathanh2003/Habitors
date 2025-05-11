@@ -62,7 +62,6 @@ extension Article.Habit {
                      goalValue: self.goalValue,
                      isTemplate: true,
                      startedDate: Date(),
-                     frequency: .init(),
-                     records: [])
+                     frequency: .init())
     }
 }

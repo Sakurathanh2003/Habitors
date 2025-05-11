@@ -109,25 +109,11 @@ extension HabitScheduler: UNUserNotificationCenterDelegate {
 // MARK: - Habit Extension
 extension Habit {
     var nearestReminderDay: Date? {
-        var reminder = [Time]()
-        switch frequency.type {
-        case .daily:
-            reminder = frequency.daily.reminder
-            if frequency.daily.reminder.isEmpty || frequency.daily.selectedDays.isEmpty {
-                return nil
-            }
-        case .weekly:
-            reminder = frequency.weekly.reminder
-            if frequency.weekly.reminder.isEmpty {
-                return nil
-            }
-        case .monthly:
-            reminder = frequency.monthly.reminder
-            if frequency.monthly.reminder.isEmpty {
-                return nil
-            }
+        if reminder.isEmpty {
+            return nil
         }
         
+        var reminder = self.reminder
         reminder = reminder.sorted(by: { $0.hour <= $1.hour && $0.minutes <= $1.minutes })
         var day = Date()
         

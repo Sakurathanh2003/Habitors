@@ -19,7 +19,7 @@ fileprivate struct AddHabitView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            NavigationBarView(title: "Edit Routine", isDarkMode: isTurnDarkMode) {
+            NavigationBarView(title: User.isVietnamese ? "Chỉnh sửa thói quen" : "Edit Routine", isDarkMode: isTurnDarkMode) {
                 withAnimation {
                     isPresenting = false
                 }
@@ -85,7 +85,7 @@ fileprivate struct AddHabitView: View {
                 
                 mainColor.frame(height: 56)
                     .overlay(
-                        Text("Save")
+                        Text(User.isVietnamese ? "Lưu" : "Save")
                             .fontBold(16)
                             .foreColor(backgroundColor)
                     )
@@ -151,7 +151,7 @@ struct ArticleDetailView: View {
                     
                     mainColor.frame(height: 56)
                         .overlay(
-                            Text("Add to my routine")
+                            Text(viewModel.isVietnameseLanguage ? "Thêm vào thói quen của tôi" : "Add to my routine")
                                 .fontBold(16)
                                 .foreColor(backgroundColor)
                         )

@@ -38,6 +38,19 @@ struct SummaryView: View {
                 "Total Done"
             }
         }
+        
+        var image: String {
+            switch self {
+            case .bestStreak:
+                "statistics_serial_all_Normal"
+            case .currentStreak:
+                "statistics_serial_now_Normal"
+            case .doneInMonth:
+                "statistics_day_month_Normal"
+            case .totalDone:
+                "statistics_day_all_Normal"
+            }
+        }
     }
     
     @ObservedObject var viewModel: HomeViewModel
@@ -46,11 +59,18 @@ struct SummaryView: View {
     var type: SummaryType
     
     var color: Color {
-        return .red
+        switch type {
+        case .bestStreak:
+            Color("good")
+        case .currentStreak:
+            Color("upset")
+        case .doneInMonth:
+            Color("Information")
+        case .totalDone:
+            Color("Success")
+        }
     }
-    
-    var imageName: String = ""
-    
+        
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack {
@@ -58,11 +78,12 @@ struct SummaryView: View {
                     .fill(color.opacity(0.1))
                     .frame(width: 40, height: 40)
                     .overlay(
-                        Image(imageName)
+                        Image(type.image)
                             .renderingMode(.template)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .foregroundStyle(color)
+                            .frame(width: 20)
                     )
                     .padding(.bottom, 20)
                 

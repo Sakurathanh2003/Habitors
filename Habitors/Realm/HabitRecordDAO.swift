@@ -19,19 +19,15 @@ final class HabitRecordDAO: RealmDao {
     static let shared = HabitRecordDAO()
     
     @discardableResult
-    func addObject(habitID: String, value: Double, date: Date, createdAt: Date) -> HabitRecord? {
+    func addObject(habitID: String, value: Double, date: Date) -> HabitRecord? {
         let object = RlmHabitRecord()
         object.id = .generate()
-        object.status = ""
-        object.createdAt = createdAt
         object.date = date
         object.value = value
+        object.habitID = habitID
         
         do {
-            try self.appendObject(to: RlmHabit.self,
-                                  parentKey: habitID,
-                                  listKeyPath: \.records,
-                                  object: object)
+            try self.addObjectAndUpdate(object)
             print("✅ Đã thêm record ngày \(date.day)-\(date.month)-\(date.year) vào habit")
             
             let record = getHabitRecord(id: object.id.stringValue)
@@ -60,16 +56,15 @@ final class HabitRecordDAO: RealmDao {
             print("❌ Lỗi update record: \(error)")
         }
     }
-    
+}
+
+// MARK: - Delete
+extension HabitRecordDAO {
     func deleteObject(item: HabitRecord) {
-        guard let object = try? self.objectWithPrimaryKey(type: RlmHabitRecord.self, key: ObjectId(string: item.id)) else {
-            return
-        }
-        
         let habitName = item.habit?.name ?? "Unknow"
         
         do {
-            try self.deleteObject(object)
+            try self.deleteObject(id: item.id)
             
             print("✅ Đã xoá record(\(item.id) ngày \(item.date.day)-\(item.date.month)-\(item.date.year) của  habit \(habitName)")
 
@@ -81,6 +76,25 @@ final class HabitRecordDAO: RealmDao {
         }
     }
     
+    func deleteObject(from habit: Habit) throws {
+        let objects = habit.records.compactMap({ $0.id })
+            .compactMap({ try? ObjectId(string: $0) })
+            .compactMap({ try? self.objectWithPrimaryKey(type: RlmHabitRecord.self, key: $0) })
+        
+        try self.deleteObjects(objects)
+    }
+    
+    func deleteObject(id: String) throws {
+        guard let object = try? self.objectWithPrimaryKey(type: RlmHabitRecord.self, key: ObjectId(string: id)) else {
+            return
+        }
+        
+        try self.deleteObject(object)
+    }
+}
+
+// MARK: - Get
+extension HabitRecordDAO {
     func getHabitRecord(id: String) -> HabitRecord? {
         guard let objectID = try? ObjectId(string: id),
               let object = try? self.objectWithPrimaryKey(type: RlmHabitRecord.self, key: objectID) else {
@@ -89,16 +103,22 @@ final class HabitRecordDAO: RealmDao {
         
         return HabitRecord(from: object)
     }
-}
-
-extension RlmHabitRecord {
-    convenience init(from record: HabitRecord) {
-        self.init()
-        self.id = (try? ObjectId.init(string: record.id)) ?? ObjectId.generate()
-        self.date = record.date
-        self.status = record.status
-        self.value = record.value
-        self.createdAt = record.createdAt
+    
+    func getRecord(habitID: String, date: Date) -> HabitRecord? {
+        let records = getRecord(habitID: habitID)
+        return records.first(where: { $0.date.isSameDay(date: date) })
+    }
+    
+    func getAll() -> [HabitRecord] {
+        guard let items = try? self.objects(type: RlmHabitRecord.self) else {
+            return []
+        }
+        
+        return items.map({ HabitRecord(from: $0) })
+    }
+    
+    func getRecord(habitID: String) -> [HabitRecord] {
+        return getAll().filter({ $0.habitID == habitID })
     }
 }
 

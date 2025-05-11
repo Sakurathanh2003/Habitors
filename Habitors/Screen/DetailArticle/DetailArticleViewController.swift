@@ -41,8 +41,8 @@ class DetailArticleViewController: BaseViewController {
         
         viewModel.routing.backToHabitTab.subscribe(onNext: { [weak self] _ in
             let alertController = UIAlertController(
-                title: "Routine added succesfully!",
-                message: "Selected habits added to your routine successfully",
+                title: User.isVietnamese ? "Đã thêm thói quen thành công!" : "Routine added succesfully!",
+                message:  User.isVietnamese ? "Những thói quen được chọn đã được thêm vào thói quen của bạn thành công" : "Selected habits added to your routine successfully",
                 preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
                 self?.coordinator?.backToHabitTab()
