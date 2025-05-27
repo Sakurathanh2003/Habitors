@@ -123,7 +123,7 @@ struct CalendarDialog: View {
                     Button(action: {
                         cancelAction()
                     }, label: {
-                        Text("Cancel")
+                        Text(User.isVietnamese ? "Huỷ" : "Cancel")
                             .fontMedium(14)
                             .foregroundStyle(Color("Black"))
                     })
@@ -131,7 +131,7 @@ struct CalendarDialog: View {
                     Button(action: {
                         doneAction(viewModel.selectedDate)
                     }, label: {
-                        Text("Done")
+                        Text(User.isVietnamese ? "Chọn" : "Done")
                             .fontMedium(14)
                             .foregroundStyle(Color("Primary"))
                     })

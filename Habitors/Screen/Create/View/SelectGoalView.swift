@@ -39,7 +39,7 @@ struct SelectGoalView: View {
                     .padding(.horizontal, 20)
                     .frame(height: 46)
                     .overlay(
-                        Text("Goal")
+                        Text(viewModel.isVietnameseLanguage ? "Mục tiêu" : "Goal")
                             .fontBold(30)
                             .foreColor(mainColor)
                     )
@@ -75,7 +75,7 @@ struct SelectGoalView: View {
             
             VStack {
                 HStack(spacing: 0) {
-                    Text("Cancel")
+                    Text(viewModel.isVietnameseLanguage ? "Huỷ" : "Cancel")
                         .fontRegular(18)
                         .onTapGesture {
                             withAnimation {
@@ -84,7 +84,7 @@ struct SelectGoalView: View {
                         }
                     
                     Spacer()
-                    Text("Done")
+                    Text(viewModel.isVietnameseLanguage ? "Xong" : "Done")
                         .fontSemiBold(18)
                         .foregroundStyle(Color("Error"))
                         .onTapGesture {
@@ -97,13 +97,13 @@ struct SelectGoalView: View {
                 .padding(.horizontal, 20)
                 .frame(height: 56)
                 .overlay(
-                    Text("Select Unit")
+                    Text(viewModel.isVietnameseLanguage ? "Chọn đơn vị" : "Select Unit")
                         .fontSemiBold(18)
                 )
                 
                 Picker("", selection: $currentUnit) {
                     ForEach(GoalUnit.custom(), id: \.self) { unit in
-                        Text(unit.rawValue.capitalized)
+                        Text(unit.description)
                             .fontSemiBold(18)
                             .frame(height: 40)
                             .tag(unit)
@@ -135,7 +135,7 @@ struct SelectGoalView: View {
     // MARK: - Unit Value
     var valueView: some View {
         VStack(spacing: 0) {
-            sectionTitle("Enter value (\(viewModel.goalUnit.rawValue))")
+            sectionTitle(viewModel.isVietnameseLanguage ? "Giá trị" : "Value")
             
             Color("Gray01")
                 .frame(height: 56)
@@ -145,7 +145,7 @@ struct SelectGoalView: View {
                         Text("\(viewModel.goalValue.text)")
                             .fontBold(18)
                         
-                        + Text(" \(viewModel.goalUnit.rawValue)/day")
+                        + Text(" \(viewModel.goalUnit.rawValue) / " + (viewModel.isVietnameseLanguage ? "ngày" : "day"))
                             .fontSemiBold(18)
                             .foregroundColor(Color("Gray"))
                         
@@ -165,14 +165,14 @@ struct SelectGoalView: View {
     @ViewBuilder
     var unitView: some View {
         VStack(spacing: 0) {
-            sectionTitle("Unit")
+            sectionTitle(viewModel.isVietnameseLanguage ? "Đơn vị" : "Unit")
             
             Color("Gray01")
                 .frame(height: 56)
                 .cornerRadius(12)
                 .overlay(
                     HStack {
-                        Text(viewModel.goalUnit.rawValue.capitalized)
+                        Text(viewModel.goalUnit.description.capitalized)
                             .fontBold(19)
                             .foregroundColor(Color("Black"))
                         

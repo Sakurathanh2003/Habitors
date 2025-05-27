@@ -41,11 +41,20 @@ enum GoalUnit: String, Codable, PersistableEnum, CaseIterable {
     
     var description: String {
         switch self {
-        case .secs: "giây"
-        case .min, .exerciseTime, .standHour: "phút"
+        case .secs: User.isVietnamese ? "giây" : "seconds"
+        case .min, .exerciseTime, .standHour: User.isVietnamese ? "phút" : "minutes"
         case .water: "ml"
-        case .hours: "giờ"
-        default: self.rawValue
+        case .hours: User.isVietnamese ? "giờ" : "hours"
+        case .count: User.isVietnamese ? "lần" : "count"
+        case .kcal: User.isVietnamese ? "kcal" : "kcal"
+        case .lbs: self.rawValue
+        case .ml: self.rawValue
+        case .usoz: self.rawValue
+        case .liter: self.rawValue
+        case .mile: self.rawValue
+        case .km: self.rawValue
+        case .m: self.rawValue
+        case .steps: User.isVietnamese ? "bước" : "steps"
         }
     }
 }
@@ -88,19 +97,19 @@ extension GoalUnit {
     
     var permissionReadMessage: String {
         switch self {
-        case .steps: "Bạn cần cấp quyền ứng dụng đọc số lượng bước"
-        case .exerciseTime: "Bạn cần cấp quyền ứng dụng đọc thời gian tập thể dục"
-        case .water: "Bạn cần cấp quyền ứng dụng đọc số lượng nước đã uống"
-        case .standHour: "Bạn cần cấp quyền ứng dụng đọc số giờ đứng"
+        case .steps: User.isVietnamese ?  "Bạn cần cấp quyền ứng dụng đọc số lượng bước" : "You need to grant the app permission to read the number of steps"
+        case .exerciseTime: User.isVietnamese ? "Bạn cần cấp quyền ứng dụng đọc thời gian tập thể dục" : "You need to grant the app permission to read exercise time"
+        case .water: User.isVietnamese ? "Bạn cần cấp quyền ứng dụng đọc số lượng nước đã uống" : "You need to grant the app permission to read the amount of water you have drunk."
+        case .standHour: User.isVietnamese ? "Bạn cần cấp quyền ứng dụng đọc số giờ đứng" : "You need to grant the application permission to read standing hours"
         default: ""
         }
     }
     
     var permissionWriteMessage: String {
         switch self {
-        case .steps: "Bạn cần cấp quyền cho ứng dụng ghi số lượng bước"
-        case .exerciseTime: "Bạn cần cấp quyền cho ứng dụng ghi thời gian workout"
-        case .water: "Bạn cần cấp quyền ứng dụng ghi số lượng nước đã uống"
+        case .steps: User.isVietnamese ? "Bạn cần cấp quyền cho ứng dụng ghi số lượng bước" : "You need to grant permission for the app to record steps"
+        case .exerciseTime: User.isVietnamese ? "Bạn cần cấp quyền cho ứng dụng ghi thời gian workout" : "You need to grant permission for the app to record workout time"
+        case .water: User.isVietnamese ? "Bạn cần cấp quyền ứng dụng ghi số lượng nước đã uống" : "You need to grant the app permission to record the amount of water you drink"
         default: ""
         }
     }

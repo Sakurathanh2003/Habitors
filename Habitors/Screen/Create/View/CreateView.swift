@@ -61,7 +61,7 @@ struct CreateView: View {
                 
                 SelectGoalView(viewModel: viewModel)
                 if viewModel.isShowingChangeValueGoal {
-                    InputView(value: viewModel.goalValue, titleString: "Enter value (\(viewModel.goalUnit.rawValue)", isShowing: $viewModel.isShowingChangeValueGoal, saveAction: {
+                    InputView(value: viewModel.goalValue, titleString: viewModel.isVietnameseLanguage ? "Nhập giá trị" : "Enter value", isShowing: $viewModel.isShowingChangeValueGoal, saveAction: {
                         if let value = Double($0) {
                             viewModel.goalValue = value
                         }
@@ -161,6 +161,11 @@ struct CreateView: View {
                             .fontBold(18)
                         
                         Spacer(minLength: 0)
+                        
+                        Image("ic_arrow_right")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 20)
                     }.padding(.horizontal, 16)
                 )
                 .onTapGesture {
@@ -231,7 +236,7 @@ struct CreateView: View {
     @ViewBuilder
     var dateAndPeriodView: some View {
         VStack(alignment: .leading, spacing: 5) {
-            sectionTitle("Habit start date")
+            sectionTitle(viewModel.isVietnameseLanguage ? "Ngày bắt đầu thói quen" : "Habit start date")
             
             Color("Gray01")
                 .frame(height: 56)
@@ -242,6 +247,11 @@ struct CreateView: View {
                             .fontBold(18)
                         
                         Spacer(minLength: 0)
+                        
+                        Image("ic_arrow_right")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 20)
                     }.padding(.horizontal, 16)
                 )
                 .onTapGesture {
@@ -260,7 +270,7 @@ struct CreateView: View {
                 sectionTitle(viewModel.isVietnameseLanguage ? "Tên thói quen" : "Name")
                 
                 TextField(text: $viewModel.name) {
-                    Text("Enter your habit name")
+                    Text(viewModel.isVietnameseLanguage ? "Nhập tên thói quen" : "Enter your habit name")
                 }
                 .fontBold(18)
                 .foregroundColor(Color("Black"))
@@ -286,11 +296,16 @@ struct CreateView: View {
                         Text("\(viewModel.goalValue.text)")
                             .fontBold(18)
                         
-                        + Text(" \(viewModel.goalUnit.description)/day")
+                        + Text(" \(viewModel.goalUnit.description) / " + (viewModel.isVietnameseLanguage ? "ngày" : "day"))
                             .fontSemiBold(18)
                             .foregroundColor(Color("Gray"))
                         
                         Spacer(minLength: 0)
+                        
+                        Image("ic_arrow_right")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 20)
                     }.padding(.horizontal, 16)
                 )
                 .onTapGesture {

@@ -50,7 +50,7 @@ struct InputView: View {
                 
                 HStack {
                     TextField(text: $text) {
-                        Text("Enter Value")
+                        Text(User.isVietnamese ? "Nhập giá trị" : "Enter Value")
                             .fontBold(18)
                     }
                     .keyboardType(.numberPad)
@@ -62,7 +62,7 @@ struct InputView: View {
                     .background(Color("Gray01"))
                     .cornerRadius(10)
                     
-                    Text("Save")
+                    Text(User.isVietnamese ? "Lưu" : "Save")
                         .fontBold(16)
                         .padding(.horizontal, 15)
                         .padding(.vertical, 10)
