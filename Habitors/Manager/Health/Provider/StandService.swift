@@ -50,10 +50,6 @@ class StandService: HealthService {
         }
     }
     
-    func saveData(_ data: Double, in date: Date, completion: ((Bool, (any Error)?) -> Void)?) {
-        completion?(false, NSError(domain: "Stand", code: 404, userInfo: [NSLocalizedDescriptionKey: "Không hỗ trợ thêm giá trị"]))
-    }
-    
     func startObserver() async {
         guard !didObserver && didRequestPermission, let type = HKObjectType.quantityType(forIdentifier: .appleStandTime), await checkReadPermission() else {
             return
@@ -83,9 +79,9 @@ class StandService: HealthService {
     }
     
     // MARK: - Request Permission
-    func requestAuthorization(completion: @escaping (Bool, Bool) -> Void) {
+    func requestAuthorization(completion: @escaping (Bool) -> Void) {
         guard let type = HKObjectType.quantityType(forIdentifier: .appleStandTime) else {
-            completion(false, false)
+            completion(false)
             return
         }
         
@@ -95,23 +91,13 @@ class StandService: HealthService {
                 let canRead = await self.checkReadPermission()
                 
                 DispatchQueue.main.async {
-                    completion(canRead, canRead)
+                    completion(canRead)
                 }
             }
         }
     }
     
     // MARK: - Check Permission
-    func checkWritePermission(completion: ((Bool) -> Void)?) {
-        guard let type = HKObjectType.quantityType(forIdentifier: .appleStandTime) else {
-            completion?(false)
-            return
-        }
-        
-        let status = healthStore.authorizationStatus(for: type)
-        completion?(status == .sharingAuthorized)
-    }
-    
     func checkReadPermission(completion: ((Bool) -> Void)?) {
         guard let type = HKObjectType.quantityType(forIdentifier: .appleStandTime) else {
             completion?(false)
@@ -120,17 +106,6 @@ class StandService: HealthService {
         
         healthStore.requestAuthorization(toShare: nil, read: Set([type])) { success, error in
             completion?(success)
-        }
-    }
-    
-    func checkWritePermission() async -> Bool {
-        guard let type = HKObjectType.quantityType(forIdentifier: .appleStandTime) else {
-            return false
-        }
-        
-        return await withUnsafeContinuation { continuation in
-            let status = healthStore.authorizationStatus(for: type)
-            continuation.resume(returning: status == .sharingAuthorized)
         }
     }
     

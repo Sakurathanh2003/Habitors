@@ -19,9 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         configRealm()
-        configAppCoordinator()
         configAppleHealthService()
-        HabitScheduler.shared.requestNotificationPermission()
+        configAppCoordinator()
         return true
     }
     
@@ -36,13 +35,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func configAppleHealthService() {
-        let store = HKHealthStore()
-       
-        Task {
-            await WaterService().startObserver()
-            await StepCountService().startObserver()
-            await ExerciseTimeService().startObserver()
-            await StandService().startObserver()
+        guard let waterType = HKObjectType.quantityType(forIdentifier: .dietaryWater),
+              let exerciseTimeType = HKObjectType.quantityType(forIdentifier: .appleExerciseTime),
+              let stepType = HKObjectType.quantityType(forIdentifier: .stepCount),
+                let standType = HKObjectType.quantityType(forIdentifier: .appleStandTime)else {
+            return
+        }
+        
+        let healthStore = HKHealthStore()
+        healthStore.requestAuthorization(toShare: nil, read: Set([waterType, exerciseTimeType, stepType, standType])) { success, error in
+            HabitScheduler.shared.requestNotificationPermission()
+
+            Task {
+                await WaterService().startObserver()
+                await StepCountService().startObserver()
+                await ExerciseTimeService().startObserver()
+                await StandService().startObserver()
+            }
         }
     }
     

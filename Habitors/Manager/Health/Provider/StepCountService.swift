@@ -50,19 +50,6 @@ class StepCountService: HealthService {
         }
     }
     
-    // MARK: - Save
-    func saveData(_ data: Double, in date: Date, completion: ((Bool, (any Error)?) -> Void)?) {
-        let stepType = HKQuantityType.quantityType(forIdentifier: .stepCount)!
-        let quantity = HKQuantity(unit: HKUnit.count(), doubleValue: data)
-        let sample = HKQuantitySample(type: stepType, quantity: quantity, start: date, end: date)
-        
-        healthStore.save(sample) { success, error in
-            DispatchQueue.main.async {
-                completion?(success, error)
-            }
-        }
-    }
-    
     // MARK: - Observer
     func startObserver() async {
         guard !didObserver && didRequestPermission, let stepType = HKObjectType.quantityType(forIdentifier: .stepCount), await checkReadPermission() else {
@@ -94,36 +81,25 @@ class StepCountService: HealthService {
     }
     
     // MARK: - Request Permission
-    func requestAuthorization(completion: @escaping (Bool, Bool) -> Void) {
+    func requestAuthorization(completion: @escaping (Bool) -> Void) {
         guard let type = HKObjectType.quantityType(forIdentifier: .stepCount) else {
-            completion(false, false)
+            completion(false)
             return
         }
         
         self.didRequestPermission = true
-        healthStore.requestAuthorization(toShare: Set([type]), read: Set([type])) { success, error in
+        healthStore.requestAuthorization(toShare: nil , read: Set([type])) { success, error in
             Task {
                 let canRead = await self.checkReadPermission()
-                let canWrite = await self.checkWritePermission()
                 
                 DispatchQueue.main.async {
-                    completion(canRead, canWrite)
+                    completion(canRead)
                 }
             }
         }
     }
     
     // MARK: - Check Permission
-    func checkWritePermission(completion: ((Bool) -> Void)?) {
-        guard let type = HKObjectType.quantityType(forIdentifier: .stepCount) else {
-            completion?(false)
-            return
-        }
-        
-        let status = healthStore.authorizationStatus(for: type)
-        completion?(status == .sharingAuthorized)
-    }
-    
     func checkReadPermission(completion: ((Bool) -> Void)?) {
         guard let type = HKObjectType.quantityType(forIdentifier: .stepCount) else {
             completion?(false)
@@ -132,17 +108,6 @@ class StepCountService: HealthService {
         
         healthStore.requestAuthorization(toShare: nil, read: Set([type])) { success, error in
             completion?(success)
-        }
-    }
-    
-    func checkWritePermission() async -> Bool {
-        guard let type = HKObjectType.quantityType(forIdentifier: .stepCount) else {
-            return false
-        }
-        
-        return await withUnsafeContinuation { continuation in
-            let status = healthStore.authorizationStatus(for: type)
-            continuation.resume(returning: status == .sharingAuthorized)
         }
     }
     

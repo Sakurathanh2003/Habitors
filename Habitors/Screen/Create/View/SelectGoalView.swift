@@ -145,7 +145,7 @@ struct SelectGoalView: View {
                         Text("\(viewModel.goalValue.text)")
                             .fontBold(18)
                         
-                        + Text(" \(viewModel.goalUnit.rawValue) / " + (viewModel.isVietnameseLanguage ? "ngày" : "day"))
+                        + Text(" \(viewModel.goalUnit.description.lowercased()) / " + (viewModel.isVietnameseLanguage ? "ngày" : "day"))
                             .fontSemiBold(18)
                             .foregroundColor(Color("Gray"))
                         

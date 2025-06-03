@@ -26,6 +26,14 @@ class SplashViewController: BaseViewController {
         super.viewDidLoad()
         self.config()
     }
+    
+    override func viewDidFirstAppear() {
+        super.viewDidFirstAppear()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.coordinator?.stop()
+        }
+    }
 
     // MARK: - Config
     func config() {

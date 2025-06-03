@@ -54,7 +54,7 @@ final class ChooseTemplateHabitViewModel: BaseViewModel<ChooseTemplateHabitViewM
             }
             
             if let _ = HabitDAO.shared.getHabit(id: habit.id) {
-                self.routing.showAlert.onNext("Habit already exists")
+                self.routing.showAlert.onNext(Translator.translate(key: "This habit was added previously."))
             } else {
                 self.routing.routeToCreate.onNext(habit)
             }

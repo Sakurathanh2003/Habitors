@@ -82,6 +82,6 @@ struct SingleTaskView: View {
     
     var description: String {
         let percent: Double = min(1.0 - unit.convertToUnit(from: baseGoalDayValue) / goalValue, 1.0)
-        return User.isVietnamese ? "Bạn đã thực hiện \((percent * 100).textWithDecimal(2))%" : "You did handle \((percent * 100).textWithDecimal(2))%"
+        return User.isVietnamese ? "Bạn đã thực hiện \((percent * 100).textWithDecimal(2))%" : "You have done \((percent * 100).textWithDecimal(2))%"
     }
 }

@@ -152,17 +152,9 @@ extension Date {
         
         switch repeatType {
         case .daily:
-            return dayCondition && habit.frequency.daily.isSelectedDay(self)
+            return dayCondition
         case .weekly:
-            // Tìm những ngày đã có record trong cùng 1 tuần
-            let records = habit.records.filter({ $0.date.isSameWeek(date: self)})
-            
-            // Nếu ngày này là 1 trong những ngày đã record
-            if records.contains(where: { $0.date.isSameDay(date: self)}) {
-                return true
-            }
-            
-            return dayCondition && records.filter({ $0.isCompleted }).count < habit.frequency.weekly.frequency
+            return dayCondition && habit.frequency.weekly.isSelectedDay(self)
         case .monthly:
             return dayCondition && habit.frequency.monthly.isSelectedDay(self)
         }

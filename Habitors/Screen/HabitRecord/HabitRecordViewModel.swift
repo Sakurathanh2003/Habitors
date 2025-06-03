@@ -123,27 +123,7 @@ final class HabitRecordViewModel: BaseViewModel<HabitRecordViewModelInput, Habit
                 return
             }
             
-            if let unit = record.habit?.goalUnit, let appleService = unit.healthService {
-                appleService.checkWritePermission { [weak self] canWrite in
-                    guard let self else {
-                        return
-                    }
-                    
-                    DispatchQueue.main.async {
-                        if canWrite {
-                            appleService.saveData(value, in: self.recordDate) { [weak self] isSuccess, error in
-                                if let error {
-                                    self?.routing.showAlert.onNext(error.localizedDescription)
-                                }
-                            }
-                        } else {
-                            self.routing.needToPermission.onNext(self.record.habit?.goalUnit.permissionWriteMessage ?? "")
-                        }
-                    }
-                }
-            } else {
-                self.setValue(newValue)
-            }
+            self.setValue(newValue)
         }).disposed(by: self.disposeBag)
         
         input.didTapEditHabit.subscribe(onNext: { [weak self] in
@@ -186,23 +166,7 @@ final class HabitRecordViewModel: BaseViewModel<HabitRecordViewModelInput, Habit
                 return
             }
             
-            if let service = record.habit?.goalUnit.healthService {
-                service.checkWritePermission { [weak self] canWrite in
-                    guard let self else {
-                        return
-                    }
-                    
-                    DispatchQueue.main.async {
-                        if canWrite {
-                            self.isShowingAddValue = true
-                        } else {
-                            self.routing.needToPermission.onNext(self.record.habit?.goalUnit.permissionWriteMessage ?? "")
-                        }
-                    }
-                }
-            } else {
-                self.isShowingAddValue = true
-            }
+            self.isShowingAddValue = true
         }).disposed(by: self.disposeBag)
     }
     

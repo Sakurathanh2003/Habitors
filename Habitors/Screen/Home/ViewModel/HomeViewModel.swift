@@ -102,6 +102,7 @@ final class HomeViewModel: BaseViewModel<HomeViewModelInput, HomeViewModelOutput
     }
     
     @objc func updateHabitItem(notification: Notification) {
+        self.currentTab = .home
         getTasks()
     }
     

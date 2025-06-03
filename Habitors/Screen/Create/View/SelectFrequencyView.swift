@@ -11,8 +11,7 @@ import SakuraExtension
 
 struct SelectFrequencyView: View {
     @State var type: Frequency.RepeatType = .daily
-    @State var daily: Frequency.Daily = .init(selectedDays: [2, 3, 4, 5, 6, 7, 8])
-    @State var weekly: Frequency.Weekly = .init(frequency: 1)
+    @State var weekly: Frequency.Weekly = .init(selectedDays: [2, 3, 4, 5, 6, 7, 8])
     @State var monthly: Frequency.Monthly = .init(type: .beginning)
         
     @State var didAppear: Bool = false
@@ -22,7 +21,6 @@ struct SelectFrequencyView: View {
     
     init(frequency: Frequency, cancelAction: @escaping () -> Void, doneAction: @escaping (Frequency) -> Void) {
         self.type = frequency.type
-        self.daily = frequency.daily
         self.weekly = frequency.weekly
         self.monthly = frequency.monthly
         self.cancelAction = cancelAction
@@ -65,6 +63,8 @@ struct SelectFrequencyView: View {
                             
                             switch type {
                             case .daily:
+                                Spacer(minLength: 0)
+                            case .weekly:
                                 sectionTitle("On These Days")
                                     .padding(.top, 20)
                                 HStack(spacing: 5) {
@@ -84,44 +84,13 @@ struct SelectFrequencyView: View {
                                             )
                                             .onTapGesture {
                                                 if isSelected {
-                                                    let selectedDays = daily.selectedDays
-                                                    self.daily = .init(selectedDays: selectedDays.filter({ $0 != index + 2}))
+                                                    let selectedDays = weekly.selectedDays
+                                                    self.weekly = .init(selectedDays: selectedDays.filter({ $0 != index + 2}))
                                                 } else {
-                                                    var selectedDays = daily.selectedDays
+                                                    var selectedDays = weekly.selectedDays
                                                     selectedDays.append(index + 2)
-                                                    self.daily = .init(selectedDays: selectedDays)
+                                                    self.weekly = .init(selectedDays: selectedDays)
                                                 }
-                                            }
-                                    }
-                                }
-                                .padding(.top, 5)
-                            case .weekly:
-                                let text = "\(weekly.frequency) " + Translator.translate(key: "Times in a week", isVietnamese: User.isVietnamese)
-                                
-                                sectionTitle(text)
-                                    .padding(.top, 20)
-                                
-                                HStack(spacing: 5) {
-                                    ForEach(1..<7, id: \.self) { index in
-                                        let selectedColor: Color = User.isTurnDarkMode ? .white : .black
-                                        let unselectedColor: Color = User.isTurnDarkMode ? Color("Black") : Color("Gray01")
-                                        
-                                        let selectedTextColor: Color = User.isTurnDarkMode ? .black : .white
-                                        let unselectedTextColor: Color = User.isTurnDarkMode ? .white : .black
-                                        
-                                        let isSelected = index == weekly.frequency
-                                        RoundedRectangle(cornerRadius: 5)
-                                            .fill(isSelected ? selectedColor : unselectedColor)
-                                            .frame(height: 50)
-                                            .overlay(
-                                                Text("\(index)")
-                                                    .fontBold(16)
-                                                    .foregroundStyle(
-                                                        isSelected ? selectedTextColor : unselectedTextColor
-                                                    )
-                                            )
-                                            .onTapGesture {
-                                                weekly = .init(frequency: index)
                                             }
                                     }
                                 }
@@ -165,7 +134,7 @@ struct SelectFrequencyView: View {
                     .padding(.top, 20)
                 }
                 
-                Text("Done")
+                Text(Translator.translate(key: "Done"))
                     .fontBold(20)
                     .frame(height: 28)
                     .padding(.horizontal, 25)
@@ -176,7 +145,7 @@ struct SelectFrequencyView: View {
                     .onTapGesture {
                         withAnimation {
                             didAppear = false
-                            doneAction(.init(type: type, daily: daily, weekly: weekly, monthly: monthly))
+                            doneAction(.init(type: type, weekly: weekly, monthly: monthly))
                         }
                     }
             }
@@ -228,7 +197,7 @@ struct SelectFrequencyView: View {
     }
     
     func isSelectedDay(_ index: Int) -> Bool {
-        return daily.selectedDays.contains(where: { $0 == index + 2})
+        return weekly.selectedDays.contains(where: { $0 == index + 2})
     }
     
     // MARK: - Get

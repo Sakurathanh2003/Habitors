@@ -19,7 +19,7 @@
 		24E9231A2D8A9C0A00E9B96C /* ChooseTemplateHabitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E923162D8A9C0A00E9B96C /* ChooseTemplateHabitViewController.swift */; };
 		24E9231B2D8A9C0A00E9B96C /* ChooseTemplateHabitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E923172D8A9C0A00E9B96C /* ChooseTemplateHabitViewModel.swift */; };
 		24E9231E2D8A9C2F00E9B96C /* ChooseTemplateHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E9231D2D8A9C2F00E9B96C /* ChooseTemplateHabitView.swift */; };
-		2A36BFDC2DC67B6A00C6395C /* Orkney.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2A36BFDB2DC67B6A00C6395C /* Orkney.mp3 */; };
+		2A36BFDC2DC67B6A00C6395C /* orkney.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2A36BFDB2DC67B6A00C6395C /* orkney.mp3 */; };
 		2A36BFFB2DCA57E500C6395C /* ListHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A36BFFA2DCA57E500C6395C /* ListHabitView.swift */; };
 		2A795E122DC1FC5E00CA91B0 /* AudioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A795E112DC1FC5E00CA91B0 /* AudioView.swift */; };
 		2A795E152DC206FC00CA91B0 /* Audio in Frameworks */ = {isa = PBXBuildFile; productRef = 2A795E142DC206FC00CA91B0 /* Audio */; };
@@ -188,7 +188,7 @@
 		2A36BFB02DC3C4B300C6395C /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		2A36BFB22DC3C4B300C6395C /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
 		2A36BFC22DC513FB00C6395C /* Habitors-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Habitors-Bridging-Header.h"; sourceTree = "<group>"; };
-		2A36BFDB2DC67B6A00C6395C /* Orkney.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Orkney.mp3; sourceTree = "<group>"; };
+		2A36BFDB2DC67B6A00C6395C /* orkney.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = orkney.mp3; sourceTree = "<group>"; };
 		2A36BFFA2DCA57E500C6395C /* ListHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListHabitView.swift; sourceTree = "<group>"; };
 		2A795E112DC1FC5E00CA91B0 /* AudioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioView.swift; sourceTree = "<group>"; };
 		2A795E162DC2074600CA91B0 /* congratulation.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = congratulation.mp3; sourceTree = "<group>"; };
@@ -771,7 +771,7 @@
 				FA00B6A42DB4B97400B49125 /* Meditative */,
 				FA00B6942DB4237800B49125 /* Soundscapes */,
 				FAE73E862D9C1C2B00944448 /* ringtone.mp3 */,
-				2A36BFDB2DC67B6A00C6395C /* Orkney.mp3 */,
+				2A36BFDB2DC67B6A00C6395C /* orkney.mp3 */,
 				2A795E162DC2074600CA91B0 /* congratulation.mp3 */,
 				FAE73E842D9B09AB00944448 /* noisy.mp3 */,
 			);
@@ -899,7 +899,7 @@
 				FA00B6AB2DB4B98D00B49125 /* a_golden_morning.mp3 in Resources */,
 				B2DFA3272DBAB1EE0035308F /* Gilroy-Bold.ttf in Resources */,
 				B2DFA3282DBAB1EE0035308F /* Gilroy-Medium.ttf in Resources */,
-				2A36BFDC2DC67B6A00C6395C /* Orkney.mp3 in Resources */,
+				2A36BFDC2DC67B6A00C6395C /* orkney.mp3 in Resources */,
 				B2DFA3292DBAB1EE0035308F /* Gilroy-Regular.ttf in Resources */,
 				B2DFA32A2DBAB1EE0035308F /* Gilroy-SemiBold.ttf in Resources */,
 				FA00B6AC2DB4B98D00B49125 /* breath_cycle.mp3 in Resources */,
@@ -1238,6 +1238,8 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Habitors/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Habit Tracking";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSCameraUsageDescription = "\"\"";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Habits linked into HealthKit needs read data to show.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Habits linked into HealthKit will insert data automaticly.";
@@ -1283,6 +1285,8 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Habitors/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Habit Tracking";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSCameraUsageDescription = "\"\"";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Habits linked into HealthKit needs read data to show.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Habits linked into HealthKit will insert data automaticly.";

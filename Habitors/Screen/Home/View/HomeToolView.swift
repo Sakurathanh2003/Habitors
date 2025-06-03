@@ -111,7 +111,7 @@ struct HomeToolView: View {
                 })
             }
             .padding(.horizontal, Const.horizontalPadding)
-            .padding(.bottom, 100)
+            .padding(.bottom, UIScreen.main.bounds.height / 2)
         }
     }
 }

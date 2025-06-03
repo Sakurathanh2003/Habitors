@@ -86,14 +86,6 @@ extension GoalUnit {
         default: nil
         }
     }
-        
-    var writeType: HKSampleType? {
-        switch self {
-        case .steps: HKQuantityType(.stepCount)
-        case .water: HKQuantityType(.dietaryWater)
-        default: nil
-        }
-    }
     
     var permissionReadMessage: String {
         switch self {
@@ -139,7 +131,10 @@ extension GoalUnit {
     }
     
     var canSetData: Bool {
-        return false
+        switch self {
+        case .exerciseTime, .standHour, .steps, .water: false
+        default: true
+        }
     }
     
     var maxValue: Double? {

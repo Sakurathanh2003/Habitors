@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SplashCoordinator: Coordinator {
+final class SplashCoordinator: WindowBaseCoordinator {
     lazy var controller: SplashViewController = {
         let viewModel = SplashViewModel()
         let controller = SplashViewController(viewModel: viewModel, coordinator: self)
@@ -16,6 +16,10 @@ final class SplashCoordinator: Coordinator {
 
     override func start() {
         super.start()
+        
+        window.rootViewController = controller
+        window.makeKeyAndVisible()
+        UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: nil, completion: nil)
     }
 
     override func stop(completion: (() -> Void)? = nil) {

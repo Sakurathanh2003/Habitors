@@ -91,7 +91,7 @@ struct TimeDialog: View {
                     Button(action: {
                         doneAction(.init(hour: hour, minutes: minutes))
                     }, label: {
-                        Text("Done")
+                        Text(Translator.translate(key: "Done"))
                             .fontMedium(14)
                             .foregroundStyle(Color("Primary"))
                     })

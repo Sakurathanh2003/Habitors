@@ -47,43 +47,6 @@ class ExerciseTimeService: HealthService {
         }
     }
     
-    func saveData(_ data: Double, in date: Date, completion: ((Bool, (any Error)?) -> Void)?) {
-        // Lấy ngày, giờ, phút, giây từ thời điểm hiện tại
-        let calendar = Calendar.current
-        let currentYear = calendar.component(.year, from: date)
-        let currentMonth = calendar.component(.month, from: date)
-        let currentDay = calendar.component(.day, from: date)
-
-        // Lấy giờ, phút, giây từ date bạn có
-        let hour = calendar.component(.hour, from: Date())
-        let minute = calendar.component(.minute, from: Date())
-        let second = calendar.component(.second, from: Date())
-
-        // Tạo Date mới với ngày hiện tại và giữ nguyên giờ, phút, giây của date bạn có
-        let endDate = calendar.date(bySettingHour: hour,
-                                    minute: minute,
-                                    second: second,
-                                    of: calendar.date(from: DateComponents(year: currentYear, month: currentMonth, day: currentDay))!)!
-        
-        let start = calendar.date(byAdding: .minute, value: Int(-abs(data)), to: endDate)!
-
-        let workout = HKWorkout(activityType: .other,
-                                start: start,
-                                end: endDate,
-                                duration: TimeInterval(data * 60.0),
-                                totalEnergyBurned: nil, totalDistance: nil, metadata: nil)
-        
-        healthStore.save(workout) { success, error in
-            completion?(success, error)
-            
-            if success {
-                print("Workout đã được lưu vào HealthKit")
-            } else {
-                print("Lỗi khi lưu workout: \(error?.localizedDescription ?? "Unknown error")")
-            }
-        }
-    }
-    
     // MARK: - Obersever
     func startObserver() async {
         guard !didObserver && didRequestPermission, let stepType = HKObjectType.quantityType(forIdentifier: .appleExerciseTime), await checkReadPermission() else {
@@ -115,33 +78,25 @@ class ExerciseTimeService: HealthService {
     }
     
     // MARK: - Request Permission
-    func requestAuthorization(completion: @escaping (Bool, Bool) -> Void) {
-        guard let readType = HKObjectType.quantityType(forIdentifier: .dietaryWater) else {
-            completion(false, false)
+    func requestAuthorization(completion: @escaping (Bool) -> Void) {
+        guard let readType = HKObjectType.quantityType(forIdentifier: .appleExerciseTime) else {
+            completion(false)
             return
         }
         
-        let writeType = HKObjectType.workoutType()
         self.didRequestPermission = true
-        healthStore.requestAuthorization(toShare: Set([writeType]), read: Set([readType])) { success, error in
+        healthStore.requestAuthorization(toShare: nil, read: Set([readType])) { success, error in
             Task {
                 let canRead = await self.checkReadPermission()
-                let canWrite = await self.checkWritePermission()
                 
                 DispatchQueue.main.async {
-                    completion(canRead, canWrite)
+                    completion(canRead)
                 }
             }
         }
     }
     
     // MARK: - Check Permission
-    func checkWritePermission(completion: ((Bool) -> Void)?) {
-        let type = HKObjectType.workoutType()
-        let status = healthStore.authorizationStatus(for: type)
-        completion?(status == .sharingAuthorized)
-    }
-    
     func checkReadPermission(completion: ((Bool) -> Void)?) {
         guard let type = HKObjectType.quantityType(forIdentifier: .appleExerciseTime) else {
             completion?(false)
@@ -150,14 +105,6 @@ class ExerciseTimeService: HealthService {
         
         healthStore.requestAuthorization(toShare: nil, read: Set([type])) { success, error in
             completion?(success)
-        }
-    }
-    
-    func checkWritePermission() async -> Bool {
-        let type = HKObjectType.workoutType()
-        return await withUnsafeContinuation { continuation in
-            let status = healthStore.authorizationStatus(for: type)
-            continuation.resume(returning: status == .sharingAuthorized)
         }
     }
     

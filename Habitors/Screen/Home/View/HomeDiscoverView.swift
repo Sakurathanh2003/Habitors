@@ -42,6 +42,7 @@ struct HomeDiscoverView: View {
                     }
                 }
                 .padding(Const.horizontalPadding)
+                .padding(.bottom, UIScreen.main.bounds.height / 2)
             }
         }
         .onAppear {
@@ -60,23 +61,11 @@ struct HomeDiscoverView: View {
     
     func discoveryItemView(_ item: Article) -> some View {
         VStack(alignment: .leading,spacing: 10) {
-            AsyncImage(url: URL(string: item.image)) { phase in
-                switch phase {
-                case .empty:
-                    ZStack {
-                        Color("Gray02")
-                        ProgressView().circleprogressColor(Color("Secondary"))
-                    }
-                case .success(let image):
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                default:
-                    Color.gray
-                }
-            }
-            .frame(width: Const.itemWidth, height: Const.itemHeight)
-            .cornerRadius(Const.itemCorner)
+            Image(item.image)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: Const.itemWidth, height: Const.itemHeight)
+                .cornerRadius(Const.itemCorner)
             
             Text(item.title)
                 .fontRegular(15)

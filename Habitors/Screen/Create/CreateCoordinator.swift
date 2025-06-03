@@ -37,7 +37,7 @@ final class CreateCoordinator: PresentedCoordinator {
     }
     
     func didCreateHabit() {
-        let alert = UIAlertController(title: "", message: "Create Habit success", preferredStyle: .alert)
+        let alert = UIAlertController(title: "", message: Translator.translate(key: "Create Habit success"), preferredStyle: .alert)
         let confirmAction = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
             guard let self else {
                 return

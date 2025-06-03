@@ -224,7 +224,7 @@ struct QuickNoteHistory: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 150, height: 150)
-                    Text("You haven't logged any notes yet.")
+                    Text(Translator.translate(key: "You haven't logged any notes yet."))
                         .fontRegular(16)
                         .foregroundStyle(.gray)
                         .padding(.top, 5)
@@ -451,7 +451,7 @@ struct ColorPickerSheet: View {
             .navigationTitle("Color Picker")
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Done") {
+                    Button(Translator.translate(key: "Done")) {
                         selectedColor = currentColor
                         dismiss()
                     }

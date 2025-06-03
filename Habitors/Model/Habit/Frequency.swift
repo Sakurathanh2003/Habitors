@@ -10,14 +10,12 @@ import Foundation
 class Frequency: Codable {
     var id: String
     var type: RepeatType
-    var daily: Daily
     var weekly: Weekly
     var monthly: Monthly
     
-    init(type: RepeatType, daily: Daily, weekly: Weekly, monthly: Monthly) {
+    init(type: RepeatType, weekly: Weekly, monthly: Monthly) {
         self.id = UUID().uuidString
         self.type = type
-        self.daily = daily
         self.weekly = weekly
         self.monthly = monthly
     }
@@ -25,8 +23,7 @@ class Frequency: Codable {
     init() {
         self.id = UUID().uuidString
         self.type = .daily
-        self.daily = .init(selectedDays: [2, 3, 4, 5, 6, 7, 8])
-        self.weekly = .init(frequency: 2)
+        self.weekly = .init(selectedDays: [2, 3, 4, 5, 6, 7, 8])
         self.monthly = .init(type: .beginning)
     }
     
@@ -36,19 +33,11 @@ class Frequency: Codable {
         case monthly
     }
     
-    struct Daily: Codable {
+    struct Weekly: Codable {
         var selectedDays: [Int]
         
         init(selectedDays: [Int]) {
             self.selectedDays = selectedDays
-        }
-    }
-    
-    struct Weekly: Codable {
-        var frequency: Int
-        
-        init(frequency: Int) {
-            self.frequency = frequency
         }
     }
     
@@ -85,9 +74,9 @@ extension Frequency {
         
         switch type {
         case .daily:
-            text += " - \(daily.selectedDays.count) " + Translator.translate(key: "days")
+            break
         case .weekly:
-            text += " - \(weekly.frequency) " + Translator.translate(key: "times")
+            text += " - \(weekly.selectedDays.count) " + Translator.translate(key: "days")
         case .monthly:
             text += " - " + Translator.translate(key: monthly.type.rawValue.capitalized)
         }
@@ -101,7 +90,7 @@ extension Frequency {
     }
 }
 
-extension Frequency.Daily {
+extension Frequency.Weekly {
     func isSelectedDay(_ day: Date) -> Bool {
         var today = day.calendar.component(.weekday, from: day)
         

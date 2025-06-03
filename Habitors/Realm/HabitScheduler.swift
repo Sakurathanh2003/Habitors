@@ -28,11 +28,9 @@ class HabitScheduler: NSObject {
     
     func requestNotificationPermission() {
         let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options: [.alert, .sound, .badge, .provisional, .providesAppNotificationSettings]) { granted, error in
+        center.requestAuthorization(options: [.alert, .sound, .badge, .criticalAlert]) { granted, error in
             if granted {
                 print("Permission granted!")
-                UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-                UNUserNotificationCenter.current().removeAllDeliveredNotifications()
             } else {
                 print("Permission denied!")
             }
@@ -52,20 +50,20 @@ class HabitScheduler: NSObject {
         
         switch item.frequency.type {
         case .daily:
-            if item.frequency.daily.selectedDays.count == 7 {
+            for time in item.reminder {
+                schedule(for: item, weekday: nil, time: time)
+            }
+        case .weekly:
+            if item.frequency.weekly.selectedDays.count == 7 {
                 for time in item.reminder {
                     schedule(for: item, weekday: nil, time: time)
                 }
             } else {
-                for weekday in item.frequency.daily.selectedDays {
+                for weekday in item.frequency.weekly.selectedDays {
                     for time in item.reminder {
                         schedule(for: item, weekday: weekday, time: time)
                     }
                 }
-            }
-        case .weekly:
-            for time in item.reminder {
-                schedule(for: item, time: time)
             }
         case .monthly:
             switch item.frequency.monthly.type {
@@ -119,16 +117,15 @@ class HabitScheduler: NSObject {
         
     private func notificationContent(for item: Habit) -> UNMutableNotificationContent {
         let content = UNMutableNotificationContent()
-        content.interruptionLevel = .active
+        content.interruptionLevel = .critical
         content.title = "Bạn có nhắc nhở!"
         
         let body = "habit: \(item.name) "
         content.body = body
         
-        content.sound = .criticalSoundNamed(UNNotificationSoundName("Orkney.mp3"),
+        content.sound = .criticalSoundNamed(UNNotificationSoundName("orkney.mp3"),
                                             withAudioVolume: 1) // Thay "ringtone.mp3" bằng tên tệp của bạn
     
-        content.categoryIdentifier = "myNotificationCategory"
         return content
     }
 }
@@ -138,6 +135,6 @@ extension HabitScheduler: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.badge, .sound, .list, .banner])
+        completionHandler([.alert, .badge, .sound, .list, .banner])
     }
 }

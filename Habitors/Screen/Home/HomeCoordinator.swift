@@ -33,6 +33,7 @@ final class HomeCoordinator: WindowBaseCoordinator {
         
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
+        UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: nil, completion: nil)
     }
     
     override func handle(event: any CoordinatorEvent) -> Bool {

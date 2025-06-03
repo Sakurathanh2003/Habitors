@@ -55,9 +55,8 @@ struct HomeView: View {
                                 HomeDiscoverView(viewModel: viewModel)
                             }
                             
-                            
                             VStack {
-                                if let currentItem = player.getItem(), !isAudioOpening {
+                                if let currentItem = player.getItem(), !isAudioOpening && player.isPlaying {
                                     AudioView(player: player, item: currentItem, isOpen: $isAudioOpening)
                                         .matchedGeometryEffect(id: "audioplayer", in: animation)
                                         .onTapGesture {

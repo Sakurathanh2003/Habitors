@@ -58,7 +58,7 @@ class CreateViewController: BaseViewController {
         }).disposed(by: self.disposeBag)
         
         viewModel.routing.showAlert.subscribe(onNext: { [weak self] message in
-            let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+            let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: "Ok", style: .cancel)
             alert.addAction(cancelAction)
             self?.present(alert, animated: true)

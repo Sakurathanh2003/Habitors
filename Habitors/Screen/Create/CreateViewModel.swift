@@ -226,7 +226,7 @@ final class CreateViewModel: BaseViewModel<CreateViewModelInput, CreateViewModel
     private func checkHealthPermissionIfNeed(completion: @escaping (String?) -> Void) {
         if let appleService = goalUnit.healthService {
             SVProgressHUD.show()
-            appleService.requestAuthorization { [weak self] canRead, canWrite in
+            appleService.requestAuthorization { [weak self] isGrant in
                 SVProgressHUD.dismiss()
                 guard let self else {
                     return
@@ -234,9 +234,7 @@ final class CreateViewModel: BaseViewModel<CreateViewModelInput, CreateViewModel
                 
                 var message: String?
                 
-                if !canRead {
-                    message = goalUnit.permissionReadMessage
-                } else if !canWrite {
+                if !isGrant {
                     message = goalUnit.permissionReadMessage
                 }
                 

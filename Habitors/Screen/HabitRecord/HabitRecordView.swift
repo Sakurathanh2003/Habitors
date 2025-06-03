@@ -153,10 +153,10 @@ struct HabitRecordView: View {
         } else {
             Spacer()
             
-            Text(viewModel.isCounting ? "Stop" : "Start")
+            Text(Translator.translate(key: viewModel.isCounting ? "Stop" : "Start"))
                 .fontBold(20)
                 .frame(width: UIScreen.main.bounds.width / 2.5, height: 56)
-                .background(Color("Error"))
+                .background(viewModel.isCounting ? Color("Error") : Color("Information"))
                 .cornerRadius(5)
                 .foregroundStyle(.white)
                 .onTapGesture {
@@ -167,7 +167,7 @@ struct HabitRecordView: View {
                     }
                 }
             
-            Text("Reset")
+            Text(Translator.translate(key: "Reset"))
                 .fontBold(20)
                 .frame(width: UIScreen.main.bounds.width / 2.5, height: 56)
                 .background(Color("Gray03"))

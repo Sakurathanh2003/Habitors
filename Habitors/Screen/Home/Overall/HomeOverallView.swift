@@ -111,7 +111,7 @@ struct HomeOverallView: View {
                         .padding(.horizontal, 20)
                     }
                 }
-                .padding(.bottom, 100)
+                .padding(.bottom, UIScreen.main.bounds.height / 2)
             }
             .background(Color.gray.opacity(0.1))
         }

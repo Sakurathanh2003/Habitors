@@ -194,19 +194,10 @@ struct ArticleDetailView: View {
     }
     
     var thumbnailView: some View {
-        AsyncImage(url: URL(string: viewModel.item.image)) { phase in
-            switch phase {
-            case .empty:
-                ProgressView().circleprogressColor(Color("Secondary"))
-            case .success(let image):
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .cornerRadius(10)
-            default:
-                ProgressView().circleprogressColor(Color("Secondary"))
-            }
-        }
+        Image(viewModel.item.image)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .cornerRadius(10)
     }
 }
 
