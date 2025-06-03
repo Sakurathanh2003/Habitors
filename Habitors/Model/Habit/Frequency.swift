@@ -81,15 +81,15 @@ class Frequency: Codable {
 extension Frequency {
     var description: String {
         var text = ""
-        text += type.rawValue.capitalized
+        text += Translator.translate(key: type.rawValue.capitalized)
         
         switch type {
         case .daily:
-            text += " - \(daily.selectedDays.count) days"
+            text += " - \(daily.selectedDays.count) " + Translator.translate(key: "days")
         case .weekly:
-            text += " - \(weekly.frequency) days"
+            text += " - \(weekly.frequency) " + Translator.translate(key: "times")
         case .monthly:
-            text += " - \(monthly.type.rawValue.capitalized)"
+            text += " - " + Translator.translate(key: monthly.type.rawValue.capitalized)
         }
         
         return text

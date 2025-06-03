@@ -69,7 +69,7 @@ class CreateViewController: BaseViewController {
             let cancelAction = UIAlertAction(title: "Ok", style: .cancel)
             alert.addAction(cancelAction)
             
-            let settingAction = UIAlertAction(title: "Go to Setting", style: .destructive) { _ in
+            let settingAction = UIAlertAction(title: Translator.translate(key: "Go to Setting"), style: .destructive) { _ in
                 UIApplication.shared.openAppleHealthSources()
             }
             

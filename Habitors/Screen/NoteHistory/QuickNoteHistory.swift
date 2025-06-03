@@ -211,7 +211,7 @@ struct QuickNoteHistory: View {
                         }
                 }
                 .overlay(
-                    Text("Quick Note")
+                    Text(Translator.translate(key: "Quick Note"))
                         .fontBold(16)
                         .foreColor(mainColor)
                 )
@@ -371,19 +371,19 @@ struct NoteView: View {
             .onAppear {
                 self.needPresentKeyboard = viewModel.currentText.isEmpty
             }
-            .confirmationDialog("Choose an option", isPresented: $showAlert, titleVisibility: .visible) {
-                Button("Change Note Background Color") {
+            .confirmationDialog(Translator.translate(key:"Choose an option"), isPresented: $showAlert, titleVisibility: .visible) {
+                Button(Translator.translate(key: "Change Note Background Color")) {
                     showColorPicker = true
                 }
                 
-                Button("Delete") {
+                Button(Translator.translate(key: "Delete")) {
                     viewModel.delete()
                     withAnimation {
                         currentNote = nil
                     }
                 }
                 
-                Button("Cancel", role: .cancel) {}
+                Button(Translator.translate(key: "Cancel"), role: .cancel) {}
             }
             .sheet(isPresented: $showColorPicker) {
                 ColorPickerSheet(selectedColor: .init {

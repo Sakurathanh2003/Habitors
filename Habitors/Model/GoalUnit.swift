@@ -139,10 +139,7 @@ extension GoalUnit {
     }
     
     var canSetData: Bool {
-        switch self {
-        case .exerciseTime, .standHour: false
-        default: true
-        }
+        return false
     }
     
     var maxValue: Double? {

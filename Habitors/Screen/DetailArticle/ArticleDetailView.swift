@@ -121,7 +121,7 @@ struct ArticleDetailView: View {
         
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            NavigationBarView(title: "Article", isDarkMode: viewModel.isTurnDarkMode) {
+            NavigationBarView(title: Translator.translate(key: "Article"), isDarkMode: viewModel.isTurnDarkMode) {
                 viewModel.routing.stop.onNext(())
             }
             

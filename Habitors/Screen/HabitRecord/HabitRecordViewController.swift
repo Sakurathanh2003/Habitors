@@ -69,19 +69,19 @@ class HabitRecordViewController: BaseViewController {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         // Add actions (options)
-        alert.addAction(UIAlertAction(title: "Cài đặt thói quen", style: .default, handler: { [weak self] _ in
+        alert.addAction(UIAlertAction(title: Translator.translate(key: "Habit Setting"), style: .default, handler: { [weak self] _ in
             DispatchQueue.main.async {
                 self?.viewModel.input.didTapEditHabit.onNext(())
             }
         }))
         
-        alert.addAction(UIAlertAction(title: "Thêm bản ghi", style: .default, handler: { [weak self] _ in
+        alert.addAction(UIAlertAction(title: Translator.translate(key: "Add Value"), style: .default, handler: { [weak self] _ in
             DispatchQueue.main.async {
                 self?.viewModel.input.didTapAddValue.onNext(())
             }
         }))
         
-        alert.addAction(UIAlertAction(title: "Đóng", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: Translator.translate(key: "Close"), style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
 }

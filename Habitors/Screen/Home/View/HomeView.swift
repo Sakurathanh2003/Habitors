@@ -131,7 +131,7 @@ struct HomeView: View {
                         .padding(.top, 20)
                         .foreColor(.gray)
                         
-                    Text("You have no habits scheduled for this day. Keep up the good work and enjoy your break! 😊")
+                    Text(Translator.translate(key: "You have no habits scheduled for this day.", isVietnamese: viewModel.isVietnameseLanguage))
                         .fontRegular(16)
                         .lineSpacing(5)
                         .multilineTextAlignment(.center)

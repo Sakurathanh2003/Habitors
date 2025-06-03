@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -20,9 +20,6 @@
 		24E9231B2D8A9C0A00E9B96C /* ChooseTemplateHabitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E923172D8A9C0A00E9B96C /* ChooseTemplateHabitViewModel.swift */; };
 		24E9231E2D8A9C2F00E9B96C /* ChooseTemplateHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E9231D2D8A9C2F00E9B96C /* ChooseTemplateHabitView.swift */; };
 		2A36BFDC2DC67B6A00C6395C /* Orkney.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2A36BFDB2DC67B6A00C6395C /* Orkney.mp3 */; };
-		2A36BFE22DC695D200C6395C /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A36BFB02DC3C4B300C6395C /* UserNotifications.framework */; };
-		2A36BFE32DC695D200C6395C /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A36BFB22DC3C4B300C6395C /* UserNotificationsUI.framework */; };
-		2A36BFED2DC695D200C6395C /* HabitorContentExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 2A36BFE12DC695D200C6395C /* HabitorContentExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2A36BFFB2DCA57E500C6395C /* ListHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A36BFFA2DCA57E500C6395C /* ListHabitView.swift */; };
 		2A795E122DC1FC5E00CA91B0 /* AudioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A795E112DC1FC5E00CA91B0 /* AudioView.swift */; };
 		2A795E152DC206FC00CA91B0 /* Audio in Frameworks */ = {isa = PBXBuildFile; productRef = 2A795E142DC206FC00CA91B0 /* Audio */; };
@@ -114,7 +111,6 @@
 		FAA1E8822DB29FED00604ABC /* MoodRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA1E8812DB29FED00604ABC /* MoodRecord.swift */; };
 		FAA1E8842DB2A08600604ABC /* MoodRecordDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA1E8832DB2A08600604ABC /* MoodRecordDAO.swift */; };
 		FAA1E8872DB33F0800604ABC /* MoodHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA1E8862DB33F0800604ABC /* MoodHistory.swift */; };
-		FAA1E8892DB3447400604ABC /* DeleteDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA1E8882DB3447400604ABC /* DeleteDialog.swift */; };
 		FAA1E88E2DB3497200604ABC /* MoodHistoryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA1E88A2DB3497200604ABC /* MoodHistoryCoordinator.swift */; };
 		FAA1E88F2DB3497200604ABC /* MoodHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA1E88B2DB3497200604ABC /* MoodHistoryViewController.swift */; };
 		FAA1E8902DB3497200604ABC /* MoodHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA1E88D2DB3497200604ABC /* MoodHistoryViewModel.swift */; };
@@ -151,16 +147,6 @@
 		FAE73E872D9C1C2B00944448 /* ringtone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FAE73E862D9C1C2B00944448 /* ringtone.mp3 */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		2A36BFEB2DC695D200C6395C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = FA03A0132D81F83F004875F9 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2A36BFE02DC695D200C6395C;
-			remoteInfo = HabitorContentExtension;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		FA00B6A32DB4B49E00B49125 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -179,7 +165,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				2A36BFED2DC695D200C6395C /* HabitorContentExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -204,7 +189,6 @@
 		2A36BFB22DC3C4B300C6395C /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
 		2A36BFC22DC513FB00C6395C /* Habitors-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Habitors-Bridging-Header.h"; sourceTree = "<group>"; };
 		2A36BFDB2DC67B6A00C6395C /* Orkney.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Orkney.mp3; sourceTree = "<group>"; };
-		2A36BFE12DC695D200C6395C /* HabitorContentExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = HabitorContentExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A36BFFA2DCA57E500C6395C /* ListHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListHabitView.swift; sourceTree = "<group>"; };
 		2A795E112DC1FC5E00CA91B0 /* AudioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioView.swift; sourceTree = "<group>"; };
 		2A795E162DC2074600CA91B0 /* congratulation.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = congratulation.mp3; sourceTree = "<group>"; };
@@ -297,7 +281,6 @@
 		FAA1E8812DB29FED00604ABC /* MoodRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodRecord.swift; sourceTree = "<group>"; };
 		FAA1E8832DB2A08600604ABC /* MoodRecordDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodRecordDAO.swift; sourceTree = "<group>"; };
 		FAA1E8862DB33F0800604ABC /* MoodHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodHistory.swift; sourceTree = "<group>"; };
-		FAA1E8882DB3447400604ABC /* DeleteDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteDialog.swift; sourceTree = "<group>"; };
 		FAA1E88A2DB3497200604ABC /* MoodHistoryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodHistoryCoordinator.swift; sourceTree = "<group>"; };
 		FAA1E88B2DB3497200604ABC /* MoodHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodHistoryViewController.swift; sourceTree = "<group>"; };
 		FAA1E88D2DB3497200604ABC /* MoodHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodHistoryViewModel.swift; sourceTree = "<group>"; };
@@ -336,30 +319,7 @@
 		FAE73E862D9C1C2B00944448 /* ringtone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ringtone.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		2A36BFEE2DC695D200C6395C /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 2A36BFE02DC695D200C6395C /* HabitorContentExtension */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		2A36BFE42DC695D200C6395C /* HabitorContentExtension */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (2A36BFEE2DC695D200C6395C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = HabitorContentExtension; sourceTree = "<group>"; };
-/* End PBXFileSystemSynchronizedRootGroup section */
-
 /* Begin PBXFrameworksBuildPhase section */
-		2A36BFDE2DC695D200C6395C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2A36BFE32DC695D200C6395C /* UserNotificationsUI.framework in Frameworks */,
-				2A36BFE22DC695D200C6395C /* UserNotifications.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		FA03A0182D81F83F004875F9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -550,7 +510,6 @@
 			isa = PBXGroup;
 			children = (
 				FA03A01D2D81F83F004875F9 /* Habitors */,
-				2A36BFE42DC695D200C6395C /* HabitorContentExtension */,
 				FA03A01C2D81F83F004875F9 /* Products */,
 				1D6C327FB0C0DD1A02024FED /* Pods */,
 				C769EF5CB3D0651AAB002413 /* Frameworks */,
@@ -561,7 +520,6 @@
 			isa = PBXGroup;
 			children = (
 				FA03A01B2D81F83F004875F9 /* Habitors.app */,
-				2A36BFE12DC695D200C6395C /* HabitorContentExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -677,7 +635,6 @@
 				FA03A0CD2D831C71004875F9 /* DashedLineView.swift */,
 				FA2A0AF72D85254200A597DB /* HabitToggle.swift */,
 				FA2A0B002D859CD500A597DB /* SetPeriodDialog.swift */,
-				FAA1E8882DB3447400604ABC /* DeleteDialog.swift */,
 				B245D92C2DB7CF6200E857FA /* NavigationBarView.swift */,
 				FA6D69612DA10F27003A7A84 /* InputView.swift */,
 			);
@@ -867,28 +824,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2A36BFE02DC695D200C6395C /* HabitorContentExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2A36BFEF2DC695D200C6395C /* Build configuration list for PBXNativeTarget "HabitorContentExtension" */;
-			buildPhases = (
-				2A36BFDD2DC695D200C6395C /* Sources */,
-				2A36BFDE2DC695D200C6395C /* Frameworks */,
-				2A36BFDF2DC695D200C6395C /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				2A36BFE42DC695D200C6395C /* HabitorContentExtension */,
-			);
-			name = HabitorContentExtension;
-			packageProductDependencies = (
-			);
-			productName = HabitorContentExtension;
-			productReference = 2A36BFE12DC695D200C6395C /* HabitorContentExtension.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 		FA03A01A2D81F83F004875F9 /* Habitors */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = FA03A02F2D81F844004875F9 /* Build configuration list for PBXNativeTarget "Habitors" */;
@@ -904,7 +839,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				2A36BFEC2DC695D200C6395C /* PBXTargetDependency */,
 			);
 			name = Habitors;
 			packageProductDependencies = (
@@ -926,9 +860,6 @@
 				LastSwiftUpdateCheck = 1630;
 				LastUpgradeCheck = 1540;
 				TargetAttributes = {
-					2A36BFE02DC695D200C6395C = {
-						CreatedOnToolsVersion = 16.3;
-					};
 					FA03A01A2D81F83F004875F9 = {
 						CreatedOnToolsVersion = 15.4;
 						LastSwiftMigration = 1630;
@@ -955,19 +886,11 @@
 			projectRoot = "";
 			targets = (
 				FA03A01A2D81F83F004875F9 /* Habitors */,
-				2A36BFE02DC695D200C6395C /* HabitorContentExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		2A36BFDF2DC695D200C6395C /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		FA03A0192D81F83F004875F9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1055,13 +978,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		2A36BFDD2DC695D200C6395C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		FA03A0172D81F83F004875F9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1093,7 +1009,6 @@
 				B230D7872DB805340040359E /* Translator.swift in Sources */,
 				FAABE5382D8C677300544254 /* Frequency.swift in Sources */,
 				FAA1E8802DB29F2600604ABC /* RlmMoodRecord.swift in Sources */,
-				FAA1E8892DB3447400604ABC /* DeleteDialog.swift in Sources */,
 				24E9231E2D8A9C2F00E9B96C /* ChooseTemplateHabitView.swift in Sources */,
 				FA2A0AF12D8516EB00A597DB /* CreateCoordinator.swift in Sources */,
 				FAE4349F2DAD7A01008C1DC9 /* Article.swift in Sources */,
@@ -1174,14 +1089,6 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		2A36BFEC2DC695D200C6395C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 2A36BFE02DC695D200C6395C /* HabitorContentExtension */;
-			targetProxy = 2A36BFEB2DC695D200C6395C /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
 		B230D78B2DB8134F0040359E /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
@@ -1195,60 +1102,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		2A36BFF02DC695D200C6395C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = NS9ZL6QW8L;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = HabitorContentExtension/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = HabitorContentExtension;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.thanhvu.habitors.HabitorContentExtension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		2A36BFF12DC695D200C6395C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = NS9ZL6QW8L;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = HabitorContentExtension/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = HabitorContentExtension;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.thanhvu.habitors.HabitorContentExtension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 		FA03A02D2D81F844004875F9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1462,15 +1315,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2A36BFEF2DC695D200C6395C /* Build configuration list for PBXNativeTarget "HabitorContentExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2A36BFF02DC695D200C6395C /* Debug */,
-				2A36BFF12DC695D200C6395C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		FA03A0162D81F83F004875F9 /* Build configuration list for PBXProject "Habitors" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

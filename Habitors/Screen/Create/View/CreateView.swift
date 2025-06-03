@@ -150,7 +150,7 @@ struct CreateView: View {
     @ViewBuilder
     var repeatView: some View {
         VStack(alignment: .leading) {
-            sectionTitle(viewModel.isVietnameseLanguage ? "Tần suất" : "Frequency")
+            sectionTitle(Translator.translate(key: "Frequency"))
             
             Color("Gray01")
                 .frame(height: 56)

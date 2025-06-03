@@ -36,7 +36,7 @@ struct SelectFrequencyView: View {
             VStack(spacing: 0) {
                 VStack {
                     HStack {
-                        Text("Frequency")
+                        Text(Translator.translate(key: "Frequency", isVietnamese: User.isVietnamese))
                             .fontBold(28)
                             .foreColor(mainColor)
                         
@@ -96,7 +96,9 @@ struct SelectFrequencyView: View {
                                 }
                                 .padding(.top, 5)
                             case .weekly:
-                                sectionTitle("\(weekly.frequency) Times in a week")
+                                let text = "\(weekly.frequency) " + Translator.translate(key: "Times in a week", isVietnamese: User.isVietnamese)
+                                
+                                sectionTitle(text)
                                     .padding(.top, 20)
                                 
                                 HStack(spacing: 5) {
@@ -139,7 +141,7 @@ struct SelectFrequencyView: View {
                                             
                                             type == self.monthly.type ? selectedColor : unselectedColor
                                             
-                                            Text(type.rawValue.capitalized)
+                                            Text(Translator.translate(key: type.rawValue.capitalized, isVietnamese: User.isVietnamese))
                                                 .fontBold(18)
                                                 .foregroundStyle(type == self.monthly.type ? selectedTextColor : unselectedTextColor)
                                         }
@@ -152,7 +154,7 @@ struct SelectFrequencyView: View {
                                 }
                                 .padding(.top, 5)
                                 
-                                Text(monthly.type.description)
+                                Text(Translator.translate(key: monthly.type.description, isVietnamese: User.isVietnamese))
                                     .fontRegular(12)
                                     .foregroundStyle(Color("Gray"))
                                     .padding(.top, 5)
@@ -203,7 +205,7 @@ struct SelectFrequencyView: View {
                     
                     type == self.type ? selectedColor : unselectedColor
                     
-                    Text(type.rawValue.capitalized)
+                    Text(Translator.translate(key: type.rawValue.capitalized))
                         .fontBold(18)
                         .foregroundStyle(type == self.type ? selectedTextColor : unselectedTextColor)
                 }
@@ -218,7 +220,7 @@ struct SelectFrequencyView: View {
     
     func sectionTitle(_ text: String) -> some View {
         HStack {
-            Text(text)
+            Text(Translator.translate(key: text, isVietnamese: User.isVietnamese))
                 .fontBold(23)
                 .foreColor(mainColor)
             Spacer()

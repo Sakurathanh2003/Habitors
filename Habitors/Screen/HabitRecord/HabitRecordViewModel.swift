@@ -110,7 +110,7 @@ final class HabitRecordViewModel: BaseViewModel<HabitRecordViewModelInput, Habit
             let newValue = currentValue + value
             
             if record.date.isFutureDay {
-                self.routing.showAlert.onNext("Vui lòng đợi đúng ngày nhé 😄")
+                self.routing.showAlert.onNext(Translator.translate(key: "Vui lòng đợi đúng ngày nhé 😄"))
                 return
             }
             
@@ -214,12 +214,12 @@ final class HabitRecordViewModel: BaseViewModel<HabitRecordViewModelInput, Habit
     private func startTimer() {
         self.isCounting = true
         timer?.invalidate()
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak self]_ in
+        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { [weak self]_ in
             guard let self else {
                 return
             }
             
-            self.setValue(self.currentValue + 1)
+            self.setValue(self.currentValue + 0.1)
         })
     }
     

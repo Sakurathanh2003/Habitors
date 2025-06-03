@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class MoodHistoryViewController: BaseViewController {
     var viewModel: MoodHistoryViewModel
@@ -46,6 +47,10 @@ class MoodHistoryViewController: BaseViewController {
     func configRoutingOutput() {
         viewModel.routing.stop.subscribe(onNext: { [weak self] in
             self?.coordinator?.dismiss()
+        }).disposed(by: self.disposeBag)
+        
+        viewModel.routing.presentDeleteDialog.subscribe(onNext: { [weak self] in
+            self?.coordinator?.presentDeleteDialog()
         }).disposed(by: self.disposeBag)
     }
 }

@@ -9,6 +9,7 @@ import UIKit
 import BackgroundTasks
 import UserNotifications
 import AppTrackingTransparency
+import HealthKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -35,6 +36,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func configAppleHealthService() {
+        let store = HKHealthStore()
+       
         Task {
             await WaterService().startObserver()
             await StepCountService().startObserver()
@@ -57,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.alert, .banner, .list])
+        completionHandler([.banner, .list, .badge, .sound])
     }
 }
 

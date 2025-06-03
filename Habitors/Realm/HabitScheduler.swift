@@ -50,32 +50,68 @@ class HabitScheduler: NSObject {
     func startSchedule(for item: Habit) {
         self.deleteSchedule(for: item)
         
-        if let nearestReminderDay = item.nearestReminderDay {
-            let notificationContent = notificationContent(for: item)
-            
-            var dateComponent = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute],
-                                                                from: nearestReminderDay)
-            var requests = [UNNotificationRequest]()
-            for index in 0..<15 {
-                let id = UUID().uuidString
-                
-                dateComponent.second = index * 2
-                notificationContent.subtitle = "\(index)"
-                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: false)
-
-                let request = UNNotificationRequest(identifier: id,
-                                                    content: notificationContent,
-                                                    trigger: trigger)
-                
-                notiID[item.id]?.append(id)
-                requests.append(request)
-            }
-            
-            for request in requests {
-                UNUserNotificationCenter.current().add(request) { error in
-                    if let error {
-                        print("Lỗi khi thêm thông báo 1: \(error.localizedDescription)")
+        switch item.frequency.type {
+        case .daily:
+            if item.frequency.daily.selectedDays.count == 7 {
+                for time in item.reminder {
+                    schedule(for: item, weekday: nil, time: time)
+                }
+            } else {
+                for weekday in item.frequency.daily.selectedDays {
+                    for time in item.reminder {
+                        schedule(for: item, weekday: weekday, time: time)
                     }
+                }
+            }
+        case .weekly:
+            for time in item.reminder {
+                schedule(for: item, time: time)
+            }
+        case .monthly:
+            switch item.frequency.monthly.type {
+            case .beginning:
+                for day in 0...10 {
+                    for time in item.reminder {
+                        schedule(for: item, day: day, time: time)
+                    }
+                }
+            case .middle:
+                for day in 11...20 {
+                    for time in item.reminder {
+                        schedule(for: item, day: day, time: time)
+                    }
+                }
+            case .end:
+                for day in 21...31 {
+                    for time in item.reminder {
+                        schedule(for: item, day: day, time: time)
+                    }
+                }
+            }
+        }
+    }
+    
+    private func schedule(for item: Habit, weekday: Int? = nil, day: Int? = nil, time: Time) {
+        let id = UUID().uuidString
+        let notificationContent = notificationContent(for: item)
+        var dateComponent = DateComponents()
+        
+        dateComponent.hour = time.hour
+        dateComponent.minute = time.minutes
+        dateComponent.weekday = weekday
+        dateComponent.day = day
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: true)
+        let request = UNNotificationRequest(identifier: id, content: notificationContent, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error {
+                print("Lỗi khi thêm thông báo 1: \(error.localizedDescription)")
+            } else {
+                if self.notiID[item.id] == nil {
+                    self.notiID[item.id] = [id]
+                } else {
+                    self.notiID[item.id]?.append(id)
                 }
             }
         }
@@ -102,39 +138,6 @@ extension HabitScheduler: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.alert, .badge, .sound])
-    }
-}
-
-// MARK: - Habit Extension
-extension Habit {
-    var nearestReminderDay: Date? {
-        if reminder.isEmpty {
-            return nil
-        }
-        
-        var reminder = self.reminder
-        reminder = reminder.sorted(by: { $0.hour <= $1.hour && $0.minutes <= $1.minutes })
-        var day = Date()
-        
-        while true {
-            if day.isDateValid(self) {
-                break
-            }
-            
-            day = day.tomorrow
-        }
-        
-        if let item = reminder.first {
-            var component = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: day)
-            component.minute = item.minutes
-            component.hour = item.hour
-            
-            if let finalDay = Calendar.current.date(from: component) {
-                day = finalDay
-            }
-        }
-        
-        return day
+        completionHandler([.badge, .sound, .list, .banner])
     }
 }

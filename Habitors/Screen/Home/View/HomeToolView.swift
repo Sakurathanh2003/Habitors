@@ -78,10 +78,10 @@ struct HomeToolView: View {
                 HStack(spacing: Const.itemSpacing) {
                     HStack(spacing: 0) {
                         VStack(alignment: .leading) {
-                            Text("Quick Note")
+                            Text(Translator.translate(key: "Quick Note"))
                                 .fontBold(16)
                             
-                            Text("Tap to add")
+                            Text(Translator.translate(key: "Tap to add"))
                                 .fontRegular(12)
                         }
                         

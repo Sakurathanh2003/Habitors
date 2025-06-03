@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 struct MoodHistoryWantToDismissEvent: CoordinatorEvent { }
 
@@ -39,5 +40,19 @@ final class MoodHistoryCoordinator: NavigationBaseCoordinator {
         } else {
             self.stop()
         }
+    }
+    
+    func presentDeleteDialog() {
+        let alert = UIAlertController(title: User.isVietnamese ? "Xác nhận" : "Confirm",
+                                      message: User.isVietnamese ? "Bạn có chắc chắn muốn xoá không? Hành động của bạn không thể quay lại" : "Are you sure want to delete? Your action can't undo", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: User.isVietnamese ? "Huỷ" : "Cancel", style: .cancel)
+        let confirmAction = UIAlertAction(title: User.isVietnamese ? "Chắc chắn" : "Confirm", style: .destructive) { [weak self] _ in
+            self?.controller.viewModel.input.delete.onNext(())
+        }
+        
+        alert.addAction(cancelAction)
+        alert.addAction(confirmAction)
+        
+        self.controller.present(alert, animated: true)
     }
 }

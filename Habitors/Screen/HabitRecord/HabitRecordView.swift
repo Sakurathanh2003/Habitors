@@ -33,7 +33,7 @@ struct HabitRecordView: View {
                             changeValueView
                         } else {
                             Spacer()
-                            Text("Relevant data will be retrieved from the Health app.")
+                            Text(Translator.translate(key: "Relevant data will be retrieved from the Health app."))
                                 .padding(.horizontal, 20)
                                 .multilineTextAlignment(.center)
                                 .fontBold(20)
@@ -49,7 +49,7 @@ struct HabitRecordView: View {
             ZStack {
                 if viewModel.isShowingAddValue {
                     InputView(value: 0,
-                              titleString: "Enter value (count)",
+                              titleString: Translator.translate(key: "Enter value"),
                               isShowing: $viewModel.isShowingAddValue,
                               saveAction: {
                         if let value = Double($0) {
@@ -187,7 +187,7 @@ struct HabitRecordView: View {
     var quickAddView: some View {
         VStack {
             HStack {
-                Text("Quick Add")
+                Text(Translator.translate(key: "Quick Add"))
                     .fontBold(20)
                     .foreColor(viewModel.mainColor)
                 
@@ -244,7 +244,7 @@ struct HabitRecordView: View {
                     Color("Secondary")
                         .frame(height: 56)
                         .overlay(
-                            Text("Other")
+                            Text(Translator.translate(key: "Other"))
                                 .fontBold(20)
                                 .foregroundStyle(.white)
                         )

@@ -70,13 +70,13 @@ struct MoodieView: View {
                     }
                 }.zIndex(1)
                 
-                Text("Swipe to change mood")
+                Text(Translator.translate(key: "Swipe to change mood"))
                     .font(.system(size: 18, weight: .semibold ,design: .rounded))
                     .padding(.top, 28)
                     
                 Color.black.frame(height: 56)
                     .overlay(
-                        Text("Select Mood")
+                        Text(Translator.translate(key: "Select this mood"))
                             .fontBold(16)
                             .foreColor(.white)
                     )
@@ -99,20 +99,17 @@ struct MoodieView: View {
                         
                         Spacer(minLength: 0)
                         
-                        Text("We've Recorded Your Mood")
+                        Text(Translator.translate(key: "We've Recorded Your Mood"))
                             .matchedGeometryEffect(id: "mood_\(mood.rawValue)_question", in: animation)
                             .font(.system(size: 25, weight: .bold, design: .rounded))
                             .multilineTextAlignment(.center)
                             .padding(.horizontal)
                         
-                        Text("We've recorded your emotional state.\nOur goal is to provide you with tailored support to enhance your well-being and productivity.")
-                            .multilineTextAlignment(.center)
-                        
                         Spacer(minLength: 0)
                         
                         Color.black.frame(height: 56)
                             .overlay(
-                                Text("View Mode History")
+                                Text(Translator.translate(key: "View Mode History"))
                                     .fontBold(16)
                                     .foreColor(.white)
                             )
@@ -182,14 +179,14 @@ struct MoodCardView: View {
             
             VStack(spacing: 0) {
                 if mood != choosedMood {
-                    Text("How are you feeling today?")
+                    Text(Translator.translate(key: "How are you feeling today?"))
                         .matchedGeometryEffect(id: "mood_\(mood.rawValue)_question", in: animation)
                         .font(.system(size: 36, weight: .bold, design: .rounded))
                         .multilineTextAlignment(.center)
                         .padding(.top, 48)
                 }
                 
-                Text(mood.rawValue.capitalized)
+                Text(Translator.translate(key: mood.rawValue.capitalized))
                     .font(.system(size: 24, weight: .medium, design: .rounded))
                     .padding(.top, 20)
                 

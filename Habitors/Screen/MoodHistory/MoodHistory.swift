@@ -11,26 +11,24 @@ import SakuraExtension
 
 struct MoodHistory: View {
     @ObservedObject var viewModel: MoodHistoryViewModel
-    @State var moodGroup: [Date: [MoodRecord]] = [:]
-    @State var chooseDeletedRecord: MoodRecord?
-    
+   
     var body: some View {
         VStack {
             NavigationBarView(
-                title: "Mood History",
+                title: Translator.translate(key: "Mood History"),
                 secondItem: nil,
                 isDarkMode: viewModel.isTurnDarkMode) {
                     viewModel.routing.stop.onNext(())
                 }
                 .padding(.horizontal, 20)
             
-            if moodGroup.isEmpty {
+            if viewModel.moodGroup.isEmpty {
                 Spacer().frame(height: 100)
                 Image("ic_empty")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 150, height: 150)
-                Text("You haven't logged any moods yet.")
+                Text(Translator.translate(key: "You haven't logged any moods yet."))
                     .fontRegular(16)
                     .foreColor(.gray)
                     .padding(.top, 5)
@@ -38,8 +36,8 @@ struct MoodHistory: View {
             } else {
                 ScrollView(.vertical) {
                     LazyVGrid(columns: [.init()]) {
-                        ForEach(moodGroup.keys.sorted(by: { $0 >= $1 }), id: \.hashValue) { date in
-                            let moods = moodGroup[date]
+                        ForEach(viewModel.moodGroup.keys.sorted(by: { $0 >= $1 }), id: \.hashValue) { date in
+                            let moods = viewModel.moodGroup[date]
                             
                             HStack {
                                 Text(date.format("dd MMMM yyyy"))
@@ -60,26 +58,7 @@ struct MoodHistory: View {
                 }
             }
         }
-        .overlay(
-            ZStack {
-                if let record = chooseDeletedRecord {
-                    DeleteDialog(objectName: "record") {
-                        deleteRecord(record)
-                        withAnimation {
-                            chooseDeletedRecord = nil
-                        }
-                    } cancelAction: {
-                        withAnimation {
-                            chooseDeletedRecord = nil
-                        }
-                    }
-                }
-            }
-        )
         .background(backgroundColor.ignoresSafeArea())
-        .onAppear {
-            getListRecord()
-        }
     }
     
     @ViewBuilder
@@ -92,7 +71,7 @@ struct MoodHistory: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 50, height: 50)
             VStack(alignment: .leading, spacing: 0) {
-                Text(mood.rawValue.capitalized)
+                Text(Translator.translate(key: mood.rawValue.capitalized))
                     .fontBold(16)
                     .frame(height: 20)
                 Text(record.createdDate.format("HH:mm"))
@@ -109,9 +88,7 @@ struct MoodHistory: View {
                 .frame(width: 30, height: 30)
                 .foregroundStyle(.white)
                 .onTapGesture {
-                    withAnimation {
-                        chooseDeletedRecord = record
-                    }
+                    viewModel.input.wantToDelete.onNext(record)
                 }
         }
         .padding(10)
@@ -121,18 +98,7 @@ struct MoodHistory: View {
         .cornerRadius(5)
     }
     
-    func deleteRecord(_ record: MoodRecord) {
-        MoodRecordDAO.shared.deleteObject(item: record)
-        getListRecord()
-    }
-    
-    func getListRecord() {
-        let listMood = MoodRecordDAO.shared.getAll().sorted(by: { $0.createdDate >= $1.createdDate})
-        moodGroup = Dictionary(grouping: listMood) { record in
-            Calendar.current.startOfDay(for: record.createdDate)
-        }
-    }
-    
+   
     var backgroundColor: Color {
         return viewModel.isTurnDarkMode ? .black : .white
     }

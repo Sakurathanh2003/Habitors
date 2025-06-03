@@ -37,7 +37,7 @@ struct SingleTaskView: View {
                     .foregroundStyle(Color("Black"))
                 
                 if isCompleted {
-                    Text("Completed")
+                    Text(Translator.translate(key: "Completed"))
                         .fontMedium(12)
                         .foregroundStyle(Color("Success"))
                 } else {
@@ -81,29 +81,7 @@ struct SingleTaskView: View {
     }
     
     var description: String {
-        switch habit.goalUnit {
-        case .min, .hours, .secs:
-            let hours = Int(baseGoalDayValue) / 3600       // Calculate hours
-            let minutes = (Int(baseGoalDayValue) % 3600) / 60  // Calculate minutes
-            let seconds = Int(baseGoalDayValue) % 60        // Calculate seconds
-            var timeComponents = [String]()
-
-            if hours > 0 {
-                timeComponents.append("\(hours) giờ")
-            }
-
-            if minutes > 0 {
-                timeComponents.append("\(minutes) phút")
-            }
-
-            if seconds > 0 {
-                timeComponents.append("\(seconds) giây")
-            }
-
-            let time = timeComponents.joined(separator: " ")
-            return "Còn \(time) nữa là hoàn thành"
-        default:
-            return "Còn \(unit.convertToUnit(from: baseGoalDayValue).text) \(unit.description) nữa là hoàn thành"
-        }
+        let percent: Double = min(1.0 - unit.convertToUnit(from: baseGoalDayValue) / goalValue, 1.0)
+        return User.isVietnamese ? "Bạn đã thực hiện \((percent * 100).textWithDecimal(2))%" : "You did handle \((percent * 100).textWithDecimal(2))%"
     }
 }

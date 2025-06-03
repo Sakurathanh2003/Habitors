@@ -27,3 +27,57 @@
 "Best Streak" = "Kỷ lục chuỗi";
 
 "Day" = "Ngày";
+"Frequency" = "Tấn suất";
+"Daily" = "Hằng ngày";
+"Weekly" = "Hằng tuần";
+"Monthly" = "Hằng tháng";
+"On These Days" = "Vào những ngày";
+"Times in a week" = "Lần trong tuần";
+"Time on Month" = "Thời gian trong tháng";
+"Beginning" = "Đầu tháng";
+"Middle" = "Giữa tháng";
+"End" = "Cuối tháng";
+
+"1st day of month to 10th day of month" = "Từ ngày 1 đến ngày 10 trong tháng";
+"11th day of month to 20th day of month" = "Từ ngày 11 đến ngày 20 trong tháng";
+"21st day of month to end of month" = "Từ ngày 21 đến hết tháng";
+
+"Repeat" = "Lặp lại";
+"days" = "ngày";
+"times" = "lần";
+
+"Quick Add" = "Thêm nhanh";
+"Other" = "Khác";
+
+"Habit Setting" = "Cài đặt thói quen";
+"Add Value" = "Thêm giá trị";
+"Close" = "Đóng";
+
+"Enter value" = "Nhập giá trị";
+"How are you feeling today?" = "Hôm nay bạn cảm thấy thế nào?";
+"Select this mood" = "Chọn cảm xúc này";
+"Swipe to change mood" = "Vuốt để thay đổi cảm xúc";
+
+"Angry" = "Tức giận";
+"Upset" = "Buồn bã";
+"Sad" = "Buồn";
+"Good" = "Tốt";
+"Happy" = "Vui vẻ";
+"Spectacular" = "Hân hoan";
+"We've Recorded Your Mood" = "Chúng tôi đã ghi lại cảm xúc của bạn";
+
+"View Mode History" = "Xem lịch sử cảm xúc";
+"Mood History" = "Lịch sử cảm xúc";
+"You haven't logged any moods yet." = "Bạn chưa ghi nhận cảm xúc nào.";
+
+"Change Note Background Color" = "Thay đổi màu nền của ghi chú";
+"Delete" = "Xoá";
+"Cancel" = "Huỷ";
+"Choose an option" = "Chọn";
+"Article" = "Bài viết";
+
+"You have no habits scheduled for this day." = "Bạn không có thói quen nào được lên lịch trong ngày này.";
+"Relevant data will be retrieved from the Health app." = "Dữ liệu liên quan sẽ được lấy trong ứng dụng Sức khoẻ.";
+"Go to Setting" = "Đi đến cài đặt";
+
+"Completed" = "Hoàn thành";
